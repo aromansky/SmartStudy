@@ -24,6 +24,9 @@
 
 
 ## Интерфейс
-| Интерфейс Desktop-приложения                                                                           | Интерфейс Android-приложения                                                                           |
-|:------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------------------:|
-|![image](https://github.com/aromansky/SmartStudy/assets/115107977/857dccd5-2e13-44c3-bc5d-f4b78d117cfd) | ![image](https://github.com/aromansky/SmartStudy/assets/115107977/2d8396ce-d039-4ce6-a51b-ee7e2d25286d)|
+### Интерфейс desktop-приложения
+![Пример интерфейса desktop-приложения](https://github.com/aromansky/SmartStudy/assets/115107977/2d96374e-0cb1-4c71-92bd-9d85c12a640b)
+
+### Интерфейс android-приложения
+![Пример интерфейса android-приложения](https://github.com/aromansky/SmartStudy/assets/115107977/9b9c33db-ca34-440d-a87d-8fc8f30891b5)
+
