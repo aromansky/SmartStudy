@@ -6,4 +6,10 @@ public partial class AppShell : Shell
 	{
 		InitializeComponent();
 	}
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        this.Window.MinimumHeight = 600;
+        this.Window.MinimumWidth = 600;
+    }
 }

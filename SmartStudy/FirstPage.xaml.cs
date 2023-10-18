@@ -6,12 +6,7 @@ public partial class FirstPage : ContentPage
 	{
 		InitializeComponent();
 	}
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        this.Window.MinimumHeight = 600;
-        this.Window.MinimumWidth = 600;
-    }
+  
     private void ClickRegister(object sender, EventArgs e)
     {
 
