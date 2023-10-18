@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartStudy.FirstPage">
+    <VerticalStackLayout
+        Margin="50"
+        Spacing="5"
+        HorizontalOptions="CenterAndExpand"
+        VerticalOptions="CenterAndExpand">
+        <Label
+            Padding="10"
+            Text="Добро пожаловать!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        
+        <Label
+            Text="Для дальнейшей работы нужно авторизироваться"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        
+        <Entry
+            x:Name="Username"
+            Placeholder="Username"
+            WidthRequest="250"
+            HeightRequest="50"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            TextChanged="TextChanged"/>
+        
+        <Entry
+            x:Name="Password"
+            Placeholder="Пароль"
+            WidthRequest="250"
+            HeightRequest="50"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            IsPassword="True"/>
+        
+        <Button
+            Text="Вход"
+            WidthRequest="250"
+            HeightRequest="50"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Clicked="ClickLogIn"/>
+        
+        <Button
+            Text="Регистрация"
+            WidthRequest="250"
+            HeightRequest="50"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Clicked="ClickRegister"/>
+        
+        <Button
+            WidthRequest="250"
+            HeightRequest="50"
+            Text="Забыли пароль?"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Clicked="ClickForgotPassword"/>
+       
+    </VerticalStackLayout>
+</ContentPage>
