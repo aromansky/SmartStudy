@@ -26,15 +26,6 @@
             HorizontalOptions="Center"/>
 
         <Entry
-            x:Name="Username"
-            Placeholder="Username"
-            WidthRequest="300"
-            HeightRequest="50"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            MaxLength="20"/>
-
-        <Entry
             x:Name="EMail"
             Placeholder="E-mail"
             WidthRequest="300"
