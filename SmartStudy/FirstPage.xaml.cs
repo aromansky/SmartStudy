@@ -22,7 +22,8 @@ public partial class FirstPage : ContentPage
 
     }
 
-    private void TextChanged(object sender, TextChangedEventArgs e)
+    private void ClickPasswordVisibility(object sender, EventArgs e)
     {
+        Password.IsPassword = !Password.IsPassword;
     }
 }
