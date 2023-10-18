@@ -43,8 +43,6 @@
             <Entry Grid.Row="1" Grid.Column="0"
             x:Name="Password"
             Placeholder="Пароль"
-            WidthRequest="250"
-            HeightRequest="50"
             IsPassword="True"
             MaxLength="20"/>
 
