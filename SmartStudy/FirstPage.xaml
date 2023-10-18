@@ -15,8 +15,8 @@
 
         <Label
             Text="Для дальнейшей работы нужно авторизоваться"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"/>
+            HorizontalTextAlignment="Center"
+            VerticalOptions="Center"/>
 
         <Entry
             x:Name="Username"
@@ -54,13 +54,38 @@
 
         </Grid>
 
-        <Button
-            Text="Вход"
-            WidthRequest="300"
-            HeightRequest="50"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            Clicked="ClickLogIn"/>
+        <Label Padding="5"
+               Text="Вход как"
+               VerticalOptions="Center"
+               HorizontalTextAlignment="Center"/>
+        <Grid
+            Grid.Row="1"
+            Grid.Column="2"
+            HorizontalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="1" Grid.Column="0"
+                    WidthRequest="145"
+                    x:Name="Student"
+                    Text="Ученик"
+                    Clicked="ClickLogIn"
+                    HorizontalOptions="StartAndExpand"/>
+
+            <Button Grid.Row="1" Grid.Column="1"
+                    WidthRequest="145"
+                    x:Name="Tutor"
+                    Text="Преподаватель"
+                    Clicked="ClickLogIn"
+                    HorizontalOptions="End"/>
+
+        </Grid>
         
         <Button
             Text="Регистрация"
