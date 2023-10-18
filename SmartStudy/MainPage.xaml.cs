@@ -1,30 +1,24 @@
-﻿namespace Prototype1
+﻿namespace SmartStudy;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
-    {
-        public MainPage()
-        {
-            InitializeComponent();
-        }
-        
-        void OnClicked1(object sender, EventArgs e)
-        {
-            Biliboba.Text = Button1.Text;
-        }
+	int count = 0;
 
-        void OnClicked2(object sender, EventArgs e)
-        {
-            Biliboba.Text = Button2.Text;
-        }
+	public MainPage()
+	{
+		InitializeComponent();
+	}
 
-        void OnClicked3(object sender, EventArgs e)
-        {
-            Biliboba.Text = Button3.Text;
-        }
+	private void OnCounterClicked(object sender, EventArgs e)
+	{
+		count++;
 
-        void OnClicked4(object sender, EventArgs e)
-        {
-            Biliboba.Text = Button4.Text;
-        }
-    }
+		if (count == 1)
+			CounterBtn.Text = $"Clicked {count} time";
+		else
+			CounterBtn.Text = $"Clicked {count} times";
+
+		SemanticScreenReader.Announce(CounterBtn.Text);
+	}
 }
+

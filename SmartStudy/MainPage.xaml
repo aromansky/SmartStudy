@@ -1,57 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Prototype1.MainPage"
-             Title="Главная страница">
+             x:Class="SmartStudy.MainPage">
 
-    <Grid ColumnSpacing="5"
-          RowSpacing="15"
-          Padding="5"
-          Grid.Row="2"
-          Grid.Column="4">
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="50" />
-        </Grid.RowDefinitions>
+            <Image
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="200"
+                HorizontalOptions="Center" />
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+            <Label
+                Text="Hello, World!"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
 
-        <Label Grid.Row="0" Grid.Column="0"
-               Grid.ColumnSpan="4"
-               x:Name="Biliboba"
-               Text="Здесь будет текст"
-               HorizontalTextAlignment="Center"
-               VerticalTextAlignment="Center"/>
+            <Label
+                Text="Welcome to .NET Multi-platform App UI"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
 
-        <Button Grid.Row="1" Grid.Column="0"
-                x:Name="Button1"
-                Text="Расписание"
-                FontSize="15"
-                Clicked="OnClicked1" />
+            <Button
+                x:Name="CounterBtn"
+                Text="Click me"
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnCounterClicked"
+                HorizontalOptions="Center" />
 
-        <Button Grid.Row="1" Grid.Column="1"
-                x:Name="Button2"
-                Text="Домашнее задание"
-                FontSize="15"
-                Clicked="OnClicked2"/>
-
-        <Button Grid.Row="1" Grid.Column="2" 
-                x:Name="Button3"
-                Text="Группа" 
-                FontSize="15"
-                Clicked="OnClicked3"/>
-
-        <Button Grid.Row="1" Grid.Column="3" 
-                x:Name="Button4"
-                Text="Комментарии" 
-                FontSize="15"
-                Clicked="OnClicked4"/>
-    </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
 
 </ContentPage>
