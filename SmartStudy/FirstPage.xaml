@@ -19,8 +19,8 @@
             VerticalOptions="Center"/>
 
         <Entry
-            x:Name="Username"
-            Placeholder="Username"
+            x:Name="EMail"
+            Placeholder="E-mail"
             WidthRequest="300"
             HeightRequest="50"
             VerticalOptions="Center" 
