@@ -14,7 +14,7 @@
             HorizontalOptions="Center" />
 
         <Label
-            Text="Для дальнейшей работы нужно авторизироваться"
+            Text="Для дальнейшей работы нужно авторизоваться"
             VerticalOptions="Center" 
             HorizontalOptions="Center"/>
 
