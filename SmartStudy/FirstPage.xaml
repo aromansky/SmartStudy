@@ -38,16 +38,17 @@
             </Grid.ColumnDefinitions>
 
             <Entry Grid.Row="0" Grid.Column="0"
-            x:Name="Password"
-            Placeholder="Пароль"
-            IsPassword="True"
-            MaxLength="20"/>
+                   x:Name="Password"
+                   Placeholder="Пароль"
+                   IsPassword="True"
+                   MaxLength="20"/>
 
             <Button Grid.Row="0" Grid.Column="1"
-                Text="👁" 
-                WidthRequest="15"
-                HeightRequest="15"
-                Clicked="ClickPasswordVisibility"/>
+                    Text="👁" 
+                    WidthRequest="15"
+                    HeightRequest="15"
+                    Clicked="ClickPasswordVisibility"
+                    Padding="0"/>
 
         </Grid>
 
