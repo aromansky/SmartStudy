@@ -24,8 +24,7 @@
             WidthRequest="300"
             HeightRequest="50"
             VerticalOptions="Center" 
-            HorizontalOptions="Center"
-            MaxLength="20"/>
+            HorizontalOptions="Center"/>
 
         <Grid
             Grid.Row="1"
