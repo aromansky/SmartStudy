@@ -14,16 +14,16 @@
             Placeholder="Имя"
             WidthRequest="300"
             HeightRequest="50"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"/>
+            HorizontalOptions="Center"
+            Keyboard="Text"/>
 
         <Entry
             x:Name="LastName"
             Placeholder="Фамилия"
             WidthRequest="300"
             HeightRequest="50"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"/>
+            HorizontalOptions="Center"
+            Keyboard="Text"/>
 
         <Entry
             x:Name="EMail"
@@ -31,7 +31,6 @@
             WidthRequest="300"
             HeightRequest="50"
             VerticalOptions="Center" 
-            HorizontalOptions="Center"
             Keyboard="Email"/>
 
         <Grid
@@ -50,7 +49,6 @@
             <Entry Grid.Row="0" Grid.Column="0"
                    x:Name="Password"
                    Placeholder="Пароль"
-                   VerticalOptions="Center" 
                    HorizontalOptions="Center"
                    WidthRequest="250"
                    MaxLength="20"
@@ -60,7 +58,8 @@
                     Text="👁" 
                     WidthRequest="15"
                     HeightRequest="15"
-                    Clicked="ClickPasswordVisibility"/>
+                    Clicked="ClickPasswordVisibility"
+                    Padding="0"/>
 
         </Grid>
 
@@ -69,7 +68,6 @@
             Placeholder="Повторите пароль"
             WidthRequest="300"
             HeightRequest="50"
-            VerticalOptions="Center" 
             HorizontalOptions="Center"
             MaxLength="20"
             IsPassword="True"/>
@@ -78,7 +76,6 @@
             Text="Создать аккаунт"
             WidthRequest="300"
             HeightRequest="50"
-            VerticalOptions="Center"
             HorizontalOptions="Center"
             Clicked="CreateAccount"/>
 
