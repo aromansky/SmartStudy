@@ -9,7 +9,7 @@ public partial class FirstPage : ContentPage
   
     private void ClickRegister(object sender, EventArgs e)
     {
-
+        Navigation.PushAsync(new RegistrationPage());
     }
 
     private void ClickLogIn(object sender, EventArgs e)
