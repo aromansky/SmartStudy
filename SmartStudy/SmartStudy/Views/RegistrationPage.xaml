@@ -23,12 +23,14 @@
             x:Name="entry_password_2"
             Placeholder="Повторение пароля"
             IsPassword="True"/>
+        
         <Button
             x:Name="button_registration"
             TextColor="#6600CC"
             BackgroundColor="White"
             Text="Зарегистрироваться"
             Clicked="button_registration_clicked"/>
+        
         <Label Text="Войти"
                VerticalOptions="End"
                HorizontalOptions="End"
@@ -39,5 +41,6 @@
                       CommandParameter="///login" />
             </Label.GestureRecognizers>
         </Label>
+        
     </VerticalStackLayout>
 </ContentPage>

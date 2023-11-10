@@ -24,7 +24,7 @@ public partial class LoginPage : ContentPage
     private void Load_login()
     {
         login.Email = entry_Email.Text;
-        login.password = entry_password.Text;
+        login.password = Password.Text;
     }
     private async void wind_error(string text_error)
     {
@@ -39,8 +39,9 @@ public partial class LoginPage : ContentPage
         }
         else if(false)
         {
+            //TO DO
             //проверить по базе данных наличие почты
-            wind_error("Аккаунта, зарегистрированного на данную почту не существует!");
+            //wind_error("Аккаунта, зарегистрированного на данную почту не существует!");
         }
         else if(login.password != "1") 
         {
@@ -56,5 +57,15 @@ public partial class LoginPage : ContentPage
             Application.Current.MainPage = new Teacher.AppShell_Teacher();
             await Shell.Current.GoToAsync("///main_page");
         }
+    }
+
+    private void button_registration_clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new RegistrationPage());
+    }
+
+    private void click_password_visibility(object sender, EventArgs e)
+    {
+        Password.IsPassword = !Password.IsPassword;
     }
 }
