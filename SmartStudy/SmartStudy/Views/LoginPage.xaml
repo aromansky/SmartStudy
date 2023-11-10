@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartStudy.Views.LoginPage"
+             Title="Вход в учетную запись">
+    <VerticalStackLayout VerticalOptions="Start"
+                         x:Name="Layout_Login"
+                         BackgroundColor="#141211">
+        <Entry
+            x:Name="entry_Email"
+            Placeholder="Email"/>
+        <Entry
+            x:Name="entry_password"
+            Placeholder="Пароль"
+            IsPassword="True"/>
+        <Button
+            x:Name="button_login"
+            TextColor="#6600CC"
+            BackgroundColor="White"
+            Text="Войти"
+            Clicked="button_login_clicked"/>
+        <Label Text="Загеристрироваться"
+               VerticalOptions="End"
+               HorizontalOptions="End"
+               TextColor="#6600CC"
+               FontSize="Medium">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TapCommand}"
+                              CommandParameter="///registration" />
+            </Label.GestureRecognizers>
+        </Label>
+    </VerticalStackLayout>
+</ContentPage>
