@@ -9,6 +9,8 @@ namespace SmartStudy
 {
     public static class Constants
     {
-        public const string RestUrl = "https://<ввести номер своего порта>";
+        public const string UserUrl = "https://<ввести номер своего порта>";
+        public const string GroupSettingsUrl = "https://<ввести номер своего порта>";
+        public const string GroupsUrl = "https://<ввести номер своего порта>";
     }
 }

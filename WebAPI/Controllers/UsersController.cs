@@ -6,11 +6,11 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class usersController : ControllerBase
     {
         private readonly SmartStudyContext _context;
 
-        public UsersController(SmartStudyContext context)
+        public usersController(SmartStudyContext context)
         {
             _context = context;
         }

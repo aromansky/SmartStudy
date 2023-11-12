@@ -12,13 +12,5 @@ namespace WebAPI.Models
         public required string Password { get; set; }
         public string? Role { get; set; }
 
-        public user(string firstName, string lastName, string email, string password)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
-            Password = password;
-        }
-
     }
 }
