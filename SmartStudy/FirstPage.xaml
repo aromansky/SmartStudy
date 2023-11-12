@@ -101,6 +101,6 @@
             VerticalOptions="Center"
             HorizontalOptions="Center"
             Clicked="ClickForgotPassword"/>
-       
+
     </VerticalStackLayout>
 </ContentPage>

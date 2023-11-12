@@ -2,16 +2,22 @@ namespace SmartStudy;
 
 public partial class RegistrationPage : ContentPage
 {
-	public RegistrationPage()
-	{
-		InitializeComponent();
-	}
+    public RegistrationPage()
+    {
+        InitializeComponent();
+    }
 
     private void CreateAccount(object sender, EventArgs e)
     {
-        if(Password.Text == RepeatPassword.Text)
+        string recommendations = Client.IsGoodPassword(Password.Text);
+        if (recommendations != "")
+            DisplayAlert("Пароль не подходит", recommendations, "ОК");
+        else
         {
-            Client.Register(FirstName.Text, LastName.Text, EMail.Text, Password.Text);
+            if (Password.Text == RepeatPassword.Text)
+                Client.Register(FirstName.Text, LastName.Text, EMail.Text, Password.Text);
+            else
+                DisplayAlert("Пароли не совпадают", "Пожалуйста, проверьте правильность ввода пароля", "ОК");
         }
     }
 

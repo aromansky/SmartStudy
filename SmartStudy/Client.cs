@@ -4,12 +4,14 @@ using System.Text.Json;
 using SmartStudy.Models;
 using System.Text;
 using System.Diagnostics;
+using System.Net.Http.Json;
+using MySqlX.XDevAPI;
+using System.Text.RegularExpressions;
 
 namespace SmartStudy
 {
     static class Client
     {
-       //static MySqlConnection _connect = new MySqlConnection(ConfigurationManager.ConnectionStrings["TestDB"].ConnectionString);
         private static HttpClient _client = new HttpClient();
         private static JsonSerializerOptions _serializerOptions = new JsonSerializerOptions
         {
@@ -37,24 +39,50 @@ namespace SmartStudy
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
-            
 
-            //_connect.Open();
+        }
 
-            //MySqlCommand command = new MySqlCommand(
-            //    "INSERT INTO user (FirstName, LastName, Email, Password)" +
-            //    $"VALUES (@FirstName, @LastName, @Email, @Password)", _connect
-            //    );
+        public static async Task<bool> Login(string email, string password)
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.RestUrl);
+                if (response.IsSuccessStatusCode)
+                {
+                    // Читаем содержимое ответа
+                    List<User> users = await response.Content.ReadFromJsonAsync<List<User>>();
+                    foreach (var user in users)
+                        if (user.Email == email && user.Password == password)
+                            return true;
+                }
+                else
+                {
+                    Debug.WriteLine($"HTTP Error: {response.StatusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return false;
+        }
 
-            //command.Parameters.AddWithValue("@FirstName", FirstName);
-            //command.Parameters.AddWithValue("@LastName", LastName);
-            //command.Parameters.AddWithValue("@Email", Email);
-            //command.Parameters.AddWithValue("@Password", Password);
-
-            //command.ExecuteNonQuery();
-
-
-            //_connect.Close();
+        public static string IsGoodPassword(string password)
+        {
+            List<string> recommendations = new List<string>();
+            // Рекомендовать повысить длину пароля, если он менее 8 символов
+            if (password.Length < 8)
+                recommendations.Add("Увеличьте длину пароля (минимум 8 символов).");
+            // Рекомендовать добавить цифры, если их нет в пароле
+            if (!password.Any(char.IsDigit))
+                recommendations.Add("Добавьте цифры в пароль.");
+            // Рекомендовать добавить буквы в верхнем регистре, если их нет в пароле
+            if (!password.Any(char.IsUpper))
+                recommendations.Add("Добавьте буквы в верхнем регистре в пароль.");
+            // Рекомендовать добавить буквы в нижнем регистре, если их нет в пароле
+            if (!password.Any(char.IsLower))
+                recommendations.Add("Добавьте буквы в нижнем регистре в пароль.");
+            return String.Join(" ", recommendations);
         }
 
     }
