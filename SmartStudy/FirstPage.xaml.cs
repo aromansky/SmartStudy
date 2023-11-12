@@ -9,9 +9,9 @@ public partial class FirstPage : ContentPage
 		InitializeComponent();
 	}
   
-    private void ClickRegister(object sender, EventArgs e)
+    private async void ClickRegister(object sender, EventArgs e)
     {
-
+        await Navigation.PushAsync(new RegistrationPage()); 
     }
 
     private async void ClickLogIn(object sender, EventArgs e)

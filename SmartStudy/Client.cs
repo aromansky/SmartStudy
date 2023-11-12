@@ -69,7 +69,9 @@ namespace SmartStudy
 
         public static string IsGoodPassword(string password)
         {
-            List<string> recommendations = new List<string>();
+            if(password is null)
+                password = "";  
+                List<string> recommendations = new List<string>();
             // Рекомендовать повысить длину пароля, если он менее 8 символов
             if (password.Length < 8)
                 recommendations.Add("Увеличьте длину пароля (минимум 8 символов).");
