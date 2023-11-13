@@ -8,6 +8,5 @@ namespace WebAPI.Models
         public long group_id { get; set; }
         public long group_settings_id { get; set; }
         public long user_id { get; set; }
-        public long Tutor { get; set; }
     }
 }
