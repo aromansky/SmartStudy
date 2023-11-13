@@ -46,7 +46,7 @@ namespace SmartStudy
         {
             try
             {
-                HttpResponseMessage response = await _client.GetAsync(Constants.RestUrl);
+                HttpResponseMessage response = await _client.GetAsync(Constants.UserUrl);
                 if (response.IsSuccessStatusCode)
                 {
                     // Читаем содержимое ответа
@@ -77,13 +77,13 @@ namespace SmartStudy
                 recommendations.Add("Увеличьте длину пароля (минимум 8 символов).");
             // Рекомендовать добавить цифры, если их нет в пароле
             if (!password.Any(char.IsDigit))
-                recommendations.Add("Добавьте цифры в пароль.");
+                recommendations.Add("\nДобавьте цифры в пароль.");
             // Рекомендовать добавить буквы в верхнем регистре, если их нет в пароле
             if (!password.Any(char.IsUpper))
-                recommendations.Add("Добавьте буквы в верхнем регистре в пароль.");
+                recommendations.Add("\nДобавьте буквы в верхнем регистре в пароль.");
             // Рекомендовать добавить буквы в нижнем регистре, если их нет в пароле
             if (!password.Any(char.IsLower))
-                recommendations.Add("Добавьте буквы в нижнем регистре в пароль.");
+                recommendations.Add("\nДобавьте буквы в нижнем регистре в пароль.");
             return String.Join(" ", recommendations);
         }
 
