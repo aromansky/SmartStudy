@@ -18,9 +18,9 @@ public partial class FirstPage : ContentPage
     {
         bool res = await Client.Login(EMail.Text, Password.Text);
         if (res)
-            await Navigation.PushAsync(new MainPage());
+            await Navigation.PushModalAsync(new MainPage());
         else
-            DisplayAlert("������", "�������� ����� ��� ������", "��");
+            DisplayAlert("Ошибка", "Неверный логин или пароль", "ОК");
     }
 
     private void ClickForgotPassword(object sender, EventArgs e)

@@ -10,7 +10,7 @@ public partial class RegistrationPage : ContentPage
         InitializeComponent();
     }
 
-    private void CreateAccount(object sender, EventArgs e)
+    private async void CreateAccount(object sender, EventArgs e)
     {
         string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
         Match isMatch = Regex.Match(EMail.Text is null ? "" : EMail.Text, pattern, RegexOptions.IgnoreCase);
@@ -25,7 +25,10 @@ public partial class RegistrationPage : ContentPage
         else
         {
             if (Password.Text == RepeatPassword.Text)
+            {
                 Client.Register(FirstName.Text, LastName.Text, EMail.Text, Password.Text);
+                await Navigation.PushAsync(new MainPage());
+            }
             else
                 DisplayAlert("Пароли не совпадают", "Пожалуйста, проверьте правильность ввода пароля", "ОК");
         }
