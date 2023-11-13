@@ -20,7 +20,7 @@ public partial class FirstPage : ContentPage
         if (res)
             await Navigation.PushAsync(new MainPage());
         else
-            DisplayAlert("Ошибка", "Неверный логин или пароль", "ОК");
+            DisplayAlert("пїЅпїЅпїЅпїЅпїЅпїЅ", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ", "пїЅпїЅ");
     }
 
     private void ClickForgotPassword(object sender, EventArgs e)

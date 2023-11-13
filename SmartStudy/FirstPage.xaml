@@ -10,21 +10,19 @@
         <Label
             Padding="10"
             Text="Добро пожаловать!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"/>
 
         <Label
             Text="Для дальнейшей работы нужно авторизоваться"
-            HorizontalTextAlignment="Center"
-            VerticalOptions="Center"/>
+            HorizontalTextAlignment="Center"/>
 
         <Entry
             x:Name="EMail"
             Placeholder="E-mail"
             WidthRequest="300"
             HeightRequest="50"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center"/>
+            HorizontalOptions="Center"
+            Keyboard="Email"/>
 
         <Grid
             Grid.Row="1"
@@ -40,22 +38,22 @@
             </Grid.ColumnDefinitions>
 
             <Entry Grid.Row="0" Grid.Column="0"
-            x:Name="Password"
-            Placeholder="Пароль"
-            IsPassword="True"
-            MaxLength="20"/>
+                   x:Name="Password"
+                   Placeholder="Пароль"
+                   IsPassword="True"
+                   MaxLength="20"/>
 
             <Button Grid.Row="0" Grid.Column="1"
-                Text="👁" 
-                WidthRequest="15"
-                HeightRequest="15"
-                Clicked="ClickPasswordVisibility"/>
+                    Text="👁" 
+                    WidthRequest="15"
+                    HeightRequest="15"
+                    Clicked="ClickPasswordVisibility"
+                    Padding="0"/>
 
         </Grid>
 
         <Label Padding="5"
                Text="Вход как"
-               VerticalOptions="Center"
                HorizontalTextAlignment="Center"/>
         <Grid
             Grid.Row="1"
@@ -90,7 +88,6 @@
             Text="Регистрация"
             WidthRequest="300"
             HeightRequest="50"
-            VerticalOptions="Center"
             HorizontalOptions="Center"
             Clicked="ClickRegister"/>
         
@@ -98,7 +95,6 @@
             WidthRequest="300"
             HeightRequest="50"
             Text="Забыли пароль?"
-            VerticalOptions="Center"
             HorizontalOptions="Center"
             Clicked="ClickForgotPassword"/>
 
