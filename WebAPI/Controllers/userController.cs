@@ -6,16 +6,16 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class usersController : ControllerBase
+    public class userController : ControllerBase
     {
         private readonly SmartStudyContext _context;
 
-        public usersController(SmartStudyContext context)
+        public userController(SmartStudyContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<user>>> GetUser()
         {
@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
             return await _context.user.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<user>> GetUser(long id)
         {
@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
             return user;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(long id, user user)
@@ -75,7 +75,7 @@ namespace WebAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<user>> PostUser(user user)
@@ -90,7 +90,7 @@ namespace WebAPI.Controllers
             return CreatedAtAction("GetUser", new { id = user.user_id }, user);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/users/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(long id)
         {

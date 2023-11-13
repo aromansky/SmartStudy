@@ -23,6 +23,15 @@ public partial class FirstPage : ContentPage
             DisplayAlert("Ошибка", "Неверный логин или пароль", "ОК");
     }
 
+    private async void ClickLogInTeacher(object sender, EventArgs e)
+    {
+        bool res = await Client.Login(EMail.Text, Password.Text);
+        if (res)
+            await Navigation.PushModalAsync(new Views.Teacher.MainPage_Teacher());
+        else
+            DisplayAlert("Ошибка", "Неверный логин или пароль", "ОК");
+    }
+
     private void ClickForgotPassword(object sender, EventArgs e)
     {
 

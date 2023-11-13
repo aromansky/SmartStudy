@@ -79,7 +79,7 @@
                     WidthRequest="145"
                     x:Name="Tutor"
                     Text="Преподаватель"
-                    Clicked="ClickLogInStudent"
+                    Clicked="ClickLogInTeacher"
                     HorizontalOptions="End"/>
 
         </Grid>
