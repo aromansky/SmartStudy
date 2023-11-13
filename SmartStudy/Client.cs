@@ -23,7 +23,7 @@ namespace SmartStudy
         {
 
             User user = new User(FirstName, LastName, Email, Password);
-            Uri uri = new Uri(string.Format(Constants.RestUrl, string.Empty));
+            Uri uri = new Uri(string.Format(Constants.UserUrl, string.Empty));
 
             try
             {
