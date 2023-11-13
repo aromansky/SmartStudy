@@ -72,14 +72,14 @@
                     WidthRequest="145"
                     x:Name="Student"
                     Text="Ученик"
-                    Clicked="ClickLogIn"
+                    Clicked="ClickLogInStudent"
                     HorizontalOptions="StartAndExpand"/>
 
             <Button Grid.Row="0" Grid.Column="1"
                     WidthRequest="145"
                     x:Name="Tutor"
                     Text="Преподаватель"
-                    Clicked="ClickLogIn"
+                    Clicked="ClickLogInStudent"
                     HorizontalOptions="End"/>
 
         </Grid>

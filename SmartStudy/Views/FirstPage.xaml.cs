@@ -14,11 +14,11 @@ public partial class FirstPage : ContentPage
         await Navigation.PushAsync(new RegistrationPage()); 
     }
 
-    private async void ClickLogIn(object sender, EventArgs e)
+    private async void ClickLogInStudent(object sender, EventArgs e)
     {
         bool res = await Client.Login(EMail.Text, Password.Text);
         if (res)
-            await Navigation.PushModalAsync(new MainPage());
+            await Navigation.PushModalAsync(new Views.Student.MainPage_Student());
         else
             DisplayAlert("Ошибка", "Неверный логин или пароль", "ОК");
     }

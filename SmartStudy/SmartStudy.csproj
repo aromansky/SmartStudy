@@ -59,13 +59,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="FirstPage.xaml.cs">
+	  <Compile Update="Views\RegistrationPage.xaml.cs">
+	    <DependentUpon>RegistrationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\FirstPage.xaml.cs">
 	    <DependentUpon>FirstPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="FirstPage.xaml">
+	  <MauiXaml Update="Views\FirstPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

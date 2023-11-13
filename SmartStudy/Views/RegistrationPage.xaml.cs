@@ -27,7 +27,7 @@ public partial class RegistrationPage : ContentPage
             if (Password.Text == RepeatPassword.Text)
             {
                 Client.Register(FirstName.Text, LastName.Text, EMail.Text, Password.Text);
-                await Navigation.PushAsync(new MainPage());
+                await Navigation.PushAsync(new FirstPage());
             }
             else
                 DisplayAlert("Пароли не совпадают", "Пожалуйста, проверьте правильность ввода пароля", "ОК");
