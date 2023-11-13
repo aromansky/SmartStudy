@@ -1,12 +1,9 @@
-﻿//using MySql.Data.MySqlClient;
-using System.Configuration;
-using System.Text.Json;
-using SmartStudy.Models;
+﻿using System.Text.Json;
 using System.Text;
 using System.Diagnostics;
 using System.Net.Http.Json;
-using MySqlX.XDevAPI;
 using System.Text.RegularExpressions;
+using SmartStudy.ModelsDB;
 
 namespace SmartStudy
 {
@@ -19,10 +16,8 @@ namespace SmartStudy
             WriteIndented = true
         };
 
-        public static async void Register(string FirstName, string LastName, string Email, string Password)
+        public static async void Register(User user)
         {
-
-            User user = new User(FirstName, LastName, Email, Password);
             Uri uri = new Uri(string.Format(Constants.UserUrl, string.Empty));
 
             try
@@ -85,6 +80,26 @@ namespace SmartStudy
             if (!password.Any(char.IsLower))
                 recommendations.Add("\nДобавьте буквы в нижнем регистре в пароль.");
             return String.Join(" ", recommendations);
+        }
+
+        public static async void CreateGroup(group_settings settings)
+        {
+            Uri uri = new Uri(string.Format(Constants.GroupSettingsUrl, string.Empty));
+
+            try
+            {
+                string json = JsonSerializer.Serialize<group_settings>(settings, _serializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PostAsync(uri, content);
+
+                if (response.IsSuccessStatusCode)
+                    Debug.WriteLine("Ok");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
         }
 
     }

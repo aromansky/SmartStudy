@@ -1,4 +1,4 @@
-using Microsoft.Maui.ApplicationModel.Communication;
+using SmartStudy.ModelsDB;
 using System.Text.RegularExpressions;
 
 namespace SmartStudy;
@@ -26,7 +26,8 @@ public partial class RegistrationPage : ContentPage
         {
             if (Password.Text == RepeatPassword.Text)
             {
-                Client.Register(FirstName.Text, LastName.Text, EMail.Text, Password.Text);
+                User user = new User(FirstName.Text, LastName.Text, EMail.Text, Password.Text);
+                Client.Register(user);
                 await Navigation.PushAsync(new FirstPage());
             }
             else

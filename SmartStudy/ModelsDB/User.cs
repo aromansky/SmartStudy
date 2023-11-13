@@ -1,4 +1,4 @@
-﻿namespace SmartStudy.Models
+﻿namespace SmartStudy.ModelsDB
 {
     public class User
     {
