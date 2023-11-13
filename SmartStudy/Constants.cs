@@ -11,6 +11,8 @@ namespace SmartStudy
     {
         public const string UserUrl = "https://<ввести номер своего порта>";
         public const string GroupSettingsUrl = "https://<ввести номер своего порта>";
-        public const string GroupsUrl = "https://<ввести номер своего порта>";
+        public const string GroupUrl = "https://<ввести номер своего порта>";
+        public const string EventUrl = "https://<ввести номер своего порта>";
+        public const string GroupEventUrl = "https://<ввести номер своего порта>";
     }
 }
