@@ -97,6 +97,6 @@
             Text="Забыли пароль?"
             HorizontalOptions="Center"
             Clicked="ClickForgotPassword"/>
-       
+
     </VerticalStackLayout>
 </ContentPage>

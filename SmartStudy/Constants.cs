@@ -9,6 +9,6 @@ namespace SmartStudy
 {
     public static class Constants
     {
-        public const string RestUrl = "https://<ввести номер своего порта>";
+        public const string RestUrl = "https://localhost:7095/api/users";
     }
 }

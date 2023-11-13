@@ -1,17 +1,33 @@
+using Microsoft.Maui.ApplicationModel.Communication;
+using System.Text.RegularExpressions;
+
 namespace SmartStudy;
 
 public partial class RegistrationPage : ContentPage
 {
-	public RegistrationPage()
-	{
-		InitializeComponent();
-	}
+    public RegistrationPage()
+    {
+        InitializeComponent();
+    }
 
     private void CreateAccount(object sender, EventArgs e)
     {
-        if(Password.Text == RepeatPassword.Text)
+        string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+        Match isMatch = Regex.Match(EMail.Text is null ? "" : EMail.Text, pattern, RegexOptions.IgnoreCase);
+        if (!isMatch.Success)
         {
-            Client.Register(FirstName.Text, LastName.Text, EMail.Text, Password.Text);
+            DisplayAlert("Неверный формат почты", "Пожалуйста, проверьте правильность ввода почты", "ОК");
+            return;
+        }
+        string recommendations = Client.IsGoodPassword(Password.Text);
+        if (recommendations != "")
+            DisplayAlert("Пароль не подходит", recommendations, "ОК");
+        else
+        {
+            if (Password.Text == RepeatPassword.Text)
+                Client.Register(FirstName.Text, LastName.Text, EMail.Text, Password.Text);
+            else
+                DisplayAlert("Пароли не совпадают", "Пожалуйста, проверьте правильность ввода пароля", "ОК");
         }
     }
 

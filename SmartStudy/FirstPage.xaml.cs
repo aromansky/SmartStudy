@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace SmartStudy;
 
 public partial class FirstPage : ContentPage
@@ -7,14 +9,18 @@ public partial class FirstPage : ContentPage
 		InitializeComponent();
 	}
   
-    private void ClickRegister(object sender, EventArgs e)
+    private async void ClickRegister(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new RegistrationPage());
+        await Navigation.PushAsync(new RegistrationPage()); 
     }
 
-    private void ClickLogIn(object sender, EventArgs e)
+    private async void ClickLogIn(object sender, EventArgs e)
     {
-
+        bool res = await Client.Login(EMail.Text, Password.Text);
+        if (res)
+            await Navigation.PushAsync(new MainPage());
+        else
+            DisplayAlert("������", "�������� ����� ��� ������", "��");
     }
 
     private void ClickForgotPassword(object sender, EventArgs e)
