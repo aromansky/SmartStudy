@@ -18,7 +18,10 @@ public partial class FirstPage : ContentPage
     {
         bool res = await Client.Login(EMail.Text, Password.Text);
         if (res)
-            await Navigation.PushModalAsync(new Views.Student.MainPage_Student());
+        {
+            Application.Current.MainPage = new Views.Student.AppShell_Student();
+            await Shell.Current.GoToAsync("///main_page");
+        }
         else
             DisplayAlert("Ошибка", "Неверный логин или пароль", "ОК");
     }
@@ -27,7 +30,10 @@ public partial class FirstPage : ContentPage
     {
         bool res = await Client.Login(EMail.Text, Password.Text);
         if (res)
-            await Navigation.PushModalAsync(new Views.Teacher.MainPage_Teacher());
+        {
+            Application.Current.MainPage = new Views.Teacher.AppShell_Teacher();
+            await Shell.Current.GoToAsync("///main_page");
+        }
         else
             DisplayAlert("Ошибка", "Неверный логин или пароль", "ОК");
     }
