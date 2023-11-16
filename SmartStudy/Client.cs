@@ -102,5 +102,21 @@ namespace SmartStudy
             }
         }
 
+        public static async Task<List<User>> GetUsersList()
+        {
+            List<User> users = new List<User>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.UserUrl);
+                if (response.IsSuccessStatusCode)
+                    users = await response.Content.ReadFromJsonAsync<List<User>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return users;
+        }
+
     }
 }
