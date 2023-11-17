@@ -9,10 +9,11 @@ namespace SmartStudy
 {
     public static class Constants
     {
-        public const string UserUrl = "https://<ввести номер своего хоста>/api/user";
-        public const string GroupSettingsUrl = "https://<ввести номер своего хоста>/api/group_settings";
-        public const string GroupUrl = "https://<ввести номер своего хоста>/api/group";
-        public const string EventUrl = "https://<ввести номер своего хоста>/api/enent";
-        public const string GroupEventUrl = "https://<ввести номер своего хоста>/api/group_event";
+        private const string your_address = "";
+        public const string UserUrl = $"https://{your_address}/api/user";
+        public const string GroupSettingsUrl = $"https://{your_address}/api/group_settings";
+        public const string GroupUrl = $"https://{your_address}/api/group";
+        public const string EventUrl = $"https://{your_address}/api/event";
+        public const string GroupEventUrl = $"https://{your_address}/api/group_event";
     }
 }
