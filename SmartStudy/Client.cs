@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Text.RegularExpressions;
 using SmartStudy.ModelsDB;
+using System.Data.SqlClient;
 
 namespace SmartStudy
 {
@@ -64,19 +65,15 @@ namespace SmartStudy
 
         public static string IsGoodPassword(string password)
         {
-            if(password is null)
+            List<string> recommendations = new List<string>();
+            if (password is null)
                 password = "";  
-                List<string> recommendations = new List<string>();
-            // Рекомендовать повысить длину пароля, если он менее 8 символов
             if (password.Length < 8)
                 recommendations.Add("Увеличьте длину пароля (минимум 8 символов).");
-            // Рекомендовать добавить цифры, если их нет в пароле
             if (!password.Any(char.IsDigit))
                 recommendations.Add("\nДобавьте цифры в пароль.");
-            // Рекомендовать добавить буквы в верхнем регистре, если их нет в пароле
             if (!password.Any(char.IsUpper))
                 recommendations.Add("\nДобавьте буквы в верхнем регистре в пароль.");
-            // Рекомендовать добавить буквы в нижнем регистре, если их нет в пароле
             if (!password.Any(char.IsLower))
                 recommendations.Add("\nДобавьте буквы в нижнем регистре в пароль.");
             return String.Join(" ", recommendations);
