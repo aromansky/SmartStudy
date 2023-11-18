@@ -32,7 +32,7 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\Images\logo.png" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
@@ -49,7 +49,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\logo.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Database1.mdf" />
+	  <None Remove="Resources\Images\calendar.svg" />
+	  <None Remove="Resources\Images\groups.svg" />
+	  <None Remove="Resources\Images\homework.png" />
+	  <None Remove="Resources\Images\logo.png" />
+	  <None Remove="Resources\Images\logo_tab.svg" />
+	  <None Remove="Resources\Images\main_page.svg" />
+	  <None Remove="Resources\Images\message.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -65,10 +76,39 @@
 	  <Compile Update="Views\FirstPage.xaml.cs">
 	    <DependentUpon>FirstPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Student\Calendar_note_add.xaml.cs">
+	    <DependentUpon>Calendar_note_add.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Teacher\Calendar.xaml.cs">
+	    <SubType>Code</SubType>
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Teacher\Calendar_note_add.xaml.cs">
+	    <SubType>Code</SubType>
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Teacher\Calendar_note_edit.xaml.cs">
+	    <SubType>Code</SubType>
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\FirstPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Student\Calendar_note_add.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Student\Calendar_note_edit.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Teacher\Calendar_note_add.xaml">
+	    <SubType>Designer</SubType>
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Teacher\Calendar_note_edit.xaml">
+	    <SubType>Designer</SubType>
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

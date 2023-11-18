@@ -38,5 +38,10 @@
                 Route="groups"/>
         </Tab>
     </TabBar>
-
+    <ShellContent
+        ContentTemplate="{DataTemplate views_student:Calendar_note_add}"
+        Route="calendar_note_add"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_student:Calendar_note_edit}"
+        Route="calendar_note_edit"/>
 </Shell>

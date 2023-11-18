@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartStudy.Views.Student.Calendar_note_add"
+             Title="Создать событие">
+    <VerticalStackLayout Spacing="10" Margin="5">
+        <Entry x:Name="Note_Name_entry"
+               Placeholder="Имя события"
+               FontSize="Medium"
+               HorizontalTextAlignment="Center"
+               HeightRequest="50"/>
+
+        <Label Text="&#xA;Список участников: " FontSize="Medium"/>
+        <Button Text="Добавить участника" WidthRequest="200" HorizontalOptions="Start"/>
+        <Label x:Name="all_date"/>
+        <DatePicker x:Name="date_change" Format="d" DateSelected="date_selected"/>
+        <TimePicker x:Name="time_change" PropertyChanged="time_selected"/>
+
+        <Editor x:Name="TextEditor"
+            Placeholder="Enter your note"
+            HeightRequest="100" />
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+            <Button Text="Сохранить"
+                Clicked="SaveButton_Clicked" />
+
+            <Button Grid.Column="1"
+                Text="Отмена"
+                Clicked="CancelButton_Clicked" />
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
