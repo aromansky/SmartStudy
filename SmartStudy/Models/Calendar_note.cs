@@ -11,6 +11,13 @@ namespace SmartStudy.Models
         public string Time_note { get; set; }
         public string Text_note { get; set; }
     }
+    internal class Note_for_sort
+    {
+        public string Name_note { get; set; }
+        public DateTime Date_note { get; set; }
+        public TimeSpan Time_note { get; set; }
+        public string Text_note { get; set; }
+    }
 
     internal class Calendar_note
     {
@@ -56,11 +63,38 @@ namespace SmartStudy.Models
             users.Rows.Add(new object[] { null, Name_note, Date_note, Time_note, Text_note });
 
             users.WriteXml(AppDataPath+"local_calendar.xml", XmlWriteMode.WriteSchema);
+            sort_data();
+        }
+        private ObservableCollection<Note_for_sort> Notes_for_sort { get; set; } = new ObservableCollection<Note_for_sort>();
+        private void sort_data()
+        {
+            Notes_for_sort.Clear();
+
+            DataSet usersSet = new DataSet("UsersSet");
+            DataTable users = new DataTable("Users");
+            usersSet.Tables.Add(users);
+            if (!File.Exists(AppDataPath+"local_calendar.xml"))
+                create_data();
+            users.ReadXml(AppDataPath+"local_calendar.xml");
+            foreach (DataRow r in users.Rows)
+            {
+                Note_for_sort note = new Note_for_sort();
+                note.Name_note = r.ItemArray[1].ToString();
+                note.Date_note = DateTime.ParseExact(r.ItemArray[2].ToString(), "dd.MM.yyyy", null);
+                note.Time_note = TimeSpan.ParseExact(r.ItemArray[3].ToString(), "hh\\:mm", null);
+                note.Text_note = r.ItemArray[4].ToString();
+                Notes_for_sort.Add(note);
+            }
+            var sortedNotes = Notes_for_sort.OrderBy(p => p.Date_note).ThenBy(p => p.Time_note);
+            users.Rows.Clear();
+            foreach (Note_for_sort note in sortedNotes)
+                users.Rows.Add(new object[] { null, note.Name_note, note.Date_note.ToString("d"), 
+                    note.Time_note.ToString("hh\\:mm"), note.Text_note });
+            users.WriteXml(AppDataPath+"local_calendar.xml", XmlWriteMode.WriteSchema);
         }
         public ObservableCollection<Note> Notes { get; set; } = new ObservableCollection<Note>();
         public Calendar_note() =>
             Load_All_Notes();
-
         public void Load_All_Notes()
         {
             Notes.Clear();
@@ -78,7 +112,7 @@ namespace SmartStudy.Models
                 note.Name_note = r.ItemArray[1].ToString();
                 note.Date_note = r.ItemArray[2].ToString();
                 note.Time_note = r.ItemArray[3].ToString();
-                note.Text_note = r.ItemArray[4].ToString();
+                note.Text_note =  r.ItemArray[4].ToString();
                 Notes.Add(note);
             }
         }
@@ -100,6 +134,7 @@ namespace SmartStudy.Models
                 note_editing["Text"] = Text_note;
             }
             users.WriteXml(AppDataPath+"local_calendar.xml", XmlWriteMode.WriteSchema);
+            sort_data();
         }
         public void Delete_note(int editing_Id)
         {

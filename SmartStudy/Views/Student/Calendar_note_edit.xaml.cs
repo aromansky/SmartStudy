@@ -52,13 +52,13 @@ public partial class Calendar_note_edit : ContentPage
     {
         date_note = text_obj;
         all_date.Text = text_obj;
-        date_change.Date = DateTime.ParseExact(date_note, "d", null);
+        date_change.Date = DateTime.ParseExact(date_note, "dd.MM.yyyy", null);
     }
     private void LoadNote_time(string text_obj)
     {
         time_note = text_obj;
         all_date.Text += " " + text_obj;
-        time_change.Time = TimeSpan.Parse(time_note);
+        time_change.Time = TimeSpan.ParseExact(time_note, "hh\\:mm", null);
     }
     private void LoadNote_text(string text_obj)
     {
@@ -69,11 +69,11 @@ public partial class Calendar_note_edit : ContentPage
     {
         Models.Calendar_note calendar_Note = new Models.Calendar_note();
         name_note = Note_Name_entry.Text;
-        date_note = date_change.Date.ToString("d");
-        time_note = time_change.Time.ToString();
+        date_note = date_change.Date.ToString("dd.MM.yyyy");
+        time_note = time_change.Time.ToString("hh\\:mm");
         text_note = TextEditor.Text;
-        calendar_Note.Save_edit_note(note_id, Note_Name_entry.Text, date_change.Date.ToString("d"),
-            time_change.Time.ToString(), TextEditor.Text);
+        calendar_Note.Save_edit_note(note_id, Note_Name_entry.Text, date_change.Date.ToString("dd.MM.yyyy"),
+            time_change.Time.ToString("hh\\:mm"), TextEditor.Text);
         Cancel_button_clicked(Cancel_button, EventArgs.Empty);
     }
     private async void DeleteButton_Clicked(object sender, EventArgs e)
@@ -88,13 +88,13 @@ public partial class Calendar_note_edit : ContentPage
     }
     public void date_selected(object sender, DateChangedEventArgs e)
     {
-        all_date.Text = e.NewDate.ToString("d") + " " + time_change.Time;
+        all_date.Text = e.NewDate.ToString("dd.MM.yyyy") + " " + time_change.Time.ToString("hh\\:mm");
 
     }
     public void time_selected(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         if (e.PropertyName == "Time")
-            all_date.Text = date_change.Date.ToString("d") + " " + $"{time_change.Time}";
+            all_date.Text = date_change.Date.ToString("dd.MM.yyyy") + " " + $"{time_change.Time.ToString("hh\\:mm")}";
     }
     public void Edit_clicked(object sender, EventArgs e)
     {
@@ -125,8 +125,8 @@ public partial class Calendar_note_edit : ContentPage
         Delete_button.IsVisible = true;
         Note_Name_entry.Text = name_note;
         all_date.Text = date_note + " " + time_note;
-        date_change.Date = DateTime.ParseExact(date_note, "d", null);
-        time_change.Time = TimeSpan.Parse(time_note);
+        date_change.Date = DateTime.ParseExact(date_note, "dd.MM.yyyy", null);
+        time_change.Time = TimeSpan.ParseExact(time_note, "hh\\:mm", null);
         TextEditor.Text = text_note;
     }
 }
