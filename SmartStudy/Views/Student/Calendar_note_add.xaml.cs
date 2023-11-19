@@ -20,7 +20,6 @@ public partial class Calendar_note_add : ContentPage
     public void date_selected(object sender, DateChangedEventArgs e)
     {
         all_date.Text = e.NewDate.ToString("dd.MM.yyyy") + " " + time_change.Time.ToString("hh\\:mm");
-        
     }
     public void time_selected(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {

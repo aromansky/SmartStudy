@@ -87,9 +87,14 @@ namespace SmartStudy.Models
             }
             var sortedNotes = Notes_for_sort.OrderBy(p => p.Date_note).ThenBy(p => p.Time_note);
             users.Rows.Clear();
+            int i = 0;
             foreach (Note_for_sort note in sortedNotes)
-                users.Rows.Add(new object[] { null, note.Name_note, note.Date_note.ToString("d"), 
-                    note.Time_note.ToString("hh\\:mm"), note.Text_note });
+            {
+                users.Rows.Add(new object[] { i, note.Name_note, note.Date_note.ToString("dd.MM.yyyy"), 
+                        note.Time_note.ToString("hh\\:mm"), note.Text_note });
+                i ++;
+            }    
+                
             users.WriteXml(AppDataPath+"local_calendar.xml", XmlWriteMode.WriteSchema);
         }
         public ObservableCollection<Note> Notes { get; set; } = new ObservableCollection<Note>();
