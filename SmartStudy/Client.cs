@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Text.RegularExpressions;
 using SmartStudy.ModelsDB;
-using System.Data.SqlClient;
 
 namespace SmartStudy
 {
@@ -114,13 +113,13 @@ namespace SmartStudy
             }
             return users;
         }
-        public static async void CreateGroup(Group group)
+        public static async void CreateGroup(ModelsDB.Group group)
         {
             Uri uri = new Uri(string.Format(Constants.GroupUrl, string.Empty));
 
             try
             {
-                string json = JsonSerializer.Serialize<Group>(group, _serializerOptions);
+                string json = JsonSerializer.Serialize<ModelsDB.Group>(group, _serializerOptions);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 Debug.WriteLine(json);
 
@@ -132,6 +131,31 @@ namespace SmartStudy
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+
+        public static async void AddUserToGroup(group_settings g_s, params User[] users)
+        {
+            Uri uri = new Uri(string.Format(Constants.GroupUrl, string.Empty));
+            foreach(User user in users)
+            {
+                try
+                {
+                    string json = JsonSerializer.Serialize<ModelsDB.Group>(new ModelsDB.Group(g_s.group_settings_id, user.Id),
+                        _serializerOptions);
+                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                    Debug.WriteLine(json);
+
+                    HttpResponseMessage response = await _client.PostAsync(uri, content);
+
+                    if (response.IsSuccessStatusCode)
+                        Debug.WriteLine("Ok");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                }
+
             }
         }
     }
