@@ -8,22 +8,23 @@ namespace SmartStudy
 {
     public class Event
     {
-        public string group_id { get; }
-        public string group_settings_id { get; }
 
-        // Время в формате "DD.MM.YYYY HH:MM"
-        public DateTime Time { get; set; } 
-
-        public Event(string group_id, string group_settings_id, string time)
+        public long event_id { get; set; }
+        public required string Title { get; set; }
+        public string? Description { get; set; }
+        public required DateTime date_begin { get; set; }
+        public required DateTime date_end { get; set; }
+        public Event(long event_id, string Title, string? Description, DateTime date_begin, DateTime date_end)
         {
-            this.group_id = group_id;
-            this.group_settings_id = group_settings_id;
-            Time = DateTime.Parse(time);
+            this.event_id = event_id;
+            this.Title = Title;
+            this.Description = Description;
+            this.date_begin = date_begin;
+            this.date_end = date_end;
         }
-
         public override string ToString()
         {
-            return $"group_id: {group_id}, group_settings_id: {group_settings_id}, time: {Time}";
+            return $"event_id: {event_id}, Title: {Title}, Description: {Description}, date_begin: {date_begin}, date_end: {date_end}"; 
         }   
     }
 }

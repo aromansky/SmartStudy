@@ -8,5 +8,7 @@ namespace WebAPI.Models
         public long event_id { get; set; }
         public required string Title { get; set; }
         public string? Description { get; set; }
+        public required DateTime date_begin { get; set; }
+        public required DateTime date_end { get; set; }
     }
 }
