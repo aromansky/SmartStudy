@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Models;
 
@@ -11,18 +6,18 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class eventController : ControllerBase
+    public class EventController : ControllerBase
     {
         private readonly SmartStudyContext _context;
 
-        public eventController(SmartStudyContext context)
+        public EventController(SmartStudyContext context)
         {
             _context = context;
         }
 
         // GET: api/event
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<@event>>> GetEvent()
+        public async Task<ActionResult<IEnumerable<@event>>> Getevent()
         {
           if (_context.@event == null)
           {
@@ -80,14 +75,14 @@ namespace WebAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/event
+        // POST: api/Event
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<@event>> PostEvent(@event @event)
         {
           if (_context.@event == null)
           {
-              return Problem("Entity set 'SmartStudyContext.Event'  is null.");
+              return Problem("Entity set 'SmartStudyContext.event'  is null.");
           }
             _context.@event.Add(@event);
             await _context.SaveChangesAsync();
