@@ -17,11 +17,11 @@ public partial class Calendar : ContentPage
     }
     public async void clicked_to_feedback(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("///feedback");
+        //await Shell.Current.GoToAsync("///feedback");
     }
     public async void clicked_to_homework(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("///homework");
+        //await Shell.Current.GoToAsync("///homework");
     }
     public async void clicked_to_groups(object sender, EventArgs e)
     {

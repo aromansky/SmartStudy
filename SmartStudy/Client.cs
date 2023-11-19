@@ -79,7 +79,7 @@ namespace SmartStudy
             return String.Join(" ", recommendations);
         }
 
-        public static async void CreateGroup(group_settings settings)
+        public static async void CreateGroupSettings(group_settings settings)
         {
             Uri uri = new Uri(string.Format(Constants.GroupSettingsUrl, string.Empty));
 
@@ -114,6 +114,25 @@ namespace SmartStudy
             }
             return users;
         }
+        public static async void CreateGroup(Group group)
+        {
+            Uri uri = new Uri(string.Format(Constants.GroupUrl, string.Empty));
 
+            try
+            {
+                string json = JsonSerializer.Serialize<Group>(group, _serializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                Debug.WriteLine(json);
+
+                HttpResponseMessage response = await _client.PostAsync(uri, content);
+
+                if (response.IsSuccessStatusCode)
+                    Debug.WriteLine("Ok");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
     }
 }
