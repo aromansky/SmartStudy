@@ -35,21 +35,6 @@
                          Margin="10" 
                          Clicked="clicked_to_create_group"/>
         </Grid>
-
-        <!--<AbsoluteLayouBackgroundColor="Purple"t
-            >
-        Padding="-5"
-        Other components 
-           
-            Grid.ColumnSpan="5"
-             AbsoluteLayout.LayoutFlags="PositionProportional"  
-            AbsoluteLayout.LayoutBounds=".95,.95,80,80"
-          
-            
-
-
-
-        </AbsoluteLayout>  -->
     </Grid>
 
     

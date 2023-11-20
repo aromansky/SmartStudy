@@ -9,7 +9,7 @@ public partial class Create_group : ContentPage
 
     private async void SaveButton_Clicked(object sender, EventArgs e)
     {
-        //TO DO
+        //TODO
         await Shell.Current.GoToAsync("///groups");
     }
     private async void CancelButton_Clicked(object sender, EventArgs e)
