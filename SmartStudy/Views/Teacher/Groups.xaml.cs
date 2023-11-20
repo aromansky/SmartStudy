@@ -22,4 +22,9 @@ public partial class Groups : ContentPage
     {
         await Shell.Current.GoToAsync("///calendar");
     }
+
+    public async void clicked_to_create_group(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("create_group");
+    }
 }

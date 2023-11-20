@@ -32,4 +32,7 @@
     <ShellContent
         ContentTemplate="{DataTemplate views_teacher:Calendar_note_edit}"
         Route="calendar_note_edit"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_teacher:Create_group}"
+        Route="create_group"/>
 </Shell>

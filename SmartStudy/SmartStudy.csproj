@@ -61,6 +61,7 @@
 	  <None Remove="Resources\Images\logo_tab.svg" />
 	  <None Remove="Resources\Images\main_page.svg" />
 	  <None Remove="Resources\Images\message.svg" />
+	  <None Remove="Resources\Images\plus_circle.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -109,6 +110,9 @@
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Teacher\Calendar_note_edit.xaml">
 	    <SubType>Designer</SubType>
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Teacher\Create_group.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
