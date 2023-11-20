@@ -1,4 +1,6 @@
-﻿namespace SmartStudy.ModelsDB
+﻿using Org.BouncyCastle.Asn1.X509;
+
+namespace SmartStudy.ModelsDB
 {
     public class User
     {
@@ -19,5 +21,6 @@
 
         public User() { }
 
+        public bool IsTutor() => Role.Equals("Tutor");
     }
 }
