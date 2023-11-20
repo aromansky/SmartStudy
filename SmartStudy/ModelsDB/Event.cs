@@ -14,9 +14,8 @@ namespace SmartStudy.ModelsDB
         public string Description { get; set; }
         public required DateTime date_begin { get; set; }
         public required DateTime date_end { get; set; }
-        public Event(long event_id, string Title, string Description, DateTime date_begin, DateTime date_end)
+        public Event(string Title, string Description, DateTime date_begin, DateTime date_end)
         {
-            this.event_id = event_id;
             this.Title = Title;
             this.Description = Description;
             this.date_begin = date_begin;

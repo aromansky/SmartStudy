@@ -16,7 +16,7 @@ public partial class FirstPage : ContentPage
 
     private async void ClickLogInStudent(object sender, EventArgs e)
     {
-        bool res = await Client.Login(EMail.Text, Password.Text);
+        bool res = await Client.Login(EMail.Text, Password.Text, "Student");
         if (res)
         {
             Application.Current.MainPage = new Views.Student.AppShell_Student();
@@ -28,7 +28,7 @@ public partial class FirstPage : ContentPage
 
     private async void ClickLogInTeacher(object sender, EventArgs e)
     {
-        bool res = await Client.Login(EMail.Text, Password.Text);
+        bool res = await Client.Login(EMail.Text, Password.Text, "Tutor");
         if (res)
         {
             Application.Current.MainPage = new Views.Teacher.AppShell_Teacher();

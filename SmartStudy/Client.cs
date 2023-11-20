@@ -2,7 +2,7 @@
 using System.Text;
 using System.Diagnostics;
 using System.Net.Http.Json;
-using System.Text.RegularExpressions;
+using SmartStudy.Models;
 using SmartStudy.ModelsDB;
 
 namespace SmartStudy
@@ -37,7 +37,7 @@ namespace SmartStudy
 
         }
 
-        public static async Task<bool> Login(string email, string password)
+        public static async Task<bool> Login(string email, string password, string role)
         {
             try
             {
@@ -48,7 +48,12 @@ namespace SmartStudy
                     List<User> users = await response.Content.ReadFromJsonAsync<List<User>>();
                     foreach (var user in users)
                         if (user.Email == email && user.Password == password)
+                        {
+                            user.Role = role;
+                            Serializer.SerializeUser(user);
                             return true;
+                        }
+                            
                 }
                 else
                 {
@@ -141,7 +146,7 @@ namespace SmartStudy
             {
                 try
                 {
-                    string json = JsonSerializer.Serialize<ModelsDB.Group>(new ModelsDB.Group(g_s.group_settings_id, user.Id),
+                    string json = JsonSerializer.Serialize<ModelsDB.Group>(new ModelsDB.Group(g_s.group_settings_id, user.user_id),
                         _serializerOptions);
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                     Debug.WriteLine(json);
