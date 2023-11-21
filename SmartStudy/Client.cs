@@ -5,6 +5,7 @@ using System.Net.Http.Json;
 using SmartStudy.ModelsDB;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
+using SmartStudy.Models;
 
 namespace SmartStudy
 {
@@ -118,17 +119,17 @@ namespace SmartStudy
             return users;
         }
 
-        public static async Task<List<Group>> GetGroupList()
+        public static async Task<List<group_settings>> GetGroupList()
         {
             Uri uri = new Uri(string.Format(Constants.GroupUrl, string.Empty));
             try
             {
-                List<Group> res = new List<Group>();
+                List<group_settings> res = new List<group_settings>();
                 HttpResponseMessage response = await _client.GetAsync(Constants.GroupSettingsUrl);
 
                 if (response.IsSuccessStatusCode)
-                    res = await response.Content.ReadFromJsonAsync<List<Group>>();
-                return res;
+                    res = await response.Content.ReadFromJsonAsync<List<group_settings>>();
+                return res.Where(x => x.Tutor_id == Serializer.DeserializeUser().user_id).ToList();
             }
             catch (Exception ex)
             {
