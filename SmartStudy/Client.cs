@@ -3,6 +3,8 @@ using System.Text;
 using System.Diagnostics;
 using System.Net.Http.Json;
 using SmartStudy.ModelsDB;
+using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 
 namespace SmartStudy
 {
@@ -114,6 +116,25 @@ namespace SmartStudy
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
             return users;
+        }
+
+        public static async Task<List<Group>> GetGroupList()
+        {
+            Uri uri = new Uri(string.Format(Constants.GroupUrl, string.Empty));
+            try
+            {
+                List<Group> res = new List<Group>();
+                HttpResponseMessage response = await _client.GetAsync(Constants.GroupSettingsUrl);
+
+                if (response.IsSuccessStatusCode)
+                    res = await response.Content.ReadFromJsonAsync<List<Group>>();
+                return res;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return null;
+            }
         }
 
         public static async void AddUserToGroup(group_settings g_s, params User[] users)
