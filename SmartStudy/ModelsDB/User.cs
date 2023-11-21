@@ -1,6 +1,4 @@
-﻿using Org.BouncyCastle.Asn1.X509;
-
-namespace SmartStudy.ModelsDB
+﻿namespace SmartStudy.ModelsDB
 {
     public class User
     {

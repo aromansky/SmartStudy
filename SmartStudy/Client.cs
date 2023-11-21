@@ -2,7 +2,6 @@
 using System.Text;
 using System.Diagnostics;
 using System.Net.Http.Json;
-using SmartStudy.Models;
 using SmartStudy.ModelsDB;
 
 namespace SmartStudy
@@ -50,10 +49,8 @@ namespace SmartStudy
                         if (user.Email == email && user.Password == password)
                         {
                             user.Role = role;
-                            Serializer.SerializeUser(user);
                             return true;
                         }
-                            
                 }
                 else
                 {
@@ -118,26 +115,6 @@ namespace SmartStudy
             }
             return users;
         }
-        public static async void CreateGroup(ModelsDB.Group group)
-        {
-            Uri uri = new Uri(string.Format(Constants.GroupUrl, string.Empty));
-
-            try
-            {
-                string json = JsonSerializer.Serialize<ModelsDB.Group>(group, _serializerOptions);
-                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                Debug.WriteLine(json);
-
-                HttpResponseMessage response = await _client.PostAsync(uri, content);
-
-                if (response.IsSuccessStatusCode)
-                    Debug.WriteLine("Ok");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-        }
 
         public static async void AddUserToGroup(group_settings g_s, params User[] users)
         {
@@ -146,10 +123,9 @@ namespace SmartStudy
             {
                 try
                 {
-                    string json = JsonSerializer.Serialize<ModelsDB.Group>(new ModelsDB.Group(g_s.group_settings_id, user.user_id),
+                    string json = JsonSerializer.Serialize<Group>(new Group(g_s.group_settings_id, user.user_id),
                         _serializerOptions);
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                    Debug.WriteLine(json);
 
                     HttpResponseMessage response = await _client.PostAsync(uri, content);
 
@@ -162,6 +138,22 @@ namespace SmartStudy
                 }
 
             }
+        }
+
+        public static async Task<List<Event>> GetEventList()
+        {
+            List<Event> events = new List<Event>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.EventUrl);
+                if (response.IsSuccessStatusCode)
+                    events = await response.Content.ReadFromJsonAsync<List<Event>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return events;
         }
     }
 }
