@@ -19,6 +19,14 @@ public partial class Calendar : ContentPage
     {
         await Shell.Current.GoToAsync("///groups");
     }
+    public async void clicked_to_feedback(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///feedback");
+    }
+    public async void clicked_to_homework(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///homework");
+    }
     public async void clicked_note_add(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("calendar_note_add");
