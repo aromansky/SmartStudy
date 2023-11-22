@@ -8,8 +8,6 @@
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="11*"/>
@@ -23,12 +21,10 @@
                         SelectionMode="Single"
                         SelectionChanged="note_clicked">
 
-                <!-- Designate how the collection of items are laid out -->
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                 </CollectionView.ItemsLayout>
 
-                <!-- Define the appearance of each item in the list -->
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
@@ -37,17 +33,15 @@
                                 <Label Text="{Binding Text_note}" MaxLines="1"  FontSize="20" TextColor="DarkGray"/>
                                 <Label Text="..." FontSize="20" TextColor="DarkGray"/>
                             </HorizontalStackLayout>
-                            <HorizontalStackLayout Spacing="5" HorizontalOptions="End">
-                                <Label Text="{Binding Date_note}" FontSize="18" TextColor="Silver"/>
-                                <Label Text="{Binding Time_note}" FontSize="18" TextColor="Silver"/>
-                            </HorizontalStackLayout>
-                            
+                            <Label Text="{Binding Date_begin}" FontSize="18" TextColor="Silver" HorizontalOptions="End"/>
+                            <Label Text="{Binding Date_end}" FontSize="18" TextColor="Silver" HorizontalOptions="End"/>
+
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
-        <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5">
+        <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
             <Button Text="Добавить событие" WidthRequest="200" HeightRequest="50" Clicked="clicked_note_add"/>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="2">
@@ -57,12 +51,6 @@
             <Button Text="Календарь" IsEnabled="False"/>
         </Grid>
         <Grid Grid.Column="2" Grid.Row="2">
-            <Button Text="Фидбэк" Clicked="clicked_to_feedback"/>
-        </Grid>
-        <Grid Grid.Column="3" Grid.Row="2">
-            <Button Text="Домашнее задание" Clicked="clicked_to_homework"/>
-        </Grid>
-        <Grid Grid.Column="4" Grid.Row="2">
             <Button Text="Группы" Clicked="clicked_to_groups"/>
         </Grid>
     </Grid>
