@@ -15,6 +15,10 @@ public partial class Calendar : ContentPage
     {
         await Shell.Current.GoToAsync("///main_page");
     }
+    public async void clicked_to_groups(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///groups");
+    }
     public async void clicked_to_feedback(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("///feedback");
@@ -23,16 +27,10 @@ public partial class Calendar : ContentPage
     {
         await Shell.Current.GoToAsync("///homework");
     }
-    public async void clicked_to_groups(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("///groups");
-    }
     public async void clicked_note_add(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("calendar_note_add");
     }
-
-
     protected override void OnAppearing()
     {
         ((Models.Calendar_note)BindingContext).Load_All_Notes();
@@ -47,14 +45,9 @@ public partial class Calendar : ContentPage
     {
         if (e.CurrentSelection.Count != 0)
         {
-            // Get the note model
             var note = (Models.Note)e.CurrentSelection[0];
 
-            await Shell.Current.GoToAsync($"calendar_note_edit?note_id={note.Id}&name_note={note.Name_note}" +
-               $"&date_note={note.Date_note}&time_note={note.Time_note}&text_note={note.Text_note}");
-            //string n_i = note.Id;
-            //wait Shell.Current.GoToAsync($"calendar_note_edit?note_id={n_i}");
-            // Unselect the UI
+            await Shell.Current.GoToAsync($"calendar_note_edit?note_id={note.Id}");
             all_notes.SelectedItem = null;
         }
     }

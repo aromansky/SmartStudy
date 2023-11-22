@@ -13,6 +13,7 @@ public partial class AppShell_Teacher : Shell
         Routing.RegisterRoute("calendar_note_edit", typeof(Calendar_note_edit));
         Routing.RegisterRoute("create_group", typeof(Create_group));
         Routing.RegisterRoute("groups", typeof(Groups));
+        Routing.RegisterRoute("feedback", typeof(Feedback));
 #if WINDOWS
         SetTabBarIsVisible(TabBar_t, false);
 #endif

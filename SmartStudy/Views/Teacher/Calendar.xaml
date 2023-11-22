@@ -37,11 +37,9 @@
                                 <Label Text="{Binding Text_note}" MaxLines="1"  FontSize="20" TextColor="DarkGray"/>
                                 <Label Text="..." FontSize="20" TextColor="DarkGray"/>
                             </HorizontalStackLayout>
-                            <HorizontalStackLayout Spacing="5" HorizontalOptions="End">
-                                <Label Text="{Binding Date_note}" FontSize="18" TextColor="Silver"/>
-                                <Label Text="{Binding Time_note}" FontSize="18" TextColor="Silver"/>
-                            </HorizontalStackLayout>
-                            
+                            <Label Text="{Binding Date_begin}" FontSize="18" TextColor="Silver" HorizontalOptions="End"/>
+                            <Label Text="{Binding Date_end}" FontSize="18" TextColor="Silver" HorizontalOptions="End"/>
+
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

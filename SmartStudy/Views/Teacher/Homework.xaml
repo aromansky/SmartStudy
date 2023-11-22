@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SmartStudy.Views.Teacher.MainPage_Teacher"
-             Title="Главная">
+             x:Class="SmartStudy.Views.Teacher.Homework"
+             Title="Домашние задания">
     <Grid x:Name="grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -19,7 +19,7 @@
             <VerticalStackLayout x:Name="main_view"></VerticalStackLayout>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1">
-            <Button Text="Главная" IsEnabled="False"/>
+            <Button Text="Главная" Clicked="clicked_to_main_page"/>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="1">
             <Button Text="Календарь" Clicked="clicked_to_calendar"/>
@@ -28,7 +28,7 @@
             <Button Text="Фидбэк" Clicked="clicked_to_feedback"/>
         </Grid>
         <Grid Grid.Column="3" Grid.Row="1">
-            <Button Text="Домашнее задание" Clicked="clicked_to_homework"/>
+            <Button Text="Домашнее задание" IsEnabled="False"/>
         </Grid>
         <Grid Grid.Column="4" Grid.Row="1">
             <Button Text="Группы" Clicked="clicked_to_groups"/>

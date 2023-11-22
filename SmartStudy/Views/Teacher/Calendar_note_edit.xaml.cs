@@ -4,76 +4,51 @@ using System.Collections.ObjectModel;
 namespace SmartStudy.Views.Teacher;
 
 [QueryProperty(nameof(Note_get_Id), "note_id")]
-[QueryProperty(nameof(Name_get_note), "name_note")]
-[QueryProperty(nameof(Date_get_note), "date_note")]
-[QueryProperty(nameof(Time_get_note), "time_note")]
-[QueryProperty(nameof(Text_get_note), "text_note")]
 public partial class Calendar_note_edit : ContentPage
 {
-    int note_id;
+    long note_id;
     string name_note;
-    string date_note;
-    string time_note;
     string text_note;
-    public int Note_get_Id
+    DateTime date_begin_note;
+    DateTime date_end_note;
+    public long Note_get_Id
     {
         set { LoadNote_id(value); }
-    }
-    public string Name_get_note
-    {
-        set { LoadNote_name(value); }
-    }
-    public string Date_get_note
-    {
-        set { LoadNote_date(value); }
-    }
-    public string Time_get_note
-    {
-        set { LoadNote_time(value); }
-    }
-    public string Text_get_note
-    {
-        set { LoadNote_text(value); }
     }
     public Calendar_note_edit()
 	{
 		InitializeComponent();
     }
-    private void LoadNote_id(int text_obj)
+    private void LoadNote_id(long text_obj)
     {
         note_id = text_obj;
-    }
-    private void LoadNote_name(string text_obj)
-    {
-        name_note = text_obj;
+        Models.Calendar_note calendar_Note = new Models.Calendar_note();
+        Models.Note note = new Models.Note();
+        note = calendar_Note.Get_Note_By_Id(note_id);
+        name_note = note.Name_note;
+        text_note = note.Text_note;
+        date_begin_note = note.Date_begin;
+        date_end_note = note.Date_end;
+
         Note_Name_entry.Text = name_note;
-    }
-    private void LoadNote_date(string text_obj)
-    {
-        date_note = text_obj;
-        all_date.Text = text_obj;
-        date_change.Date = DateTime.ParseExact(date_note, "dd.MM.yyyy", null);
-    }
-    private void LoadNote_time(string text_obj)
-    {
-        time_note = text_obj;
-        all_date.Text += " " + text_obj;
-        time_change.Time = TimeSpan.ParseExact(time_note, "hh\\:mm", null);
-    }
-    private void LoadNote_text(string text_obj)
-    {
-        text_note = text_obj;
         TextEditor.Text = text_note;
+        all_date_begin.Text = date_begin_note.ToString("g");
+        date_change_begin.Date = date_begin_note;
+        time_change_begin.Time = date_begin_note.TimeOfDay;
+        all_date_end.Text = date_end_note.ToString("g");
+        date_change_end.Date = date_end_note;
+        time_change_end.Time = date_end_note.TimeOfDay;
     }
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
         Models.Calendar_note calendar_Note = new Models.Calendar_note();
         name_note = Note_Name_entry.Text;
-        date_note = date_change.Date.ToString("dd.MM.yyyy");
-        time_note = time_change.Time.ToString("hh\\:mm");
         text_note = TextEditor.Text;
-        calendar_Note.Save_edit_note(note_id, Note_Name_entry.Text, date_change.Date.ToString("dd.MM.yyyy"),
-            time_change.Time.ToString("hh\\:mm"), TextEditor.Text);
+        date_begin_note = DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " + 
+            time_change_begin.Time.ToString("hh\\:mm"), "g", null);
+        date_end_note = DateTime.ParseExact(date_change_end.Date.ToString("dd.MM.yyyy") + " " +
+            time_change_end.Time.ToString("hh\\:mm"), "g", null);
+        calendar_Note.Save_edit_note(note_id, name_note, text_note, date_begin_note, date_end_note);
         Cancel_button_clicked(Cancel_button, EventArgs.Empty);
     }
     private async void DeleteButton_Clicked(object sender, EventArgs e)
@@ -86,21 +61,32 @@ public partial class Calendar_note_edit : ContentPage
             await Shell.Current.GoToAsync("///calendar");
         }
     }
-    public void date_selected(object sender, DateChangedEventArgs e)
+    public void date_begin_selected(object sender, DateChangedEventArgs e)
     {
-        all_date.Text = e.NewDate.ToString("dd.MM.yyyy") + " " + time_change.Time.ToString("hh\\:mm");
+        all_date_begin.Text = e.NewDate.ToString("dd.MM.yyyy") + " " + time_change_begin.Time.ToString("hh\\:mm");
     }
-    public void time_selected(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    public void time_begin_selected(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         if (e.PropertyName == "Time")
-            all_date.Text = date_change.Date.ToString("dd.MM.yyyy") + " " + time_change.Time.ToString("hh\\:mm");
+            all_date_begin.Text = date_change_begin.Date.ToString("dd.MM.yyyy") + " " + time_change_begin.Time.ToString("hh\\:mm");
+    }
+    public void date_end_selected(object sender, DateChangedEventArgs e)
+    {
+        all_date_end.Text = e.NewDate.ToString("dd.MM.yyyy") + " " + time_change_end.Time.ToString("hh\\:mm");
+    }
+    public void time_end_selected(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == "Time")
+            all_date_end.Text = date_change_end.Date.ToString("dd.MM.yyyy") + " " + $"{time_change_end.Time.ToString("hh\\:mm")}";
     }
     public void Edit_clicked(object sender, EventArgs e)
     {
         Note_Name_entry.IsReadOnly = false;
         TextEditor.IsReadOnly = false;
-        date_change.IsEnabled = true;
-        time_change.IsEnabled = true;
+        date_change_begin.IsEnabled = true;
+        time_change_begin.IsEnabled = true;
+        date_change_end.IsEnabled = true;
+        time_change_end.IsEnabled = true;
         Add_user.IsVisible = true;
         Save_button.IsVisible = true;
         Cancel_button.IsVisible = true;
@@ -115,17 +101,22 @@ public partial class Calendar_note_edit : ContentPage
     {
         Note_Name_entry.IsReadOnly = true;
         TextEditor.IsReadOnly = true;
-        date_change.IsEnabled = false;
-        time_change.IsEnabled = false;
+        date_change_begin.IsEnabled = false;
+        time_change_begin.IsEnabled = false;
+        date_change_end.IsEnabled = false;
+        time_change_end.IsEnabled = false;
         Add_user.IsVisible = false;
         Save_button.IsVisible = false;
         Cancel_button.IsVisible = false;
         Edit_button.IsVisible = true;
         Delete_button.IsVisible = true;
         Note_Name_entry.Text = name_note;
-        all_date.Text = date_note + " " + time_note;
-        date_change.Date = DateTime.ParseExact(date_note, "dd.MM.yyyy", null);
-        time_change.Time = TimeSpan.ParseExact(time_note, "hh\\:mm", null);
+        all_date_begin.Text = date_begin_note.ToString("g");
+        date_change_begin.Date = date_begin_note;
+        time_change_begin.Time = date_begin_note.TimeOfDay;
+        all_date_end.Text = date_end_note.ToString("g");
+        date_change_end.Date = date_end_note;
+        time_change_end.Time = date_end_note.TimeOfDay;
         TextEditor.Text = text_note;
     }
 }

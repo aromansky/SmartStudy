@@ -13,9 +13,21 @@
         <Label Text="&#xA;Список участников: " FontSize="Medium"/>
         <Button x:Name="Add_user" Text="Добавить участника" WidthRequest="200" HorizontalOptions="Start"
                  IsVisible="False" Clicked="Add_user_clicked"/>
-        <Label x:Name="all_date"/>
-        <DatePicker x:Name="date_change" Format="d" DateSelected="date_selected" IsEnabled="False"/>
-        <TimePicker x:Name="time_change" PropertyChanged="time_selected" IsEnabled="False"/>
+
+        <HorizontalStackLayout Spacing="15">
+            <Label Text="Начало: " FontSize="Medium" VerticalTextAlignment="End"/>
+            <Label x:Name="all_date_begin" FontSize="Small" VerticalTextAlignment="End"/>
+        </HorizontalStackLayout>
+        <DatePicker x:Name="date_change_begin" Format="d" DateSelected="date_begin_selected" IsEnabled="False"/>
+        <TimePicker x:Name="time_change_begin" PropertyChanged="time_begin_selected" IsEnabled="False"/>
+
+        <HorizontalStackLayout Spacing="15">
+            <Label Text="Конец:" FontSize="Medium" VerticalTextAlignment="End"/>
+            <Label x:Name="all_date_end" FontSize="Small" VerticalTextAlignment="End"/>
+        </HorizontalStackLayout>
+        
+        <DatePicker x:Name="date_change_end" Format="d" DateSelected="date_end_selected" IsEnabled="False"/>
+        <TimePicker x:Name="time_change_end" PropertyChanged="time_end_selected" IsEnabled="False"/>
 
         <Editor x:Name="TextEditor"
         Placeholder="Enter your note"
