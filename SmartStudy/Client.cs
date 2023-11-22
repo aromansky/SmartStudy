@@ -16,6 +16,10 @@ namespace SmartStudy
             WriteIndented = true
         };
 
+         /// <summary>
+         /// Выполняет регистрацию пользователя. Делает соответствующую запись в таблице user 
+         /// </summary>
+         /// <param name="user">Объект класса User</param>
         public static async void Register(User user)
         {
             Uri uri = new Uri(string.Format(Constants.UserUrl, string.Empty));
@@ -37,6 +41,13 @@ namespace SmartStudy
 
         }
 
+        /// <summary>
+        /// Выполняет вход в аккаунт пользователя.
+        /// </summary>
+        /// <param name="email">EMail пользователя</param>
+        /// <param name="password">Пароль пользователя</param>
+        /// <param name="role">Роль пользователя</param>
+        /// <returns>True, если вход возможен. False - иначе</returns>
         public static async Task<bool> Login(string email, string password, string role)
         {
             try
@@ -66,6 +77,11 @@ namespace SmartStudy
             return false;
         }
 
+        /// <summary>
+        /// Возвращает строку с рекомендациями по улучшению пароля
+        /// </summary>
+        /// <param name="password">Переданный пароль</param>
+        /// <returns></returns>
         public static string IsGoodPassword(string password)
         {
             List<string> recommendations = new List<string>();
@@ -82,6 +98,11 @@ namespace SmartStudy
             return String.Join(" ", recommendations);
         }
 
+
+        /// <summary>
+        /// Создаёт в таблице group_settings запись, соответствующую объекту класса group_settings
+        /// </summary>
+        /// <param name="settings">Объект класса group_settings</param>
         public static async void CreateGroupSettings(group_settings settings)
         {
             Uri uri = new Uri(string.Format(Constants.GroupSettingsUrl, string.Empty));
@@ -102,6 +123,59 @@ namespace SmartStudy
             }
         }
 
+        /// <summary>
+        /// Создаёт в таблице event запись, соответствующую объекту класса Event
+        /// </summary>
+        /// <param name="event">Объект класса Event</param>
+        public static async void CreateEvent(Event @event)
+        {
+            Uri uri = new Uri(string.Format(Constants.EventUrl, string.Empty));
+
+            try
+            {
+                string json = JsonSerializer.Serialize<Event>(@event, _serializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PostAsync(uri, content);
+
+                if (response.IsSuccessStatusCode)
+                    Debug.WriteLine("Ok");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Добавляет event к указанной группе. Создаёт об этом запись в таблицу group_event
+        /// </summary>
+        /// <param name="event">Объект класса Event</param>
+        /// <param name="g_s">Объект класса group_settings</param>
+        public static async void AddEventToGroup(Event @event, group_settings g_s)
+        {
+            Uri uri = new Uri(string.Format(Constants.GroupEventUrl, string.Empty));
+
+            try
+            {
+                string json = JsonSerializer.Serialize<group_event>(new group_event(@event.event_id, g_s.group_settings_id), _serializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PostAsync(uri, content);
+
+                if (response.IsSuccessStatusCode)
+                    Debug.WriteLine("Ok");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Возвращает список с информацией о зарегистрированных пользователях
+        /// </summary>
+        /// <returns>Список List<User></returns>
         public static async Task<List<User>> GetUsersList()
         {
             List<User> users = new List<User>();
@@ -118,6 +192,38 @@ namespace SmartStudy
             return users;
         }
 
+
+        /// <summary>
+        ///  Возвращает список объектов group_settings, в которых состоит user
+        /// </summary>
+        /// <param name="user">User</param>
+        /// <returns>Список объектов group_settings, в которых состоит user</returns>
+        public static async Task<List<group_settings>> GetGroupListWithUser(User user)
+        {
+            List<Group> groups = new List<Group>();
+            List<group_settings> groupsSettings = new List<group_settings>();
+            try
+            {
+                HttpResponseMessage responseGroup = await _client.GetAsync(Constants.GroupUrl);
+                if (responseGroup.IsSuccessStatusCode)
+                    groups = await responseGroup.Content.ReadFromJsonAsync<List<Group>>();
+
+                HttpResponseMessage responsegroupsSettings = await _client.GetAsync(Constants.GroupSettingsUrl);
+                if (responsegroupsSettings.IsSuccessStatusCode)
+                    groupsSettings = await responsegroupsSettings.Content.ReadFromJsonAsync<List<group_settings>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return groupsSettings.Where(x => groups.Where(x => x.user_id == user.user_id).Select(x => x.group_settings_id).Distinct().Contains(x.group_settings_id)).ToList();
+        }
+
+
+        /// <summary>
+        /// Возвращает список с информацией о созданных пользователем группах
+        /// </summary>
+        /// <returns>Список List<group_settings></returns>
         public static async Task<List<group_settings>> GetGroupList()
         {
             Uri uri = new Uri(string.Format(Constants.GroupUrl, string.Empty));
@@ -137,6 +243,11 @@ namespace SmartStudy
             }
         }
 
+        /// <summary>
+        /// Добавляет пользователей в указанную группу. Делает соответствующую запись в таблице group_event
+        /// </summary>
+        /// <param name="g_s">Объект класса group_settings</param>
+        /// <param name="users">Массив пользователей</param>
         public static async void AddUserToGroup(group_settings g_s, params User[] users)
         {
             Uri uri = new Uri(string.Format(Constants.GroupUrl, string.Empty));
@@ -161,8 +272,36 @@ namespace SmartStudy
             }
         }
 
-        public static async Task<List<Event>> GetEventList()
+
+        /// <summary>
+        /// Возвращает список объектов group_event
+        /// </summary>
+        /// <returns>List<group_event></returns>
+        public static async Task<List<group_event>> GetGroupEventList()
         {
+            List<group_event> events = new List<group_event>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.GroupEventUrl);
+                if (response.IsSuccessStatusCode)
+                    events = await response.Content.ReadFromJsonAsync<List<group_event>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return events;
+        }
+
+      
+        /// <summary>
+        /// Возвращает списко объектов Event, в которых учавствует пользователь
+        /// </summary>
+        /// <param name="user">Пользвователь</param>
+        /// <returns>List<Event></returns>
+        public static async Task<List<Event>> GetEventList(User user)
+        {
+            var groupEvents = GetGroupEventList();
             List<Event> events = new List<Event>();
             try
             {
@@ -174,7 +313,12 @@ namespace SmartStudy
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
-            return events;
+            return null;
+
+            // получить юзеров +
+            // получить номера групп, в которых они состоят +
+            // получить групповые ивенты в которых есть юзеры
+            // отсюда получить ивенты и вернуть их
         }
     }
 }
