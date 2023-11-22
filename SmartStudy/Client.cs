@@ -3,8 +3,6 @@ using System.Text;
 using System.Diagnostics;
 using System.Net.Http.Json;
 using SmartStudy.ModelsDB;
-using System.Collections.Generic;
-using Microsoft.Extensions.Logging;
 using SmartStudy.Models;
 
 namespace SmartStudy
@@ -52,6 +50,7 @@ namespace SmartStudy
                         if (user.Email == email && user.Password == password)
                         {
                             user.Role = role;
+                            Serializer.SerializeUser(user);
                             return true;
                         }
                 }
