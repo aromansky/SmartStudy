@@ -1,13 +1,13 @@
 namespace SmartStudy.Views.Teacher;
 
-public partial class Groups : ContentPage
+public partial class Feedback : ContentPage
 {
-	public Groups()
+	public Feedback()
 	{
 		InitializeComponent();
         grid.SetColumnSpan(main_view, 2);
         Label lab = new Label();
-        lab.Text = "Список групп";
+        lab.Text = "Какие-то сообщения";
         main_view.Add(lab);
 #if WINDOWS
 #else
@@ -26,14 +26,8 @@ public partial class Groups : ContentPage
     {
         await Shell.Current.GoToAsync("///homework");
     }
-
-    public async void clicked_to_feedback(object sender, EventArgs e)
+    public async void clicked_to_groups(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("///feedback");
-    }
-
-    public async void clicked_to_create_group(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("create_group");
+        await Shell.Current.GoToAsync("///groups");
     }
 }

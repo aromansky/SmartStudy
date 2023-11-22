@@ -23,6 +23,12 @@
             <Button Text="Календарь" Clicked="clicked_to_calendar"/>
         </Grid>
         <Grid Grid.Column="2" Grid.Row="1">
+            <Button Text="Фидбэк" Clicked="clicked_to_feedback"/>
+        </Grid>
+        <Grid Grid.Column="3" Grid.Row="1">
+            <Button Text="Домашнее задание" Clicked="clicked_to_homework"/>
+        </Grid>
+        <Grid Grid.Column="4" Grid.Row="1">
             <Button Text="Группы" Clicked="clicked_to_groups"/>
         </Grid>
     </Grid>

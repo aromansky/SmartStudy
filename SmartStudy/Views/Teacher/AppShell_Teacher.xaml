@@ -19,9 +19,21 @@
                 ContentTemplate="{DataTemplate views_teacher:Calendar}"
                 Route="calendar"/>
         </Tab>
-        <Tab Icon="groups.svg"
-            Title="Группы">
+        <Tab Icon="message.svg"
+            Title="Фидбэк">
+            <ShellContent 
+                ContentTemplate="{DataTemplate views_teacher:Feedback}"
+                Route="feedback"/>
+        </Tab>
+        <Tab Icon="homework.svg"
+            Title="ДЗ">
             <ShellContent
+                ContentTemplate="{DataTemplate views_teacher:Homework}"
+                Route="homework"/>
+        </Tab>
+        <Tab Icon="groups.png"
+            Title="Группы">
+            <ShellContent 
                 ContentTemplate="{DataTemplate views_teacher:Groups}"
                 Route="groups"/>
         </Tab>
