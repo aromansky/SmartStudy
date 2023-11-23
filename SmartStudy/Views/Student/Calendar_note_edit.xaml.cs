@@ -6,9 +6,9 @@ namespace SmartStudy.Views.Student;
 [QueryProperty(nameof(Note_get_Id), "note_id")]
 public partial class Calendar_note_edit : ContentPage
 {
-    long note_id;
-    string name_note;
-    string text_note;
+    long event_id;
+    string title_event;
+    string descr_event;
     DateTime date_begin_note;
     DateTime date_end_note;
     public long Note_get_Id
@@ -19,19 +19,19 @@ public partial class Calendar_note_edit : ContentPage
     {
         InitializeComponent();
     }
-    private void LoadNote_id(long text_obj)
+    private async void LoadNote_id(long text_obj)
     {
-        note_id = text_obj;
+        event_id = text_obj;
         Calendar_note calendar_Note = new Calendar_note();
         Event @event = new Event();
-        @event = calendar_Note.Get_Note_By_Id(note_id);
-        name_note = @event.Title;
-        text_note = @event.Description;
+        @event = await Client.GetEventFromId(event_id);
+        title_event = @event.Title;
+        descr_event = @event.Description;
         date_begin_note = @event.date_begin;
         date_end_note = @event.date_end;
 
-        Note_Name_entry.Text = name_note;
-        TextEditor.Text = text_note;
+        Note_Name_entry.Text = title_event;
+        TextEditor.Text = descr_event;
         all_date_begin.Text = date_begin_note.ToString("g");
         date_change_begin.Date = date_begin_note;
         time_change_begin.Time = date_begin_note.TimeOfDay;
@@ -41,23 +41,23 @@ public partial class Calendar_note_edit : ContentPage
     }
     private void SaveButton_Clicked(object sender, EventArgs e)
     {
-        Models.Calendar_note calendar_Note = new Models.Calendar_note();
-        name_note = Note_Name_entry.Text;
-        text_note = TextEditor.Text;
-        date_begin_note = DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " +
-            time_change_begin.Time.ToString("hh\\:mm"), "g", null);
-        date_end_note = DateTime.ParseExact(date_change_end.Date.ToString("dd.MM.yyyy") + " " +
-            time_change_end.Time.ToString("hh\\:mm"), "g", null);
-        calendar_Note.Save_edit_note(note_id, name_note, text_note, date_begin_note, date_end_note);
-        Cancel_button_clicked(Cancel_button, EventArgs.Empty);
+        //Models.Calendar_note calendar_Note = new Models.Calendar_note();
+        //title_event = Note_Name_entry.Text;
+        //descr_event = TextEditor.Text;
+        //date_begin_note = DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " +
+        //    time_change_begin.Time.ToString("hh\\:mm"), "g", null);
+        //date_end_note = DateTime.ParseExact(date_change_end.Date.ToString("dd.MM.yyyy") + " " +
+        //    time_change_end.Time.ToString("hh\\:mm"), "g", null);
+        //calendar_Note.Save_edit_note(note_id, name_note, text_note, date_begin_note, date_end_note);
+        //Cancel_button_clicked(Cancel_button, EventArgs.Empty);
     }
     private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
-        bool result = await DisplayAlert("Подтвердить действие", $"Вы хотите удалить событие {name_note}?", "Да", "Нет");
+        bool result = await DisplayAlert("Подтвердить действие", $"Вы хотите удалить событие {title_event}?", "Да", "Нет");
         if (result)
         {
             Models.Calendar_note calendar_Note = new Models.Calendar_note();
-            calendar_Note.Delete_note(note_id);
+            calendar_Note.Delete_note(event_id);
             await Shell.Current.GoToAsync("///calendar");
         }
     }
@@ -110,13 +110,13 @@ public partial class Calendar_note_edit : ContentPage
         Cancel_button.IsVisible = false;
         Edit_button.IsVisible = true;
         Delete_button.IsVisible = true;
-        Note_Name_entry.Text = name_note;
+        Note_Name_entry.Text = title_event;
         all_date_begin.Text = date_begin_note.ToString("g");
         date_change_begin.Date = date_begin_note;
         time_change_begin.Time = date_begin_note.TimeOfDay;
         all_date_end.Text = date_end_note.ToString("g");
         date_change_end.Date = date_end_note;
         time_change_end.Time = date_end_note.TimeOfDay;
-        TextEditor.Text = text_note;
+        TextEditor.Text = descr_event;
     }
 }

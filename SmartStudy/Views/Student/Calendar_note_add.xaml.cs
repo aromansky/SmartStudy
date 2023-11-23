@@ -9,7 +9,7 @@ public partial class Calendar_note_add : ContentPage
     private async void SaveButton_Clicked(object sender, EventArgs e)
     {
         Models.Calendar_note calendar_Note = new Models.Calendar_note();
-        calendar_Note.add_data(Note_Name_entry.Text, TextEditor.Text,
+        calendar_Note.add_data(Title.Text, Description.Text,
             DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " +
             time_change_begin.Time.ToString("hh\\:mm"), "g", null),
             DateTime.ParseExact(date_change_end.Date.ToString("dd.MM.yyyy") + " " +

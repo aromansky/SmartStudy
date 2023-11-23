@@ -13,14 +13,14 @@ public partial class Create_group : ContentPage
     private async void SaveButton_Clicked(object sender, EventArgs e)
     {
         //TODO
-        if (string.IsNullOrEmpty(Note_Name_entry.Text))
+        if (string.IsNullOrEmpty(Title.Text))
         {
             DisplayAlert("Ошибка", "Введите название группы", "Ок");
             return;
         }  
         else
         {
-            group_settings g_s = new group_settings(Serializer.DeserializeUser().user_id, Note_Name_entry.Text, TextEditor.Text);
+            group_settings g_s = new group_settings(Serializer.DeserializeUser().user_id, Title.Text, Description.Text);
             Client.CreateGroupSettings(g_s);
 
             //TODO теперь поработать с добавлением/удалением учеников

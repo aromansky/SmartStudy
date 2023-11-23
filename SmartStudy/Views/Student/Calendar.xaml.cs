@@ -1,3 +1,5 @@
+using SmartStudy.Models;
+
 namespace SmartStudy.Views.Student;
 
 public partial class Calendar : ContentPage
@@ -27,13 +29,19 @@ public partial class Calendar : ContentPage
     {
         await Shell.Current.GoToAsync("///homework");
     }
-    public async void clicked_note_add(object sender, EventArgs e)
+    public async void clicked_event_add(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("calendar_note_add");
     }
     protected override void OnAppearing()
     {
-        ((Models.Calendar_note)BindingContext).Load_All_Notes();
+        ((Models.Calendar_note)BindingContext).Load_All_Events();
+        // Семён, раскоментируй этот код, когда переделаешь связи между страницами
+        //if (!Serializer.DeserializeUser().IsTutor())
+        //{
+        //    AddEvent.IsEnabled = false;
+        //    AddEvent.IsVisible = false;
+        //}
     }
 
     private async void Add_Clicked(object sender, EventArgs e)
@@ -41,13 +49,13 @@ public partial class Calendar : ContentPage
         await Shell.Current.GoToAsync(nameof(Calendar_note_add));
     }
 
-    private async void note_clicked(object sender, SelectionChangedEventArgs e)
+    private async void event_clicked(object sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.Count != 0)
         {
-            var note = (ModelsDB.Event)e.CurrentSelection[0];
+            var @event = (ModelsDB.Event)e.CurrentSelection[0];
 
-            await Shell.Current.GoToAsync($"calendar_note_edit?note_id={note.event_id}");
+            await Shell.Current.GoToAsync($"calendar_note_edit?note_id={@event.event_id}");
             all_notes.SelectedItem = null;
         }
     }

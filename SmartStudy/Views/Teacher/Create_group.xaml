@@ -4,18 +4,20 @@
              x:Class="SmartStudy.Views.Teacher.Create_group"
              Title="Создание группы">
     <VerticalStackLayout Spacing="10" Margin="5">
-        <Entry x:Name="Note_Name_entry"
-               Placeholder="Имя группы"
+        <Entry x:Name="Title"
+               Placeholder="Название группы"
                FontSize="Medium"
                HorizontalTextAlignment="Center"
-               HeightRequest="50"/>
+               HeightRequest="50"
+               MaxLength="50"/>
 
         <Label Text="&#xA;Список участников: " FontSize="Medium"/>
         <Button Text="Добавить участника" WidthRequest="200" HorizontalOptions="Start"/>
 
-        <Editor x:Name="TextEditor"
-            Placeholder="Добавить описание"
-            HeightRequest="100" />
+        <Editor x:Name="Description"
+            Placeholder="Описание"
+            HeightRequest="100"
+            MaxLength="500"/>
 
         <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
             <Button Text="Сохранить"

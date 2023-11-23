@@ -148,6 +148,25 @@ namespace SmartStudy
         }
 
         /// <summary>
+        /// Получает объект Event по его event_id
+        /// </summary>
+        /// <param name="id">id Event-а</param>
+        public static async Task<Event> GetEventFromId(long id)
+        {
+            Event @event = null;
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.EventUrl + $"/{id}");
+                @event = await response.Content.ReadFromJsonAsync<Event>();
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+            return @event;
+        }
+
+        /// <summary>
         /// Добавляет event к указанной группе. Создаёт об этом запись в таблицу group_event
         /// </summary>
         /// <param name="event">Объект класса Event</param>

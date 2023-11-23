@@ -50,19 +50,21 @@ namespace SmartStudy.Models
         //когда появится взаимодействие с бд, дублировать это же для класса @event
         //в связке с какой-то функцией добавления события в бд
         //и соответственно после добавления в бд запись в локальный файл моей функцией с переданным event_id
-        public void add_data(string Name_note, string Text_note, DateTime Date_begin, DateTime Date_end)
+        public void add_data(string Title, string Description, DateTime date_begin, DateTime date_end)
         {
-            
-            DataSet usersSet = new DataSet("UsersSet");
-            DataTable users = new DataTable("Users");
-            usersSet.Tables.Add(users);
-            if (!File.Exists(AppDataPath+"local_calendar.xml"))
-                create_data();
-            users.ReadXml(AppDataPath+"local_calendar.xml");
+            Client.CreateEvent(new Event(Title, Description, date_begin, date_end));
+            Load_All_Events();
 
-            users.Rows.Add(new object[] { null, Name_note, Text_note, Date_begin, Date_end });
+            //DataSet usersSet = new DataSet("UsersSet");
+            //DataTable users = new DataTable("Users");
+            //usersSet.Tables.Add(users);
+            //if (!File.Exists(AppDataPath+"local_calendar.xml"))
+            //    create_data();
+            //users.ReadXml(AppDataPath+"local_calendar.xml");
 
-            users.WriteXml(AppDataPath+"local_calendar.xml", XmlWriteMode.WriteSchema);
+            //users.Rows.Add(new object[] { null, Name_note, Text_note, Date_begin, Date_end });
+
+            //users.WriteXml(AppDataPath+"local_calendar.xml", XmlWriteMode.WriteSchema);
             sort_data();
         }
         
@@ -101,11 +103,11 @@ namespace SmartStudy.Models
             users.WriteXml(AppDataPath+"local_calendar.xml", XmlWriteMode.WriteSchema);
         }
         public Calendar_note() =>
-            Load_All_Notes();
+            Load_All_Events();
         
         //загружает все события,
         //в неё можно поместить функцию из бд для притягивания всех событий пользователя
-        public async void Load_All_Notes()
+        public async void Load_All_Events()
         {
             List<Event> evs = await Client.GetEventList(Models.Serializer.DeserializeUser());
             Events.Clear();

@@ -21,7 +21,7 @@
                         ItemsSource="{Binding Events}"
                         Margin="20"
                         SelectionMode="Single"
-                        SelectionChanged="note_clicked">
+                        SelectionChanged="event_clicked">
 
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
@@ -44,7 +44,7 @@
             </CollectionView>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5">
-            <Button Text="Добавить событие" WidthRequest="200" HeightRequest="50" Clicked="clicked_note_add"/>
+            <Button x:Name="AddEvent" Text="Добавить событие" WidthRequest="200" HeightRequest="50" Clicked="clicked_event_add"/>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="2">
             <Button Text="Главная" Clicked="clicked_to_main_page"/>

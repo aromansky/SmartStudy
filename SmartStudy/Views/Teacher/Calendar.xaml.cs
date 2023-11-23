@@ -33,7 +33,7 @@ public partial class Calendar : ContentPage
     }
     protected override void OnAppearing()
     {
-        ((Models.Calendar_note)BindingContext).Load_All_Notes();
+        ((Models.Calendar_note)BindingContext).Load_All_Events();
     }
 
     private async void Add_Clicked(object sender, EventArgs e)
