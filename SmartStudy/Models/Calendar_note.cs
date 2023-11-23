@@ -52,7 +52,7 @@ namespace SmartStudy.Models
         //и соответственно после добавления в бд запись в локальный файл моей функцией с переданным event_id
         public void add_data(string Title, string Description, DateTime date_begin, DateTime date_end)
         {
-            Client.CreateEvent(new Event(Title, Description, date_begin, date_end));
+            Client.CreateEvent(new Event(Title, Serializer.DeserializeUser().user_id, Description, date_begin, date_end));
             Load_All_Events();
 
             //DataSet usersSet = new DataSet("UsersSet");
@@ -157,20 +157,22 @@ namespace SmartStudy.Models
         //удаляет событие id=editing_Id
         public void Delete_note(long editing_Id)
         {
-            DataSet usersSet = new DataSet("UsersSet");
-            DataTable users = new DataTable("Users");
-            usersSet.Tables.Add(users);
-            if (!File.Exists(AppDataPath+"local_calendar.xml"))
-                create_data();
-            users.ReadXml(AppDataPath+"local_calendar.xml");
+            Client.DeleteEventFromId(editing_Id);
 
-            var selectedUsers = users.Select($"Id = {editing_Id}");
-            foreach (var note_editing in selectedUsers)
-                note_editing.Delete();
-            users.WriteXml(AppDataPath+"local_calendar.xml", XmlWriteMode.WriteSchema);
+            //DataSet usersSet = new DataSet("UsersSet");
+            //DataTable users = new DataTable("Users");
+            //usersSet.Tables.Add(users);
+            //if (!File.Exists(AppDataPath+"local_calendar.xml"))
+            //    create_data();
+            //users.ReadXml(AppDataPath+"local_calendar.xml");
+
+            //var selectedUsers = users.Select($"Id = {editing_Id}");
+            //foreach (var note_editing in selectedUsers)
+            //    note_editing.Delete();
+            //users.WriteXml(AppDataPath+"local_calendar.xml", XmlWriteMode.WriteSchema);
         }
         //считывает параметры события с id=editing_Id из списка всех событий
-        public Event Get_Note_By_Id(long editing_Id)
+        public Event Get_Event_By_Id(long editing_Id)
         {
             return Events.Where(x => x.event_id == editing_Id).FirstOrDefault();
         }

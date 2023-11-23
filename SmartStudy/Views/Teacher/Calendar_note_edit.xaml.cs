@@ -19,12 +19,12 @@ public partial class Calendar_note_edit : ContentPage
 	{
 		InitializeComponent();
     }
-    private void LoadNote_id(long text_obj)
+    private async void LoadNote_id(long text_obj)
     {
         note_id = text_obj;
         Models.Calendar_note calendar_Note = new Models.Calendar_note();
         ModelsDB.Event @event = new ModelsDB.Event();
-        @event = calendar_Note.Get_Note_By_Id(note_id);
+        @event = calendar_Note.Get_Event_By_Id(note_id);
         name_note = @event.Title;
         text_note = @event.Description;
         date_begin_note = @event.date_begin;

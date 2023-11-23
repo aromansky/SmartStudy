@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Net.Http.Json;
 using SmartStudy.ModelsDB;
 using SmartStudy.Models;
+using Microsoft.Extensions.Logging;
 
 namespace SmartStudy
 {
@@ -167,6 +168,26 @@ namespace SmartStudy
         }
 
         /// <summary>
+        /// Удаляет запись об Event-е из БД
+        /// </summary>
+        /// <param name="id">id Event-а</param>
+        public static async void DeleteEventFromId(long event_id)
+        {
+            User user = Serializer.DeserializeUser();
+            Event @event = await GetEventFromId(event_id);
+            if (/*!user.IsTutor() ||*/ (user.user_id != @event.author_id))
+                return;
+            try
+            {
+                HttpResponseMessage response = await _client.DeleteAsync(Constants.EventUrl + $"/{@event.event_id}");
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+        }
+
+        /// <summary>
         /// Добавляет event к указанной группе. Создаёт об этом запись в таблицу group_event
         /// </summary>
         /// <param name="event">Объект класса Event</param>
@@ -189,6 +210,51 @@ namespace SmartStudy
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Возвращает список объектов group_event
+        /// </summary>
+        public static async Task<List<group_event>> GetGroupEventList()
+        {
+            List<group_event> events = new List<group_event>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.GroupEventUrl);
+                if (response.IsSuccessStatusCode)
+                    events = await response.Content.ReadFromJsonAsync<List<group_event>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return events;
+        }
+
+        /// <summary>
+        /// Возвращает списко объектов Event, в которых учавствует пользователь
+        /// </summary>
+        /// <param name="user">Пользвователь</param>
+        /// <returns>Список event-ов</returns>
+        public static async Task<List<Event>> GetEventList(User user)
+        {
+            var eventUsers = new List<EventUser>();
+            List<Event> events = new List<Event>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.EventUserUrl + $"/{user.user_id}");
+                if (response.IsSuccessStatusCode)
+                    eventUsers = await response.Content.ReadFromJsonAsync<List<EventUser>>();
+
+                response = await _client.GetAsync(Constants.EventUrl);
+                if (response.IsSuccessStatusCode)
+                    events = await response.Content.ReadFromJsonAsync<List<Event>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return events.Where(x => eventUsers.Select(x => x.event_id).Contains(x.event_id)).ToList();
         }
 
         /// <summary>
@@ -289,52 +355,6 @@ namespace SmartStudy
                 }
 
             }
-        }
-
-
-        /// <summary>
-        /// Возвращает список объектов group_event
-        /// </summary>
-        public static async Task<List<group_event>> GetGroupEventList()
-        {
-            List<group_event> events = new List<group_event>();
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(Constants.GroupEventUrl);
-                if (response.IsSuccessStatusCode)
-                    events = await response.Content.ReadFromJsonAsync<List<group_event>>();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-            return events;
-        }
-
-        /// <summary>
-        /// Возвращает списко объектов Event, в которых учавствует пользователь
-        /// </summary>
-        /// <param name="user">Пользвователь</param>
-        /// <returns>Список event-ов</returns>
-        public static async Task<List<Event>> GetEventList(User user)
-        {
-            var eventUsers = new List<EventUser>();
-            List<Event> events = new List<Event>();
-            try
-            {
-                HttpResponseMessage response = await _client.GetAsync(Constants.EventUserUrl + $"/{user.user_id}");
-                if (response.IsSuccessStatusCode)
-                    eventUsers = await response.Content.ReadFromJsonAsync<List<EventUser>>();
-
-                response = await _client.GetAsync(Constants.EventUrl);
-                if (response.IsSuccessStatusCode)
-                    events = await response.Content.ReadFromJsonAsync<List<Event>>();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
-            }
-            return events.Where(x => eventUsers.Select(x => x.event_id).Contains(x.event_id)).ToList();
         }
     }
 }
