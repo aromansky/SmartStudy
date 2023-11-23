@@ -23,12 +23,12 @@ public partial class Calendar_note_edit : ContentPage
     {
         note_id = text_obj;
         Models.Calendar_note calendar_Note = new Models.Calendar_note();
-        Models.Note note = new Models.Note();
-        note = calendar_Note.Get_Note_By_Id(note_id);
-        name_note = note.Name_note;
-        text_note = note.Text_note;
-        date_begin_note = note.Date_begin;
-        date_end_note = note.Date_end;
+        ModelsDB.Event @event = new ModelsDB.Event();
+        @event = calendar_Note.Get_Note_By_Id(note_id);
+        name_note = @event.Title;
+        text_note = @event.Description;
+        date_begin_note = @event.date_begin;
+        date_end_note = @event.date_end;
 
         Note_Name_entry.Text = name_note;
         TextEditor.Text = text_note;

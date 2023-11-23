@@ -45,9 +45,9 @@ public partial class Calendar : ContentPage
     {
         if (e.CurrentSelection.Count != 0)
         {
-            var note = (Models.Note)e.CurrentSelection[0];
+            var note = (ModelsDB.Event)e.CurrentSelection[0];
 
-            await Shell.Current.GoToAsync($"calendar_note_edit?note_id={note.Id}");
+            await Shell.Current.GoToAsync($"calendar_note_edit?note_id={note.event_id}");
             all_notes.SelectedItem = null;
         }
     }

@@ -16,8 +16,8 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<EventUser>>> GetEventUsers()
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IEnumerable<EventUser>>> GetEventUsers(long user_id)
         {
             var eventUsers = from @event in _context.@event
                              join group_event in _context.group_event on @event.event_id equals group_event.event_id

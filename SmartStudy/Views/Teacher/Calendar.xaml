@@ -32,13 +32,13 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
-                            <Label Text="{Binding Name_note}" FontSize="28" HorizontalOptions="Center"/>
+                            <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Center"/>
                             <HorizontalStackLayout>
-                                <Label Text="{Binding Text_note}" MaxLines="1"  FontSize="20" TextColor="DarkGray"/>
+                                <Label Text="{Binding Description}" MaxLines="1"  FontSize="20" TextColor="DarkGray"/>
                                 <Label Text="..." FontSize="20" TextColor="DarkGray"/>
                             </HorizontalStackLayout>
-                            <Label Text="{Binding Date_begin}" FontSize="18" TextColor="Silver" HorizontalOptions="End"/>
-                            <Label Text="{Binding Date_end}" FontSize="18" TextColor="Silver" HorizontalOptions="End"/>
+                            <Label Text="{Binding date_begin}" FontSize="18" TextColor="Silver" HorizontalOptions="End"/>
+                            <Label Text="{Binding date_end}" FontSize="18" TextColor="Silver" HorizontalOptions="End"/>
 
                         </StackLayout>
                     </DataTemplate>

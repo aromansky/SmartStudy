@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Data;
+using SmartStudy.ModelsDB;
 
 namespace SmartStudy.Models
 {
@@ -12,19 +13,11 @@ namespace SmartStudy.Models
     //
     //вообще можно создать функции в бд и вызывать их из моих, с уже переданными
     //параметрами(id, строки, даты), если это удобно 
-    internal class Note
-    {
-        public long Id { get; set; }
-        public string Name_note { get; set; }
-        public string Text_note { get; set; }
-        public DateTime Date_begin { get; set; }
-        public DateTime Date_end { get; set; }
-    }
     internal class Calendar_note
     {
         private string AppDataPath = FileSystem.AppDataDirectory;
         //коллекция всех событий пользователя
-        public ObservableCollection<Note> Notes { get; set; } = new ObservableCollection<Note>();
+        public ObservableCollection<Event> Events { get; set; } = new ObservableCollection<Event>();
         public void create_data()
         {
             DataSet usersSet = new DataSet("UsersSet");
@@ -78,7 +71,7 @@ namespace SmartStudy.Models
         //оставить для оффлайн версии, если такая будет, единственно заменять note_id на event_id
         private void sort_data()
         {
-            Notes.Clear();
+            Events.Clear();
 
             DataSet usersSet = new DataSet("UsersSet");
             DataTable users = new DataTable("Users");
@@ -88,20 +81,20 @@ namespace SmartStudy.Models
             users.ReadXml(AppDataPath+"local_calendar.xml");
             foreach (DataRow r in users.Rows)
             {
-                Note note = new Note();
-                note.Name_note = r.ItemArray[1].ToString();
-                note.Text_note = r.ItemArray[2].ToString();
-                note.Date_begin = DateTime.ParseExact(r.ItemArray[3].ToString(), "G", null);
-                note.Date_end = DateTime.ParseExact(r.ItemArray[4].ToString(), "G", null);
-                Notes.Add(note);
+                Event @event = new Event();
+                @event.Title = r.ItemArray[1].ToString();
+                @event.Description = r.ItemArray[2].ToString();
+                @event.date_begin = DateTime.ParseExact(r.ItemArray[3].ToString(), "G", null);
+                @event.date_end = DateTime.ParseExact(r.ItemArray[4].ToString(), "G", null);
+                Events.Add(@event);
             }
-            var sortedNotes = Notes.OrderBy(p => p.Date_begin).ThenBy(p => p.Date_end);
+            var sortedNotes = Events.OrderBy(p => p.date_begin).ThenBy(p => p.date_end);
             users.Rows.Clear();
             long i = 0;
-            foreach (Note note in sortedNotes)
+            foreach (Event @event in sortedNotes)
             {
-                users.Rows.Add(new object[] { i, note.Name_note, note.Text_note, 
-                    note.Date_begin, note.Date_end });
+                users.Rows.Add(new object[] { i, @event.Title, @event.Description,
+                    @event.date_begin, @event.date_end });
                 i ++;
             }    
                 
@@ -112,26 +105,29 @@ namespace SmartStudy.Models
         
         //загружает все события,
         //в неё можно поместить функцию из бд для притягивания всех событий пользователя
-        public void Load_All_Notes()
+        public async void Load_All_Notes()
         {
-            Notes.Clear();
+            List<Event> evs = await Client.GetEventList(Models.Serializer.DeserializeUser());
+            Events.Clear();
+            foreach (Event ev in evs)
+                Events.Add(ev);
 
-            DataSet usersSet = new DataSet("UsersSet");
-            DataTable users = new DataTable("Users");
-            usersSet.Tables.Add(users);
-            if (!File.Exists(AppDataPath+"local_calendar.xml"))
-                create_data();
-            users.ReadXml(AppDataPath+"local_calendar.xml");
-            foreach (DataRow r in users.Rows)
-            {
-                Note note = new Note();
-                note.Id = (long)r.ItemArray[0];
-                note.Name_note = r.ItemArray[1].ToString();
-                note.Text_note =  r.ItemArray[2].ToString();
-                note.Date_begin = DateTime.ParseExact(r.ItemArray[3].ToString(), "G", null);
-                note.Date_end = DateTime.ParseExact(r.ItemArray[4].ToString(), "G", null);
-                Notes.Add(note);
-            }
+
+            //DataSet usersSet = new DataSet("UsersSet");
+            //DataTable users = new DataTable("Users");
+            //usersSet.Tables.Add(users);
+            //if (!File.Exists(AppDataPath+"local_calendar.xml"))
+            //    create_data();
+            //users.ReadXml(AppDataPath+"local_calendar.xml");
+            //foreach (DataRow r in users.Rows)
+            //{
+            //    Event @event = new Event();
+            //    @event.Title = r.ItemArray[1].ToString();
+            //    @event.Description = r.ItemArray[2].ToString();
+            //    @event.date_begin = DateTime.ParseExact(r.ItemArray[3].ToString(), "G", null);
+            //    @event.date_end = DateTime.ParseExact(r.ItemArray[4].ToString(), "G", null);
+            //    Events.Add(@event);
+            //}
         }
 
         //сохраняет изменения в событии с id=editing_Id
@@ -172,9 +168,9 @@ namespace SmartStudy.Models
             users.WriteXml(AppDataPath+"local_calendar.xml", XmlWriteMode.WriteSchema);
         }
         //считывает параметры события с id=editing_Id из списка всех событий
-        public Note Get_Note_By_Id(long editing_Id)
+        public Event Get_Note_By_Id(long editing_Id)
         {
-            return Notes.Where(x => x.Id == editing_Id).FirstOrDefault();
+            return Events.Where(x => x.event_id == editing_Id).FirstOrDefault();
         }
     }
 }

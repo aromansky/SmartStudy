@@ -276,7 +276,6 @@ namespace SmartStudy
         /// <summary>
         /// Возвращает список объектов group_event
         /// </summary>
-        /// <returns>List<group_event></returns>
         public static async Task<List<group_event>> GetGroupEventList()
         {
             List<group_event> events = new List<group_event>();
@@ -293,19 +292,18 @@ namespace SmartStudy
             return events;
         }
 
-      
         /// <summary>
         /// Возвращает списко объектов Event, в которых учавствует пользователь
         /// </summary>
         /// <param name="user">Пользвователь</param>
-        /// <returns>List<Event></returns>
+        /// <returns>Список event-ов</returns>
         public static async Task<List<Event>> GetEventList(User user)
         {
             var eventUsers = new List<EventUser>();
             List<Event> events = new List<Event>();
             try
             {
-                HttpResponseMessage response = await _client.GetAsync(Constants.EventUserUrl);
+                HttpResponseMessage response = await _client.GetAsync(Constants.EventUserUrl + $"/{user.user_id}");
                 if (response.IsSuccessStatusCode)
                     eventUsers = await response.Content.ReadFromJsonAsync<List<EventUser>>();
 
@@ -317,7 +315,7 @@ namespace SmartStudy
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
-            return events.Where(x => eventUsers.Where(x => x.user_id == user.user_id).Select(x => x.event_id).Contains(x.event_id)).ToList();
+            return events.Where(x => eventUsers.Select(x => x.event_id).Contains(x.event_id)).ToList();
         }
     }
 }
