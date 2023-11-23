@@ -301,11 +301,15 @@ namespace SmartStudy
         /// <returns>List<Event></returns>
         public static async Task<List<Event>> GetEventList(User user)
         {
-            var groupEvents = GetGroupEventList();
+            var eventUsers = new List<EventUser>();
             List<Event> events = new List<Event>();
             try
             {
-                HttpResponseMessage response = await _client.GetAsync(Constants.EventUrl);
+                HttpResponseMessage response = await _client.GetAsync(Constants.EventUserUrl);
+                if (response.IsSuccessStatusCode)
+                    eventUsers = await response.Content.ReadFromJsonAsync<List<EventUser>>();
+
+                response = await _client.GetAsync(Constants.EventUrl);
                 if (response.IsSuccessStatusCode)
                     events = await response.Content.ReadFromJsonAsync<List<Event>>();
             }
@@ -313,12 +317,7 @@ namespace SmartStudy
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
-            return null;
-
-            // получить юзеров +
-            // получить номера групп, в которых они состоят +
-            // получить групповые ивенты в которых есть юзеры
-            // отсюда получить ивенты и вернуть их
+            return events.Where(x => eventUsers.Where(x => x.user_id == user.user_id).Select(x => x.event_id).Contains(x.event_id)).ToList();
         }
     }
 }

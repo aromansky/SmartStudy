@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
 
 
         [HttpGet]
-        public IActionResult GetEventUsers()
+        public async Task<ActionResult<IEnumerable<EventUser>>> GetEventUsers()
         {
             var eventUsers = from @event in _context.@event
                              join group_event in _context.group_event on @event.event_id equals group_event.event_id
@@ -27,8 +27,10 @@ namespace WebAPI.Controllers
                                  user_id = @group.user_id,
                                  event_id = @event.event_id
                              };
+            if (eventUsers == null)
+                return NotFound();
 
-            return Ok(eventUsers);
+            return await eventUsers.ToListAsync();
         }
     }
 }
