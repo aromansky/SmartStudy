@@ -4,7 +4,7 @@
              x:Class="SmartStudy.Views.Student.Calendar_note_edit">
     <VerticalStackLayout Spacing="10" Margin="5">
         <Entry x:Name="Note_Name_entry"
-           Placeholder="Имя события"
+           Placeholder="Название события"
            FontSize="Medium"
            HorizontalTextAlignment="Center"
            IsReadOnly="True"
@@ -30,7 +30,7 @@
         <TimePicker x:Name="time_change_end" PropertyChanged="time_end_selected" IsEnabled="False"/>
 
         <Editor x:Name="TextEditor"
-        Placeholder="Enter your note"
+        Placeholder="Описание события"
         IsReadOnly="True"
         HeightRequest="100" />
 

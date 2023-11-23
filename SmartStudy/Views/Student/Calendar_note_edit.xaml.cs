@@ -39,17 +39,22 @@ public partial class Calendar_note_edit : ContentPage
         date_change_end.Date = date_end_note;
         time_change_end.Time = date_end_note.TimeOfDay;
     }
-    private void SaveButton_Clicked(object sender, EventArgs e)
+    private async void SaveButton_Clicked(object sender, EventArgs e)
     {
-        //Models.Calendar_note calendar_Note = new Models.Calendar_note();
+        Models.Calendar_note calendar_Note = new Models.Calendar_note();
         //title_event = Note_Name_entry.Text;
         //descr_event = TextEditor.Text;
         //date_begin_note = DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " +
         //    time_change_begin.Time.ToString("hh\\:mm"), "g", null);
         //date_end_note = DateTime.ParseExact(date_change_end.Date.ToString("dd.MM.yyyy") + " " +
         //    time_change_end.Time.ToString("hh\\:mm"), "g", null);
-        //calendar_Note.Save_edit_note(note_id, name_note, text_note, date_begin_note, date_end_note);
-        //Cancel_button_clicked(Cancel_button, EventArgs.Empty);
+        calendar_Note.Save_edit_note(event_id, Note_Name_entry.Text, TextEditor.Text,
+            DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " +
+            time_change_begin.Time.ToString("hh\\:mm"), "g", null),
+            DateTime.ParseExact(date_change_end.Date.ToString("dd.MM.yyyy") + " " +
+            time_change_end.Time.ToString("hh\\:mm"), "g", null));
+
+        await Shell.Current.GoToAsync("///calendar");
     }
     private async void DeleteButton_Clicked(object sender, EventArgs e)
     {

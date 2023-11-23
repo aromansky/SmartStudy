@@ -134,24 +134,26 @@ namespace SmartStudy.Models
 
         //сохраняет изменения в событии с id=editing_Id
         //аналогично можно воспользоваться передаваемыми параметрами для вызова функции из бд
-        public void Save_edit_note(long editing_Id, string Name_note, string Text_note, DateTime Date_begin, DateTime Date_end)
+        public void Save_edit_note(long editing_Id, string Title, string Description, DateTime date_begin, DateTime date_end)
         {
-            DataSet usersSet = new DataSet("UsersSet");
-            DataTable users = new DataTable("Users");
-            usersSet.Tables.Add(users);
-            if (!File.Exists(AppDataPath+"local_calendar.xml"))
-                create_data();
-            users.ReadXml(AppDataPath+"local_calendar.xml");
+            Client.EditEventFromId(editing_Id, new Event(Title, Serializer.DeserializeUser().user_id, Description, date_begin, date_end));
 
-            var selectedUsers = users.Select($"Id = {editing_Id}");
-            foreach (var note_editing in selectedUsers)
-            {
-                note_editing["Name"] = Name_note;
-                note_editing["Text"] = Text_note;
-                note_editing["Date_begin"] = Date_begin;
-                note_editing["Date_end"] = Date_end;
-            }
-            users.WriteXml(AppDataPath+"local_calendar.xml", XmlWriteMode.WriteSchema);
+            //DataSet usersSet = new DataSet("UsersSet");
+            //DataTable users = new DataTable("Users");
+            //usersSet.Tables.Add(users);
+            //if (!File.Exists(AppDataPath+"local_calendar.xml"))
+            //    create_data();
+            //users.ReadXml(AppDataPath+"local_calendar.xml");
+
+            //var selectedUsers = users.Select($"Id = {editing_Id}");
+            //foreach (var note_editing in selectedUsers)
+            //{
+            //    note_editing["Name"] = Name_note;
+            //    note_editing["Text"] = Text_note;
+            //    note_editing["Date_begin"] = Date_begin;
+            //    note_editing["Date_end"] = Date_end;
+            //}
+            //users.WriteXml(AppDataPath+"local_calendar.xml", XmlWriteMode.WriteSchema);
             sort_data();
         }
         //удаляет событие id=editing_Id

@@ -188,6 +188,29 @@ namespace SmartStudy
         }
 
         /// <summary>
+        /// Редактирует запись об Event-е из БД
+        /// </summary>
+        /// <param name="id">id Event-а</param>
+        public static async void EditEventFromId(long editing_Id, Event @event)
+        {
+            User user = Serializer.DeserializeUser();
+            @event.event_id = editing_Id;
+            if (/*!user.IsTutor() ||*/ (user.user_id != @event.author_id))
+                return;
+            try
+            {
+                string json = JsonSerializer.Serialize<Event>(@event, _serializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PutAsync(Constants.EventUrl + $"/{editing_Id}", content);
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+        }
+
+        /// <summary>
         /// Добавляет event к указанной группе. Создаёт об этом запись в таблицу group_event
         /// </summary>
         /// <param name="event">Объект класса Event</param>
