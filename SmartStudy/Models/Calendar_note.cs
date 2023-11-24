@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Data;
+using System.Windows.Input;
 using SmartStudy.ModelsDB;
 
 namespace SmartStudy.Models
@@ -13,9 +14,11 @@ namespace SmartStudy.Models
     //
     //вообще можно создать функции в бд и вызывать их из моих, с уже переданными
     //параметрами(id, строки, даты), если это удобно 
-    internal class Calendar_note
+    public class Calendar_note
     {
+        bool IsRefreshing;
         private string AppDataPath = FileSystem.AppDataDirectory;
+
         //коллекция всех событий пользователя
         public ObservableCollection<Event> Events { get; set; } = new ObservableCollection<Event>();
         public void create_data()
@@ -104,7 +107,7 @@ namespace SmartStudy.Models
         }
         public Calendar_note() =>
             Load_All_Events();
-        
+
         //загружает все события,
         //в неё можно поместить функцию из бд для притягивания всех событий пользователя
         public async void Load_All_Events()

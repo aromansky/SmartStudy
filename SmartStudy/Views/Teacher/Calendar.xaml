@@ -12,38 +12,47 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="11*"/>
+            <RowDefinition Height="4*"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="*" x:Name="row_button"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5">
-            <CollectionView x:Name="all_notes"
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" BackgroundColor="Red">
+            <ScrollView>
+                <CollectionView x:Name="all_notes"
                         ItemsSource="{Binding Events}"
                         Margin="20"
                         SelectionMode="Single"
                         SelectionChanged="event_clicked">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
 
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-                </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Center"/>
+                                <HorizontalStackLayout>
+                                    <Label Text="{Binding Description}" MaxLines="1"  FontSize="20" TextColor="DarkGray"/>
+                                </HorizontalStackLayout>
+                                <Label Text="{Binding date_begin}" FontSize="18" TextColor="Silver" HorizontalOptions="End"/>
+                                <Label Text="{Binding date_end}" FontSize="18" TextColor="Silver" HorizontalOptions="End"/>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Center"/>
-                            <HorizontalStackLayout>
-                                <Label Text="{Binding Description}" MaxLines="1"  FontSize="20" TextColor="DarkGray"/>
-                            </HorizontalStackLayout>
-                            <Label Text="{Binding date_begin}" FontSize="18" TextColor="Silver" HorizontalOptions="End"/>
-                            <Label Text="{Binding date_end}" FontSize="18" TextColor="Silver" HorizontalOptions="End"/>
-
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
         </Grid>
-        <Grid Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5">
-            <Button x:Name="AddEvent" Text="Добавить событие" WidthRequest="200" HeightRequest="50" Clicked="clicked_event_add"/>
+        <Grid Grid.Column="4" Grid.Row="1">
+            <ImageButton Source="plus_circle.png" 
+             x:Name="AddEvent"
+             WidthRequest="70" 
+             HeightRequest="70"
+             CornerRadius="80"
+             HorizontalOptions="End"
+             VerticalOptions="End"
+             Margin="10" 
+             Clicked="clicked_event_add"/>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="2">
             <Button Text="Главная" Clicked="clicked_to_main_page"/>
