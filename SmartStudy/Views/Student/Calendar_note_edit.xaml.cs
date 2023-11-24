@@ -38,6 +38,18 @@ public partial class Calendar_note_edit : ContentPage
         all_date_end.Text = date_end_note.ToString("g");
         date_change_end.Date = date_end_note;
         time_change_end.Time = date_end_note.TimeOfDay;
+
+        Note_Name_entry.IsReadOnly = true;
+        TextEditor.IsReadOnly = true;
+        date_change_begin.IsEnabled = false;
+        time_change_begin.IsEnabled = false;
+        date_change_end.IsEnabled = false;
+        time_change_end.IsEnabled = false;
+        Add_group_in_event.IsVisible = false;
+        Save_button.IsVisible = false;
+        Cancel_button.IsVisible = false;
+        Edit_button.IsVisible = false;
+        Delete_button.IsVisible = false;
     }
     private async void SaveButton_Clicked(object sender, EventArgs e)
     {
@@ -48,6 +60,12 @@ public partial class Calendar_note_edit : ContentPage
         //    time_change_begin.Time.ToString("hh\\:mm"), "g", null);
         //date_end_note = DateTime.ParseExact(date_change_end.Date.ToString("dd.MM.yyyy") + " " +
         //    time_change_end.Time.ToString("hh\\:mm"), "g", null);
+        if (time_change_begin.Time > time_change_end.Time)
+        {
+            DisplayAlert("Ошибка", "Неверное время окончания", "ОК");
+            time_change_end.Time = time_change_begin.Time;
+            return;
+        }
         calendar_Note.Save_edit_note(event_id, Note_Name_entry.Text, TextEditor.Text,
             DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " +
             time_change_begin.Time.ToString("hh\\:mm"), "g", null),
@@ -69,11 +87,16 @@ public partial class Calendar_note_edit : ContentPage
     public void date_begin_selected(object sender, DateChangedEventArgs e)
     {
         all_date_begin.Text = e.NewDate.ToString("dd.MM.yyyy") + " " + time_change_begin.Time.ToString("hh\\:mm");
+        date_change_end.MinimumDate = date_change_begin.Date;
     }
     public void time_begin_selected(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         if (e.PropertyName == "Time")
+        {
             all_date_begin.Text = date_change_begin.Date.ToString("dd.MM.yyyy") + " " + time_change_begin.Time.ToString("hh\\:mm");
+            if (time_change_begin.Time > time_change_end.Time)
+                time_change_end.Time = time_change_begin.Time;
+        } 
     }
     public void date_end_selected(object sender, DateChangedEventArgs e)
     {
@@ -92,13 +115,13 @@ public partial class Calendar_note_edit : ContentPage
         time_change_begin.IsEnabled = true;
         date_change_end.IsEnabled = true;
         time_change_end.IsEnabled = true;
-        Add_user.IsVisible = true;
+        Add_group_in_event.IsVisible = true;
         Save_button.IsVisible = true;
         Cancel_button.IsVisible = true;
         Edit_button.IsVisible = false;
         Delete_button.IsVisible = false;
     }
-    public void Add_user_clicked(object sender, EventArgs e)
+    public void Add_group_in_event_clicked(object sender, EventArgs e)
     {
         //
     }
@@ -110,7 +133,7 @@ public partial class Calendar_note_edit : ContentPage
         time_change_begin.IsEnabled = false;
         date_change_end.IsEnabled = false;
         time_change_end.IsEnabled = false;
-        Add_user.IsVisible = false;
+        Add_group_in_event.IsVisible = false;
         Save_button.IsVisible = false;
         Cancel_button.IsVisible = false;
         Edit_button.IsVisible = true;

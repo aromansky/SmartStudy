@@ -37,11 +37,11 @@ public partial class Calendar : ContentPage
     {
         ((Models.Calendar_note)BindingContext).Load_All_Events();
         // Семён, раскоментируй этот код, когда переделаешь связи между страницами
-        //if (!Serializer.DeserializeUser().IsTutor())
-        //{
-        //    AddEvent.IsEnabled = false;
-        //    AddEvent.IsVisible = false;
-        //}
+        if (!Serializer.DeserializeUser().IsTutor())
+        {
+            AddEvent.IsEnabled = false;
+            AddEvent.IsVisible = false;
+        }
     }
 
     private async void Add_Clicked(object sender, EventArgs e)

@@ -11,8 +11,8 @@
            HeightRequest="50"/>
 
         <Label Text="&#xA;Список участников: " FontSize="Medium"/>
-        <Button x:Name="Add_user" Text="Добавить участника" WidthRequest="200" HorizontalOptions="Start"
-                 IsVisible="False" Clicked="Add_user_clicked"/>
+        <Button x:Name="Add_group_in_event" Text="Добавить группу" WidthRequest="200" HorizontalOptions="Start"
+                 IsVisible="False" Clicked="Add_group_in_event_clicked"/>
 
         <HorizontalStackLayout Spacing="15">
             <Label Text="Начало: " FontSize="Medium" VerticalTextAlignment="End"/>

@@ -12,7 +12,7 @@
                MaxLength="50"/>
 
         <Label Text="&#xA;Список участников: " FontSize="Medium"/>
-        <Button Text="Добавить участника" WidthRequest="200" HorizontalOptions="Start"/>
+        <Button Text="Добавить группу" WidthRequest="200" HorizontalOptions="Start"/>
 
         <HorizontalStackLayout Spacing="15">
             <Label Text="Начало: " FontSize="Medium" VerticalTextAlignment="End"/>
