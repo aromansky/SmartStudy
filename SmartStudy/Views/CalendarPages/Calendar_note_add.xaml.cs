@@ -1,4 +1,4 @@
-namespace SmartStudy.Views.Teacher;
+namespace SmartStudy.Views.CalendarPages;
 
 public partial class Calendar_note_add : ContentPage
 {

@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views_teacher="clr-namespace:SmartStudy.Views.Teacher"
+    xmlns:views_CalendarPages="clr-namespace:SmartStudy.Views.CalendarPages"
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar x:Name="TabBar_t">
@@ -16,7 +17,7 @@
         <Tab Icon="calendar.svg"
             Title="Календарь">
             <ShellContent
-                ContentTemplate="{DataTemplate views_teacher:Calendar}"
+                ContentTemplate="{DataTemplate views_CalendarPages:Calendar}"
                 Route="calendar"/>
         </Tab>
         <Tab Icon="message.svg"
@@ -39,10 +40,10 @@
         </Tab>
     </TabBar>
     <ShellContent
-        ContentTemplate="{DataTemplate views_teacher:Calendar_note_add}"
+        ContentTemplate="{DataTemplate views_CalendarPages:Calendar_note_add}"
         Route="calendar_note_add"/>
     <ShellContent
-        ContentTemplate="{DataTemplate views_teacher:Calendar_note_edit}"
+        ContentTemplate="{DataTemplate views_CalendarPages:Calendar_note_edit}"
         Route="calendar_note_edit"/>
     <ShellContent
         ContentTemplate="{DataTemplate views_teacher:Create_group}"

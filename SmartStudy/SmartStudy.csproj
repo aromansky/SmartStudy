@@ -77,18 +77,15 @@
 	  <Compile Update="Views\FirstPage.xaml.cs">
 	    <DependentUpon>FirstPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Student\Calendar_note_add.xaml.cs">
-	    <DependentUpon>Calendar_note_add.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Teacher\Calendar.xaml.cs">
+	  <Compile Update="Views\CalendarPages\Calendar.xaml.cs">
 	    <SubType>Code</SubType>
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Teacher\Calendar_note_add.xaml.cs">
+	  <Compile Update="Views\CalendarPages\Calendar_note_add.xaml.cs">
 	    <SubType>Code</SubType>
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Teacher\Calendar_note_edit.xaml.cs">
+	  <Compile Update="Views\CalendarPages\Calendar_note_edit.xaml.cs">
 	    <SubType>Code</SubType>
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
@@ -104,17 +101,11 @@
 	  <MauiXaml Update="Views\FirstPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Student\Calendar_note_add.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Student\Calendar_note_edit.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Teacher\Calendar_note_add.xaml">
+	  <MauiXaml Update="Views\CalendarPages\Calendar_note_add.xaml">
 	    <SubType>Designer</SubType>
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Teacher\Calendar_note_edit.xaml">
+	  <MauiXaml Update="Views\CalendarPages\Calendar_note_edit.xaml">
 	    <SubType>Designer</SubType>
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

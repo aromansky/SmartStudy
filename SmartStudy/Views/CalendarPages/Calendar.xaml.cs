@@ -1,6 +1,6 @@
 using SmartStudy.Models;
 
-namespace SmartStudy.Views.Teacher;
+namespace SmartStudy.Views.CalendarPages;
 
 public partial class Calendar : ContentPage
 {

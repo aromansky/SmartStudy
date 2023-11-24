@@ -1,7 +1,7 @@
 using SmartStudy.Models;
 using SmartStudy.ModelsDB;
 
-namespace SmartStudy.Views.Teacher;
+namespace SmartStudy.Views.CalendarPages;
 
 [QueryProperty(nameof(Note_get_Id), "note_id")]
 public partial class Calendar_note_edit : ContentPage
