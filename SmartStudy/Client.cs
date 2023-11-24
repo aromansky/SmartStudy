@@ -195,7 +195,7 @@ namespace SmartStudy
         {
             User user = Serializer.DeserializeUser();
             @event.event_id = editing_Id;
-            if (/*!user.IsTutor() ||*/ (user.user_id != @event.author_id))
+            if (!user.IsTutor() || (user.user_id != @event.author_id))
                 return;
             try
             {
