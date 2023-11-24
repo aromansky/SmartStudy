@@ -109,9 +109,9 @@ public partial class Calendar_note_edit : ContentPage
         Edit_button.IsVisible = false;
         Delete_button.IsVisible = false;
     }
-    public void Add_group_in_event_clicked(object sender, EventArgs e)
+    public async void Add_group_in_event_clicked(object sender, EventArgs e)
     {
-        //
+        await Shell.Current.GoToAsync("add_event_to_group");
     }
     public void Cancel_button_clicked(object sender, EventArgs e)
     {

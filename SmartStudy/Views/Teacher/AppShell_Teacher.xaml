@@ -46,6 +46,9 @@
         ContentTemplate="{DataTemplate views_CalendarPages:Calendar_note_edit}"
         Route="calendar_note_edit"/>
     <ShellContent
+        ContentTemplate="{DataTemplate views_CalendarPages:Group_list}"
+        Route="add_event_to_group"/>
+    <ShellContent
         ContentTemplate="{DataTemplate views_teacher:Create_group}"
         Route="create_group"/>
 </Shell>

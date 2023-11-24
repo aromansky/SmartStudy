@@ -36,7 +36,6 @@
                                 </HorizontalStackLayout>
                                 <Label Text="{Binding date_begin}" FontSize="18" TextColor="Silver" HorizontalOptions="End"/>
                                 <Label Text="{Binding date_end}" FontSize="18" TextColor="Silver" HorizontalOptions="End"/>
-
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

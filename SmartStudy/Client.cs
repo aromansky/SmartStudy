@@ -277,6 +277,8 @@ namespace SmartStudy
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
+            if (user.IsTutor())
+                return events.Where(x => x.author_id == user.user_id).ToList();
             return events.Where(x => eventUsers.Select(x => x.event_id).Contains(x.event_id)).ToList();
         }
 

@@ -16,7 +16,6 @@ namespace SmartStudy.Models
     //параметрами(id, строки, даты), если это удобно 
     public class Calendar_note
     {
-        bool IsRefreshing;
         private string AppDataPath = FileSystem.AppDataDirectory;
 
         //коллекция всех событий пользователя
