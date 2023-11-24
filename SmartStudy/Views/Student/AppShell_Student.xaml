@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="SmartStudy.Views.Student.AppShell_Student"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views_student="clr-namespace:SmartStudy.Views.Student"
+    xmlns:views_CalendarPages="clr-namespace:SmartStudy.Views.CalendarPages"
+    Shell.FlyoutBehavior="Disabled">
+
+    <TabBar x:Name="TabBar_s">
+        <Tab Icon="main_page.svg"
+            Title="Главная">
+            <ShellContent
+                ContentTemplate="{DataTemplate views_student:MainPage_Student}"
+                Route="main_page"/>
+        </Tab>
+        <Tab Icon="calendar.svg"
+            Title="Календарь">
+            <ShellContent
+                ContentTemplate="{DataTemplate views_CalendarPages:Calendar}"
+                Route="calendar"/>
+        </Tab>
+        <Tab Icon="message.svg"
+            Title="Фидбэк">
+            <ShellContent 
+                ContentTemplate="{DataTemplate views_student:Feedback}"
+                Route="feedback"/>
+        </Tab>
+        <Tab Icon="homework.svg"
+            Title="ДЗ">
+            <ShellContent
+                ContentTemplate="{DataTemplate views_student:Homework}"
+                Route="homework"/>
+        </Tab>
+        <Tab Icon="groups.png"
+            Title="Группы">
+            <ShellContent 
+                ContentTemplate="{DataTemplate views_student:Groups}"
+                Route="groups"/>
+        </Tab>
+    </TabBar>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_CalendarPages:Calendar_note_add}"
+        Route="calendar_note_add"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_CalendarPages:Calendar_note_edit}"
+        Route="calendar_note_edit"/>
+</Shell>

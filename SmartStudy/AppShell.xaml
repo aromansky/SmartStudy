@@ -9,6 +9,6 @@
     <ShellContent
         Title="SmartStudy"
         ContentTemplate="{DataTemplate local:FirstPage}"
-        Route="FirstPage" />
+        Route="RegistrationPage" />
 
 </Shell>
