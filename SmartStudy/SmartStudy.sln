@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartStudy", "SmartStudy.csproj", "{DF3C93AA-0DD9-4544-83F4-E3D1B6CD2883}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "..\WebAPI\WebAPI.csproj", "{C1E1EEC3-FDD6-4C9B-9093-1CA996744835}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "..\WebAPI\WebAPI.csproj", "{C1E1EEC3-FDD6-4C9B-9093-1CA996744835}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
