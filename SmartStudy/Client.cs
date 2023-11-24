@@ -215,19 +215,22 @@ namespace SmartStudy
         /// </summary>
         /// <param name="event">Объект класса Event</param>
         /// <param name="g_s">Объект класса group_settings</param>
-        public static async void AddEventToGroup(Event @event, group_settings g_s)
+        public static async void AddEventToGroup(Event @event, params group_settings[] g_s)
         {
             Uri uri = new Uri(string.Format(Constants.GroupEventUrl, string.Empty));
 
             try
             {
-                string json = JsonSerializer.Serialize<group_event>(new group_event(@event.event_id, g_s.group_settings_id), _serializerOptions);
-                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                foreach(var i in g_s)
+                {
+                    string json = JsonSerializer.Serialize<group_event>(new group_event(@event.event_id, i.group_settings_id), _serializerOptions);
+                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await _client.PostAsync(uri, content);
+                    HttpResponseMessage response = await _client.PostAsync(uri, content);
 
-                if (response.IsSuccessStatusCode)
-                    Debug.WriteLine("Ok");
+                    if (response.IsSuccessStatusCode)
+                        Debug.WriteLine("Ok");
+                }
             }
             catch (Exception ex)
             {

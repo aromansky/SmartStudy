@@ -1,4 +1,6 @@
-using SmartStudy.Models;
+using Microsoft.Maui.Controls;
+using SmartStudy.ModelsDB;
+using System.Collections.ObjectModel;
 
 namespace SmartStudy.Views.CalendarPages;
 
@@ -32,5 +34,17 @@ public partial class Group_list : ContentPage
     private async void CancelButton_Clicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("///calendar");
+    }
+
+    private void but_Clicked(object sender, EventArgs e)
+    {
+        if (((Models.Group_note)BindingContext).SelectedGroups.Count() == 0)
+        {
+            DisplayAlert("Ошибка", "Выберите не менее 1 группы", "Ok");
+            return;
+        }
+        group_settings[] a = ((Models.Group_note)BindingContext).SelectedGroups.Select(x => x as group_settings).ToArray();
+        Event ev = Models.Serializer.DeserializeEvent();
+        Client.AddEventToGroup(ev, a);
     }
 }

@@ -6,7 +6,6 @@ namespace SmartStudy.Models
     static class Serializer
     {
         static string path = FileSystem.Current.AppDataDirectory;
-        static string directory = Path.Combine(path, "Events");
 
         /// <summary>
         /// Сериализует объект класса User в файл UserData.xml
@@ -51,10 +50,8 @@ namespace SmartStudy.Models
         {
             if (@event == null)
                 return;
-            if (!Directory.Exists(directory))
-                Directory.CreateDirectory(directory);
             XmlSerializer serializer = new XmlSerializer(typeof(Event));
-            using (FileStream fs = new FileStream(Path.Combine(directory, "Event" + @event.event_id + ".xml"), FileMode.Create))
+            using (FileStream fs = new FileStream(Path.Combine(path, "Event.xml"), FileMode.Create))
                 serializer.Serialize(fs, @event);
         }
 
@@ -63,16 +60,16 @@ namespace SmartStudy.Models
         /// Десериализует объект класса Event из файла Event[num].xml
         /// </summary>
         /// <returns></returns>
-        public static List<Event> DeserializeEvents()
+        public static Event DeserializeEvent()
         {
             try
             {
-                List<Event> events = new List<Event>();
+                Event @event;
                 XmlSerializer serializer = new XmlSerializer(typeof(Event));
-                foreach (string dir in Directory.GetFiles(directory))
-                    using (FileStream fs = new FileStream(dir, FileMode.Open))
-                        events.Add((Event)serializer.Deserialize(fs));
-                return events;
+                using (FileStream fs = new FileStream(Path.Combine(path, "Event.xml"), FileMode.Open))
+                    @event = (Event)serializer.Deserialize(fs);
+                //File.Delete(path);
+                return @event;
             }
             // надо чем-нибудь запомнить
             catch

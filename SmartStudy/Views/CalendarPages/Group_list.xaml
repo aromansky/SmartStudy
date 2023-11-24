@@ -3,24 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartStudy.Views.CalendarPages.Group_list"
              Title="Группы">
-    <ScrollView>
-        <CollectionView x:Name="all_notes"
-                    ItemsSource="{Binding Groups}"
-                    Margin="20">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-            </CollectionView.ItemsLayout>
-
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
-                        <HorizontalStackLayout>
-                            <Label Text="{Binding Description}" MaxLines="1"  FontSize="20" TextColor="DarkGray" HorizontalTextAlignment="End"/>
-                        </HorizontalStackLayout>
-                    </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </ScrollView>
+    <ContentPage.Resources>
+        <Style TargetType="VerticalStackLayout">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="DarkViolet" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <ScrollView>
+            <CollectionView x:Name="all_notes"
+                ItemsSource="{Binding Groups}"
+                Margin="20"
+                SelectionMode="Multiple"
+                SelectedItems="{Binding SelectedGroups}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
+                            <Label Text="{Binding Description}" MaxLines="1"  FontSize="20" TextColor="DarkGray" HorizontalTextAlignment="Start"/>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Button x:Name="but" Text="Ok" Clicked="but_Clicked"/>
+        </Grid>
+    </Grid>
+    
+    
 </ContentPage>

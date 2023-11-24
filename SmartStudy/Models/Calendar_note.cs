@@ -16,7 +16,7 @@ namespace SmartStudy.Models
     //параметрами(id, строки, даты), если это удобно 
     public class Calendar_note
     {
-        private string AppDataPath = FileSystem.AppDataDirectory;
+        private string AppDataPath = FileSystem.CacheDirectory;
 
         //коллекция всех событий пользователя
         public ObservableCollection<Event> Events { get; set; } = new ObservableCollection<Event>();
