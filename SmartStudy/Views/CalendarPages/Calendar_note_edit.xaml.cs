@@ -11,6 +11,8 @@ public partial class Calendar_note_edit : ContentPage
     string descr_event;
     DateTime date_begin_note;
     DateTime date_end_note;
+    Event @event = null;
+    User user = Serializer.DeserializeUser();
     public long Note_get_Id
     {
         set { LoadNote_id(value); }
@@ -22,8 +24,6 @@ public partial class Calendar_note_edit : ContentPage
     private async void LoadNote_id(long text_obj)
     {
         event_id = text_obj;
-        Calendar_note calendar_Note = new Calendar_note();
-        Event @event = new Event();
         @event = await Client.GetEventFromId(event_id);
         title_event = @event.Title;
         descr_event = @event.Description;
@@ -38,6 +38,12 @@ public partial class Calendar_note_edit : ContentPage
         all_date_end.Text = date_end_note.ToString("g");
         date_change_end.Date = date_end_note;
         time_change_end.Time = date_end_note.TimeOfDay;
+
+        if(user.user_id != @event.author_id)
+        {
+            Edit_button.IsEnabled = false;
+            Edit_button.IsVisible = false;
+        }
     }
     private async void SaveButton_Clicked(object sender, EventArgs e)
     {
@@ -112,22 +118,22 @@ public partial class Calendar_note_edit : ContentPage
     public async void Add_group_in_event_clicked(object sender, EventArgs e)
     {
         Calendar_note calendar_Note = new Calendar_note();
-        // костыль
-        Event ev = new Event(Note_Name_entry.Text, Serializer.DeserializeUser().user_id, TextEditor.Text,
-            DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " +
-            time_change_begin.Time.ToString("hh\\:mm"), "g", null),
-            DateTime.ParseExact(date_change_end.Date.ToString("dd.MM.yyyy") + " " +
-            time_change_end.Time.ToString("hh\\:mm"), "g", null));
-        ev.event_id = event_id;
+        //// костыль
+        //Event ev = new Event(Note_Name_entry.Text, Serializer.DeserializeUser().user_id, TextEditor.Text,
+        //    DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " +
+        //    time_change_begin.Time.ToString("hh\\:mm"), "g", null),
+        //    DateTime.ParseExact(date_change_end.Date.ToString("dd.MM.yyyy") + " " +
+        //    time_change_end.Time.ToString("hh\\:mm"), "g", null));
+        //ev.event_id = event_id;
 
-        calendar_Note.Save_edit_note(event_id, Note_Name_entry.Text, TextEditor.Text,
-            DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " +
-            time_change_begin.Time.ToString("hh\\:mm"), "g", null),
-            DateTime.ParseExact(date_change_end.Date.ToString("dd.MM.yyyy") + " " +
-            time_change_end.Time.ToString("hh\\:mm"), "g", null));
-        // костыль
-        Serializer.SerializeEvent(ev);
-        await Shell.Current.GoToAsync("add_event_to_group");
+        //calendar_Note.Save_edit_note(event_id, Note_Name_entry.Text, TextEditor.Text,
+        //    DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " +
+        //    time_change_begin.Time.ToString("hh\\:mm"), "g", null),
+        //    DateTime.ParseExact(date_change_end.Date.ToString("dd.MM.yyyy") + " " +
+        //    time_change_end.Time.ToString("hh\\:mm"), "g", null));
+        //// костыль
+        //Serializer.SerializeEvent(ev);
+        await Shell.Current.GoToAsync($"///add_event_to_group?note_id={@event.event_id}");
     }
     public void Cancel_button_clicked(object sender, EventArgs e)
     {
@@ -150,5 +156,17 @@ public partial class Calendar_note_edit : ContentPage
         date_change_end.Date = date_end_note;
         time_change_end.Time = date_end_note.TimeOfDay;
         TextEditor.Text = descr_event;
+    }
+
+    protected override void OnAppearing()
+    {
+        if (!user.IsTutor())
+        {
+            Cancel_button.IsEnabled = false;
+            Cancel_button.IsVisible = false;
+
+            Delete_button.IsEnabled = false;
+            Delete_button.IsVisible = false;
+        }
     }
 }

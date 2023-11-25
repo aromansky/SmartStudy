@@ -157,7 +157,8 @@ namespace SmartStudy
             Event @event = null;
             try
             {
-                HttpResponseMessage response = await _client.GetAsync(Constants.EventUrl + $"/{id}");
+                string url = Constants.EventUrl + $"/{id}";
+                HttpResponseMessage response = await _client.GetAsync(url);
                 @event = await response.Content.ReadFromJsonAsync<Event>();
             }
             catch (Exception ex)
@@ -175,8 +176,6 @@ namespace SmartStudy
         {
             User user = Serializer.DeserializeUser();
             Event @event = await GetEventFromId(event_id);
-            if (/*!user.IsTutor() ||*/ (user.user_id != @event.author_id))
-                return;
             try
             {
                 HttpResponseMessage response = await _client.DeleteAsync(Constants.EventUrl + $"/{@event.event_id}");

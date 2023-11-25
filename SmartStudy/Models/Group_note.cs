@@ -11,9 +11,10 @@ namespace SmartStudy.Models
         public Group_note() => Load_All_Groups();
         public async void Load_All_Groups()
         {
+            List<group_event> group_with_event = await Client.GetGroupEventList();
             List<group_settings> grps = await Client.GetGroupList();
             Groups.Clear();
-            foreach (group_settings grp in grps)
+            foreach (group_settings grp in grps.Where(x => !group_with_event.Select(x => x.group_settings_id).Contains(x.group_settings_id)))
                 Groups.Add(grp);
         }
     }

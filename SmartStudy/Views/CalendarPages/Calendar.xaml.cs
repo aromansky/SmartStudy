@@ -40,8 +40,6 @@ public partial class Calendar : ContentPage
         {
             AddEvent.IsEnabled = false;
             AddEvent.IsVisible = false;
-
-            all_notes.SelectionMode = SelectionMode.None;
         }
     }
 
@@ -56,9 +54,8 @@ public partial class Calendar : ContentPage
         {
             var @event = (ModelsDB.Event)e.CurrentSelection[0];
 
-            await Shell.Current.GoToAsync($"///calendar_note_edit?note_id={@event.event_id}");
+            await Shell.Current.GoToAsync($"calendar_note_edit?note_id={@event.event_id}");
             all_notes.SelectedItem = null;
         }
     }
-
 }
