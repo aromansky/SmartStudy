@@ -20,6 +20,7 @@ public partial class Calendar_note_edit : ContentPage
     public Calendar_note_edit()
 	{
 		InitializeComponent();
+        BindingContext = new Group_note();
     }
     private async void LoadNote_id(long text_obj)
     {
@@ -44,10 +45,11 @@ public partial class Calendar_note_edit : ContentPage
             Edit_button.IsEnabled = false;
             Edit_button.IsVisible = false;
         }
+        
     }
     private async void SaveButton_Clicked(object sender, EventArgs e)
     {
-        Models.Calendar_note calendar_Note = new Models.Calendar_note();
+        Calendar_note calendar_Note = new Calendar_note();
         //title_event = Note_Name_entry.Text;
         //descr_event = TextEditor.Text;
         //date_begin_note = DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " +
@@ -168,5 +170,6 @@ public partial class Calendar_note_edit : ContentPage
             Delete_button.IsEnabled = false;
             Delete_button.IsVisible = false;
         }
+        ((Group_note)BindingContext).Load_Groups_With_Event(event_id);
     }
 }

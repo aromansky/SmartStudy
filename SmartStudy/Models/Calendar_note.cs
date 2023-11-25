@@ -116,7 +116,6 @@ namespace SmartStudy.Models
             foreach (Event ev in evs)
                 Events.Add(ev);
 
-
             //DataSet usersSet = new DataSet("UsersSet");
             //DataTable users = new DataTable("Users");
             //usersSet.Tables.Add(users);

@@ -7,7 +7,7 @@ public partial class Calendar : ContentPage
 	public Calendar()
 	{
 		InitializeComponent();
-        BindingContext = new Models.Calendar_note();
+        BindingContext = new Calendar_note();
 #if WINDOWS
 #else
         row_button.Height = 0;
@@ -35,7 +35,7 @@ public partial class Calendar : ContentPage
     }
     protected override void OnAppearing()
     {
-        ((Models.Calendar_note)BindingContext).Load_All_Events();
+        ((Calendar_note)BindingContext).Load_All_Events();
         if (!Serializer.DeserializeUser().IsTutor())
         {
             AddEvent.IsEnabled = false;

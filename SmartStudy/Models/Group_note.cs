@@ -7,6 +7,15 @@ namespace SmartStudy.Models
     {
         public ObservableCollection<group_settings> Groups { get; set; } = new ObservableCollection<group_settings>();
         public ObservableCollection<object> SelectedGroups { get; set; } = new ObservableCollection<object>();
+        public ObservableCollection<group_settings> GroupsWithEvent { get; set; } = new ObservableCollection<group_settings>();
+        public async void Load_Groups_With_Event(long event_id)
+        {
+            GroupsWithEvent.Clear();
+            List<group_settings> g_s = await Client.GetGroupsWithEvent(event_id);
+            foreach (group_settings g in g_s)
+                GroupsWithEvent.Add(g);
+        }
+        
 
         public Group_note() => Load_All_Groups();
         public async void Load_All_Groups()

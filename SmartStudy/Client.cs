@@ -257,6 +257,25 @@ namespace SmartStudy
         }
 
         /// <summary>
+        /// Возвращает список групп с указанным event-ом
+        /// </summary>
+        public static async Task<List<group_settings>> GetGroupsWithEvent(long event_id)
+        {
+            List<group_settings> group_Settings = new List<group_settings>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.GroupSettingsUrl + $"/event-{event_id}");
+                if (response.IsSuccessStatusCode)
+                    group_Settings = await response.Content.ReadFromJsonAsync<List<group_settings>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return group_Settings;
+        }
+
+        /// <summary>
         /// Возвращает список объектов Event, в которых учавствует пользователь
         /// </summary>
         /// <param name="user">Пользвователь</param>
