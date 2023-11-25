@@ -17,10 +17,10 @@ namespace SmartStudy
             WriteIndented = true
         };
 
-         /// <summary>
-         /// Выполняет регистрацию пользователя. Делает соответствующую запись в таблице user 
-         /// </summary>
-         /// <param name="user">Объект класса User</param>
+        /// <summary>
+        /// Выполняет регистрацию пользователя. Делает соответствующую запись в таблице user 
+        /// </summary>
+        /// <param name="user">Объект класса User</param>
         public static async void Register(User user)
         {
             Uri uri = new Uri(string.Format(Constants.UserUrl, string.Empty));
@@ -87,7 +87,7 @@ namespace SmartStudy
         {
             List<string> recommendations = new List<string>();
             if (password is null)
-                password = "";  
+                password = "";
             if (password.Length < 8)
                 recommendations.Add("Увеличьте длину пароля (минимум 8 символов).");
             if (!password.Any(char.IsDigit))
@@ -220,7 +220,7 @@ namespace SmartStudy
 
             try
             {
-                foreach(var i in g_s)
+                foreach (var i in g_s)
                 {
                     string json = JsonSerializer.Serialize<group_event>(new group_event(@event.event_id, i.group_settings_id), _serializerOptions);
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -257,31 +257,34 @@ namespace SmartStudy
         }
 
         /// <summary>
-        /// Возвращает списко объектов Event, в которых учавствует пользователь
+        /// Возвращает список объектов Event, в которых учавствует пользователь
         /// </summary>
         /// <param name="user">Пользвователь</param>
         /// <returns>Список event-ов</returns>
-        public static async Task<List<Event>> GetEventList(User user)
+        public static async Task<List<Event>> GetEventsWithUser(User user)
         {
-            var eventUsers = new List<EventUser>();
             List<Event> events = new List<Event>();
             try
             {
-                HttpResponseMessage response = await _client.GetAsync(Constants.EventUserUrl + $"/{user.user_id}");
-                if (response.IsSuccessStatusCode)
-                    eventUsers = await response.Content.ReadFromJsonAsync<List<EventUser>>();
-
-                response = await _client.GetAsync(Constants.EventUrl);
-                if (response.IsSuccessStatusCode)
-                    events = await response.Content.ReadFromJsonAsync<List<Event>>();
+                HttpResponseMessage response;
+                if (user.IsTutor())
+                {
+                    response = await _client.GetAsync(Constants.EventUrl + $"/author-{user.user_id}");
+                    if (response.IsSuccessStatusCode)
+                        events = await response.Content.ReadFromJsonAsync<List<Event>>();
+                }
+                else
+                {
+                    response = await _client.GetAsync(Constants.EventUrl + $"/user-{user.user_id}");
+                    if (response.IsSuccessStatusCode)
+                        events = await response.Content.ReadFromJsonAsync<List<Event>>();
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
-            if (user.IsTutor())
-                return events.Where(x => x.author_id == user.user_id).ToList();
-            return events.Where(x => eventUsers.Select(x => x.event_id).Contains(x.event_id)).ToList();
+            return events;
         }
 
         /// <summary>
@@ -363,7 +366,7 @@ namespace SmartStudy
         public static async void AddUserToGroup(group_settings g_s, params User[] users)
         {
             Uri uri = new Uri(string.Format(Constants.GroupUrl, string.Empty));
-            foreach(User user in users)
+            foreach (User user in users)
             {
                 try
                 {

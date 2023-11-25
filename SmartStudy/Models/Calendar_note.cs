@@ -111,7 +111,7 @@ namespace SmartStudy.Models
         //в неё можно поместить функцию из бд для притягивания всех событий пользователя
         public async void Load_All_Events()
         {
-            List<Event> evs = await Client.GetEventList(Models.Serializer.DeserializeUser());
+            List<Event> evs = await Client.GetEventsWithUser(Serializer.DeserializeUser());
             Events.Clear();
             foreach (Event ev in evs)
                 Events.Add(ev);

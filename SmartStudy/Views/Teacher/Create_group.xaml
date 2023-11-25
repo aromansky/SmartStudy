@@ -23,7 +23,7 @@
                 <DataTemplate>
                     <VerticalStackLayout>
                         <Label Text="{Binding FirstName}"/>
-                        <Label Text="{Binding SecondName}"/>
+                        <Label Text="{Binding LastName}"/>
                     </VerticalStackLayout>
                 </DataTemplate>
                 </CollectionView.ItemTemplate>
