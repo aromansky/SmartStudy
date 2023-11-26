@@ -44,6 +44,20 @@ namespace WebAPI.Controllers
             return user;
         }
 
+        // GET: api/users/5
+        [HttpGet("group-{id}")]
+        public async Task<ActionResult<IEnumerable<user>>> GetUsersInGroup(long id)
+        {
+            var usersInGroup =   (from @group in _context.@group.Where(x => x.group_settings_id == id)
+                                 join user in _context.user on @group.user_id equals user.user_id
+                                 select user).Distinct();
+
+            if (usersInGroup == null)
+                return NotFound();
+
+            return await usersInGroup.ToListAsync();
+        }
+
         // PUT: api/users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

@@ -276,6 +276,45 @@ namespace SmartStudy
         }
 
         /// <summary>
+        /// Возвращает группу с указанным id
+        /// </summary>
+        public static async Task<group_settings> GetGroupWithId(long group_settings_id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.GroupSettingsUrl + $"/{group_settings_id}");
+                if (response.IsSuccessStatusCode)
+                    return await response.Content.ReadFromJsonAsync<group_settings>();
+                else 
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает список групп с указанным tutor-ом
+        /// </summary>
+        public static async Task<List<group_settings>> GetGroupsWithTutor(long tutor_id)
+        {
+            List<group_settings> group_Settings = new List<group_settings>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.GroupSettingsUrl + $"/tutor-{tutor_id}");
+                if (response.IsSuccessStatusCode)
+                    group_Settings = await response.Content.ReadFromJsonAsync<List<group_settings>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return group_Settings;
+        }
+
+        /// <summary>
         /// Возвращает список объектов Event, в которых учавствует пользователь
         /// </summary>
         /// <param name="user">Пользвователь</param>
@@ -326,13 +365,34 @@ namespace SmartStudy
             return users;
         }
 
+        /// <summary>
+        /// Возвращает список с информацией о зарегистрированных пользователях, состоящих в указанной группе
+        /// </summary>
+        /// <param name="group_settings_id">Id группы</param>
+        /// <returns>Список List<User></returns>
+        public static async Task<List<User>> GetUsersFromGroup(long group_settings_id)
+        {
+            List<User> users = new List<User>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.UserUrl + $"/group-{group_settings_id}");
+                if (response.IsSuccessStatusCode)
+                    users = await response.Content.ReadFromJsonAsync<List<User>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return users;
+        }
+
 
         /// <summary>
         ///  Возвращает список объектов group_settings, в которых состоит user
         /// </summary>
         /// <param name="user">User</param>
         /// <returns>Список объектов group_settings, в которых состоит user</returns>
-        public static async Task<List<group_settings>> GetGroupListWithUser(User user)
+        public static async Task<List<group_settings>> GetGroupListWithUser(long user_id)
         {
             List<Group> groups = new List<Group>();
             List<group_settings> groupsSettings = new List<group_settings>();
@@ -350,7 +410,7 @@ namespace SmartStudy
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
-            return groupsSettings.Where(x => groups.Where(x => x.user_id == user.user_id).Select(x => x.group_settings_id).Distinct().Contains(x.group_settings_id)).ToList();
+            return groupsSettings.Where(x => groups.Where(x => x.user_id == user_id).Select(x => x.group_settings_id).Distinct().Contains(x.group_settings_id)).ToList();
         }
 
 

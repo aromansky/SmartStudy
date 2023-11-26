@@ -71,6 +71,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\GroupPages\Create_group.xaml.cs">
+	    <DependentUpon>Create_group.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\GroupPages\Edit_group.xaml.cs">
+	    <DependentUpon>Edit_group.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\RegistrationPage.xaml.cs">
 	    <DependentUpon>RegistrationPage.xaml</DependentUpon>
 	  </Compile>
@@ -112,7 +118,10 @@
 	    <SubType>Designer</SubType>
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Teacher\Create_group.xaml">
+	  <MauiXaml Update="Views\GroupPages\Create_group.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\GroupPages\Edit_group.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Teacher\Feedback.xaml">

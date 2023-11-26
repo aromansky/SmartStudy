@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SmartStudy.Views.Teacher.Create_group"
-             Title="Создание группы">
-    <Grid RowDefinitions="*,*,5*,*,2*,*">
+             x:Class="SmartStudy.Views.GroupPages.Edit_group"
+             Title="Группа">
+    <Grid RowDefinitions="*,*,4*,*,2*,*">
         <Grid Grid.Row="0" Margin="5">
             <!--Spacing="10"-->
 
             <Entry x:Name="Title"
-               Placeholder="Название группы"
-               FontSize="Medium"
-               HorizontalTextAlignment="Center"
-               HeightRequest="50"
-               MaxLength="50"/>
+                   Placeholder="Название группы"
+                   IsEnabled="False"
+                   FontSize="Medium"
+                   HorizontalTextAlignment="Center"
+                   HeightRequest="50"
+                   MaxLength="50"/>
         </Grid>
-        <Grid Grid.Row="1" Margin="5">
+        <Grid Grid.Row="1">
             <Label Text="&#xA;Список участников: " FontSize="Medium"/>
         </Grid>
         <Grid Grid.Row="2" Margin="5">
             <ScrollView>
                 <CollectionView x:Name="all_users"
-                                ItemsSource="{Binding Users}"
+                                ItemsSource="{Binding UsersInGroup}"
                                 Margin="20"
                                 SelectionMode="Multiple"
                                 SelectedItem="OnItemSelected">
@@ -37,24 +38,27 @@
         </Grid>
 
         <Grid Grid.Row="3" Margin="5">
-            <Button Text="Добавить участника" WidthRequest="200" HorizontalOptions="Start"/>
+            <Button x:Name="AddUsers" Text="Добавить участников" WidthRequest="200" HorizontalOptions="Start" IsEnabled="False" IsVisible="False"/>
         </Grid>
 
         <Grid Grid.Row="4">
             <Editor x:Name="Description"
                 Placeholder="Описание"
-                MaxLength="500"/>
+                MaxLength="500"
+                IsEnabled="False"/>
         </Grid>
         <Grid Grid.Row="5" Margin="5">
             <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
-                <Button Text="Сохранить"
-                        Clicked="SaveButton_Clicked"
-                        HeightRequest="50"/>
+                <Button x:Name="EditButton"
+                    Text="Редактировать"
+                    Clicked="EditButton_Clicked"
+                    HeightRequest="50"/>
 
-                <Button Grid.Column="1"
-                        Text="Отмена"
-                        Clicked="CancelButton_Clicked"
-                        HeightRequest="50"/>
+                <Button x:Name="DeleteButton"
+                    Grid.Column="1"
+                    Text="Удалить"
+                    Clicked="DeleteButton_Clicked"
+                    HeightRequest="50"/>
             </Grid>
         </Grid>
     </Grid>
