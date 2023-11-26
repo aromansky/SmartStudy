@@ -3,46 +3,58 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartStudy.Views.Teacher.Create_group"
              Title="Создание группы">
-    <VerticalStackLayout Spacing="10" Margin="5">
-        
-        <Entry x:Name="Title"
+    <Grid RowDefinitions="*,*,4*,*,4*,*">
+        <Grid Grid.Row="0" Margin="5">
+            <!--Spacing="10"-->
+
+            <Entry x:Name="Title"
                Placeholder="Название группы"
                FontSize="Medium"
                HorizontalTextAlignment="Center"
                HeightRequest="50"
                MaxLength="50"/>
+        </Grid>
+        <Grid Grid.Row="1" Margin="5">
+            <Label Text="&#xA;Список участников: " FontSize="Medium"/>
+        </Grid>
+        <Grid Grid.Row="2" Margin="5">
+            <ScrollView>
+                <CollectionView x:Name="all_users"
+                                ItemsSource="{Binding Users}"
+                                Margin="20"
+                                SelectionMode="Multiple"
+                                SelectedItem="OnItemSelected">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <VerticalStackLayout>
+                                <Label Text="{Binding FirstName}"/>
+                                <Label Text="{Binding LastName}"/>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </Grid>
 
-        <Label Text="&#xA;Список участников: " FontSize="Medium"/>
+        <Grid Grid.Row="3" Margin="5">
+            <Button Text="Добавить участника" WidthRequest="200" HorizontalOptions="Start"/>
+        </Grid>
 
-            <CollectionView x:Name="all_users"
-                        ItemsSource="{Binding Users}"
-                        Margin="20"
-                        SelectionMode="Multiple"
-                        SelectedItem="OnItemSelected">
-                <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <VerticalStackLayout>
-                        <Label Text="{Binding FirstName}"/>
-                        <Label Text="{Binding LastName}"/>
-                    </VerticalStackLayout>
-                </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        
-        <Button Text="Добавить участника" WidthRequest="200" HorizontalOptions="Start"/>
-
-        <Editor x:Name="Description"
-            Placeholder="Описание"
-            HeightRequest="100"
-            MaxLength="500"/>
-
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
-            <Button Text="Сохранить"
+        <Grid Grid.Row="4">
+            <Editor x:Name="Description"
+                Placeholder="Описание"
+                HeightRequest=""
+                MaxLength="500"/>
+        </Grid>
+        <Grid Grid.Row="5" Margin="5">
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+                <Button Text="Сохранить"
                 Clicked="SaveButton_Clicked" />
 
-            <Button Grid.Column="1"
+                <Button Grid.Column="1"
                 Text="Отмена"
                 Clicked="CancelButton_Clicked" />
+            </Grid>
         </Grid>
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>
