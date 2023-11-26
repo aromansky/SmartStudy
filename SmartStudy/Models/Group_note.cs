@@ -18,12 +18,13 @@ namespace SmartStudy.Models
             Groups.Clear();
             foreach (group_settings grp in grps.Where(x => !group_with_event.Select(x => x.group_settings_id).Contains(x.group_settings_id)))
                 Groups.Add(grp);
+            Groups.OrderBy(x => x.Title);
         }
         public async void Load_Groups_With_Event(long event_id)
         {
             GroupsWithEvent.Clear();
             List<group_settings> g_s = await Client.GetGroupsWithEvent(event_id);
-            foreach (group_settings g in g_s)
+            foreach (group_settings g in g_s.OrderBy(x => x.Title))
                 GroupsWithEvent.Add(g);
         }
 
@@ -33,17 +34,16 @@ namespace SmartStudy.Models
             {
                 List<group_settings> g_s = await Client.GetGroupsWithTutor(user_id);
                 GroupsWithUser.Clear();
-                foreach (group_settings g in g_s)
+                foreach (group_settings g in g_s.OrderBy(x => x.Title))
                     GroupsWithUser.Add(g);
             }
             else
             {
                 List<group_settings> g_s = await Client.GetGroupListWithUser(user_id);
                 GroupsWithUser.Clear();
-                foreach (group_settings g in g_s)
+                foreach (group_settings g in g_s.OrderBy(x => x.Title))
                     GroupsWithUser.Add(g);
             }
-            
         }
     }
 }

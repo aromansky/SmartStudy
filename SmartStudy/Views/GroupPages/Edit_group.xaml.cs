@@ -1,6 +1,7 @@
 using SmartStudy.ModelsDB;
 using SmartStudy.Models;
 using Microsoft.Extensions.Logging;
+using System.Globalization;
 
 namespace SmartStudy.Views.GroupPages;
 
@@ -24,7 +25,7 @@ public partial class Edit_group : ContentPage
     public Edit_group()
 	{
 		InitializeComponent();
-        BindingContext = new Models.User_list();
+        BindingContext = new User_list();
         
     }
 
@@ -81,5 +82,30 @@ public partial class Edit_group : ContentPage
         group_Settings.group_settings_id = group_settings_id;
         Client.EditGroupFromId(group_settings_id, group_Settings);
         await Shell.Current.GoToAsync("///groups");
+    }
+
+    private async void AddUsersToGroup(object sender, EventArgs e)
+    {
+        group_settings group_Settings = new group_settings(Serializer.DeserializeUser().user_id, Title.Text, Description.Text);
+        group_Settings.group_settings_id = group_settings_id;
+        Client.EditGroupFromId(group_settings_id, group_Settings);
+        await Shell.Current.GoToAsync($"///add_users_to_group?group_settings_id={group_settings_id}");
+    }
+}
+
+public class FullNameConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is User user)
+        {
+            return $"{user.LastName} {user.FirstName}";
+        }
+
+        return string.Empty;
+    }
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

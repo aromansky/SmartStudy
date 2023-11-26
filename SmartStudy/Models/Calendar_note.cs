@@ -113,7 +113,7 @@ namespace SmartStudy.Models
         {
             List<Event> evs = await Client.GetEventsWithUser(Serializer.DeserializeUser());
             Events.Clear();
-            foreach (Event ev in evs)
+            foreach (Event ev in evs.DistinctBy(x => x.event_id))
                 Events.Add(ev);
 
             //DataSet usersSet = new DataSet("UsersSet");

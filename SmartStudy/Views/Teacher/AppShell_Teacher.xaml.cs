@@ -16,6 +16,7 @@ public partial class AppShell_Teacher : Shell
         Routing.RegisterRoute("groups", typeof(Groups));
         Routing.RegisterRoute("edit_group", typeof(Edit_group));
         Routing.RegisterRoute("create_group", typeof(Create_group));
+        Routing.RegisterRoute("add_users_to_group", typeof(Users_list));
         Routing.RegisterRoute("feedback", typeof(Feedback));
 #if WINDOWS
         SetTabBarIsVisible(TabBar_t, false);

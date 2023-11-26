@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartStudy.Views.GroupPages.Edit_group"
+             xmlns:converter="clr-namespace:SmartStudy.Views.GroupPages"
              Title="Группа">
     <Grid RowDefinitions="*,*,4*,*,2*,*">
         <Grid Grid.Row="0" Margin="5">
@@ -25,11 +26,13 @@
                                 Margin="20"
                                 SelectionMode="Multiple"
                                 SelectedItem="OnItemSelected">
+                    <CollectionView.Resources>
+                        <converter:FullNameConverter x:Key="FullNameConverter" />
+                    </CollectionView.Resources>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <VerticalStackLayout>
-                                <Label Text="{Binding FirstName}"/>
-                                <Label Text="{Binding LastName}"/>
+                                <Label Text="{Binding ., Converter={StaticResource FullNameConverter}}" FontSize="28" HorizontalOptions="Start"/>
                             </VerticalStackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -38,7 +41,7 @@
         </Grid>
 
         <Grid Grid.Row="3" Margin="5">
-            <Button x:Name="AddUsers" Text="Добавить участников" WidthRequest="200" HorizontalOptions="Start" IsEnabled="False" IsVisible="False"/>
+            <Button x:Name="AddUsers" Text="Добавить участников" WidthRequest="200" HorizontalOptions="Start" IsEnabled="False" IsVisible="False" Clicked="AddUsersToGroup"/>
         </Grid>
 
         <Grid Grid.Row="4">
