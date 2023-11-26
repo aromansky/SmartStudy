@@ -56,16 +56,21 @@ namespace WebAPI.Controllers
             var group_settings = from @event in _context.@event.Where(x => x.event_id == id)
                              join group_event in _context.group_event on @event.event_id equals group_event.event_id
                              join _group_settings in _context.group_settings on group_event.group_settings_id equals _group_settings.group_settings_id
-                             select new group_settings
-                             {
-                                 group_settings_id = _group_settings.group_settings_id,
-                                 Tutor_id = _group_settings.Tutor_id,
-                                 Title = _group_settings.Title,
-                                 Description = _group_settings.Description,
-                             };
+                             select _group_settings;
             if (group_settings == null)
                 return NotFound();
             return await group_settings.ToListAsync();
+        }
+
+        // GET: api/group_settings/event-5
+        [HttpGet("tutor-{id}")]
+        public async Task<ActionResult<IEnumerable<group_settings>>> GetGroup_settingsWithTutor(long id)
+        {
+            if (_context.group_settings == null)
+            {
+                return NotFound();
+            }
+            return await _context.group_settings.Where(x => x.Tutor_id == id).ToListAsync();
         }
 
         // PUT: api/group_settings/5
