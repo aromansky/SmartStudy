@@ -20,37 +20,41 @@
                HeightRequest="50"/>
         </Grid>
         <Grid Grid.Row="1">
-            <VerticalStackLayout>
-                <Label Text="&#xA;Группы с данным событием: " FontSize="Medium"/>
-                <ScrollView>
-                    <CollectionView ItemsSource="{Binding GroupsWithEvent}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <VerticalStackLayout>
-                                    <Label Text="{Binding Title}"/>
-                                </VerticalStackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </ScrollView>
-            </VerticalStackLayout>
+            <Grid RowDefinitions="*,*">
+                <Grid Grid.Row="0">
+                    <Label Text="&#xA;Группы с данным событием: " FontSize="Medium"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Button x:Name="Add_group_in_event" Text="Добавить группу" WidthRequest="200" HeightRequest="50" HorizontalOptions="Start"
+                            IsVisible="False" Clicked="Add_group_in_event_clicked"/>
+                    <ScrollView x:Name="GroupsWithEvent">
+                        <CollectionView ItemsSource="{Binding GroupsWithEvent}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding Title}"/>
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </ScrollView>
+                </Grid>
+            </Grid>
         </Grid>
         <Grid Grid.Row="2">
             <VerticalStackLayout>
-                <Button x:Name="Add_group_in_event" Text="Добавить группу" WidthRequest="200" HorizontalOptions="Start"
-                    IsVisible="False" Clicked="Add_group_in_event_clicked"/>
                 <Label Text="Начало: " FontSize="Medium" VerticalTextAlignment="End"/>
                 <Label x:Name="all_date_begin" FontSize="Small" VerticalTextAlignment="End"/>
-                <DatePicker x:Name="date_change_begin" Format="d" DateSelected="date_begin_selected" IsEnabled="False"/>
-                <TimePicker x:Name="time_change_begin" PropertyChanged="time_begin_selected" IsEnabled="False"/>
+                <DatePicker x:Name="date_change_begin" Format="d" DateSelected="date_begin_selected" IsEnabled="False"  Margin="5"/>
+                <TimePicker x:Name="time_change_begin" PropertyChanged="time_begin_selected" IsEnabled="False" Margin="5"/>
             </VerticalStackLayout>
         </Grid>
         <Grid Grid.Row="3">
-            <VerticalStackLayout>
+            <VerticalStackLayout >
                 <Label Text="Конец:" FontSize="Medium" VerticalTextAlignment="End"/>
-                <Label x:Name="all_date_end" FontSize="Small" VerticalTextAlignment="End"/>
-                <DatePicker x:Name="date_change_end" Format="d" DateSelected="date_end_selected" IsEnabled="False"/>
-            <TimePicker x:Name="time_change_end" PropertyChanged="time_end_selected" IsEnabled="False"/>
+                <Label x:Name="all_date_end" FontSize="Small" VerticalTextAlignment="End" />
+                <DatePicker x:Name="date_change_end" Format="d" DateSelected="date_end_selected" IsEnabled="False" Margin="5"/>
+                <TimePicker x:Name="time_change_end" PropertyChanged="time_end_selected" IsEnabled="False" Margin="5"/>
             </VerticalStackLayout>
         </Grid>
         <Grid Grid.Row="4">

@@ -105,6 +105,8 @@ public partial class Calendar_note_edit : ContentPage
     }
     public void Edit_clicked(object sender, EventArgs e)
     {
+        GroupsWithEvent.IsVisible = false;
+        GroupsWithEvent.IsEnabled = true;
         Note_Name_entry.IsReadOnly = false;
         TextEditor.IsReadOnly = false;
         date_change_begin.IsEnabled = true;
