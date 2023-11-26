@@ -1,5 +1,6 @@
 using SmartStudy.ModelsDB;
 using SmartStudy.Models;
+using Microsoft.Extensions.Logging;
 
 namespace SmartStudy.Views.GroupPages;
 
@@ -33,6 +34,8 @@ public partial class Edit_group : ContentPage
         Description.IsEnabled = true;
         AddUsers.IsEnabled = true;
         AddUsers.IsVisible = true;
+        SaveButton.IsEnabled = true;
+        SaveButton.IsVisible = true;
     }
 
     protected override void OnAppearing()
@@ -64,6 +67,19 @@ public partial class Edit_group : ContentPage
 
     private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
+        bool result = await DisplayAlert("Подтвердить действие", $"Вы хотите удалить группы?", "Да", "Нет");
+        if (result)
+        {
+            Client.DeleteGroupSettings(group_settings_id);
+            await Shell.Current.GoToAsync("///groups");
+        }
+    }
+
+    private async void SaveButton_Clicked(object sender, EventArgs e)
+    {
+        group_settings group_Settings = new group_settings(Serializer.DeserializeUser().user_id, Title.Text, Description.Text);
+        group_Settings.group_settings_id = group_settings_id;
+        Client.EditGroupFromId(group_settings_id, group_Settings);
         await Shell.Current.GoToAsync("///groups");
     }
 }

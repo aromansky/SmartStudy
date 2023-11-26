@@ -21,9 +21,9 @@ namespace SmartStudy.Models
         public async void Load_Users_In_Group(long group_settings_id)
         {
             List<User> users = await Client.GetUsersFromGroup(group_settings_id);
-            Users.Clear();
+            UsersInGroup.Clear();
             foreach (User user in users)
-                Users.Add(user);
+                UsersInGroup.Add(user);
         }
     }
 }

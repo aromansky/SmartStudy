@@ -124,6 +124,9 @@
 	  <MauiXaml Update="Views\GroupPages\Edit_group.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\GroupPages\Users_list.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Teacher\Feedback.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

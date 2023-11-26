@@ -124,6 +124,42 @@ namespace SmartStudy
             }
         }
 
+
+        /// <summary>
+        /// Удаляет запись group_settings из БД
+        /// </summary>
+        /// <param name="group_settings_id">Id группы</param>
+        public static async void DeleteGroupSettings(long group_settings_id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.DeleteAsync(Constants.GroupSettingsUrl + $"/{group_settings_id}");
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+        }
+
+        /// <summary>
+        /// Редактирует запись об group_settings-е из БД
+        /// </summary>
+        /// <param name="id">id Event-а</param>
+        public static async void EditGroupFromId(long editing_Id, group_settings g_s)
+        {
+            try
+            {
+                string json = JsonSerializer.Serialize<group_settings>(g_s, _serializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PutAsync(Constants.GroupSettingsUrl + $"/{editing_Id}", content);
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+        }
+
         /// <summary>
         /// Создаёт в таблице event запись, соответствующую объекту класса Event
         /// </summary>
