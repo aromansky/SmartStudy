@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartStudy.Views.Teacher.Create_group"
              Title="Создание группы">
-    <Grid RowDefinitions="*,*,6*,*,2*,*">
+    <Grid RowDefinitions="*,*,5*,*,2*,*">
         <Grid Grid.Row="0" Margin="5">
             <!--Spacing="10"-->
 
@@ -48,11 +48,13 @@
         <Grid Grid.Row="5" Margin="5">
             <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
                 <Button Text="Сохранить"
-                Clicked="SaveButton_Clicked" />
+                        Clicked="SaveButton_Clicked"
+                        HeightRequest="50"/>
 
                 <Button Grid.Column="1"
-                Text="Отмена"
-                Clicked="CancelButton_Clicked" />
+                        Text="Отмена"
+                        Clicked="CancelButton_Clicked"
+                        HeightRequest="50"/>
             </Grid>
         </Grid>
     </Grid>
