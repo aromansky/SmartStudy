@@ -121,22 +121,6 @@ public partial class Calendar_note_edit : ContentPage
     }
     public async void Add_group_in_event_clicked(object sender, EventArgs e)
     {
-        Calendar_note calendar_Note = new Calendar_note();
-        //// костыль
-        //Event ev = new Event(Note_Name_entry.Text, Serializer.DeserializeUser().user_id, TextEditor.Text,
-        //    DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " +
-        //    time_change_begin.Time.ToString("hh\\:mm"), "g", null),
-        //    DateTime.ParseExact(date_change_end.Date.ToString("dd.MM.yyyy") + " " +
-        //    time_change_end.Time.ToString("hh\\:mm"), "g", null));
-        //ev.event_id = event_id;
-
-        //calendar_Note.Save_edit_note(event_id, Note_Name_entry.Text, TextEditor.Text,
-        //    DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " +
-        //    time_change_begin.Time.ToString("hh\\:mm"), "g", null),
-        //    DateTime.ParseExact(date_change_end.Date.ToString("dd.MM.yyyy") + " " +
-        //    time_change_end.Time.ToString("hh\\:mm"), "g", null));
-        //// костыль
-        //Serializer.SerializeEvent(ev);
         await Shell.Current.GoToAsync($"///add_event_to_group?note_id={@event.event_id}");
     }
     public void Cancel_button_clicked(object sender, EventArgs e)
@@ -171,6 +155,9 @@ public partial class Calendar_note_edit : ContentPage
 
             Delete_button.IsEnabled = false;
             Delete_button.IsVisible = false;
+
+            Edit_button.IsEnabled = false;
+            Edit_button.IsVisible = false;
         }
         ((Group_note)BindingContext).Load_Groups_With_Event(event_id);
     }
