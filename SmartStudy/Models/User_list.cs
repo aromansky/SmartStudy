@@ -17,7 +17,7 @@ namespace SmartStudy.Models
         public async void Load_All_Users()
         {
             List<User> users = await Client.GetUsersList();
-            //Users.Clear();
+            Users.Clear();
             foreach (User user in users)
                 Users.Add(user);
         }

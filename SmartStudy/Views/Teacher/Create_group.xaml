@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartStudy.Views.Teacher.Create_group"
              Title="Создание группы">
-    <Grid RowDefinitions="*,*,4*,*,4*,*">
+    <Grid RowDefinitions="*,*,6*,*,2*,*">
         <Grid Grid.Row="0" Margin="5">
             <!--Spacing="10"-->
 
@@ -43,7 +43,6 @@
         <Grid Grid.Row="4">
             <Editor x:Name="Description"
                 Placeholder="Описание"
-                HeightRequest=""
                 MaxLength="500"/>
         </Grid>
         <Grid Grid.Row="5" Margin="5">
