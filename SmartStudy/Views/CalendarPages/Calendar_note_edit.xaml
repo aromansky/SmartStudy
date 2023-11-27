@@ -2,54 +2,77 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartStudy.Views.CalendarPages.Calendar_note_edit">
-    <VerticalStackLayout Spacing="10" Margin="5">
-        <Entry x:Name="Note_Name_entry"
-           Placeholder="Название события"
-           FontSize="Medium"
-           HorizontalTextAlignment="Center"
-           IsReadOnly="True"
-           HeightRequest="50"/>
-
-        <Label Text="&#xA;Список участников: " FontSize="Medium"/>
-        <Button x:Name="Add_group_in_event" Text="Добавить группу" WidthRequest="200" HorizontalOptions="Start"
-                 IsVisible="False" Clicked="Add_group_in_event_clicked"/>
-
-        <HorizontalStackLayout Spacing="15">
-            <Label Text="Начало: " FontSize="Medium" VerticalTextAlignment="End"/>
-            <Label x:Name="all_date_begin" FontSize="Small" VerticalTextAlignment="End"/>
-        </HorizontalStackLayout>
-        <DatePicker x:Name="date_change_begin" Format="d" DateSelected="date_begin_selected" IsEnabled="False"/>
-        <TimePicker x:Name="time_change_begin" PropertyChanged="time_begin_selected" IsEnabled="False"/>
-
-        <HorizontalStackLayout Spacing="15">
-            <Label Text="Конец:" FontSize="Medium" VerticalTextAlignment="End"/>
-            <Label x:Name="all_date_end" FontSize="Small" VerticalTextAlignment="End"/>
-        </HorizontalStackLayout>
-        
-        <DatePicker x:Name="date_change_end" Format="d" DateSelected="date_end_selected" IsEnabled="False"/>
-        <TimePicker x:Name="time_change_end" PropertyChanged="time_end_selected" IsEnabled="False"/>
-
-        <Editor x:Name="TextEditor"
-        Placeholder="Описание события"
-        IsReadOnly="True"
-        HeightRequest="100" />
-
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
-            <Button x:Name="Edit_button" Grid.Column="0"
+    <Grid RowDefinitions="*,3*,3*,3*,3*,*" Padding="10">
+        <Grid Grid.Row="0">
+            <Entry x:Name="Note_Name_entry"
+               Placeholder="Название события"
+               FontSize="Medium"
+               HorizontalTextAlignment="Center"
+               IsReadOnly="True"
+               HeightRequest="50"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid RowDefinitions="*,*">
+                <Grid Grid.Row="0">
+                    <Label Text="&#xA;Группы с данным событием: " FontSize="Medium"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Button x:Name="Add_group_in_event" Text="Добавить группу" WidthRequest="200" HeightRequest="50" HorizontalOptions="Start"
+                            IsVisible="False" Clicked="Add_group_in_event_clicked"/>
+                    <ScrollView x:Name="GroupsWithEvent">
+                        <CollectionView ItemsSource="{Binding GroupsWithEvent}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding Title}"/>
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </ScrollView>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <VerticalStackLayout>
+                <Label Text="Начало: " FontSize="Medium" VerticalTextAlignment="End"/>
+                <Label x:Name="all_date_begin" FontSize="Small" VerticalTextAlignment="End"/>
+                <DatePicker x:Name="date_change_begin" Format="d" DateSelected="date_begin_selected" IsEnabled="False"  Margin="5"/>
+                <TimePicker x:Name="time_change_begin" PropertyChanged="time_begin_selected" IsEnabled="False" Margin="5"/>
+            </VerticalStackLayout>
+        </Grid>
+        <Grid Grid.Row="3">
+            <VerticalStackLayout >
+                <Label Text="Конец:" FontSize="Medium" VerticalTextAlignment="End"/>
+                <Label x:Name="all_date_end" FontSize="Small" VerticalTextAlignment="End" />
+                <DatePicker x:Name="date_change_end" Format="d" DateSelected="date_end_selected" IsEnabled="False" Margin="5"/>
+                <TimePicker x:Name="time_change_end" PropertyChanged="time_end_selected" IsEnabled="False" Margin="5"/>
+            </VerticalStackLayout>
+        </Grid>
+        <Grid Grid.Row="4">
+            <Editor x:Name="TextEditor"
+                    Placeholder="Описание события"
+                    IsReadOnly="True"
+                    HeightRequest="100" />
+        </Grid>
+        <Grid Grid.Row="5">
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+                <Button x:Name="Edit_button" Grid.Column="0"
                     Text="Редактировать"
                     Clicked="Edit_clicked" />
 
-            <Button x:Name="Save_button" Grid.Column="0"
+                <Button x:Name="Save_button" Grid.Column="0"
                     Text="Сохранить изменения"
                     Clicked="SaveButton_Clicked" IsVisible="False"/>
 
-            <Button x:Name="Cancel_button" Grid.Column="1"
+                <Button x:Name="Cancel_button" Grid.Column="1"
                     Text="Отмена"
                     Clicked="Cancel_button_clicked" IsVisible="False"/>
 
-            <Button x:Name="Delete_button" Grid.Column="1"
+                <Button x:Name="Delete_button" Grid.Column="1"
                     Text="Удалить событие"
                     Clicked="DeleteButton_Clicked" />
+            </Grid>
         </Grid>
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>

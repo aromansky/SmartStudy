@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.WebRequestMethods;
-
-namespace SmartStudy
+﻿namespace SmartStudy
 {
     public static class Constants
     {
-        // a22268-0fcc.b.d-f.pw
-        private const string your_address = "a22282-c547.b.d-f.pw";
+        private const string your_address = "a22367-6b84.c.d-f.pw";
         public const string UserUrl = $"https://{your_address}/api/user";
         public const string GroupSettingsUrl = $"https://{your_address}/api/group_settings";
         public const string GroupUrl = $"https://{your_address}/api/group";

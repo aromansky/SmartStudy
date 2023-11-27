@@ -44,6 +44,40 @@ namespace WebAPI.Controllers
             return @event;
         }
 
+        // GET: api/event/author-5
+        [HttpGet("author-{id}")]
+        public async Task<ActionResult<IEnumerable<@event>>> GetEventsFromAuthor(long id)
+        {
+            {
+                if (_context.@event == null)
+                {
+                    return NotFound();
+                }
+                return await _context.@event.Where(x => x.author_id == id).ToListAsync();
+            }
+        }
+
+        // GET: api/event/user-5
+        [HttpGet("user-{id}")]
+        public async Task<ActionResult<IEnumerable<@event>>> GetEventsWithUsers(long id)
+        {
+            var eventUsers = from @event in _context.@event
+                             join group_event in _context.group_event on @event.event_id equals group_event.event_id
+                             join @group in _context.@group.Where(x => x.user_id == id).Distinct() on group_event.group_settings_id equals @group.group_settings_id
+                             select new @event
+                             {
+                                 event_id = @event.event_id,
+                                 author_id = @event.author_id,
+                                 Title = @event.Title,
+                                 Description = @event.Description,
+                                 date_begin = @event.date_begin,
+                                 date_end = @event.date_end
+                             };
+            if (eventUsers == null)
+                return NotFound();
+            return await eventUsers.ToListAsync();
+        }
+
         // PUT: api/event/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

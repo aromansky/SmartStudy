@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views_teacher="clr-namespace:SmartStudy.Views.Teacher"
     xmlns:views_CalendarPages="clr-namespace:SmartStudy.Views.CalendarPages"
+    xmlns:views_GroupPages="clr-namespace:SmartStudy.Views.GroupPages"
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar x:Name="TabBar_t">
@@ -35,7 +36,7 @@
         <Tab Icon="groups.png"
             Title="Группы">
             <ShellContent 
-                ContentTemplate="{DataTemplate views_teacher:Groups}"
+                ContentTemplate="{DataTemplate views_GroupPages:Groups}"
                 Route="groups"/>
         </Tab>
     </TabBar>
@@ -49,6 +50,12 @@
         ContentTemplate="{DataTemplate views_CalendarPages:Group_list}"
         Route="add_event_to_group"/>
     <ShellContent
-        ContentTemplate="{DataTemplate views_teacher:Create_group}"
+        ContentTemplate="{DataTemplate views_GroupPages:Create_group}"
         Route="create_group"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_GroupPages:Edit_group}"
+        Route="edit_group"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_GroupPages:Users_list}"
+        Route="add_users_to_group"/>
 </Shell>

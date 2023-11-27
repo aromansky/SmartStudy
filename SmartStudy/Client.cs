@@ -17,10 +17,10 @@ namespace SmartStudy
             WriteIndented = true
         };
 
-         /// <summary>
-         /// Выполняет регистрацию пользователя. Делает соответствующую запись в таблице user 
-         /// </summary>
-         /// <param name="user">Объект класса User</param>
+        /// <summary>
+        /// Выполняет регистрацию пользователя. Делает соответствующую запись в таблице user 
+        /// </summary>
+        /// <param name="user">Объект класса User</param>
         public static async void Register(User user)
         {
             Uri uri = new Uri(string.Format(Constants.UserUrl, string.Empty));
@@ -87,7 +87,7 @@ namespace SmartStudy
         {
             List<string> recommendations = new List<string>();
             if (password is null)
-                password = "";  
+                password = "";
             if (password.Length < 8)
                 recommendations.Add("Увеличьте длину пароля (минимум 8 символов).");
             if (!password.Any(char.IsDigit))
@@ -124,6 +124,42 @@ namespace SmartStudy
             }
         }
 
+
+        /// <summary>
+        /// Удаляет запись group_settings из БД
+        /// </summary>
+        /// <param name="group_settings_id">Id группы</param>
+        public static async void DeleteGroupSettings(long group_settings_id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.DeleteAsync(Constants.GroupSettingsUrl + $"/{group_settings_id}");
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+        }
+
+        /// <summary>
+        /// Редактирует запись об group_settings-е из БД
+        /// </summary>
+        /// <param name="id">id Event-а</param>
+        public static async void EditGroupFromId(long editing_Id, group_settings g_s)
+        {
+            try
+            {
+                string json = JsonSerializer.Serialize<group_settings>(g_s, _serializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PutAsync(Constants.GroupSettingsUrl + $"/{editing_Id}", content);
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+        }
+
         /// <summary>
         /// Создаёт в таблице event запись, соответствующую объекту класса Event
         /// </summary>
@@ -157,7 +193,8 @@ namespace SmartStudy
             Event @event = null;
             try
             {
-                HttpResponseMessage response = await _client.GetAsync(Constants.EventUrl + $"/{id}");
+                string url = Constants.EventUrl + $"/{id}";
+                HttpResponseMessage response = await _client.GetAsync(url);
                 @event = await response.Content.ReadFromJsonAsync<Event>();
             }
             catch (Exception ex)
@@ -175,8 +212,6 @@ namespace SmartStudy
         {
             User user = Serializer.DeserializeUser();
             Event @event = await GetEventFromId(event_id);
-            if (/*!user.IsTutor() ||*/ (user.user_id != @event.author_id))
-                return;
             try
             {
                 HttpResponseMessage response = await _client.DeleteAsync(Constants.EventUrl + $"/{@event.event_id}");
@@ -215,19 +250,22 @@ namespace SmartStudy
         /// </summary>
         /// <param name="event">Объект класса Event</param>
         /// <param name="g_s">Объект класса group_settings</param>
-        public static async void AddEventToGroup(Event @event, group_settings g_s)
+        public static async void AddEventToGroup(Event @event, params group_settings[] g_s)
         {
             Uri uri = new Uri(string.Format(Constants.GroupEventUrl, string.Empty));
 
             try
             {
-                string json = JsonSerializer.Serialize<group_event>(new group_event(@event.event_id, g_s.group_settings_id), _serializerOptions);
-                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                foreach (var i in g_s)
+                {
+                    string json = JsonSerializer.Serialize<group_event>(new group_event(@event.event_id, i.group_settings_id), _serializerOptions);
+                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await _client.PostAsync(uri, content);
+                    HttpResponseMessage response = await _client.PostAsync(uri, content);
 
-                if (response.IsSuccessStatusCode)
-                    Debug.WriteLine("Ok");
+                    if (response.IsSuccessStatusCode)
+                        Debug.WriteLine("Ok");
+                }
             }
             catch (Exception ex)
             {
@@ -255,31 +293,92 @@ namespace SmartStudy
         }
 
         /// <summary>
-        /// Возвращает списко объектов Event, в которых учавствует пользователь
+        /// Возвращает список групп с указанным event-ом
         /// </summary>
-        /// <param name="user">Пользвователь</param>
-        /// <returns>Список event-ов</returns>
-        public static async Task<List<Event>> GetEventList(User user)
+        public static async Task<List<group_settings>> GetGroupsWithEvent(long event_id)
         {
-            var eventUsers = new List<EventUser>();
-            List<Event> events = new List<Event>();
+            List<group_settings> group_Settings = new List<group_settings>();
             try
             {
-                HttpResponseMessage response = await _client.GetAsync(Constants.EventUserUrl + $"/{user.user_id}");
+                HttpResponseMessage response = await _client.GetAsync(Constants.GroupSettingsUrl + $"/event-{event_id}");
                 if (response.IsSuccessStatusCode)
-                    eventUsers = await response.Content.ReadFromJsonAsync<List<EventUser>>();
-
-                response = await _client.GetAsync(Constants.EventUrl);
-                if (response.IsSuccessStatusCode)
-                    events = await response.Content.ReadFromJsonAsync<List<Event>>();
+                    group_Settings = await response.Content.ReadFromJsonAsync<List<group_settings>>();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
-            if (user.IsTutor())
-                return events.Where(x => x.author_id == user.user_id).ToList();
-            return events.Where(x => eventUsers.Select(x => x.event_id).Contains(x.event_id)).ToList();
+            return group_Settings;
+        }
+
+        /// <summary>
+        /// Возвращает группу с указанным id
+        /// </summary>
+        public static async Task<group_settings> GetGroupWithId(long group_settings_id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.GroupSettingsUrl + $"/{group_settings_id}");
+                if (response.IsSuccessStatusCode)
+                    return await response.Content.ReadFromJsonAsync<group_settings>();
+                else 
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает список групп с указанным tutor-ом
+        /// </summary>
+        public static async Task<List<group_settings>> GetGroupsWithTutor(long tutor_id)
+        {
+            List<group_settings> group_Settings = new List<group_settings>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.GroupSettingsUrl + $"/tutor-{tutor_id}");
+                if (response.IsSuccessStatusCode)
+                    group_Settings = await response.Content.ReadFromJsonAsync<List<group_settings>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return group_Settings;
+        }
+
+        /// <summary>
+        /// Возвращает список объектов Event, в которых учавствует пользователь
+        /// </summary>
+        /// <param name="user">Пользвователь</param>
+        /// <returns>Список event-ов</returns>
+        public static async Task<List<Event>> GetEventsWithUser(User user)
+        {
+            List<Event> events = new List<Event>();
+            try
+            {
+                HttpResponseMessage response;
+                if (user.IsTutor())
+                {
+                    response = await _client.GetAsync(Constants.EventUrl + $"/author-{user.user_id}");
+                    if (response.IsSuccessStatusCode)
+                        events = await response.Content.ReadFromJsonAsync<List<Event>>();
+                }
+                else
+                {
+                    response = await _client.GetAsync(Constants.EventUrl + $"/user-{user.user_id}");
+                    if (response.IsSuccessStatusCode)
+                        events = await response.Content.ReadFromJsonAsync<List<Event>>();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return events;
         }
 
         /// <summary>
@@ -302,13 +401,34 @@ namespace SmartStudy
             return users;
         }
 
+        /// <summary>
+        /// Возвращает список с информацией о зарегистрированных пользователях, состоящих в указанной группе
+        /// </summary>
+        /// <param name="group_settings_id">Id группы</param>
+        /// <returns>Список List<User></returns>
+        public static async Task<List<User>> GetUsersFromGroup(long group_settings_id)
+        {
+            List<User> users = new List<User>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.UserUrl + $"/group-{group_settings_id}");
+                if (response.IsSuccessStatusCode)
+                    users = await response.Content.ReadFromJsonAsync<List<User>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return users;
+        }
+
 
         /// <summary>
         ///  Возвращает список объектов group_settings, в которых состоит user
         /// </summary>
         /// <param name="user">User</param>
         /// <returns>Список объектов group_settings, в которых состоит user</returns>
-        public static async Task<List<group_settings>> GetGroupListWithUser(User user)
+        public static async Task<List<group_settings>> GetGroupListWithUser(long user_id)
         {
             List<Group> groups = new List<Group>();
             List<group_settings> groupsSettings = new List<group_settings>();
@@ -326,7 +446,7 @@ namespace SmartStudy
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
-            return groupsSettings.Where(x => groups.Where(x => x.user_id == user.user_id).Select(x => x.group_settings_id).Distinct().Contains(x.group_settings_id)).ToList();
+            return groupsSettings.Where(x => groups.Where(x => x.user_id == user_id).Select(x => x.group_settings_id).Distinct().Contains(x.group_settings_id)).ToList();
         }
 
 
@@ -358,14 +478,14 @@ namespace SmartStudy
         /// </summary>
         /// <param name="g_s">Объект класса group_settings</param>
         /// <param name="users">Массив пользователей</param>
-        public static async void AddUserToGroup(group_settings g_s, params User[] users)
+        public static async void AddUsersToGroup(long group_settings_id, params User[] users)
         {
             Uri uri = new Uri(string.Format(Constants.GroupUrl, string.Empty));
-            foreach(User user in users)
+            foreach (User user in users)
             {
                 try
                 {
-                    string json = JsonSerializer.Serialize<Group>(new Group(g_s.group_settings_id, user.user_id),
+                    string json = JsonSerializer.Serialize<Group>(new Group(group_settings_id, user.user_id),
                         _serializerOptions);
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 

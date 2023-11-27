@@ -11,6 +11,8 @@ public partial class Calendar_note_edit : ContentPage
     string descr_event;
     DateTime date_begin_note;
     DateTime date_end_note;
+    Event @event = null;
+    User user = Serializer.DeserializeUser();
     public long Note_get_Id
     {
         set { LoadNote_id(value); }
@@ -18,12 +20,11 @@ public partial class Calendar_note_edit : ContentPage
     public Calendar_note_edit()
 	{
 		InitializeComponent();
+        BindingContext = new Group_note();
     }
     private async void LoadNote_id(long text_obj)
     {
         event_id = text_obj;
-        Calendar_note calendar_Note = new Calendar_note();
-        Event @event = new Event();
         @event = await Client.GetEventFromId(event_id);
         title_event = @event.Title;
         descr_event = @event.Description;
@@ -38,10 +39,17 @@ public partial class Calendar_note_edit : ContentPage
         all_date_end.Text = date_end_note.ToString("g");
         date_change_end.Date = date_end_note;
         time_change_end.Time = date_end_note.TimeOfDay;
+
+        if(user.user_id != @event.author_id)
+        {
+            Edit_button.IsEnabled = false;
+            Edit_button.IsVisible = false;
+        }
+        
     }
     private async void SaveButton_Clicked(object sender, EventArgs e)
     {
-        Models.Calendar_note calendar_Note = new Models.Calendar_note();
+        Calendar_note calendar_Note = new Calendar_note();
         //title_event = Note_Name_entry.Text;
         //descr_event = TextEditor.Text;
         //date_begin_note = DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " +
@@ -97,6 +105,8 @@ public partial class Calendar_note_edit : ContentPage
     }
     public void Edit_clicked(object sender, EventArgs e)
     {
+        GroupsWithEvent.IsVisible = false;
+        GroupsWithEvent.IsEnabled = true;
         Note_Name_entry.IsReadOnly = false;
         TextEditor.IsReadOnly = false;
         date_change_begin.IsEnabled = true;
@@ -111,7 +121,7 @@ public partial class Calendar_note_edit : ContentPage
     }
     public async void Add_group_in_event_clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("add_event_to_group");
+        await Shell.Current.GoToAsync($"///add_event_to_group?note_id={@event.event_id}");
     }
     public void Cancel_button_clicked(object sender, EventArgs e)
     {
@@ -134,5 +144,21 @@ public partial class Calendar_note_edit : ContentPage
         date_change_end.Date = date_end_note;
         time_change_end.Time = date_end_note.TimeOfDay;
         TextEditor.Text = descr_event;
+    }
+
+    protected override void OnAppearing()
+    {
+        if (!user.IsTutor())
+        {
+            Cancel_button.IsEnabled = false;
+            Cancel_button.IsVisible = false;
+
+            Delete_button.IsEnabled = false;
+            Delete_button.IsVisible = false;
+
+            Edit_button.IsEnabled = false;
+            Edit_button.IsVisible = false;
+        }
+        ((Group_note)BindingContext).Load_Groups_With_Event(event_id);
     }
 }
