@@ -34,7 +34,8 @@
                     IsEnabled="True"
                     IsVisible="True"
                     HeightRequest="50"
-                    VerticalOptions="End"/>
+                    VerticalOptions="End"
+                    Clicked="Savebutton_Clicked"/>
         </Grid>
     </Grid>
 </ContentPage>
