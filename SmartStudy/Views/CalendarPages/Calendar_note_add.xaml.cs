@@ -16,6 +16,11 @@ public partial class Calendar_note_add : ContentPage
             time_change_end.Time = time_change_begin.Time;
             return;
         }
+        if (String.IsNullOrEmpty(Title.Text))
+        {
+            DisplayAlert("Ошибка", "Введите название события", "ОК");
+            return;
+        }
         Models.Calendar_note calendar_Note = new Models.Calendar_note();
         calendar_Note.add_data(Title.Text, Description.Text, 
             DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " +

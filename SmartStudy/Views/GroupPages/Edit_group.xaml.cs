@@ -68,7 +68,7 @@ public partial class Edit_group : ContentPage
 
     private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
-        bool result = await DisplayAlert("Подтвердить действие", $"Вы хотите удалить группы?", "Да", "Нет");
+        bool result = await DisplayAlert("Подтвердить действие", $"Вы хотите удалить группу?", "Да", "Нет");
         if (result)
         {
             Client.DeleteGroupSettings(group_settings_id);

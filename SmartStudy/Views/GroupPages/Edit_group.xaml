@@ -23,9 +23,7 @@
             <ScrollView>
                 <CollectionView x:Name="all_users"
                                 ItemsSource="{Binding UsersInGroup}"
-                                Margin="20"
-                                SelectionMode="Multiple"
-                                SelectedItem="OnItemSelected">
+                                Margin="20">
                     <CollectionView.Resources>
                         <converter:FullNameConverter x:Key="FullNameConverter" />
                     </CollectionView.Resources>
