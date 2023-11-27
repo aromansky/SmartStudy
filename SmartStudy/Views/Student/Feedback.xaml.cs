@@ -7,7 +7,7 @@ public partial class Feedback : ContentPage
 		InitializeComponent();
         grid.SetColumnSpan(main_view, 2);
         Label lab = new Label();
-        lab.Text = "Какие-то сообщения";
+        lab.Text = "Фидбек";
         main_view.Add(lab);
 #if WINDOWS
 #else

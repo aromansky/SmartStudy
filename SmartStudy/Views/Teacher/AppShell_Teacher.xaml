@@ -55,4 +55,7 @@
     <ShellContent
         ContentTemplate="{DataTemplate views_GroupPages:Edit_group}"
         Route="edit_group"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_GroupPages:Users_list}"
+        Route="add_users_to_group"/>
 </Shell>

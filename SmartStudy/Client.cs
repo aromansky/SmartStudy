@@ -124,6 +124,42 @@ namespace SmartStudy
             }
         }
 
+
+        /// <summary>
+        /// Удаляет запись group_settings из БД
+        /// </summary>
+        /// <param name="group_settings_id">Id группы</param>
+        public static async void DeleteGroupSettings(long group_settings_id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.DeleteAsync(Constants.GroupSettingsUrl + $"/{group_settings_id}");
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+        }
+
+        /// <summary>
+        /// Редактирует запись об group_settings-е из БД
+        /// </summary>
+        /// <param name="id">id Event-а</param>
+        public static async void EditGroupFromId(long editing_Id, group_settings g_s)
+        {
+            try
+            {
+                string json = JsonSerializer.Serialize<group_settings>(g_s, _serializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PutAsync(Constants.GroupSettingsUrl + $"/{editing_Id}", content);
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+        }
+
         /// <summary>
         /// Создаёт в таблице event запись, соответствующую объекту класса Event
         /// </summary>
@@ -442,14 +478,14 @@ namespace SmartStudy
         /// </summary>
         /// <param name="g_s">Объект класса group_settings</param>
         /// <param name="users">Массив пользователей</param>
-        public static async void AddUserToGroup(group_settings g_s, params User[] users)
+        public static async void AddUsersToGroup(long group_settings_id, params User[] users)
         {
             Uri uri = new Uri(string.Format(Constants.GroupUrl, string.Empty));
             foreach (User user in users)
             {
                 try
                 {
-                    string json = JsonSerializer.Serialize<Group>(new Group(g_s.group_settings_id, user.user_id),
+                    string json = JsonSerializer.Serialize<Group>(new Group(group_settings_id, user.user_id),
                         _serializerOptions);
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 

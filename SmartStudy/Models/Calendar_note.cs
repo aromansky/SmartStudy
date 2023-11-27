@@ -32,7 +32,7 @@ namespace SmartStudy.Models
             idColumn.AutoIncrement = true; // будет автоинкрементироваться
             idColumn.AutoIncrementSeed = 0; // начальное значение
             idColumn.AutoIncrementStep = 1; // приращении при добавлении новой строки
-            
+
             DataColumn nameColumn = new DataColumn("Name", Type.GetType("System.String"));
             DataColumn textColumn = new DataColumn("Text", Type.GetType("System.String"));
             DataColumn date_begin_Column = new DataColumn("Date_begin", Type.GetType("System.DateTime"));
@@ -47,7 +47,7 @@ namespace SmartStudy.Models
 
             users.PrimaryKey = new DataColumn[] { users.Columns["Id"] };
 
-            users.WriteXml(AppDataPath+"local_calendar.xml", XmlWriteMode.WriteSchema);
+            users.WriteXml(AppDataPath + "local_calendar.xml", XmlWriteMode.WriteSchema);
         }
         //когда появится взаимодействие с бд, дублировать это же для класса @event
         //в связке с какой-то функцией добавления события в бд
@@ -69,7 +69,7 @@ namespace SmartStudy.Models
             //users.WriteXml(AppDataPath+"local_calendar.xml", XmlWriteMode.WriteSchema);
             sort_data();
         }
-        
+
         //функция существует пока нет добавления события в события в бд
         //предназначена для сортировки по времени, так что можно
         //оставить для оффлайн версии, если такая будет, единственно заменять note_id на event_id
@@ -80,9 +80,9 @@ namespace SmartStudy.Models
             DataSet usersSet = new DataSet("UsersSet");
             DataTable users = new DataTable("Users");
             usersSet.Tables.Add(users);
-            if (!File.Exists(AppDataPath+"local_calendar.xml"))
+            if (!File.Exists(AppDataPath + "local_calendar.xml"))
                 create_data();
-            users.ReadXml(AppDataPath+"local_calendar.xml");
+            users.ReadXml(AppDataPath + "local_calendar.xml");
             foreach (DataRow r in users.Rows)
             {
                 Event @event = new Event();
@@ -99,10 +99,10 @@ namespace SmartStudy.Models
             {
                 users.Rows.Add(new object[] { i, @event.Title, @event.Description,
                     @event.date_begin, @event.date_end });
-                i ++;
-            }    
-                
-            users.WriteXml(AppDataPath+"local_calendar.xml", XmlWriteMode.WriteSchema);
+                i++;
+            }
+
+            users.WriteXml(AppDataPath + "local_calendar.xml", XmlWriteMode.WriteSchema);
         }
         public Calendar_note() =>
             Load_All_Events();
@@ -113,7 +113,7 @@ namespace SmartStudy.Models
         {
             List<Event> evs = await Client.GetEventsWithUser(Serializer.DeserializeUser());
             Events.Clear();
-            foreach (Event ev in evs)
+            foreach (Event ev in evs.DistinctBy(x => x.event_id))
                 Events.Add(ev);
 
             //DataSet usersSet = new DataSet("UsersSet");
