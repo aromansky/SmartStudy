@@ -70,7 +70,7 @@
 	  <None Remove="Database1.mdf" />
 	  <None Remove="Resources\Images\calendar.svg" />
 	  <None Remove="Resources\Images\groups.svg" />
-	  <None Remove="Resources\Images\homework.png" />
+	  <None Remove="Resources\Images\homework.svg" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logo_tab.svg" />
 	  <None Remove="Resources\Images\main_page.svg" />
