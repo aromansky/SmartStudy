@@ -22,11 +22,3 @@
 * ASP.NET Core
 * MySQL
 
-
-## Интерфейс
-### Интерфейс desktop-приложения
-![Пример интерфейса desktop-приложения](https://github.com/aromansky/SmartStudy/assets/115107977/2d96374e-0cb1-4c71-92bd-9d85c12a640b)
-
-### Интерфейс android-приложения
-![Пример интерфейса android-приложения](https://github.com/aromansky/SmartStudy/assets/115107977/9b9c33db-ca34-440d-a87d-8fc8f30891b5)
-
