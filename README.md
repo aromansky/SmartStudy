@@ -20,7 +20,7 @@
 * C#
 * .NET MAUI
 * ASP.NET Core
-* SQl Server
+* MySQL
 
 
 ## Интерфейс
