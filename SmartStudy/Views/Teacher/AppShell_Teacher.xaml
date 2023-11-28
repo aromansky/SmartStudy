@@ -33,7 +33,7 @@
                 ContentTemplate="{DataTemplate views_teacher:Homework}"
                 Route="homework"/>
         </Tab>
-        <Tab Icon="groups.png"
+        <Tab Icon="groups.svg"
             Title="Группы">
             <ShellContent 
                 ContentTemplate="{DataTemplate views_GroupPages:Groups}"
