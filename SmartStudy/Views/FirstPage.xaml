@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartStudy.FirstPage">
+    <VerticalStackLayout
+        Margin="50"
+        Spacing="5"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+        <Label
+            Padding="10"
+            Text="Добро пожаловать!"
+            HorizontalOptions="Center"/>
+
+        <Label
+            Text="Для дальнейшей работы нужно авторизоваться"
+            HorizontalTextAlignment="Center"/>
+
+        <Entry
+            x:Name="EMail"
+            Placeholder="E-mail"
+            WidthRequest="300"
+            HeightRequest="50"
+            HorizontalOptions="Center"
+            Keyboard="Email"/>
+
+        <Grid
+            Grid.Row="1"
+            Grid.Column="2"
+            HorizontalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+
+            <Entry Grid.Row="0" Grid.Column="0"
+                   x:Name="Password"
+                   Placeholder="Пароль"
+                   IsPassword="True"
+                   MaxLength="20"/>
+
+            <Button Grid.Row="0" Grid.Column="1"
+                    Text="👁" 
+                    WidthRequest="15"
+                    HeightRequest="15"
+                    Clicked="ClickPasswordVisibility"
+                    Padding="0"/>
+
+        </Grid>
+
+        <Label Padding="5"
+               Text="Вход как"
+               HorizontalTextAlignment="Center"/>
+        <Grid
+            Grid.Row="1"
+            Grid.Column="2"
+            HorizontalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0"
+                    WidthRequest="145"
+                    x:Name="Student"
+                    Text="Ученик"
+                    Clicked="ClickLogInStudent"
+                    HorizontalOptions="StartAndExpand"/>
+
+            <Button Grid.Row="0" Grid.Column="1"
+                    WidthRequest="145"
+                    x:Name="Tutor"
+                    Text="Преподаватель"
+                    Clicked="ClickLogInTeacher"
+                    HorizontalOptions="End"/>
+
+        </Grid>
+        
+        <Button
+            Text="Регистрация"
+            WidthRequest="300"
+            HeightRequest="50"
+            HorizontalOptions="Center"
+            Clicked="ClickRegister"/>
+        
+        <Button
+            WidthRequest="300"
+            HeightRequest="50"
+            Text="Забыли пароль?"
+            HorizontalOptions="Center"
+            Clicked="ClickForgotPassword"/>
+
+    </VerticalStackLayout>
+</ContentPage>

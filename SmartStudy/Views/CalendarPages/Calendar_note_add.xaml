@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartStudy.Views.CalendarPages.Calendar_note_add"
+             Title="Создать событие">
+    <VerticalStackLayout Spacing="10" Margin="5">
+        <Entry x:Name="Title"
+               Placeholder="Название события"
+               FontSize="Medium"
+               HorizontalTextAlignment="Center"
+               HeightRequest="50"
+               MaxLength="50"/>
+
+        <HorizontalStackLayout Spacing="15">
+            <Label Text="Начало: " FontSize="Medium" VerticalTextAlignment="End"/>
+            <Label x:Name="all_date_begin" FontSize="Small" VerticalTextAlignment="End"/>
+        </HorizontalStackLayout>
+        <DatePicker x:Name="date_change_begin" Format="d" DateSelected="date_begin_selected"/>
+        <TimePicker x:Name="time_change_begin" PropertyChanged="time_begin_selected"/>
+
+        <HorizontalStackLayout Spacing="15">
+            <Label Text="Конец:" FontSize="Medium" VerticalTextAlignment="End"/>
+            <Label x:Name="all_date_end" FontSize="Small" VerticalTextAlignment="End"/>
+        </HorizontalStackLayout>
+        <DatePicker x:Name="date_change_end" Format="d" DateSelected="date_end_selected"/>
+        <TimePicker x:Name="time_change_end" PropertyChanged="time_end_selected"/>
+
+        <Editor x:Name="Description"
+            Placeholder="Описание события"
+            HeightRequest="100"
+            MaxLength="500"/>
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+            <Button Text="Сохранить"
+                Clicked="SaveButton_Clicked" />
+
+            <Button Grid.Column="1"
+                Text="Отмена"
+                Clicked="CancelButton_Clicked" />
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

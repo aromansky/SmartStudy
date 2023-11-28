@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartStudy.Views.CalendarPages.Group_list"
+             Title="Группы">
+    <ContentPage.Resources>
+        <Style TargetType="VerticalStackLayout">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor"
+                                        Value="DarkViolet" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <ScrollView>
+                <CollectionView x:Name="all_notes"
+                                ItemsSource="{Binding Groups}"
+                                Margin="20"
+                                SelectionMode="Multiple"
+                                SelectedItems="{Binding SelectedGroups}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
+                                <Label Text="{Binding Description}" MaxLines="1"  FontSize="20" TextColor="DarkGray" HorizontalTextAlignment="Start"/>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid ColumnDefinitions="*,*">
+                <Grid Grid.Column="0" Grid.ColumnSpan="1">
+                    <Button x:Name="ok" 
+                            Text="Добавить" 
+                            Clicked="ok_Clicked" 
+                            HeightRequest="50"/>
+                </Grid>
+                <Grid Grid.Column="1" Grid.ColumnSpan="1">
+                    <Button x:Name="goBack" 
+                            Text="Отмена" 
+                            Clicked="GoBack" 
+                            HeightRequest="50"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>
