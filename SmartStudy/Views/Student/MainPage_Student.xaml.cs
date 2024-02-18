@@ -14,6 +14,11 @@ public partial class MainPage_Student : ContentPage
         row_button.Height = 0;
 #endif
     }
+    public async void update_page(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///feedback");
+        await Shell.Current.GoToAsync("///main_page");
+    }
     public async void clicked_to_calendar(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("///calendar");
