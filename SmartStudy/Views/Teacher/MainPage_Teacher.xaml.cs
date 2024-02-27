@@ -37,4 +37,10 @@ public partial class MainPage_Teacher : ContentPage
     {
         await Shell.Current.GoToAsync("///feedback");
     }
+    public async void logOut(object sender, EventArgs e)
+    {
+        Application.Current.MainPage = new AppShell();
+        await Shell.Current.GoToAsync("///RegistrationPage");
+    }
+
 }

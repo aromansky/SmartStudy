@@ -19,7 +19,9 @@
             <RowDefinition Height="*" x:Name="row_button"/>
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="0">
-            <VerticalStackLayout x:Name="main_view"></VerticalStackLayout>
+            <VerticalStackLayout x:Name="main_view">
+                <Button Text="LogOut" Clicked="logOut"/>
+            </VerticalStackLayout>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1">
             <Button Text="Главная" IsEnabled="False"/>
