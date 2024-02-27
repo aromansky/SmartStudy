@@ -1,3 +1,5 @@
+using SmartStudy.Models;
+
 namespace SmartStudy.Views.Student;
 
 public partial class MainPage_Student : ContentPage
@@ -34,5 +36,11 @@ public partial class MainPage_Student : ContentPage
     public async void clicked_to_groups(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("///groups");
+    }
+    public async void logOut(object sender, EventArgs e)
+    {
+        Serializer.DeleteUserData();
+        Application.Current.MainPage = new AppShell();
+        await Shell.Current.GoToAsync("///RegistrationPage");
     }
 }

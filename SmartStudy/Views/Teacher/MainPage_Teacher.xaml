@@ -5,6 +5,7 @@
              Title="Главная">
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="Button_update" Clicked="update_page" IconImageSource="{FontImage Glyph='↺', Color=White, Size=22}" />
+        <ToolbarItem x:Name="Button_logOut" Text="LogOut" Clicked="logOut" IconImageSource="{FontImage Glyph='↪', Color=White, Size=22}"/>
     </ContentPage.ToolbarItems>
     <Grid x:Name="grid">
         <Grid.ColumnDefinitions>
@@ -20,7 +21,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="0">
             <VerticalStackLayout x:Name="main_view">
-                <Button Text="LogOut" Clicked="logOut"/>
+                
             </VerticalStackLayout>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1">
