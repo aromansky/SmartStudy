@@ -46,9 +46,10 @@
     <ShellContent
         ContentTemplate="{DataTemplate views_CalendarPages:Calendar_note_edit}"
         Route="calendar_note_edit"/>
+    <!-- Возможно, можно удалить
     <ShellContent
         ContentTemplate="{DataTemplate views_CalendarPages:Group_list}"
-        Route="add_event_to_group"/>
+        Route="add_event_to_group"/>-->
     <ShellContent
         ContentTemplate="{DataTemplate views_GroupPages:Create_group}"
         Route="create_group"/>
