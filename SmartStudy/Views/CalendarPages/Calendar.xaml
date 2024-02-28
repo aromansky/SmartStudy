@@ -7,6 +7,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="Button_add_date" Clicked="Add_Clicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
         <ToolbarItem x:Name="Button_change_view" Clicked="change_view_cal" IconImageSource="{FontImage Glyph='≡', Color=White, Size=22}" />
+        <ToolbarItem x:Name="Button_update" Clicked="update_page" IconImageSource="{FontImage Glyph='↺', Color=White, Size=22}" />
     </ContentPage.ToolbarItems>
     <Grid x:Name="grid">
         <Grid.ColumnDefinitions>
@@ -24,11 +25,9 @@
             <RowDefinition Height="*" x:Name="row_button"/>
         </Grid.RowDefinitions>
         <Grid x:Name="grid_cal_view" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="3">
-            <Frame BackgroundColor="#303230">
-                <cal:Calendar x:Name="cal_view" EventsScrollViewVisible="True" SelectedDayBackgroundColor="Red" CalendarLayout="Month" DaysTitleColor="Gray"
-                              EventIndicatorColor="Orange" ShowYearPicker="False">
+            <cal:Calendar x:Name="cal_view" EventsScrollViewVisible="True" SelectedDayBackgroundColor="Red" CalendarLayout="Month" DaysTitleColor="Gray"
+                              EventIndicatorColor="Orange" ShowYearPicker="False" BackgroundColor="#303230">
                 </cal:Calendar>
-            </Frame>
         </Grid>
         <Grid x:Name="grid_cal_list" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" IsVisible="False">
             <Frame>

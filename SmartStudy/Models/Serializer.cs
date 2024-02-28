@@ -78,5 +78,20 @@ namespace SmartStudy.Models
             }
 
         }
+        /// <summary>
+        /// Удаление данных о предыдущем входе из памяти
+        /// </summary>
+        public static void DeleteUserData()
+        {
+            try
+            {
+                File.Delete(Path.Combine(path, "UserData.xml"));
+            }
+            catch
+            {
+                throw new FileNotFoundException();
+            }
+            
+        }
     }
 }
