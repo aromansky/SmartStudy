@@ -14,6 +14,11 @@ public partial class Homework : ContentPage
         row_button.Height = 0;
 #endif
     }
+    public async void update_page(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///main_page");
+        await Shell.Current.GoToAsync("///homework");
+    }
     public async void clicked_to_main_page(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("///main_page");

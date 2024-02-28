@@ -121,7 +121,8 @@ public partial class Calendar_note_edit : ContentPage
     }
     public async void Add_group_in_event_clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync($"///add_event_to_group?note_id={@event.event_id}");
+        await Navigation.PushModalAsync(new Group_list(@event.event_id));
+        //await Shell.Current.GoToAsync($"///add_event_to_group?note_id={@event.event_id}"); Возможно, можно удалить
     }
     public void Cancel_button_clicked(object sender, EventArgs e)
     {
