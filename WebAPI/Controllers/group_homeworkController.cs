@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
@@ -31,24 +32,27 @@ namespace WebAPI.Controllers
         }
 
 
-        // ТРЕБУЕТ ТЕСТИРОВАНИЯ
-        // Возвращает дз, которое доступно пользователю
-        // GET: api/group_homework/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<homework>>> GetHomeWorksWithUsers(long id)
+        // Принимает homework_id, возвращает группы (group_settings), которым оно доступно
+        // GET: api/group_homework
+        [HttpGet("groups_with_homework-{id}")]
+        public async Task<ActionResult<IEnumerable<group_settings>>> GetGroupWithHomework(long id)
         {
-            var homeworks = from homework in _context.homework
-                            join user_homework in _context.user_homework on homework.homework_id equals user_homework.homework_id
-                            join user in _context.user on user_homework.user_id equals user.user_id
-                            select new homework
-                            {
-                                homework_id = homework.homework_id,
-                                Title = homework.Title,
-                                Description = homework.Description
-                            };
-            if (homeworks == null)
+            var groups = from homework in _context.homework
+                         join group_homework in _context.group_homework on homework.homework_id equals group_homework.homework_id
+                         join group_settings in _context.group_settings on group_homework.group_settings_id equals group_settings.group_settings_id
+                         where homework.homework_id == id
+                         select new group_settings
+                         {
+                             group_settings_id = group_settings.group_settings_id,
+                             Tutor_id = group_settings.Tutor_id,
+                             Title = group_settings.Title,
+                             Description = group_settings.Description
+
+                         };
+            if(groups is null)
                 return NotFound();
-            return await homeworks.ToListAsync();
+            return await groups.ToListAsync();
+
         }
 
 
