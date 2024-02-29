@@ -34,5 +34,27 @@ namespace WebAPI.Controllers
                 return NotFound();
             return await homeworks.ToListAsync();
         }
+
+
+        // Удаляет дз из группы
+        // DELETE: api/group_homework/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteGroupHomework(long id)
+        {
+            if (_context.group_homework == null)
+            {
+                return NotFound();
+            }
+            var homework = await _context.homework.FindAsync(id);
+            if (homework == null)
+            {
+                return NotFound();
+            }
+
+            _context.homework.Remove(homework);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }
