@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<homework>> GetEvent(long id)
         {
-          if (_context.@event == null)
+          if (_context.homework == null)
           {
               return NotFound();
           }
