@@ -37,6 +37,9 @@
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 		<DefaultLanguage>ru</DefaultLanguage>
 		<PackageCertificateThumbprint>CD56DE44078EDB2B516D5DEC7EB77582CC085152</PackageCertificateThumbprint>
+
+		<WindowsPackageType Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">None</WindowsPackageType>
+		
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
@@ -69,12 +72,15 @@
 	<ItemGroup>
 	  <None Remove="Database1.mdf" />
 	  <None Remove="Resources\Images\calendar.svg" />
+	  <None Remove="Resources\Images\closed.png" />
+	  <None Remove="Resources\Images\open.svg" />
 	  <None Remove="Resources\Images\groups.svg" />
 	  <None Remove="Resources\Images\homework.svg" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logo_tab.svg" />
 	  <None Remove="Resources\Images\main_page.svg" />
 	  <None Remove="Resources\Images\message.svg" />
+	  <None Remove="Resources\Images\opened.png" />
 	  <None Remove="Resources\Images\plus_circle.png" />
 	</ItemGroup>
 
