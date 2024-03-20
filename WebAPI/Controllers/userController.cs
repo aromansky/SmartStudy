@@ -81,6 +81,19 @@ namespace WebAPI.Controllers
             return await homeworks.ToListAsync();
         }
 
+        // Принимает id пользователя, возвращает дз, которое он создал
+        // GET: api/user_homework/users_with_homework-5
+        [HttpGet("homework_author-{id}")]
+        public async Task<ActionResult<IEnumerable<homework>>> GetCreatedHomeWorks(long id)
+        {
+            var homeworks =  from homework in _context.homework
+                             where homework.author_id == id
+                             select homework;
+            if (homeworks == null)
+                return NotFound();
+            return await homeworks.ToListAsync();
+        }
+
         // Принимает id пользователя, возвращает групповое дз, которое ему доступно
         // GET: api/user_homework/users_with_homework-5
         [HttpGet("homework_user_from_group-{id}")]
