@@ -2,7 +2,7 @@
 {
     public static class Constants
     {
-        private const string your_address = "localhost:7095";
+        private const string your_address = "a25516-e14f.w.d-f.pw";
         public const string UserUrl = $"https://{your_address}/api/user";
         public const string GroupSettingsUrl = $"https://{your_address}/api/group_settings";
         public const string GroupUrl = $"https://{your_address}/api/group";
