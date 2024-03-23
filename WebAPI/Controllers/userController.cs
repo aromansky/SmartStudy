@@ -62,7 +62,7 @@ namespace WebAPI.Controllers
 
 
         // Принимает id пользователя, возвращает личное дз, которое ему доступно
-        // GET: api/user_homework/users_with_homework-5
+        // GET: api/user/users_with_homework-5
         [HttpGet("homework_user-{id}")]
         public async Task<ActionResult<IEnumerable<homework>>> GetHomeWorksForhUser(long id)
         {

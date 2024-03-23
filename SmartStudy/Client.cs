@@ -5,6 +5,7 @@ using System.Net.Http.Json;
 using SmartStudy.ModelsDB;
 using SmartStudy.Models;
 using Microsoft.Extensions.Logging;
+using SmartStudy.Views.Student;
 
 namespace SmartStudy
 {
@@ -500,6 +501,50 @@ namespace SmartStudy
                 }
 
             }
+        }
+
+
+        /// <summary>
+        /// Возвращает дз, доступное пользователю
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
+        public static async Task<List<homework>> GetUserHomework(long user_id)
+        {
+            List<homework> homeworks = new List<homework>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.UserUrl + $"/homework_user-{user_id}");
+                if (response.IsSuccessStatusCode)
+                    homeworks = await response.Content.ReadFromJsonAsync<List<homework>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return homeworks;
+        }
+
+
+        /// <summary>
+        /// Возвращает дз, доступное группе
+        /// </summary>
+        /// <param name="user_id"></param>
+        /// <returns></returns>
+        public static async Task<List<homework>> GetGroupHomework(long group_settings_id)
+        {
+            List<homework> homeworks = new List<homework>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.GroupSettingsUrl + $"/homework_user-{group_settings_id}");
+                if (response.IsSuccessStatusCode)
+                    homeworks = await response.Content.ReadFromJsonAsync<List<homework>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return homeworks;
         }
     }
 }
