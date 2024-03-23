@@ -507,7 +507,7 @@ namespace SmartStudy
         /// <summary>
         /// Возвращает дз, доступное пользователю
         /// </summary>
-        /// <param name="user_id"></param>
+        /// <param name="user_id">id пользователя</param>
         /// <returns></returns>
         public static async Task<List<homework>> GetUserHomework(long user_id)
         {
@@ -529,7 +529,7 @@ namespace SmartStudy
         /// <summary>
         /// Возвращает дз, доступное группе
         /// </summary>
-        /// <param name="user_id"></param>
+        /// <param name="group_settings_id">id группы</param>
         /// <returns></returns>
         public static async Task<List<homework>> GetGroupHomework(long group_settings_id)
         {
@@ -537,6 +537,28 @@ namespace SmartStudy
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(Constants.GroupSettingsUrl + $"/homework_user-{group_settings_id}");
+                if (response.IsSuccessStatusCode)
+                    homeworks = await response.Content.ReadFromJsonAsync<List<homework>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return homeworks;
+        }
+
+
+        /// <summary>
+        /// Возвращает дз, созданное пользователем
+        /// </summary>
+        /// <param name="user_id">id пользователя</param>
+        /// <returns></returns>
+        public static async Task<List<homework>> GetHomeworkForAuthor(long author_id)
+        {
+            List<homework> homeworks = new List<homework>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.UserUrl + $"/homework_author-{author_id}");
                 if (response.IsSuccessStatusCode)
                     homeworks = await response.Content.ReadFromJsonAsync<List<homework>>();
             }
