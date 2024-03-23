@@ -551,7 +551,7 @@ namespace SmartStudy
         /// <summary>
         /// Возвращает дз, созданное пользователем
         /// </summary>
-        /// <param name="user_id">id пользователя</param>
+        /// <param name="author_id">id автора</param>
         /// <returns></returns>
         public static async Task<List<homework>> GetHomeworkForAuthor(long author_id)
         {
@@ -567,6 +567,29 @@ namespace SmartStudy
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
             return homeworks;
+        }
+
+
+
+        /// <summary>
+        /// Возвращает дз, созданное пользователем
+        /// </summary>
+        /// <param name="homerwork_id">id домашнего задания</param>
+        /// <returns></returns>
+        public static async Task<List<group_settings>> GetGroupsWithHomework(long homerwork_id)
+        {
+            List<group_settings> group_settings = new List<group_settings>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.GroupUrl + $"/groups_with_homework-{homerwork_id}");
+                if (response.IsSuccessStatusCode)
+                    group_settings = await response.Content.ReadFromJsonAsync<List<group_settings>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return group_settings;
         }
     }
 }
