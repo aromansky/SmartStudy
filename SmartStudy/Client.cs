@@ -572,7 +572,7 @@ namespace SmartStudy
 
 
         /// <summary>
-        /// Возвращает дз, созданное пользователем
+        /// Возвращает группы, которым доступно дз
         /// </summary>
         /// <param name="homerwork_id">id домашнего задания</param>
         /// <returns></returns>
@@ -590,6 +590,129 @@ namespace SmartStudy
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
             return group_settings;
+        }
+
+        /// <summary>
+        /// Создаёт в таблице homework запись, соответствующую объекту класса homework
+        /// </summary>
+        /// <param name="homework">Объект класса homework</param>
+        public static async void CreateHomework(homework homework)
+        {
+            Uri uri = new Uri(string.Format(Constants.HomeworkUrl, string.Empty));
+
+            try
+            {
+                string json = JsonSerializer.Serialize<homework>(homework, _serializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PostAsync(uri, content);
+
+                if (response.IsSuccessStatusCode)
+                    Debug.WriteLine("Ok");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Редактирует запись о homework из БД
+        /// </summary>
+        /// <param name="homework_id">id Event-а</param>
+        public static async void EditHomeworkFromId(long editing_Id, homework homework)
+        {
+            User user = Serializer.DeserializeUser();
+            homework.homework_id = editing_Id;
+            if (!user.IsTutor() || (user.user_id != homework.author_id))
+                return;
+            try
+            {
+                string json = JsonSerializer.Serialize<homework>(homework, _serializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PutAsync(Constants.HomeworkUrl + $"/{editing_Id}", content);
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+        }
+
+
+        /// <summary>
+        /// Удаляет запись homework из БД
+        /// </summary>
+        /// <param name="homework_id">Id домашнего задания</param>
+        public static async void DeleteHomework(long homework_id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.DeleteAsync(Constants.HomeworkUrl + $"/{homework_id}");
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+        }
+
+
+        /// <summary>
+        /// Отправляет homework пользователям
+        /// </summary>
+        /// <param name="homework_id">Id домашнего задания</param>
+        /// <param name="user_id">Id пользователей, котрым отсылается дз</param>
+        public static async void CreateUserHomework(long homework_id, params long[] users_id)
+        {
+            Uri uri = new Uri(string.Format(Constants.UserHomeworkUrl, string.Empty));
+
+            try
+            {
+                foreach(long u_id in users_id)
+                {
+                    user_homework user_homework = new user_homework(homework_id, u_id);
+                    string json = JsonSerializer.Serialize<user_homework>(user_homework, _serializerOptions);
+                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await _client.PostAsync(uri, content);
+
+                    if (response.IsSuccessStatusCode)
+                        Debug.WriteLine("Ok");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Отправляет homework в группу
+        /// </summary>
+        /// <param name="homework_id">Id домашнего задания</param>
+        /// <param name="group_settings_id">Id групп, котрым отсылается дз</param>
+        public static async void CreateGroupHomework(long homework_id, params long[] group_settings_id)
+        {
+            Uri uri = new Uri(string.Format(Constants.GroupHomeworkUrl, string.Empty));
+
+            try
+            {
+                foreach (long gs_id in group_settings_id)
+                {
+                    group_homework group_homework = new group_homework(homework_id, gs_id);
+                    string json = JsonSerializer.Serialize<group_homework>(group_homework, _serializerOptions);
+                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await _client.PostAsync(uri, content);
+
+                    if (response.IsSuccessStatusCode)
+                        Debug.WriteLine("Ok");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
         }
     }
 }

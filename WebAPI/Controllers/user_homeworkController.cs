@@ -18,22 +18,22 @@ namespace WebAPI.Controllers
         // POST: api/group_homework
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<user_homework>> PostGroupHomework(user_homework user_homework)
+        public async Task<ActionResult<user_homework>> PostUserHomework(user_homework user_homework)
         {
             if (_context.user_homework == null)
             {
-                return Problem("Entity set 'SmartStudyContext.group_homework'  is null.");
+                return Problem("Entity set 'SmartStudyContext.user_homework'  is null.");
             }
             _context.user_homework.Add(user_homework);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGroupHomework", new { id = user_homework.user_homework_id }, user_homework);
+            return CreatedAtAction("GetUserHomework", new { id = user_homework.user_homework_id }, user_homework);
         }
 
         // Удаляет дз для пользователя
         // DELETE: api/group_homework/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGroupHomework(long id)
+        public async Task<IActionResult> DeleteUserHomework(long id)
         {
             if (_context.user_homework == null)
             {

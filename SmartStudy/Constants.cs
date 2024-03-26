@@ -9,6 +9,8 @@
         public const string EventUrl = $"https://{your_address}/api/event";
         public const string GroupEventUrl = $"https://{your_address}/api/group_event";
         public const string EventUserUrl = $"https://{your_address}/api/event_user";
-
+        public const string HomeworkUrl = $"https://{your_address}/api/homework";
+        public const string UserHomeworkUrl = $"https://{your_address}/api/user_homework";
+        public const string GroupHomeworkUrl = $"https://{your_address}/api/group_homework";
     }
 }

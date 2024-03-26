@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
 
         // GET: api/homework/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<homework>> GetEvent(long id)
+        public async Task<ActionResult<homework>> GetHomework(long id)
         {
           if (_context.homework == null)
           {
