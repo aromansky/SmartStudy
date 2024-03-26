@@ -1,3 +1,5 @@
+using SmartStudy.Models;
+
 namespace SmartStudy.Views.Student;
 
 public partial class Homework : ContentPage
@@ -5,40 +7,24 @@ public partial class Homework : ContentPage
 	public Homework()
 	{
 		InitializeComponent();
+        BindingContext = new Homework_list();
+        grid.SetColumnSpan(main_view, 2);
         Label lab = new Label();
         lab.Text = "Задания от учителя";
-        Button btn_to_view_one_hw = new Button();
-        btn_to_view_one_hw.Text = "посмотреть конкретное задание";
-        btn_to_view_one_hw.Clicked += clicked_to_view_one_hw;
-        Button btn_to_list_all_hw_user = new Button();
-        btn_to_list_all_hw_user.Text = "посмотреть все задания";
-        btn_to_list_all_hw_user.Clicked += clicked_to_list_all_hw_user;
-        Button btn_to_list_all_hw_one_group = new Button();
-        btn_to_list_all_hw_one_group.Text = "посмотреть задания группы";
-        btn_to_list_all_hw_one_group.Clicked += clicked_to_list_all_hw_one_group;
+        //Button btn_to_view_one_hw = new Button();
+        //btn_to_view_one_hw.Text = "посмотреть конкретное задание";
+        //btn_to_view_one_hw.Clicked += clicked_to_view_one_hw;
         main_view.Add(lab);
-        main_view.Add(btn_to_view_one_hw);
-        main_view.Add(btn_to_list_all_hw_user);
-        main_view.Add(btn_to_list_all_hw_one_group);
+        //main_view.Add(btn_to_view_one_hw);
 #if WINDOWS
 #else
         row_button.Height = 0;
 #endif
     }
-    public async void clicked_to_view_one_hw(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("view_one_hw");
-    }
-    public async void clicked_to_list_all_hw_user(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("list_all_hw_user");
-    }
-    public async void clicked_to_list_all_hw_one_group(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync($"list_all_hw_one_group?group_id={-1}");
-    }
-
-
+    //public async void clicked_to_view_one_hw(object sender, EventArgs e)
+    //{
+    //    await Shell.Current.GoToAsync("view_one_hw");
+    //}
     public async void update_page(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("///main_page");
@@ -60,6 +46,22 @@ public partial class Homework : ContentPage
     {
         await Shell.Current.GoToAsync("///groups");
     }
+    protected override void OnAppearing()
+    {
+        ((Homework_list)BindingContext).LoadHomework();
+    }
+
+    private async void task_ckicked(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.Count != 0)
+        {
+            //TODO
+            //await Shell.Current.GoToAsync($"edit_group?group_settings_id={((ModelsDB.group_settings)e.CurrentSelection[0]).group_settings_id}");
+            all_tasks.SelectedItem = null;
+        }
+
+    }
+
     /*
     private async void event_clicked(object sender, SelectionChangedEventArgs e)
     {
