@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartStudy.Views.HomeworkPages.List_all_hw_one_group"
+             Title="List_all_hw_one_group">
+    <VerticalStackLayout>
+        <ScrollView>
+            <CollectionView x:Name="all_homeworks_group"
+                        ItemsSource="{Binding HomeworksGroup}"
+                        Margin="20"
+                        SelectionMode="Single"
+                        SelectionChanged="homework_ckicked">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
+                            <Label Text="{Binding Description}" FontSize="20" TextColor="DarkGray"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </VerticalStackLayout>
+</ContentPage>

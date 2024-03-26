@@ -8,16 +8,12 @@ public partial class List_all_groups_with_hw : ContentPage
     private long hw_id;
     public long Hw_get_Id
     {
-        set { Load_Hw(value); }
+        set { hw_id = value; }
     }
     public List_all_groups_with_hw()
 	{
 		InitializeComponent();
         BindingContext = Client.GetGroupsWithHomework(hw_id);
-    }
-    public void Load_Hw(long hw_id)
-    {
-
     }
     private async void group_ckicked(object sender, SelectionChangedEventArgs e)
     {

@@ -19,11 +19,15 @@ public partial class Homework : ContentPage
         Button btn_to_list_all_hw_group = new Button();
         btn_to_list_all_hw_group.Text = "посмотреть все группы c данным заданием";
         btn_to_list_all_hw_group.Clicked += clicked_to_list_all_hw_group;
+        Button btn_to_list_all_hw_one_group = new Button();
+        btn_to_list_all_hw_one_group.Text = "посмотреть задания группы";
+        btn_to_list_all_hw_one_group.Clicked += clicked_to_list_all_hw_one_group;
         main_view.Add(lab);
         main_view.Add(btn_to_add_hw);
         main_view.Add(btn_to_view_one_hw);
         main_view.Add(btn_to_list_all_hw_user);
         main_view.Add(btn_to_list_all_hw_group);
+        main_view.Add(btn_to_list_all_hw_one_group);
 #if WINDOWS
 #else
         row_button.Height = 0;
@@ -45,6 +49,12 @@ public partial class Homework : ContentPage
     {
         await Shell.Current.GoToAsync($"list_all_groups_with_hw?hw_id={-1}");
     }
+    public async void clicked_to_list_all_hw_one_group(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync($"list_all_hw_one_group?group_id={-1}");
+    }
+
+
     public async void update_page(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("///main_page");

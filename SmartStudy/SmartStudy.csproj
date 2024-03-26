@@ -160,6 +160,9 @@
 	  <MauiXaml Update="Views\HomeworkPages\List_all_groups_with_hw.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\HomeworkPages\List_all_hw_one_group.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\HomeworkPages\List_all_hw_user.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

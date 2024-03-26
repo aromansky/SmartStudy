@@ -19,6 +19,7 @@ public partial class AppShell_Teacher : Shell
         Routing.UnRegisterRoute("view_one_hw");
         Routing.UnRegisterRoute("list_all_hw_user");
         Routing.UnRegisterRoute("list_all_group_with_hw");
+        Routing.UnRegisterRoute("list_all_hw_one_group");
 
         Routing.RegisterRoute("main_page", typeof(MainPage_Teacher));
         Routing.RegisterRoute("calendar", typeof(Calendar));
@@ -34,6 +35,7 @@ public partial class AppShell_Teacher : Shell
         Routing.RegisterRoute("view_one_hw", typeof(View_one_hw));
         Routing.RegisterRoute("list_all_hw_user", typeof(List_all_hw_user));
         Routing.RegisterRoute("list_all_groups_with_hw", typeof(List_all_groups_with_hw));
+        Routing.RegisterRoute("list_all_hw_one_group", typeof(List_all_hw_one_group));
 #if WINDOWS
         SetTabBarIsVisible(TabBar_t, false);
 #endif
