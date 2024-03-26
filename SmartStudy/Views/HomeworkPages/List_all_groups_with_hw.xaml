@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SmartStudy.Views.HomeworkPages.List_all_hw_user"
-             Title="Список всех дз пользователя.">
+             x:Class="SmartStudy.Views.HomeworkPages.List_all_groups_with_hw"
+             Title="List_all_groups_with_hw">
     <VerticalStackLayout>
         <ScrollView>
-            <CollectionView x:Name="all_homeworks_user"
-                            ItemsSource="{Binding HomeworksUser}"
-                            Margin="20"
-                            SelectionMode="Single"
-                            SelectionChanged="homework_ckicked">
-                
+            <CollectionView x:Name="all_groups_with_hw"
+                        ItemsSource="{Binding GroupsWithHomework}"
+                        Margin="20"
+                        SelectionMode="Single"
+                        SelectionChanged="group_ckicked">
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>

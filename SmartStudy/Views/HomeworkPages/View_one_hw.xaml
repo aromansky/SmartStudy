@@ -3,10 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartStudy.Views.HomeworkPages.View_one_hw"
              Title="View_one_hw">
-    <VerticalStackLayout>
-        <Label 
-            Text="Подробный просмотр конкретного задания."
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout Spacing="10" Margin="5">
+        <Entry x:Name="Title"
+               Placeholder="Название дз"
+               FontSize="Medium"
+               HorizontalTextAlignment="Center"
+               HeightRequest="50"
+               MaxLength="50"
+               IsEnabled="False" Margin="5"/>
+
+        <HorizontalStackLayout Spacing="15">
+            <Label Text="Начало: " FontSize="Medium" VerticalTextAlignment="End"/>
+            <Label x:Name="all_date_begin" FontSize="Small" VerticalTextAlignment="End"/>
+        </HorizontalStackLayout>
+        <DatePicker x:Name="date_change_begin" Format="d" IsEnabled="False" Margin="5"/>
+        <TimePicker x:Name="time_change_begin" IsEnabled="False" Margin="5"/>
+
+        <HorizontalStackLayout Spacing="15">
+            <Label Text="Конец:" FontSize="Medium" VerticalTextAlignment="End"/>
+            <Label x:Name="all_date_end" FontSize="Small" VerticalTextAlignment="End"/>
+        </HorizontalStackLayout>
+        <DatePicker x:Name="date_change_end" Format="d" IsEnabled="False" Margin="5"/>
+        <TimePicker x:Name="time_change_end" IsEnabled="False" Margin="5"/>
+
+        <Editor x:Name="Description"
+                Placeholder="Текст дз"
+                HeightRequest="100"
+                MaxLength="500"
+                IsEnabled="False"
+                Margin="5"/>
     </VerticalStackLayout>
 </ContentPage>

@@ -57,6 +57,6 @@
         ContentTemplate="{DataTemplate views_HomeworkPages:List_all_hw_user}"
         Route="list_all_hw_user"/>
     <ShellContent
-        ContentTemplate="{DataTemplate views_HomeworkPages:List_all_hw_group}"
-        Route="list_all_hw_group"/>
+        ContentTemplate="{DataTemplate views_HomeworkPages:List_all_groups_with_hw}"
+        Route="List_all_groups_with_hw"/>
 </Shell>

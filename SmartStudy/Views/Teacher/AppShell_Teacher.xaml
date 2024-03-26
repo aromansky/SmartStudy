@@ -61,12 +61,15 @@
         ContentTemplate="{DataTemplate views_GroupPages:Users_list}"
         Route="add_users_to_group"/>
     <ShellContent
+        ContentTemplate="{DataTemplate views_HomeworkPages:Add_hw}"
+        Route="add_hw"/>
+    <ShellContent
         ContentTemplate="{DataTemplate views_HomeworkPages:View_one_hw}"
         Route="view_one_hw"/>
     <ShellContent
         ContentTemplate="{DataTemplate views_HomeworkPages:List_all_hw_user}"
         Route="list_all_hw_user"/>
     <ShellContent
-        ContentTemplate="{DataTemplate views_HomeworkPages:List_all_hw_group}"
-        Route="list_all_hw_group"/>
+        ContentTemplate="{DataTemplate views_HomeworkPages:List_all_groups_with_hw}"
+        Route="list_all_groups_with_hw"/>
 </Shell>

@@ -18,7 +18,7 @@
             <RowDefinition Height="15*"/>
             <RowDefinition Height="*" x:Name="row_button"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0">
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5">
             <VerticalStackLayout x:Name="main_view"></VerticalStackLayout>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1">
