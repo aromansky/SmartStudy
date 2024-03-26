@@ -83,15 +83,7 @@ namespace SmartStudy.Models
         /// </summary>
         public static void DeleteUserData()
         {
-            try
-            {
                 File.Delete(Path.Combine(path, "UserData.xml"));
-            }
-            catch
-            {
-                throw new FileNotFoundException();
-            }
-            
         }
     }
 }
