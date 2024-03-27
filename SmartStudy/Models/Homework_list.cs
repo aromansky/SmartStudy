@@ -10,8 +10,7 @@ namespace SmartStudy.Models
         public Homework_list() => LoadHomework();
 
         public async void LoadHomework()
-        {
-            Homeworks.Clear();
+        {  
             List<homework> homeworks;
 
             User thisUser = Serializer.DeserializeUser();
@@ -21,6 +20,7 @@ namespace SmartStudy.Models
             else
                 homeworks = await Client.GetUserHomework(thisUser.user_id);
 
+            Homeworks.Clear();
             foreach (homework user in homeworks.OrderBy(x => x.Title))
                 Homeworks.Add(user);
         }
