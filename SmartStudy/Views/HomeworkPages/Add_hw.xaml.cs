@@ -16,7 +16,7 @@ public partial class Add_hw : ContentPage
         }
         if (String.IsNullOrEmpty(Title.Text))
         {
-            DisplayAlert("Ошибка", "Введите название события", "ОК");
+            DisplayAlert("Ошибка", "Введите название дз", "ОК");
             return;
         }
         // TODO: добавление задания в список
