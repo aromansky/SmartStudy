@@ -10,41 +10,41 @@ namespace WebAPI.Controllers
     {
         private readonly SmartStudyContext _context;
 
-        public HomeWorkController(SmartStudyContext context)
+        public FeedbackController(SmartStudyContext context)
         {
             _context = context;
         }
 
 
-        // GET: api/homework/5
+        // GET: api/feedback/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<homework>> GetHomework(long id)
+        public async Task<ActionResult<feedback>> Getfeedback(long id)
         {
-          if (_context.homework == null)
+          if (_context.feedback == null)
           {
               return NotFound();
           }
-            var homework = await _context.homework.FindAsync(id);
+            var feedback = await _context.feedback.FindAsync(id);
 
-            if (homework == null)
+            if (feedback == null)
             {
                 return NotFound();
             }
 
-            return homework;
+            return feedback;
         }
 
-        // PUT: api/homework/5
+        // PUT: api/feedback/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHomework(long id, homework homework)
+        public async Task<IActionResult> Putfeedback(long id, feedback feedback)
         {
-            if (id != homework.homework_id)
+            if (id != feedback.feedback_id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(homework).State = EntityState.Modified;
+            _context.Entry(feedback).State = EntityState.Modified;
 
             try
             {
@@ -52,7 +52,7 @@ namespace WebAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!HomeWorkExists(id))
+                if (!feedbackExists(id))
                 {
                     return NotFound();
                 }
@@ -66,45 +66,47 @@ namespace WebAPI.Controllers
         }
 
 
-        // DELETE: api/homework/5
+        // DELETE: api/feedback/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteHomework(long id)
+        public async Task<IActionResult> Deletefeedback(long id)
         {
-            if (_context.homework == null)
+            if (_context.feedback == null)
             {
                 return NotFound();
             }
-            var homework = await _context.homework.FindAsync(id);
-            if (homework == null)
+            var feedback = await _context.feedback.FindAsync(id);
+            if (feedback == null)
             {
                 return NotFound();
             }
 
-            _context.homework.Remove(homework);
+            _context.feedback.Remove(feedback);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
 
-        // POST: api/homework
+        // POST: api/feedback
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<homework>> PostHomework(homework homework)
+        public async Task<ActionResult<feedback>> Postfeedback(feedback feedback)
         {
-            if (_context.homework == null)
+            if (_context.feedback == null)
             {
-                return Problem("Entity set 'SmartStudyContext.homework'  is null.");
+                return Problem("Entity set 'SmartStudyContext.feedback'  is null.");
             }
-            _context.homework.Add(homework);
+            _context.feedback.Add(feedback);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Gethomework", new { id = homework.homework_id }, homework);
+            return CreatedAtAction("Getfeedback", new { id = feedback.feedback_id }, feedback);
         }
 
-        private bool HomeWorkExists(long id)
+        private bool feedbackExists(long id)
         {
-            return (_context.homework?.Any(e => e.homework_id == id)).GetValueOrDefault();
+            return (_context.feedback?.Any(e => e.feedback_id == id)).GetValueOrDefault();
         }
+
+
     }
 }

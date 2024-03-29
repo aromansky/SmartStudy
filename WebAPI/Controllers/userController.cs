@@ -81,6 +81,23 @@ namespace WebAPI.Controllers
             return await homeworks.ToListAsync();
         }
 
+
+        // Принимает id пользователя, возвращает фидбек, который он получил
+        // GET: api/user/users_with_homework-5
+        [HttpGet("feedback_user-{id}")]
+        public async Task<ActionResult<IEnumerable<feedback>>> GetFeedBackForhUser(long id)
+        {
+            var feedbacks = (from feedback in _context.feedback
+                             join user_feedback in _context.user_feedback on feedback.feedback_id equals user_feedback.feedback_id
+                             join user in _context.user on user_feedback.user_id equals user.user_id
+                             where user.user_id == id
+                             select feedback).Distinct();
+            if (feedbacks == null)
+                return NotFound();
+            return await feedbacks.ToListAsync();
+        }
+
+
         // Принимает id пользователя, возвращает дз, которое он создал
         // GET: api/user_homework/users_with_homework-5
         [HttpGet("homework_author-{id}")]
@@ -92,6 +109,20 @@ namespace WebAPI.Controllers
             if (homeworks == null)
                 return NotFound();
             return await homeworks.ToListAsync();
+        }
+
+
+        // Принимает id пользователя, возвращает фидбек, которое он создал
+        // GET: api/user_homework/users_with_homework-5
+        [HttpGet("feedback_author-{id}")]
+        public async Task<ActionResult<IEnumerable<feedback>>> GetCreatedFeedbacks(long id)
+        {
+            var feedbacks = from feedback in _context.feedback
+                            where feedback.author_id == id
+                            select feedback;
+            if (feedbacks == null)
+                return NotFound();
+            return await feedbacks.ToListAsync();
         }
 
         // Принимает id пользователя, возвращает групповое дз, которое ему доступно
