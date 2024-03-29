@@ -17,5 +17,7 @@ namespace WebAPI.Models
         public DbSet<WebAPI.Models.homework> homework { get; set; } = default!;
         public DbSet<WebAPI.Models.group_homework> group_homework { get; set; } = default!;
         public DbSet<WebAPI.Models.user_homework> user_homework { get; set; } = default!;
+        public DbSet<WebAPI.Models.feedback> feedback { get; set; } = default!;
+        public DbSet<WebAPI.Models.user_feedback> user_feedback { get; set; } = default!;
     }
 }
