@@ -619,7 +619,7 @@ namespace SmartStudy
         /// <summary>
         /// Редактирует запись о homework из БД
         /// </summary>
-        /// <param name="homework_id">id Event-а</param>
+        /// <param name="editing_Id">id homework-а</param>
         public static async void EditHomeworkFromId(long editing_Id, homework homework)
         {
             User user = Serializer.DeserializeUser();
@@ -708,6 +708,30 @@ namespace SmartStudy
                     if (response.IsSuccessStatusCode)
                         Debug.WriteLine("Ok");
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Создаёт в таблице feedback запись, соответствующую объекту класса feedback
+        /// </summary>
+        /// <param name="feedback">Объект класса feedback</param>
+        public static async void CreateFeedback(feedback feedback)
+        {
+            Uri uri = new Uri(string.Format(Constants.FeedbackUrl, string.Empty));
+
+            try
+            {
+                string json = JsonSerializer.Serialize<feedback>(feedback, _serializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PostAsync(uri, content);
+
+                if (response.IsSuccessStatusCode)
+                    Debug.WriteLine("Ok");
             }
             catch (Exception ex)
             {

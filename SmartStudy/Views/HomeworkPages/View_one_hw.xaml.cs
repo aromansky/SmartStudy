@@ -118,7 +118,7 @@ public partial class View_one_hw : ContentPage
         Edit_button.IsVisible = false;
         Delete_button.IsVisible = false;
     }
-    public async void Add_group_in_event_clicked(object sender, EventArgs e)
+    public /*async*/ void Add_group_in_event_clicked(object sender, EventArgs e)
     {
         // TODO: функция добавления группы в дз
     }

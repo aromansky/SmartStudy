@@ -12,5 +12,7 @@
         public const string HomeworkUrl = $"https://{your_address}/api/homework";
         public const string UserHomeworkUrl = $"https://{your_address}/api/user_homework";
         public const string GroupHomeworkUrl = $"https://{your_address}/api/group_homework";
+        public const string FeedbackUrl = $"https://{your_address}/api/feedback";
+        public const string UserFeedbackUrl = $"https://{your_address}/api/user_feedback";
     }
 }

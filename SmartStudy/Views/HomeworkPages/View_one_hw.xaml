@@ -50,7 +50,7 @@
                 </Grid>
                 <Grid Grid.Row="1">
                     <Button x:Name="Add_group_in_hw" Text="Добавить группу" WidthRequest="200" HeightRequest="50" HorizontalOptions="Start"
-                        IsVisible="False" Clicked="Add_group_in_hw_clicked"/>
+                        IsVisible="False"/>
                     <ScrollView x:Name="GroupsWithHw">
                         <CollectionView ItemsSource="{Binding GroupsWithHw}">
                             <CollectionView.ItemTemplate>
