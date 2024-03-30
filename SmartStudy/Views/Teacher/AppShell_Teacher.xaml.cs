@@ -32,6 +32,7 @@ public partial class AppShell_Teacher : Shell
         Routing.RegisterRoute("create_group", typeof(Create_group));
         Routing.RegisterRoute("add_users_to_group", typeof(Users_list));
         Routing.RegisterRoute("feedback", typeof(Feedback));
+        Routing.RegisterRoute("create_feedback", typeof(Create_feedback));
         Routing.RegisterRoute("add_hw", typeof(Add_hw));
         Routing.RegisterRoute("view_one_hw", typeof(View_one_hw));
         Routing.RegisterRoute("list_all_hw_user", typeof(List_all_hw_user));
