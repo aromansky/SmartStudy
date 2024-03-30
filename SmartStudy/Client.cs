@@ -592,6 +592,27 @@ namespace SmartStudy
             return group_settings;
         }
 
+
+        /// <summary>
+        /// Получает объект homework по его homework_id
+        /// </summary>
+        /// <param name="id">id homework-а</param>
+        public static async Task<homework> GetHomeworkFromId(long id)
+        {
+            homework homework = null;
+            try
+            {
+                string url = Constants.HomeworkUrl + $"/{id}";
+                HttpResponseMessage response = await _client.GetAsync(url);
+                homework = await response.Content.ReadFromJsonAsync<homework>();
+            }
+            catch (Exception ex)
+            {
+                //
+            }
+            return homework;
+        }
+
         /// <summary>
         /// Создаёт в таблице homework запись, соответствующую объекту класса homework
         /// </summary>

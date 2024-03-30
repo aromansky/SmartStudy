@@ -7,11 +7,7 @@ namespace SmartStudy.Views.HomeworkPages;
 public partial class View_one_hw : ContentPage
 {
     User user = Serializer.DeserializeUser();
-    string title_hw;
-    string descr_hw;
-    long hw_id;
-    DateTime date_begin_hw;
-    DateTime date_end_hw;
+    homework homework;
 
     public long Hw_get_Id
     {
@@ -20,38 +16,25 @@ public partial class View_one_hw : ContentPage
     public View_one_hw()
 	{
 		InitializeComponent();
-        // TODO: аналогично для дз
-        //BindingContext = new Group_note();
+        BindingContext = new Homework_list();
     }
-    public void Load_Hw(long hw_id)
+    public async void Load_Hw(long hw_id)
     {
-        // TODO: загружаем поля задания в переменные по id дз
-        string title_hw = "title" + hw_id.ToString();
-        string descr_hw = "description";
-        DateTime date_begin_hw = new DateTime(2024, 3, 25, 18, 30, 0);
-        DateTime date_end_hw = new DateTime(2024, 3, 26, 20, 0, 0);
+        homework = await Client.GetHomeworkFromId(hw_id);
+        all_date_begin.Text = homework.date_begin.ToString("g");
+        date_change_begin.Date = homework.date_begin;
+        time_change_begin.Time = homework.date_begin.TimeOfDay;
+        all_date_end.Text = homework.date_end.ToString("g");
+        date_change_end.Date = homework.date_end;
+        time_change_end.Time = homework.date_end.TimeOfDay;
+        Title.Text = homework.Title;
+        Description.Text = homework.Description;
 
-        this.hw_id = hw_id;
-        this.title_hw = title_hw;
-        this.date_begin_hw = date_begin_hw;
-        this.date_end_hw= date_end_hw;
-        this.descr_hw = descr_hw;
-
-        all_date_begin.Text = date_begin_hw.ToString("g");
-        date_change_begin.Date = date_begin_hw;
-        time_change_begin.Time = date_begin_hw.TimeOfDay;
-        all_date_end.Text = date_end_hw.ToString("g");
-        date_change_end.Date = date_end_hw;
-        time_change_end.Time = date_end_hw.TimeOfDay;
-        Title.Text = title_hw;
-        Description.Text = descr_hw;
-
-        // TODO: раскоментировать при написании функции получения id автора по id дз
-        /*if (user.user_id != homework.author_id)
+        if (user.user_id != homework.author_id)
         {
             Edit_button.IsEnabled = false;
             Edit_button.IsVisible = false;
-        }*/
+        }
     }
 
     private async void SaveButton_Clicked(object sender, EventArgs e)
@@ -72,10 +55,10 @@ public partial class View_one_hw : ContentPage
     }
     private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
-        bool result = await DisplayAlert("Подтвердить действие", $"Вы хотите удалить дз {title_hw}?", "Да", "Нет");
+        bool result = await DisplayAlert("Подтвердить действие", $"Вы хотите удалить дз {homework.Title}?", "Да", "Нет");
         if (result)
         {
-            // TODO: функция удаления hw
+            Client.DeleteHomework(homework.homework_id);
             await Shell.Current.GoToAsync("///calendar");
         }
     }
@@ -118,7 +101,7 @@ public partial class View_one_hw : ContentPage
         Edit_button.IsVisible = false;
         Delete_button.IsVisible = false;
     }
-    public /*async*/ void Add_group_in_event_clicked(object sender, EventArgs e)
+    public async void Add_homework_to_group_clicked(object sender, EventArgs e)
     {
         // TODO: функция добавления группы в дз
     }
@@ -135,14 +118,14 @@ public partial class View_one_hw : ContentPage
         Cancel_button.IsVisible = false;
         Edit_button.IsVisible = true;
         Delete_button.IsVisible = true;
-        Title.Text = title_hw;
-        all_date_begin.Text = date_begin_hw.ToString("g");
-        date_change_begin.Date = date_begin_hw;
-        time_change_begin.Time = date_begin_hw.TimeOfDay;
-        all_date_end.Text = date_end_hw.ToString("g");
-        date_change_end.Date = date_end_hw;
-        time_change_end.Time = date_end_hw.TimeOfDay;
-        Description.Text = descr_hw;
+        Title.Text = homework.Title;
+        all_date_begin.Text = homework.date_begin.ToString("g");
+        date_change_begin.Date = homework.date_begin;
+        time_change_begin.Time = homework.date_begin.TimeOfDay;
+        all_date_end.Text = homework.date_end.ToString("g");
+        date_change_end.Date = homework.date_end;
+        time_change_end.Time = homework.date_end.TimeOfDay;
+        Description.Text = homework.Description;
     }
 
     protected override void OnAppearing()
@@ -159,6 +142,6 @@ public partial class View_one_hw : ContentPage
             Edit_button.IsVisible = false;
         }
         // TODO: аналогично для групп с дз
-        //((Group_note)BindingContext).Load_Groups_With_Event(event_id);
+        ((Homework_list)BindingContext).LoadHomework();
     }
 }
