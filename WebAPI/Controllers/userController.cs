@@ -70,12 +70,7 @@ namespace WebAPI.Controllers
                             join user_homework in _context.user_homework on homework.homework_id equals user_homework.homework_id
                             join user in _context.user on user_homework.user_id equals user.user_id
                             where user.user_id == id
-                            select new homework
-                            {
-                                homework_id = homework.homework_id,
-                                Title = homework.Title,
-                                Description = homework.Description
-                            }).Distinct();
+                            select homework).Distinct();
             if (homeworks == null)
                 return NotFound();
             return await homeworks.ToListAsync();
@@ -135,12 +130,7 @@ namespace WebAPI.Controllers
                             join @group in _context.@group on group_homework.group_settings_id equals @group.group_settings_id
                             join user in _context.user on @group.user_id equals user.user_id
                             where user.user_id == id
-                            select new homework
-                            {
-                                homework_id = homework.homework_id,
-                                Title = homework.Title,
-                                Description = homework.Description
-                            };
+                            select homework;
             if (homeworks == null)
                 return NotFound();
             return await homeworks.ToListAsync();
