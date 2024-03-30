@@ -14,12 +14,46 @@
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
+         
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>
             <RowDefinition Height="*" x:Name="row_button"/>
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="0">
             <VerticalStackLayout x:Name="main_view"></VerticalStackLayout>
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5">
+            <ScrollView>
+                <CollectionView x:Name="all_groups"
+                    ItemsSource="{Binding GroupsWithUser}" 
+                    Margin="20"
+                    SelectionMode="Single"
+                    SelectionChanged="feedback_clicked">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
+                                <Label Text="{Binding Description}" FontSize="20" TextColor="DarkGray"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </Grid>
+        <Grid Grid.Column="4" Grid.Row="0">
+            <ImageButton Source="plus_circle.png" 
+                            x:Name="CreateFeedback"
+                            WidthRequest="70" 
+                            HeightRequest="70"
+                            CornerRadius="80"
+                            HorizontalOptions="End"
+                            VerticalOptions="End"
+                            Margin="10" 
+                            Clicked="clicked_to_create_feedback"/>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1">
             <Button Text="Главная" Clicked="clicked_to_main_page"/>
