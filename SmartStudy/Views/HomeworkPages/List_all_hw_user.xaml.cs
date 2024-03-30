@@ -7,11 +7,7 @@ public partial class List_all_hw_user : ContentPage
 	public List_all_hw_user()
 	{
 		InitializeComponent();
-        long user_id = Serializer.DeserializeUser().user_id;
-        if (Serializer.DeserializeUser().IsTutor())
-		    BindingContext = Client.GetHomeworkForAuthor(user_id);
-        else
-            BindingContext = Client.GetUserHomework(user_id);
+        BindingContext = new Homework_list();
     }
 
 	public async void homework_ckicked(object sender, SelectionChangedEventArgs e)

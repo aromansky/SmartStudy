@@ -6,7 +6,7 @@
     <VerticalStackLayout>
         <ScrollView>
             <CollectionView x:Name="all_homeworks_user"
-                            ItemsSource="{Binding HomeworksUser}"
+                            ItemsSource="{Binding Homeworks}"
                             Margin="20"
                             SelectionMode="Single"
                             SelectionChanged="homework_ckicked">
