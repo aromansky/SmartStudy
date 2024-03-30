@@ -101,7 +101,7 @@ public partial class View_one_hw : ContentPage
         Edit_button.IsVisible = false;
         Delete_button.IsVisible = false;
     }
-    public async void Add_homework_to_group_clicked(object sender, EventArgs e)
+    public /*async*/ void Add_homework_to_group_clicked(object sender, EventArgs e)
     {
         // TODO: функция добавления группы в дз
     }
@@ -141,7 +141,7 @@ public partial class View_one_hw : ContentPage
             Edit_button.IsEnabled = false;
             Edit_button.IsVisible = false;
         }
-        // TODO: аналогично для групп с дз
+
         ((Homework_list)BindingContext).LoadHomework();
     }
 }

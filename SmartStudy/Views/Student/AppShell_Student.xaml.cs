@@ -15,6 +15,7 @@ public partial class AppShell_Student : Shell
         Routing.UnRegisterRoute("homework");
         Routing.UnRegisterRoute("groups");
         Routing.UnRegisterRoute("edit_group");
+        Routing.UnRegisterRoute("view_one_hw");
         Routing.UnRegisterRoute("list_all_hw_user");
         Routing.UnRegisterRoute("list_all_hw_one_group");
         Routing.UnRegisterRoute("list_all_hw_group");

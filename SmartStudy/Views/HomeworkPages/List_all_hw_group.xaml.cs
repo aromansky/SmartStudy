@@ -34,7 +34,7 @@ public partial class List_all_hw_group : ContentPage
         if (e.CurrentSelection.Count != 0)
         {
             //TODO
-            //await Shell.Current.GoToAsync($"edit_group?group_settings_id={((ModelsDB.group_settings)e.CurrentSelection[0]).group_settings_id}");
+            await Shell.Current.GoToAsync($"view_one_hw?hw_id={((ModelsDB.homework)e.CurrentSelection[0]).homework_id}");
             all_tasks.SelectedItem = null;
         }
 

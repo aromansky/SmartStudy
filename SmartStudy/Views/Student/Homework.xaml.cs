@@ -56,20 +56,9 @@ public partial class Homework : ContentPage
         if (e.CurrentSelection.Count != 0)
         {
             //TODO
-            //await Shell.Current.GoToAsync($"edit_group?group_settings_id={((ModelsDB.group_settings)e.CurrentSelection[0]).group_settings_id}");
+            await Shell.Current.GoToAsync($"view_one_hw?hw_id={((ModelsDB.homework)e.CurrentSelection[0]).homework_id}");
             all_tasks.SelectedItem = null;
         }
 
     }
-
-    /*
-    private async void event_clicked(object sender, SelectionChangedEventArgs e)
-    {
-        if (e.CurrentSelection.Count != 0)
-        {
-            await Shell.Current.GoToAsync($"calendar_note_edit?note_id={((ModelsDB.Event)e.CurrentSelection[0]).event_id}");
-            all_notes.SelectedItem = null;
-        }
-    }
-    */
 }
