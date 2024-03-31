@@ -32,20 +32,22 @@ namespace WebAPI.Controllers
 
         // Удаляет фидбек для пользователя
         // DELETE: api/group_homework/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserFeedback(long id)
+        [HttpDelete("{feedback_id}_{user_id}")]
+        public async Task<IActionResult> DeleteUserFeedback(long feedback_id, long user_id)
         {
             if (_context.user_feedback == null)
             {
                 return NotFound();
             }
-            var user_feedback = await _context.user_feedback.FindAsync(id);
+            var user_feedback = from _user_feedback in _context.user_feedback
+                                where _user_feedback.feedback_id == feedback_id && _user_feedback.user_id == user_id
+                                select _user_feedback;
             if (user_feedback == null)
             {
                 return NotFound();
             }
 
-            _context.user_feedback.Remove(user_feedback);
+            _context.user_feedback.Remove(user_feedback.First());
             await _context.SaveChangesAsync();
 
             return NoContent();

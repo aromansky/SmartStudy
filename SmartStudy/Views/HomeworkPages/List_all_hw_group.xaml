@@ -19,13 +19,16 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*" x:Name="row_button"/>
         </Grid.RowDefinitions>
+        
+         <!--Здесь группы-->
         <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5">
-            <ScrollView>
-                <CollectionView x:Name="all_tasks"
-                    ItemsSource="{Binding Homeworks}"
+            <Label x:Name="label_group" Text="Ваши группы" HorizontalOptions="Start" FontSize="Large"  Margin="20, 0, 0, 0"/>
+            <ScrollView Margin="0, 20, 0, 0">
+                <CollectionView x:Name="groups"
+                    ItemsSource="{Binding GroupsWithUser}"
                     Margin="20"
                     SelectionMode="Single"
-                    SelectionChanged="task_ckicked">
+                    SelectionChanged="group_clicked">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                     </CollectionView.ItemsLayout>
@@ -42,6 +45,42 @@
             </ScrollView>
         </Grid>
 
+
+        <!--Здесь дз для групп-->
+        <Grid Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="5">
+            <Label x:Name="label_hw" Text="Вы не выбрали группу" HorizontalOptions="Start" FontSize="Large"  Margin="20, 0, 0, 0"/>
+            <ScrollView Margin="0, 20, 0, 0">
+                <CollectionView x:Name="all_tasks"
+                    ItemsSource="{Binding GroupHomeworks}"
+                    Margin="20"
+                    SelectionMode="Single"
+                    SelectionChanged="task_ckicked">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <StackLayout Grid.Column="0">
+                                    <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding Description}" FontSize="20" TextColor="DarkGray"/>
+                                </StackLayout>
+                                <ImageButton Grid.Column="1" Source="group_remove.png" x:Name="GroupRemoveButton" Clicked="remove_homework"
+                                             WidthRequest="30" HeightRequest="30" HorizontalOptions="End" Margin="10"/>
+                                <ImageButton Grid.Column="2" Source="delete.png" x:Name="DeleteButton" Clicked="delete_homework"
+                                             WidthRequest="30" HeightRequest="30" HorizontalOptions="Start" Margin="10"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </Grid>
         <Grid Grid.Column="4" Grid.Row="1">
             <ImageButton Source="plus_circle.png" 
                             x:Name="CreateGroup"

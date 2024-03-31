@@ -45,7 +45,7 @@ public partial class Groups : ContentPage
 
     protected override void OnAppearing()
     {
-        ((Group_note)BindingContext).Load_Groups_With_User(Serializer.DeserializeUser().user_id);
+        ((Group_note)BindingContext).Load_Groups_With_User();
         if (!Serializer.DeserializeUser().IsTutor())
         {
             CreateGroup.IsEnabled = false;

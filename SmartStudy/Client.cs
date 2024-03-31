@@ -536,7 +536,7 @@ namespace SmartStudy
             List<homework> homeworks = new List<homework>();
             try
             {
-                HttpResponseMessage response = await _client.GetAsync(Constants.GroupSettingsUrl + $"/homework_user-{group_settings_id}");
+                HttpResponseMessage response = await _client.GetAsync(Constants.GroupSettingsUrl + $"/homework-{group_settings_id}");
                 if (response.IsSuccessStatusCode)
                     homeworks = await response.Content.ReadFromJsonAsync<List<homework>>();
             }
@@ -665,15 +665,35 @@ namespace SmartStudy
         /// Удаляет запись homework из БД
         /// </summary>
         /// <param name="homework_id">Id домашнего задания</param>
-        public static async void DeleteHomework(long homework_id)
+        public static async Task<bool> DeleteHomework(long homework_id)
         {
             try
             {
                 HttpResponseMessage response = await _client.DeleteAsync(Constants.HomeworkUrl + $"/{homework_id}");
+                return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
             {
+                return false;
                 //
+            }
+        }
+
+        /// <summary>
+        /// Открепляет дз от группы
+        /// </summary>
+        /// <param name="homework_id">id группы</param>
+        /// <param name="group_settings_id">id домашнего задания</param>
+        public static async Task<bool> DeleteGroupHomework(long homework_id, long group_settings_id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.DeleteAsync(Constants.GroupHomeworkUrl + $"/{homework_id}_{group_settings_id}");
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                return false;
             }
         }
 
@@ -787,14 +807,16 @@ namespace SmartStudy
         /// Удаляет запись feedback из БД
         /// </summary>
         /// <param name="feedback_id">Id фидбека</param>
-        public static async void DeleteFeedback(long feedback_id)
+        public static async Task<bool> DeleteFeedback(long feedback_id)
         {
             try
             {
                 HttpResponseMessage response = await _client.DeleteAsync(Constants.FeedbackUrl + $"/{feedback_id}");
+                return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
             {
+                return false;
                 //
             }
         }

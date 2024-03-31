@@ -1,3 +1,6 @@
+using SmartStudy.ModelsDB;
+using SmartStudy.Models;
+
 namespace SmartStudy.Views.HomeworkPages;
 
 public partial class Add_hw : ContentPage
@@ -19,7 +22,9 @@ public partial class Add_hw : ContentPage
             DisplayAlert("Ошибка", "Введите название дз", "ОК");
             return;
         }
-        // TODO: добавление задания в список
+        Client.CreateHomework(new ModelsDB.homework(Title.Text, Description.Text, Serializer.DeserializeUser().user_id,
+            DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " + time_change_begin.Time.ToString("hh\\:mm"), "g", null),
+            DateTime.ParseExact(date_change_end.Date.ToString("dd.MM.yyyy") + " " + time_change_end.Time.ToString("hh\\:mm"), "g", null)));
         await Shell.Current.GoToAsync("///homework");
     }
     private async void CancelButton_Clicked(object sender, EventArgs e)

@@ -34,20 +34,22 @@ namespace WebAPI.Controllers
 
         // Удаляет дз из группы
         // DELETE: api/group_homework/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGroupHomework(long id)
+        [HttpDelete("{homework_id}_{group_settings_id}")]
+        public async Task<IActionResult> DeleteGroupHomework(long homework_id, long group_settings_id)
         {
             if (_context.group_homework == null)
             {
                 return NotFound();
             }
-            var group_homework = await _context.group_homework.FindAsync(id);
+            var group_homework = from _group_homework in _context.group_homework
+                                 where _group_homework.group_settings_id == group_settings_id && _group_homework.homework_id == homework_id
+                                 select _group_homework;
             if (group_homework == null)
             {
                 return NotFound();
             }
 
-            _context.group_homework.Remove(group_homework);
+            _context.group_homework.Remove(group_homework.First());
             await _context.SaveChangesAsync();
 
             return NoContent();
