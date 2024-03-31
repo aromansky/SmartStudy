@@ -1,4 +1,5 @@
 using SmartStudy.Models;
+using SmartStudy.Views.GroupPages;
 
 namespace SmartStudy.Views.HomeworkPages;
 
@@ -7,7 +8,6 @@ public partial class List_all_hw_group : ContentPage
     public List_all_hw_group()
     {
         InitializeComponent();
-        BindingContext = new Homework_list();
 #if WINDOWS
 #else
         row_button.Height = 0;
@@ -21,11 +21,13 @@ public partial class List_all_hw_group : ContentPage
 
     protected override void OnAppearing()
     {
-        ((Homework_list)BindingContext).LoadHomework();
+        var list_groups = new Group_note();
+        list_groups.Load_Groups_With_User(Serializer.DeserializeUser().user_id);
+        all_groups.BindingContext = list_groups;
         if (!Serializer.DeserializeUser().IsTutor())
         {
-            CreateGroup.IsEnabled = false;
-            CreateGroup.IsVisible = false;
+            CreateHw.IsEnabled = false;
+            CreateHw.IsVisible = false;
         }
     }
 
@@ -40,10 +42,20 @@ public partial class List_all_hw_group : ContentPage
 
     }
 
+    private void group_ckicked(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.Count != 0)
+        {
+            var hw_list_now_group = new Homework_list();
+            hw_list_now_group.LoadGroupHomework(((ModelsDB.group_settings)e.CurrentSelection[0]).group_settings_id);
+            all_tasks.BindingContext = hw_list_now_group;
+            all_groups.SelectedItem = null;
+        }
+    }
+
     public async void clicked_to_create_task(object sender, EventArgs e)
     {
-        //TODO
-        //await Shell.Current.GoToAsync("create_task");
+        await Shell.Current.GoToAsync("add_hw");
     }
 
 

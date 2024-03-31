@@ -59,7 +59,7 @@ public partial class View_one_hw : ContentPage
         if (result)
         {
             Client.DeleteHomework(homework.homework_id);
-            await Shell.Current.GoToAsync("///calendar");
+            await Shell.Current.GoToAsync("///homework");
         }
     }
     public void date_begin_selected(object sender, DateChangedEventArgs e)
