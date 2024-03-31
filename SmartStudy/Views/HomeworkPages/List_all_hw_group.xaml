@@ -20,30 +20,7 @@
             <RowDefinition Height="*" x:Name="row_button"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
-            <ScrollView>
-                <CollectionView x:Name="all_tasks"
-                    ItemsSource="{Binding GroupHomeworks}"
-                    Margin="20"
-                    SelectionMode="Single"
-                    SelectionChanged="task_ckicked">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-                    </CollectionView.ItemsLayout>
-
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout>
-                                <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
-                                <Label Text="{Binding Description}" FontSize="20" TextColor="DarkGray"/>
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </ScrollView>
-        </Grid>
-
-        <Grid Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="2">
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
             <ScrollView>
                 <CollectionView x:Name="all_groups"
                                 ItemsSource="{Binding GroupsWithUser}"
@@ -66,6 +43,28 @@
             </ScrollView>
         </Grid>
 
+        <Grid Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="3">
+            <ScrollView>
+                <CollectionView x:Name="all_tasks"
+                    ItemsSource="{Binding GroupHomeworks}"
+                    Margin="20"
+                    SelectionMode="Single"
+                    SelectionChanged="task_ckicked">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
+                                <Label Text="{Binding Description}" FontSize="20" TextColor="DarkGray"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </Grid>
 
         <Grid Grid.Column="4" Grid.Row="1">
             <ImageButton Source="plus_circle.png" 
