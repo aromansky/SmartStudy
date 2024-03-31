@@ -8,11 +8,12 @@
     </ContentPage.ToolbarItems>
     <Grid x:Name="grid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50*" />
+            <ColumnDefinition Width="50*" />
+            <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="14*"/>
@@ -83,7 +84,7 @@
         </Grid>
         <Grid Grid.Column="4" Grid.Row="1">
             <ImageButton Source="plus_circle.png" 
-                            x:Name="CreateGroup"
+                            x:Name="CreateHw"
                             WidthRequest="70" 
                             HeightRequest="70"
                             CornerRadius="80"

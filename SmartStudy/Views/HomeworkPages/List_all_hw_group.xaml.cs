@@ -5,7 +5,7 @@ namespace SmartStudy.Views.HomeworkPages;
 
 public partial class List_all_hw_group : ContentPage
 {
-    // Всё дз для групп
+    // пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     public List_all_hw_group()
     {
         InitializeComponent();
@@ -28,8 +28,8 @@ public partial class List_all_hw_group : ContentPage
 
         if (!Serializer.DeserializeUser().IsTutor())
         {
-            CreateGroup.IsEnabled = false;
-            CreateGroup.IsVisible = false;
+            CreateHw.IsEnabled = false;
+            CreateHw.IsVisible = false;
         }
     }
 
@@ -55,7 +55,18 @@ public partial class List_all_hw_group : ContentPage
         
 
         if (!(group is null))
-            label_hw.Text = $"Домашнее задание для {group.Title}";
+            label_hw.Text = $"пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ {group.Title}";
+    }
+
+    private void group_ckicked(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.Count != 0)
+        {
+            var hw_list_now_group = new Homework_list();
+            hw_list_now_group.LoadGroupHomework(((ModelsDB.group_settings)e.CurrentSelection[0]).group_settings_id);
+            all_tasks.BindingContext = hw_list_now_group;
+            all_groups.SelectedItem = null;
+        }
     }
 
     public async void clicked_to_create_task(object sender, EventArgs e)
