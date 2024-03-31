@@ -55,7 +55,7 @@ public partial class List_all_hw_group : ContentPage
         
 
         if (!(group is null))
-            label_hw.Text = $"�������� ������� ��� {group.Title}";
+            label_hw.Text = $"Домашнее задание для {group.Title}";
     }
 
     private void group_ckicked(object sender, SelectionChangedEventArgs e)
@@ -65,7 +65,7 @@ public partial class List_all_hw_group : ContentPage
             var hw_list_now_group = new Homework_list();
             hw_list_now_group.LoadGroupHomework(((ModelsDB.group_settings)e.CurrentSelection[0]).group_settings_id);
             all_tasks.BindingContext = hw_list_now_group;
-            all_groups.SelectedItem = null;
+            groups.SelectedItem = null;
         }
     }
 

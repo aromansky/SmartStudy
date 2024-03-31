@@ -14,8 +14,8 @@ public partial class View_one_hw : ContentPage
         set { Load_Hw(value); }
     }
     public View_one_hw()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         BindingContext = new Homework_list();
     }
     public async void Load_Hw(long hw_id)
@@ -51,6 +51,9 @@ public partial class View_one_hw : ContentPage
             return;
         }
         // TODO: добавление задания в список
+        Client.EditHomeworkFromId(homework.homework_id, new ModelsDB.homework(Title.Text, Description.Text, Serializer.DeserializeUser().user_id,
+            DateTime.ParseExact(date_change_begin.Date.ToString("dd.MM.yyyy") + " " + time_change_begin.Time.ToString("hh\\:mm"), "g", null),
+            DateTime.ParseExact(date_change_end.Date.ToString("dd.MM.yyyy") + " " + time_change_end.Time.ToString("hh\\:mm"), "g", null)));
         await Shell.Current.GoToAsync("///homework");
     }
     private async void DeleteButton_Clicked(object sender, EventArgs e)
@@ -58,7 +61,7 @@ public partial class View_one_hw : ContentPage
         bool result = await DisplayAlert("Подтвердить действие", $"Вы хотите удалить дз {homework.Title}?", "Да", "Нет");
         if (result)
         {
-            Client.DeleteHomework(homework.homework_id);
+            await Client.DeleteHomework(homework.homework_id);
             await Shell.Current.GoToAsync("///homework");
         }
     }
