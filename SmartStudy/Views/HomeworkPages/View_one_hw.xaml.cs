@@ -35,6 +35,21 @@ public partial class View_one_hw : ContentPage
             Edit_button.IsEnabled = false;
             Edit_button.IsVisible = false;
         }
+
+#if WINDOWS
+
+#else
+        ToolbarItem add_group = new ToolbarItem
+        {
+            IconImageSource = ImageSource.FromFile("group_add.svg")   
+        };
+        ToolbarItem groups = new ToolbarItem
+        {
+            IconImageSource = ImageSource.FromFile("groups1.svg")
+        };
+        this.ToolbarItems.Add(add_group);
+        this.ToolbarItems.Add(groups);
+#endif
     }
 
     private async void SaveButton_Clicked(object sender, EventArgs e)
@@ -90,15 +105,15 @@ public partial class View_one_hw : ContentPage
     }
     public void Edit_clicked(object sender, EventArgs e)
     {
-        GroupsWithHw.IsVisible = false;
-        GroupsWithHw.IsEnabled = true;
+        //GroupsWithHw.IsVisible = false;
+        //GroupsWithHw.IsEnabled = true;
         Title.IsReadOnly = false;
         Description.IsReadOnly = false;
         date_change_begin.IsEnabled = true;
         time_change_begin.IsEnabled = true;
         date_change_end.IsEnabled = true;
         time_change_end.IsEnabled = true;
-        Add_group_in_hw.IsVisible = true;
+        //Add_group_in_hw.IsVisible = true;
         Save_button.IsVisible = true;
         Cancel_button.IsVisible = true;
         Edit_button.IsVisible = false;
@@ -116,7 +131,7 @@ public partial class View_one_hw : ContentPage
         time_change_begin.IsEnabled = false;
         date_change_end.IsEnabled = false;
         time_change_end.IsEnabled = false;
-        Add_group_in_hw.IsVisible = false;
+        //Add_group_in_hw.IsVisible = false;
         Save_button.IsVisible = false;
         Cancel_button.IsVisible = false;
         Edit_button.IsVisible = true;

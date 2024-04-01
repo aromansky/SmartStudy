@@ -20,8 +20,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*" x:Name="row_button"/>
         </Grid.RowDefinitions>
-        
-         <!--Здесь группы-->
+
+        <!--Здесь группы-->
         <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5">
             <Label x:Name="label_group" Text="Ваши группы" HorizontalOptions="Start" FontSize="Large"  Margin="20, 0, 0, 0"/>
             <ScrollView Margin="0, 20, 0, 0">
@@ -61,18 +61,12 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="3*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                
+                            <Grid ColumnDefinitions="3*, *, *">
                                 <StackLayout Grid.Column="0">
                                     <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
                                     <Label Text="{Binding Description}" FontSize="20" TextColor="DarkGray"/>
                                 </StackLayout>
-                                <ImageButton Grid.Column="1" Source="group_remove.png" x:Name="GroupRemoveButton" Clicked="remove_homework"
+                                <ImageButton Grid.Column="1" Source="group_remove.png" x:Name="DeleteButton1" Clicked="delete_homework"
                                              WidthRequest="30" HeightRequest="30" HorizontalOptions="End" Margin="10"/>
                                 <ImageButton Grid.Column="2" Source="delete.png" x:Name="DeleteButton" Clicked="delete_homework"
                                              WidthRequest="30" HeightRequest="30" HorizontalOptions="Start" Margin="10"/>
@@ -93,6 +87,6 @@
                             Margin="10" 
                             Clicked="clicked_to_create_task"/>
         </Grid>
-        
+
     </Grid>
 </ContentPage>

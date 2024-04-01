@@ -98,6 +98,9 @@
 	  <Compile Update="Views\GroupPages\Edit_group.xaml.cs">
 	    <DependentUpon>Edit_group.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\HomeworkPages\List_all_groups.xaml.cs">
+	    <DependentUpon>List_all_groups.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\HomeworkPages\List_all_groups_with_hw.xaml.cs">
 	    <DependentUpon>List_all_groups_with_hw.xaml</DependentUpon>
 	  </Compile>
@@ -161,6 +164,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\HomeworkPages\Add_hw.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\HomeworkPages\List_all_groups.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\HomeworkPages\List_all_groups_with_hw.xaml">

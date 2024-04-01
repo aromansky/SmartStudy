@@ -33,7 +33,11 @@ public partial class Homework : ContentPage
     }
     public async void clicked_to_list_all_hw_group(object sender, EventArgs e)
     {
+#if WINDOWS
         await Shell.Current.GoToAsync("list_all_hw_group");
+#else
+        await Shell.Current.GoToAsync("list_all_groups");
+#endif
     }
     public async void update_page(object sender, EventArgs e)
     {

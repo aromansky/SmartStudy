@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage x:Name="contPage" 
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartStudy.Views.HomeworkPages.List_all_hw_one_group"
-             Title="List_all_hw_one_group">
+             Title="Домашнее задание для группы">
     <VerticalStackLayout>
         <ScrollView>
             <CollectionView x:Name="all_homeworks_group"
-                        ItemsSource="{Binding HomeworksGroup}"
+                        ItemsSource="{Binding GroupHomeworks}"
                         Margin="20"
                         SelectionMode="Single"
                         SelectionChanged="homework_ckicked">
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
-                            <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
-                            <Label Text="{Binding Description}" FontSize="20" TextColor="DarkGray"/>
-                        </StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackLayout Grid.Column="0">
+                                <Label Text="{Binding Title}" LineBreakMode="TailTruncation" FontSize="28" HorizontalOptions="Start"/>
+                                <Label Text="{Binding Description}" LineBreakMode="TailTruncation" FontSize="20" TextColor="DarkGray"/>
+                            </StackLayout>
+                            <ImageButton Grid.Column="1" Source="group_remove.svg" x:Name="GroupRemoveButton" Clicked="remove_homework"
+                                         WidthRequest="30" HeightRequest="30" HorizontalOptions="End" Margin="10"/>
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
