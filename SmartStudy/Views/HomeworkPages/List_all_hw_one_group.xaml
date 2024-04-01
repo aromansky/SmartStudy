@@ -24,7 +24,7 @@
                                 <Label Text="{Binding Title}" LineBreakMode="TailTruncation" FontSize="28" HorizontalOptions="Start"/>
                                 <Label Text="{Binding Description}" LineBreakMode="TailTruncation" FontSize="20" TextColor="DarkGray"/>
                             </StackLayout>
-                            <ImageButton Grid.Column="1" Source="group_remove.svg" x:Name="GroupRemoveButton" Clicked="remove_homework"
+                            <ImageButton Grid.Column="1" Source="group_remove_black.svg" x:Name="GroupRemoveButton" Clicked="remove_homework"
                                          WidthRequest="30" HeightRequest="30" HorizontalOptions="End" Margin="10"/>
                         </Grid>
                     </DataTemplate>

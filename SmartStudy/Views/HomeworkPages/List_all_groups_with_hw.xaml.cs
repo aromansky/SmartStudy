@@ -1,4 +1,5 @@
 using SmartStudy.Models;
+using SmartStudy.ModelsDB;
 
 namespace SmartStudy.Views.HomeworkPages;
 
@@ -13,14 +14,24 @@ public partial class List_all_groups_with_hw : ContentPage
     public List_all_groups_with_hw()
 	{
 		InitializeComponent();
-        BindingContext = Client.GetGroupsWithHomework(hw_id);
+        BindingContext = new Homework_list();
     }
-    private async void group_ckicked(object sender, SelectionChangedEventArgs e)
+
+    protected override void OnAppearing()
     {
-        if (e.CurrentSelection.Count != 0)
-        {
-            await Shell.Current.GoToAsync($"edit_group?group_settings_id={((ModelsDB.group_settings)e.CurrentSelection[0]).group_settings_id}");
-            all_groups_with_hw.SelectedItem = null;
-        }
+        ((Homework_list)BindingContext).LoadGroupsWithHomework(hw_id);
+    }
+
+    private async void remove_group(object sender, EventArgs e)
+    {
+        long g_s_id = ((sender as ImageButton).BindingContext as group_settings).group_settings_id;
+        await Client.DeleteGroupHomework(hw_id, g_s_id);
+
+        UpdateGroups(g_s_id);
+    }
+
+    private void UpdateGroups(long group_settings_id)
+    {
+        (BindingContext as Homework_list).LoadGroupsWithHomework(group_settings_id);
     }
 }

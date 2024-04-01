@@ -17,6 +17,22 @@ public partial class View_one_hw : ContentPage
     {
         InitializeComponent();
         BindingContext = new Homework_list();
+
+#if WINDOWS
+
+#else
+        ToolbarItem add_group = new ToolbarItem { IconImageSource = ImageSource.FromFile("group_add.svg") };
+        ToolbarItem groups = new ToolbarItem { IconImageSource = ImageSource.FromFile("groups1.svg") };
+
+        add_group.Clicked += Add_group_Clicked;
+        groups.Clicked += Groups_with_hw_Clicked;
+
+        if (this.ToolbarItems.Count == 0)
+        {
+            this.ToolbarItems.Add(add_group);
+            this.ToolbarItems.Add(groups);
+        }
+#endif
     }
     public async void Load_Hw(long hw_id)
     {
@@ -35,21 +51,16 @@ public partial class View_one_hw : ContentPage
             Edit_button.IsEnabled = false;
             Edit_button.IsVisible = false;
         }
+    }
 
-#if WINDOWS
+    private void Add_group_Clicked(object sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
 
-#else
-        ToolbarItem add_group = new ToolbarItem
-        {
-            IconImageSource = ImageSource.FromFile("group_add.svg")   
-        };
-        ToolbarItem groups = new ToolbarItem
-        {
-            IconImageSource = ImageSource.FromFile("groups1.svg")
-        };
-        this.ToolbarItems.Add(add_group);
-        this.ToolbarItems.Add(groups);
-#endif
+    private async void Groups_with_hw_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync($"list_all_groups_with_hw?hw_id={homework.homework_id}");
     }
 
     private async void SaveButton_Clicked(object sender, EventArgs e)

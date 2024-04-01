@@ -8,7 +8,8 @@ namespace SmartStudy.Models
     {
         public ObservableCollection<homework> Homeworks { get; set; } = new ObservableCollection<homework>();
         public ObservableCollection<homework> GroupHomeworks { get; set; } = new ObservableCollection<homework>();
-
+        public ObservableCollection<group_settings> GroupsWithHomework { get; set; } = new ObservableCollection<group_settings>();
+        public ObservableCollection<group_settings> GroupsWithoutHomework { get; set; } = new ObservableCollection<group_settings>();
         public Homework_list() => LoadHomework();
 
         public async void LoadHomework()
@@ -29,15 +30,36 @@ namespace SmartStudy.Models
 
         public async void LoadGroupHomework(long g_s_id)
         {
-            List<homework> homeworks;
-
             User thisUser = Serializer.DeserializeUser();
 
-            homeworks = await Client.GetGroupHomework(g_s_id);
+            List<homework> homeworks = await Client.GetGroupHomework(g_s_id);
 
             GroupHomeworks.Clear();
             foreach (homework hw in homeworks.OrderBy(x => x.Title))
                 GroupHomeworks.Add(hw);
+        }
+
+        public async void LoadGroupsWithHomework(long hw_id)
+        {
+            User thisUser = Serializer.DeserializeUser();
+
+            List<group_settings> groups = await Client.GetGroupsWithHomework(hw_id);
+
+            GroupsWithHomework.Clear();
+            foreach (group_settings g_s in groups.OrderBy(x => x.Title))
+                GroupsWithHomework.Add(g_s);
+        }
+
+        public async void LoadGroupsWithoutHomework(long hw_id)
+        {
+            User thisUser = Serializer.DeserializeUser();
+
+            List<group_settings> groupsWithHw = await Client.GetGroupsWithHomework(hw_id);
+            List<group_settings> groups = await Client.GetGroupListWithUser(thisUser.user_id);
+
+            GroupsWithoutHomework.Clear();
+            foreach (group_settings g_s in groups.Except(groupsWithHw).OrderBy(x => x.Title))
+                GroupsWithoutHomework.Add(g_s);
         }
     }
 }
