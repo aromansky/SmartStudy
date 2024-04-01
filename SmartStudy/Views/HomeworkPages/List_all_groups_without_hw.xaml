@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SmartStudy.Views.HomeworkPages.List_all_groups_with_hw"
-             Title="Группы с данным домашним заданием">
+             x:Class="SmartStudy.Views.HomeworkPages.List_all_groups_without_hw"
+             Title="Группы без данного задания">
     <VerticalStackLayout>
         <ScrollView>
             <CollectionView x:Name="groups"
-                        ItemsSource="{Binding GroupsWithHomework}"
+                        ItemsSource="{Binding GroupsWithoutHomework}"
                         Margin="20">
 
                 <CollectionView.ItemTemplate>
@@ -16,7 +16,7 @@
                                 <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
                                 <Label Text="{Binding Description}" FontSize="20" TextColor="DarkGray"/>
                             </StackLayout>
-                            <ImageButton Grid.Column="1" Source="group_remove_black.svg" Clicked="remove_group"
+                            <ImageButton Grid.Column="1" Source="group_add_black.svg" Clicked="group_add"
                                          WidthRequest="30" HeightRequest="30" HorizontalOptions="End" Margin="10"/>
                         </Grid>
                     </DataTemplate>

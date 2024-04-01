@@ -1,6 +1,7 @@
 ﻿using SmartStudy.ModelsDB;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Linq;
 
 namespace SmartStudy.Models
 {
@@ -55,10 +56,10 @@ namespace SmartStudy.Models
             User thisUser = Serializer.DeserializeUser();
 
             List<group_settings> groupsWithHw = await Client.GetGroupsWithHomework(hw_id);
-            List<group_settings> groups = await Client.GetGroupListWithUser(thisUser.user_id);
+            List<group_settings> groups = await Client.GetGroupsWithTutor(thisUser.user_id);
 
             GroupsWithoutHomework.Clear();
-            foreach (group_settings g_s in groups.Except(groupsWithHw).OrderBy(x => x.Title))
+            foreach (group_settings g_s in groups.Where(x => !groupsWithHw.Select(x => x.group_settings_id).Contains(x.group_settings_id)).OrderBy(x => x.Title))
                 GroupsWithoutHomework.Add(g_s);
         }
     }

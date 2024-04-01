@@ -732,7 +732,7 @@ namespace SmartStudy
         /// </summary>
         /// <param name="homework_id">Id домашнего задания</param>
         /// <param name="group_settings_id">Id групп, котрым отсылается дз</param>
-        public static async void CreateGroupHomework(long homework_id, params long[] group_settings_id)
+        public static async Task<bool> CreateGroupHomework(long homework_id, params long[] group_settings_id)
         {
             Uri uri = new Uri(string.Format(Constants.GroupHomeworkUrl, string.Empty));
 
@@ -745,15 +745,13 @@ namespace SmartStudy
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
                     HttpResponseMessage response = await _client.PostAsync(uri, content);
-
-                    if (response.IsSuccessStatusCode)
-                        Debug.WriteLine("Ok");
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
+            return true;
         }
 
         /// <summary>

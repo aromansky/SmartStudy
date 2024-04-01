@@ -21,7 +21,7 @@ public partial class View_one_hw : ContentPage
 #if WINDOWS
 
 #else
-        ToolbarItem add_group = new ToolbarItem { IconImageSource = ImageSource.FromFile("group_add.svg") };
+        ToolbarItem add_group = new ToolbarItem { IconImageSource = ImageSource.FromFile("group_add_white.svg") };
         ToolbarItem groups = new ToolbarItem { IconImageSource = ImageSource.FromFile("groups1.svg") };
 
         add_group.Clicked += Add_group_Clicked;
@@ -53,9 +53,9 @@ public partial class View_one_hw : ContentPage
         }
     }
 
-    private void Add_group_Clicked(object sender, EventArgs e)
+    private async void Add_group_Clicked(object sender, EventArgs e)
     {
-        throw new NotImplementedException();
+        await Shell.Current.GoToAsync($"list_all_groups_without_hw?hw_id={homework.homework_id}");
     }
 
     private async void Groups_with_hw_Clicked(object sender, EventArgs e)

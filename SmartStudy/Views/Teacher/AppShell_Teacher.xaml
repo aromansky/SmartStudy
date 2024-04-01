@@ -73,6 +73,9 @@
         ContentTemplate="{DataTemplate views_HomeworkPages:List_all_groups_with_hw}"
         Route="list_all_groups_with_hw"/>
     <ShellContent
+        ContentTemplate="{DataTemplate views_HomeworkPages:List_all_groups_without_hw}"
+        Route="list_all_groups_with_hw"/>
+    <ShellContent
         ContentTemplate="{DataTemplate views_HomeworkPages:List_all_hw_one_group}"
         Route="list_all_hw_one_group"/>
     <ShellContent

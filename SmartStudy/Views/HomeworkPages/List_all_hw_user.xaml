@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartStudy.Views.HomeworkPages.List_all_hw_user"
-             Title="Список всех дз пользователя.">
+             Title="Созданные работы">
     <VerticalStackLayout>
         <ScrollView>
             <CollectionView x:Name="all_homeworks_user"

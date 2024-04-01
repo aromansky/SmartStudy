@@ -38,6 +38,7 @@ public partial class AppShell_Teacher : Shell
         Routing.RegisterRoute("list_all_hw_user", typeof(List_all_hw_user));
         Routing.RegisterRoute("list_all_groups", typeof(List_all_groups));
         Routing.RegisterRoute("list_all_groups_with_hw", typeof(List_all_groups_with_hw));
+        Routing.RegisterRoute("list_all_groups_without_hw", typeof(List_all_groups_without_hw));
         Routing.RegisterRoute("list_all_hw_one_group", typeof(List_all_hw_one_group));
         Routing.RegisterRoute("list_all_hw_group", typeof(List_all_hw_group));
 #if WINDOWS
