@@ -9,12 +9,9 @@ public partial class Homework : ContentPage
 		InitializeComponent();
         BindingContext = new Homework_list();
         grid.SetColumnSpan(main_view, 2);
-        Label lab = new Label();
-        lab.Text = "«адани€ от учител€";
         //Button btn_to_view_one_hw = new Button();
         //btn_to_view_one_hw.Text = "посмотреть конкретное задание";
         //btn_to_view_one_hw.Clicked += clicked_to_view_one_hw;
-        main_view.Add(lab);
         //main_view.Add(btn_to_view_one_hw);
 #if WINDOWS
 #else

@@ -21,17 +21,20 @@ public partial class View_one_hw : ContentPage
 #if WINDOWS
 
 #else
-        ToolbarItem add_group = new ToolbarItem { IconImageSource = ImageSource.FromFile("group_add_white.svg") };
-        ToolbarItem groups = new ToolbarItem { IconImageSource = ImageSource.FromFile("groups1.svg") };
-
-        add_group.Clicked += Add_group_Clicked;
-        groups.Clicked += Groups_with_hw_Clicked;
-
-        if (this.ToolbarItems.Count == 0)
+        if(user.IsTutor())
         {
-            this.ToolbarItems.Add(add_group);
-            this.ToolbarItems.Add(groups);
-        }
+            ToolbarItem add_group = new ToolbarItem { IconImageSource = ImageSource.FromFile("group_add_white.svg") };
+            ToolbarItem groups = new ToolbarItem { IconImageSource = ImageSource.FromFile("groups1.svg") };
+
+            add_group.Clicked += Add_group_Clicked;
+            groups.Clicked += Groups_with_hw_Clicked;
+
+            if (this.ToolbarItems.Count == 0)
+            {
+                this.ToolbarItems.Add(add_group);
+                this.ToolbarItems.Add(groups);
+            }
+        }  
 #endif
     }
     public async void Load_Hw(long hw_id)
