@@ -2,9 +2,9 @@ namespace SmartStudy.Views.Teacher;
 
 public partial class Feedback : ContentPage
 {
-	public Feedback()
-	{
-		InitializeComponent();
+    public Feedback()
+    {
+        InitializeComponent();
         grid.SetColumnSpan(main_view, 2);
         Label lab = new Label();
         lab.Text = "װטהבוך";
@@ -13,6 +13,11 @@ public partial class Feedback : ContentPage
 #else
         row_button.Height = 0;
 #endif
+    }
+    public async void update_page(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///main_page");
+        await Shell.Current.GoToAsync("///feedback");
     }
     public async void clicked_to_main_page(object sender, EventArgs e)
     {
@@ -29,5 +34,19 @@ public partial class Feedback : ContentPage
     public async void clicked_to_groups(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("///groups");
+    }
+
+    public async void clicked_to_create_feedback(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("create_feedback");
+    }
+    private async void feedback_clicked(object sender, SelectionChangedEventArgs e)
+    {
+        //if (e.CurrentSelection.Count != 0)
+        //{
+        //    await Shell.Current.GoToAsync($"edit_group?group_settings_id={((ModelsDB.group_settings)e.CurrentSelection[0]).group_settings_id}");
+        //    all_groups.SelectedItem = null;
+        //}
+
     }
 }

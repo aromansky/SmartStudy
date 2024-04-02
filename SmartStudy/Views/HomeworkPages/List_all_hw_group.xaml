@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartStudy.Views.HomeworkPages.List_all_hw_group"
+             Title="Домашние задания для групп">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="Button_update" Clicked="update_page" IconImageSource="{FontImage Glyph='↺', Color=White, Size=22}" />
+    </ContentPage.ToolbarItems>
+    <Grid x:Name="grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50*" />
+            <ColumnDefinition Width="50*" />
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="14*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" x:Name="row_button"/>
+        </Grid.RowDefinitions>
+
+        <!--Здесь группы-->
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5">
+            <Label x:Name="label_group" Text="Ваши группы" HorizontalOptions="Start" FontSize="Large"  Margin="20, 0, 0, 0"/>
+            <ScrollView Margin="0, 20, 0, 0">
+                <CollectionView x:Name="groups"
+                    ItemsSource="{Binding GroupsWithUser}"
+                    Margin="20"
+                    SelectionMode="Single"
+                    SelectionChanged="group_clicked">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
+                                <Label Text="{Binding Description}" FontSize="20" TextColor="DarkGray"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </Grid>
+
+
+        <!--Здесь дз для групп-->
+        <Grid Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="5">
+            <Label x:Name="label_hw" Text="Вы не выбрали группу" HorizontalOptions="Start" FontSize="Large"  Margin="20, 0, 0, 0"/>
+            <ScrollView Margin="0, 20, 0, 0">
+                <CollectionView x:Name="all_tasks"
+                    ItemsSource="{Binding GroupHomeworks}"
+                    Margin="20"
+                    SelectionMode="Single"
+                    SelectionChanged="task_ckicked">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="3*, *, *">
+                                <StackLayout Grid.Column="0">
+                                    <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
+                                    <Label Text="{Binding Description}" FontSize="20" TextColor="DarkGray"/>
+                                </StackLayout>
+                                <ImageButton Grid.Column="1" Source="group_remove_black.png" x:Name="remove_button" Clicked="delete_homework"
+                                             WidthRequest="30" HeightRequest="30" HorizontalOptions="End" Margin="10"/>
+                                <ImageButton Grid.Column="2" Source="delete.png" x:Name="DeleteButton" Clicked="delete_homework"
+                                             WidthRequest="30" HeightRequest="30" HorizontalOptions="Start" Margin="10"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </Grid>
+        <Grid Grid.Column="5" Grid.Row="1">
+            <ImageButton Source="plus_circle.png" 
+                            x:Name="CreateHw"
+                            WidthRequest="70" 
+                            HeightRequest="70"
+                            CornerRadius="80"
+                            HorizontalOptions="End"
+                            VerticalOptions="End"
+                            Margin="10" 
+                            Clicked="clicked_to_create_task"/>
+        </Grid>
+
+    </Grid>
+</ContentPage>

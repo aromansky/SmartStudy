@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartStudy.Views.HomeworkPages.View_one_hw"
+             Title="Домашнее задание">
+    <Grid RowDefinitions="*, 2*, 10*, *" Padding="10">
+        <Grid Grid.Row="0">
+            <Entry x:Name="Title"
+                   Placeholder="Название дз"
+                   FontSize="Medium"
+                   HorizontalTextAlignment="Center"
+                   IsReadOnly="True"
+                   HeightRequest="50"
+                   VerticalTextAlignment="Start"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid ColumnDefinitions= "*,*" Padding="10" >
+                <VerticalStackLayout Grid.Column="0">
+                    <Label Text="Начало: " FontSize="Medium" VerticalTextAlignment="End"/>
+                    <Label x:Name="all_date_begin" FontSize="Small" VerticalTextAlignment="End"/>
+                    <HorizontalStackLayout>
+                        <DatePicker x:Name="date_change_begin" Format="d" DateSelected="date_begin_selected" IsEnabled="False"  Margin="5"/>
+                        <TimePicker x:Name="time_change_begin" PropertyChanged="time_begin_selected" IsEnabled="False" Margin="5"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1">
+                    <Label Text="Конец:" FontSize="Medium" VerticalTextAlignment="End"/>
+                    <Label x:Name="all_date_end" FontSize="Small" VerticalTextAlignment="End" />
+                    <HorizontalStackLayout>
+                        <DatePicker x:Name="date_change_end" Format="d" DateSelected="date_end_selected" IsEnabled="False" Margin="5"/>
+                        <TimePicker x:Name="time_change_end" PropertyChanged="time_end_selected" IsEnabled="False" Margin="5"/>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Editor x:Name="Description"
+                    Placeholder="Описание дз"
+                    IsReadOnly="True"
+                    HeightRequest="500" 
+                    VerticalOptions="StartAndExpand"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+                <Button x:Name="Edit_button" Grid.Column="0"
+                    Text="Редактировать"
+                    Clicked="Edit_clicked" />
+
+                <Button x:Name="Save_button" Grid.Column="0"
+                    Text="Сохранить изменения"
+                    Clicked="SaveButton_Clicked" IsVisible="False"/>
+
+                <Button x:Name="Cancel_button" Grid.Column="1"
+                    Text="Отмена"
+                    Clicked="Cancel_button_clicked" IsVisible="False"/>
+
+                <Button x:Name="Delete_button" Grid.Column="1"
+                    Text="Удалить"
+                    Clicked="DeleteButton_Clicked" />
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

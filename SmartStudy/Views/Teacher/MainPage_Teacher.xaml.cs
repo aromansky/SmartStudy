@@ -1,4 +1,5 @@
 using Microsoft.Maui.Controls;
+using SmartStudy.Models;
 
 namespace SmartStudy.Views.Teacher;
 
@@ -16,6 +17,11 @@ public partial class MainPage_Teacher : ContentPage
         row_button.Height = 0;
 #endif
     }
+    public async void update_page(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///feedback");
+        await Shell.Current.GoToAsync("///main_page");
+    }
     public async void clicked_to_calendar(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("///calendar");
@@ -32,4 +38,12 @@ public partial class MainPage_Teacher : ContentPage
     {
         await Shell.Current.GoToAsync("///feedback");
     }
+    public async void logOut(object sender, EventArgs e)
+    {
+        Serializer.DeleteUserData();
+        Application.Current.MainPage = new AppShell();
+        await Navigation.PopToRootAsync();
+        await Shell.Current.GoToAsync("///RegistrationPage");
+    }
+
 }

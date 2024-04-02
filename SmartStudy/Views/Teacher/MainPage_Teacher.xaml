@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartStudy.Views.Teacher.MainPage_Teacher"
              Title="Главная">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="Button_update" Clicked="update_page" IconImageSource="{FontImage Glyph='↺', Color=White, Size=22}" />
+        <ToolbarItem x:Name="Button_logOut" Text="LogOut" Clicked="logOut" IconImageSource="{FontImage Glyph='↪', Color=White, Size=22}"/>
+    </ContentPage.ToolbarItems>
     <Grid x:Name="grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -16,7 +20,9 @@
             <RowDefinition Height="*" x:Name="row_button"/>
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="0">
-            <VerticalStackLayout x:Name="main_view"></VerticalStackLayout>
+            <VerticalStackLayout x:Name="main_view">
+                
+            </VerticalStackLayout>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1">
             <Button Text="Главная" IsEnabled="False"/>

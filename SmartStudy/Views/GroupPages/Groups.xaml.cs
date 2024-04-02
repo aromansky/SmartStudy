@@ -14,6 +14,12 @@ public partial class Groups : ContentPage
         row_button.Height = 0;
 #endif
     }
+    public async void update_page(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("///main_page");
+        await Shell.Current.GoToAsync("///groups");
+    }
+
     public async void clicked_to_main_page(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("///main_page");
@@ -39,7 +45,7 @@ public partial class Groups : ContentPage
 
     protected override void OnAppearing()
     {
-        ((Group_note)BindingContext).Load_Groups_With_User(Serializer.DeserializeUser().user_id);
+        ((Group_note)BindingContext).Load_Groups_With_User();
         if (!Serializer.DeserializeUser().IsTutor())
         {
             CreateGroup.IsEnabled = false;

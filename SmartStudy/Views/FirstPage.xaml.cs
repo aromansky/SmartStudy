@@ -4,14 +4,14 @@ namespace SmartStudy;
 
 public partial class FirstPage : ContentPage
 {
-	public FirstPage()
-	{
-		InitializeComponent();
-	}
-  
+    public FirstPage()
+    {
+        InitializeComponent();
+    }
+
     private async void ClickRegister(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new RegistrationPage()); 
+        await Navigation.PushAsync(new RegistrationPage());
     }
 
     private async void ClickLogInStudent(object sender, EventArgs e)
@@ -46,5 +46,15 @@ public partial class FirstPage : ContentPage
     private void ClickPasswordVisibility(object sender, EventArgs e)
     {
         Password.IsPassword = !Password.IsPassword;
+        var button = sender as ImageButton;
+        if (button != null)
+        {
+            if (button.Source.ToString().Contains("opened.png"))
+                button.Source = "closed.png"; // Изменение на изображение "closed.png"
+            else
+                button.Source = "opened.png"; // Изменение обратно на изображение "opened.png"
+        }
+        else
+            Debug.WriteLine("Error: sender is not ImageButton");
     }
 }
