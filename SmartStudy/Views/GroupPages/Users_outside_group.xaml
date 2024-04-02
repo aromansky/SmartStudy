@@ -5,26 +5,26 @@
              x:Class="SmartStudy.Views.GroupPages.Users_outside_group"
              xmlns:converter="clr-namespace:SmartStudy.Views.GroupPages"
              Title="Добавить пользователя">
-    <VerticalStackLayout>
-        <ScrollView>
-            <CollectionView ItemsSource="{Binding UsersOutsideGroup}"
+    <ScrollView>
+        <CollectionView ItemsSource="{Binding UsersOutsideGroup}"
                             Margin="20">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.Resources>
-                    <converter:FullNameConverter x:Key="FullNameConverter" />
-                </CollectionView.Resources>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnDefinitions="5*, *">
-                            <Label Grid.Column="0" Text="{Binding Converter={StaticResource FullNameConverter}}" FontSize="28" HorizontalOptions="Start"/>
-                            <ImageButton x:Name="add_button" Grid.Column="1" Source="{Binding IconAdd}" Clicked="add_user"
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.Resources>
+                <converter:FullNameConverter x:Key="FullNameConverter" />
+            </CollectionView.Resources>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="5*, *">
+                        <Label Grid.Column="0" Text="{Binding Converter={StaticResource FullNameConverter}}" FontSize="28" HorizontalOptions="Start"/>
+                        <ImageButton x:Name="add_button" Grid.Column="1" Source="{Binding IconAdd}" Clicked="add_user"
                                          WidthRequest="30" HeightRequest="30" HorizontalOptions="End" Margin="10"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </ScrollView>
-    </VerticalStackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
 </ContentPage>

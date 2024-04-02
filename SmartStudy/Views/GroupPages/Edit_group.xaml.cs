@@ -62,8 +62,8 @@ if(user.IsTutor())
 
     private void EditButton_Clicked(object sender, EventArgs e)
     {
-        Title.IsEnabled = true;
-        Description.IsEnabled = true;
+        Title.IsReadOnly = false;
+        Description.IsReadOnly = false;
         SaveButton.IsEnabled = true;
         SaveButton.IsVisible = true;
     }

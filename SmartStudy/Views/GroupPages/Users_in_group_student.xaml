@@ -5,24 +5,22 @@
              x:Class="SmartStudy.Views.GroupPages.Users_in_group_student"
              xmlns:converter="clr-namespace:SmartStudy.Views.GroupPages"
              Title="Пользователи в группе">
-    <VerticalStackLayout>
-        <ScrollView>
-            <CollectionView ItemsSource="{Binding UsersInGroup}"
+    <ScrollView>
+        <CollectionView ItemsSource="{Binding UsersInGroup}"
                             Margin="20">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.Resources>
-                    <converter:FullNameConverter x:Key="FullNameConverter" />
-                </CollectionView.Resources>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnDefinitions="5*, *">
-                            <Label Grid.Column="0" Text="{Binding Converter={StaticResource FullNameConverter}}" FontSize="28" HorizontalOptions="Start"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </ScrollView>
-    </VerticalStackLayout>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.Resources>
+                <converter:FullNameConverter x:Key="FullNameConverter" />
+            </CollectionView.Resources>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="5*, *">
+                        <Label Grid.Column="0" Text="{Binding Converter={StaticResource FullNameConverter}}" FontSize="28" HorizontalOptions="Start"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
 </ContentPage>
