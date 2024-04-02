@@ -20,5 +20,29 @@
         public User() { }
 
         public bool IsTutor() => Role.Equals("Tutor");
+
+        public string IconAdd
+        {
+            get
+            {
+#if WINDOWS
+                return "user_add_black.png";
+#else
+                return "user_add_black.svg";
+#endif
+            }
+        }
+
+        public string IconRemove
+        {
+            get
+            {
+#if WINDOWS
+                return "user_remove_black.png";
+#else
+                return "user_remove_black.svg";
+#endif
+            }
+        }
     }
 }

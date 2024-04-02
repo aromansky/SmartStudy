@@ -54,12 +54,9 @@
                    MaxLength="20"
                    IsPassword="True"/>
 
-            <Button Grid.Row="0" Grid.Column="1"
-                    Text="👁" 
-                    WidthRequest="15"
-                    HeightRequest="15"
-                    Clicked="ClickPasswordVisibility"
-                    Padding="0"/>
+            
+            <ImageButton Source="opened.png"  Grid.Row="0" Grid.Column="1"
+                         Clicked="ClickPasswordVisibility"></ImageButton>
 
         </Grid>
 

@@ -44,18 +44,96 @@ namespace WebAPI.Controllers
             return user;
         }
 
+        // Принимает id группы (group_settings), возвращает пользователей, принадлежащих группе
         // GET: api/users/5
         [HttpGet("group-{id}")]
         public async Task<ActionResult<IEnumerable<user>>> GetUsersInGroup(long id)
         {
-            var usersInGroup =   (from @group in _context.@group.Where(x => x.group_settings_id == id)
-                                 join user in _context.user on @group.user_id equals user.user_id
-                                 select user).Distinct();
+            var usersInGroup = from @group in _context.@group
+                               join user in _context.user on @group.user_id equals user.user_id
+                               where @group.group_settings_id == id
+                               select user;
 
             if (usersInGroup == null)
                 return NotFound();
 
             return await usersInGroup.ToListAsync();
+        }
+
+
+        // Принимает id пользователя, возвращает личное дз, которое ему доступно
+        // GET: api/user/users_with_homework-5
+        [HttpGet("homework_user-{id}")]
+        public async Task<ActionResult<IEnumerable<homework>>> GetHomeWorksForhUser(long id)
+        {
+            var homeworks = (from homework in _context.homework
+                            join user_homework in _context.user_homework on homework.homework_id equals user_homework.homework_id
+                            join user in _context.user on user_homework.user_id equals user.user_id
+                            where user.user_id == id
+                            select homework).Distinct();
+            if (homeworks == null)
+                return NotFound();
+            return await homeworks.ToListAsync();
+        }
+
+
+        // Принимает id пользователя, возвращает фидбек, который он получил
+        // GET: api/user/users_with_homework-5
+        [HttpGet("feedback_user-{id}")]
+        public async Task<ActionResult<IEnumerable<feedback>>> GetFeedBackForhUser(long id)
+        {
+            var feedbacks = (from feedback in _context.feedback
+                             join user_feedback in _context.user_feedback on feedback.feedback_id equals user_feedback.feedback_id
+                             join user in _context.user on user_feedback.user_id equals user.user_id
+                             where user.user_id == id
+                             select feedback).Distinct();
+            if (feedbacks == null)
+                return NotFound();
+            return await feedbacks.ToListAsync();
+        }
+
+
+        // Принимает id пользователя, возвращает дз, которое он создал
+        // GET: api/user_homework/users_with_homework-5
+        [HttpGet("homework_author-{id}")]
+        public async Task<ActionResult<IEnumerable<homework>>> GetCreatedHomeWorks(long id)
+        {
+            var homeworks =  from homework in _context.homework
+                             where homework.author_id == id
+                             select homework;
+            if (homeworks == null)
+                return NotFound();
+            return await homeworks.ToListAsync();
+        }
+
+
+        // Принимает id пользователя, возвращает фидбек, которое он создал
+        // GET: api/user_homework/users_with_homework-5
+        [HttpGet("feedback_author-{id}")]
+        public async Task<ActionResult<IEnumerable<feedback>>> GetCreatedFeedbacks(long id)
+        {
+            var feedbacks = from feedback in _context.feedback
+                            where feedback.author_id == id
+                            select feedback;
+            if (feedbacks == null)
+                return NotFound();
+            return await feedbacks.ToListAsync();
+        }
+
+        // Принимает id пользователя, возвращает групповое дз, которое ему доступно
+        // GET: api/user_homework/users_with_homework-5
+        [HttpGet("homework_user_from_group-{id}")]
+        public async Task<ActionResult<IEnumerable<homework>>> GetHomeWorksForGroup(long id)
+        {
+            var homeworks = from homework in _context.homework
+                            join group_homework in _context.group_homework on homework.homework_id equals group_homework.homework_id
+                            join @group in _context.@group on group_homework.group_settings_id equals @group.group_settings_id
+                            join user in _context.user on @group.user_id equals user.user_id
+                            where user.user_id == id
+                            select homework;
+            if (homeworks == null)
+                return NotFound();
+            return await homeworks.ToListAsync();
         }
 
         // PUT: api/users/5

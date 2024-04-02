@@ -6,6 +6,7 @@
     xmlns:views_teacher="clr-namespace:SmartStudy.Views.Teacher"
     xmlns:views_CalendarPages="clr-namespace:SmartStudy.Views.CalendarPages"
     xmlns:views_GroupPages="clr-namespace:SmartStudy.Views.GroupPages"
+    xmlns:views_HomeworkPages="clr-namespace:SmartStudy.Views.HomeworkPages"
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar x:Name="TabBar_t">
@@ -57,6 +58,33 @@
         ContentTemplate="{DataTemplate views_GroupPages:Edit_group}"
         Route="edit_group"/>
     <ShellContent
-        ContentTemplate="{DataTemplate views_GroupPages:Users_list}"
-        Route="add_users_to_group"/>
+        ContentTemplate="{DataTemplate views_GroupPages:Users_in_group}"
+        Route="users_outside_group"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_GroupPages:Users_outside_group}"
+        Route="users_outside_group"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_HomeworkPages:Add_hw}"
+        Route="add_hw"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_HomeworkPages:View_one_hw}"
+        Route="view_one_hw"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_HomeworkPages:List_all_hw_user}"
+        Route="list_all_hw_user"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_HomeworkPages:List_all_groups_with_hw}"
+        Route="list_all_groups_with_hw"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_HomeworkPages:List_all_groups_without_hw}"
+        Route="list_all_groups_with_hw"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_HomeworkPages:List_all_hw_one_group}"
+        Route="list_all_hw_one_group"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_HomeworkPages:List_all_hw_group}"
+        Route="list_all_hw_group"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_HomeworkPages:List_all_groups}"
+        Route="list_all_groups"/>
 </Shell>

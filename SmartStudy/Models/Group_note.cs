@@ -28,18 +28,19 @@ namespace SmartStudy.Models
                 GroupsWithEvent.Add(g);
         }
 
-        public async void Load_Groups_With_User(long user_id)
+        public async void Load_Groups_With_User()
         {
-            if(Serializer.DeserializeUser().IsTutor())
+            User user = Serializer.DeserializeUser();
+            if (user.IsTutor())
             {
-                List<group_settings> g_s = await Client.GetGroupsWithTutor(user_id);
+                List<group_settings> g_s = await Client.GetGroupsWithTutor(user.user_id);
                 GroupsWithUser.Clear();
                 foreach (group_settings g in g_s.OrderBy(x => x.Title))
                     GroupsWithUser.Add(g);
             }
             else
             {
-                List<group_settings> g_s = await Client.GetGroupListWithUser(user_id);
+                List<group_settings> g_s = await Client.GetGroupListWithUser(user.user_id);
                 GroupsWithUser.Clear();
                 foreach (group_settings g in g_s.OrderBy(x => x.Title))
                     GroupsWithUser.Add(g);
