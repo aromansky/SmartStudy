@@ -70,7 +70,27 @@ namespace WebAPI.Controllers
                             join user_homework in _context.user_homework on homework.homework_id equals user_homework.homework_id
                             join user in _context.user on user_homework.user_id equals user.user_id
                             where user.user_id == id
-                            select homework).Distinct();
+                            select homework).Union(from homework in _context.homework
+                                                  join group_homework in _context.group_homework on homework.homework_id equals group_homework.homework_id
+                                                  join @group in _context.@group on group_homework.group_settings_id equals @group.group_settings_id
+                                                  join user in _context.user on @group.user_id equals user.user_id
+                                                  where @group.user_id == id
+                                                  select homework).Distinct();
+            if (homeworks == null)
+                return NotFound();
+            return await homeworks.ToListAsync();
+        }
+
+        // Принимает id дз, возвращает пользователей, которым оно доступно
+        // GET: api/user/users_with_homework-5
+        [HttpGet("users_with_hw-{id}")]
+        public async Task<ActionResult<IEnumerable<user>>> GetUsersWithHomework(long id)
+        {
+            var homeworks = (from homework in _context.homework
+                             join user_homework in _context.user_homework on homework.homework_id equals user_homework.homework_id
+                             join user in _context.user on user_homework.user_id equals user.user_id
+                             where homework.homework_id == id
+                             select user).Distinct();
             if (homeworks == null)
                 return NotFound();
             return await homeworks.ToListAsync();
@@ -94,7 +114,7 @@ namespace WebAPI.Controllers
 
 
         // Принимает id пользователя, возвращает дз, которое он создал
-        // GET: api/user_homework/users_with_homework-5
+        // GET: api/user/users_with_homework-5
         [HttpGet("homework_author-{id}")]
         public async Task<ActionResult<IEnumerable<homework>>> GetCreatedHomeWorks(long id)
         {
@@ -107,8 +127,8 @@ namespace WebAPI.Controllers
         }
 
 
-        // Принимает id пользователя, возвращает фидбек, которое он создал
-        // GET: api/user_homework/users_with_homework-5
+        // Принимает id пользователя, возвращает фидбек, который он создал
+        // GET: api/user/feedback_author-5
         [HttpGet("feedback_author-{id}")]
         public async Task<ActionResult<IEnumerable<feedback>>> GetCreatedFeedbacks(long id)
         {

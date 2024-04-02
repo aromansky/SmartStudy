@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
 
 
         // Удаляет дз из группы
-        // DELETE: api/group_homework/5
+        // DELETE: api/group_homework/5_1
         [HttpDelete("{homework_id}_{group_settings_id}")]
         public async Task<IActionResult> DeleteGroupHomework(long homework_id, long group_settings_id)
         {

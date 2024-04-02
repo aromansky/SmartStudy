@@ -16,33 +16,45 @@ public partial class View_one_hw : ContentPage
     public View_one_hw()
     {
 #if WINDOWS
-if(user.IsTutor())
+        if (user.IsTutor())
         {
             ToolbarItem add_group = new ToolbarItem { IconImageSource = ImageSource.FromFile("group_add_white.png") };
             ToolbarItem groups = new ToolbarItem { IconImageSource = ImageSource.FromFile("groups_white.png") };
+            ToolbarItem users = new ToolbarItem { IconImageSource = ImageSource.FromFile("user_white.png") };
+            ToolbarItem add_users = new ToolbarItem { IconImageSource = ImageSource.FromFile("user_add_white.png") };
 
             add_group.Clicked += Add_group_Clicked;
             groups.Clicked += Groups_with_hw_Clicked;
+            users.Clicked += Users_Clicked;
+            add_users.Clicked += Add_user_Clicked;
 
             if (this.ToolbarItems.Count == 0)
             {
                 this.ToolbarItems.Add(add_group);
                 this.ToolbarItems.Add(groups);
+                this.ToolbarItems.Add(add_users);
+                this.ToolbarItems.Add(users);
             }
-        } 
+        }
 #else
         if (user.IsTutor())
         {
             ToolbarItem add_group = new ToolbarItem { IconImageSource = ImageSource.FromFile("group_add_white.svg") };
             ToolbarItem groups = new ToolbarItem { IconImageSource = ImageSource.FromFile("groups1.svg") };
+            ToolbarItem users = new ToolbarItem { IconImageSource = ImageSource.FromFile("user_white.svg") };
+            ToolbarItem add_users = new ToolbarItem { IconImageSource = ImageSource.FromFile("user_add_white.svg") };
 
             add_group.Clicked += Add_group_Clicked;
             groups.Clicked += Groups_with_hw_Clicked;
+            users.Clicked += Users_Clicked;
+            add_users.Clicked += Add_user_Clicked;
 
             if (this.ToolbarItems.Count == 0)
             {
                 this.ToolbarItems.Add(add_group);
                 this.ToolbarItems.Add(groups);
+                this.ToolbarItems.Add(add_users);
+                this.ToolbarItems.Add(users);
             }
         }
 #endif
@@ -77,6 +89,16 @@ if(user.IsTutor())
     private async void Groups_with_hw_Clicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync($"list_all_groups_with_hw?hw_id={homework.homework_id}");
+    }
+
+    private async void Add_user_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync($"users_without_hw?hw_id={homework.homework_id}");
+    }
+
+    private async void Users_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync($"users_with_hw?hw_id={homework.homework_id}");
     }
 
     private async void SaveButton_Clicked(object sender, EventArgs e)

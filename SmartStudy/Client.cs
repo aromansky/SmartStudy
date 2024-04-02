@@ -402,6 +402,28 @@ namespace SmartStudy
             return users;
         }
 
+
+        /// <summary>
+        /// Возвращает список пользователей, которым доступно дз
+        /// </summary>
+        /// <param name="homework_id">id дз</param>
+        /// <returns></returns>
+        public static async Task<List<User>> GetUsersWithHomework(long homework_id)
+        {
+            List<User> users = new List<User>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.UserUrl + $"/users_with_hw-{homework_id}");
+                if (response.IsSuccessStatusCode)
+                    users = await response.Content.ReadFromJsonAsync<List<User>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return users;
+        }
+
         /// <summary>
         /// Возвращает список с информацией о зарегистрированных пользователях, состоящих в указанной группе
         /// </summary>
@@ -715,13 +737,31 @@ namespace SmartStudy
             }
         }
 
+        /// <summary>
+        /// Открепляет дз от пользователя
+        /// </summary>
+        /// <param name="homework_id">id группы</param>
+        /// <param name="user_id">id пользователя</param>
+        public static async Task<bool> DeleteUserHomework(long homework_id, long user_id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.DeleteAsync(Constants.UserHomeworkUrl + $"/{homework_id}_{user_id}");
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
 
         /// <summary>
         /// Отправляет homework пользователям
         /// </summary>
         /// <param name="homework_id">Id домашнего задания</param>
         /// <param name="users_id">Id пользователей, котрым отсылается дз</param>
-        public static async void CreateUserHomework(long homework_id, params long[] users_id)
+        public static async Task<bool> CreateUserHomework(long homework_id, params long[] users_id)
         {
             Uri uri = new Uri(string.Format(Constants.UserHomeworkUrl, string.Empty));
 
@@ -743,6 +783,7 @@ namespace SmartStudy
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
+            return true;
         }
 
         /// <summary>

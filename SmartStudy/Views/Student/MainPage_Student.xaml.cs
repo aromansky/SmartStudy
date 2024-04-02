@@ -41,6 +41,7 @@ public partial class MainPage_Student : ContentPage
     {
         Serializer.DeleteUserData();
         Application.Current.MainPage = new AppShell();
+        
         await Shell.Current.GoToAsync("///RegistrationPage");
     }
 }

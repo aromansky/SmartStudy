@@ -42,7 +42,9 @@ public partial class AppShell_Teacher : Shell
         Routing.RegisterRoute("list_all_groups_without_hw", typeof(List_all_groups_without_hw));
         Routing.RegisterRoute("list_all_hw_one_group", typeof(List_all_hw_one_group));
         Routing.RegisterRoute("list_all_hw_group", typeof(List_all_hw_group));
-        
+        Routing.RegisterRoute("users_with_hw", typeof(Users_with_hw));
+        Routing.RegisterRoute("users_without_hw", typeof(Users_without_hw));
+
 
 #if WINDOWS
         SetTabBarIsVisible(TabBar_t, false);
