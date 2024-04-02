@@ -21,7 +21,8 @@ public partial class AppShell_Teacher : Shell
         Routing.UnRegisterRoute("list_all_group_with_hw");
         Routing.UnRegisterRoute("list_all_hw_one_group");
         Routing.UnRegisterRoute("list_all_hw_group");
-        
+        Routing.UnRegisterRoute("users_in_group");
+
 
         Routing.RegisterRoute("main_page", typeof(MainPage_Teacher));
         Routing.RegisterRoute("calendar", typeof(Calendar));

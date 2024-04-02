@@ -19,6 +19,7 @@ public partial class AppShell_Student : Shell
         Routing.UnRegisterRoute("list_all_hw_user");
         Routing.UnRegisterRoute("list_all_hw_one_group");
         Routing.UnRegisterRoute("list_all_hw_group");
+        Routing.UnRegisterRoute("users_in_group");
 
         Routing.RegisterRoute("main_page", typeof(MainPage_Student));
         Routing.RegisterRoute("calendar", typeof(Calendar));
