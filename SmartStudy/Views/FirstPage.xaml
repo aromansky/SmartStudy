@@ -22,12 +22,14 @@
             WidthRequest="300"
             HeightRequest="50"
             HorizontalOptions="Center"
-            Keyboard="Email"/>
+            Keyboard="Email"
+            BackgroundColor="AliceBlue"/>
 
         <Grid
             Grid.Row="1"
             Grid.Column="2"
-            HorizontalOptions="Center">
+            HorizontalOptions="Center"
+            BackgroundColor="AliceBlue">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
@@ -43,13 +45,8 @@
                    IsPassword="True"
                    MaxLength="20"/>
 
-            <Button Grid.Row="0" Grid.Column="1"
-                    Text="👁" 
-                    WidthRequest="15"
-                    HeightRequest="15"
-                    Clicked="ClickPasswordVisibility"
-                    Padding="0"/>
-
+            <ImageButton Source="opened.png"  Grid.Row="0" Grid.Column="1"
+                         Clicked="ClickPasswordVisibility"></ImageButton>
         </Grid>
 
         <Label Padding="5"
@@ -83,20 +80,23 @@
                     HorizontalOptions="End"/>
 
         </Grid>
-        
+
         <Button
+            
             Text="Регистрация"
             WidthRequest="300"
             HeightRequest="50"
             HorizontalOptions="Center"
             Clicked="ClickRegister"/>
-        
+
         <Button
             WidthRequest="300"
             HeightRequest="50"
             Text="Забыли пароль?"
             HorizontalOptions="Center"
             Clicked="ClickForgotPassword"/>
+      
 
     </VerticalStackLayout>
+
 </ContentPage>

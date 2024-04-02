@@ -9,34 +9,45 @@
         HorizontalOptions="Center"
         VerticalOptions="Center">
 
+        <HorizontalStackLayout>
+            
+        </HorizontalStackLayout>
+        <Label Text="Имя"/>
         <Entry
             x:Name="FirstName"
             Placeholder="Имя"
             WidthRequest="300"
             HeightRequest="50"
             HorizontalOptions="Center"
-            Keyboard="Text"/>
+            Keyboard="Text"
+            BackgroundColor="AliceBlue"/>
 
+        <Label Text="Фамилия"/>
         <Entry
             x:Name="LastName"
             Placeholder="Фамилия"
             WidthRequest="300"
             HeightRequest="50"
             HorizontalOptions="Center"
-            Keyboard="Text"/>
+            Keyboard="Text"
+            BackgroundColor="AliceBlue"/>
 
+        <Label Text="Email"/>
         <Entry
             x:Name="EMail"
             Placeholder="E-mail"
             WidthRequest="300"
             HeightRequest="50"
             VerticalOptions="Center" 
-            Keyboard="Email"/>
+            Keyboard="Email"
+            BackgroundColor="AliceBlue"/>
 
+        <Label Text="Пароль"/>
         <Grid
             Grid.Row="1"
             Grid.Column="2"
-            HorizontalOptions="Center">
+            HorizontalOptions="Center"
+            BackgroundColor="AliceBlue">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
@@ -54,12 +65,9 @@
                    MaxLength="20"
                    IsPassword="True"/>
 
-            <Button Grid.Row="0" Grid.Column="1"
-                    Text="👁" 
-                    WidthRequest="15"
-                    HeightRequest="15"
-                    Clicked="ClickPasswordVisibility"
-                    Padding="0"/>
+            
+            <ImageButton Source="opened.png"  Grid.Row="0" Grid.Column="1"
+                         Clicked="ClickPasswordVisibility"></ImageButton>
 
         </Grid>
 
@@ -70,7 +78,8 @@
             HeightRequest="50"
             HorizontalOptions="Center"
             MaxLength="20"
-            IsPassword="True"/>
+            IsPassword="True"
+            BackgroundColor="AliceBlue"/>
 
         <Button
             Text="Создать аккаунт"

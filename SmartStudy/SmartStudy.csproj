@@ -37,6 +37,9 @@
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 		<DefaultLanguage>ru</DefaultLanguage>
 		<PackageCertificateThumbprint>CD56DE44078EDB2B516D5DEC7EB77582CC085152</PackageCertificateThumbprint>
+
+		<!--<WindowsPackageType Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">None</WindowsPackageType>-->
+		
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
@@ -69,12 +72,15 @@
 	<ItemGroup>
 	  <None Remove="Database1.mdf" />
 	  <None Remove="Resources\Images\calendar.svg" />
+	  <None Remove="Resources\Images\closed.png" />
+	  <None Remove="Resources\Images\open.svg" />
 	  <None Remove="Resources\Images\groups.svg" />
 	  <None Remove="Resources\Images\homework.svg" />
 	  <None Remove="Resources\Images\logo.png" />
 	  <None Remove="Resources\Images\logo_tab.svg" />
 	  <None Remove="Resources\Images\main_page.svg" />
 	  <None Remove="Resources\Images\message.svg" />
+	  <None Remove="Resources\Images\opened.png" />
 	  <None Remove="Resources\Images\plus_circle.png" />
 	</ItemGroup>
 
@@ -91,6 +97,21 @@
 	  </Compile>
 	  <Compile Update="Views\GroupPages\Edit_group.xaml.cs">
 	    <DependentUpon>Edit_group.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\GroupPages\Users_in_group_student.xaml.cs">
+	    <DependentUpon>Users_in_group_student.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\GroupPages\Users_in_group.xaml.cs">
+	    <DependentUpon>Users_in_group.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\GroupPages\Users_outside_group.xaml.cs">
+	    <DependentUpon>Users_outside_group.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\HomeworkPages\List_all_groups.xaml.cs">
+	    <DependentUpon>List_all_groups.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\HomeworkPages\List_all_groups_with_hw.xaml.cs">
+	    <DependentUpon>List_all_groups_with_hw.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\RegistrationPage.xaml.cs">
 	    <DependentUpon>RegistrationPage.xaml</DependentUpon>
@@ -109,6 +130,15 @@
 	  <Compile Update="Views\CalendarPages\Calendar_note_edit.xaml.cs">
 	    <SubType>Code</SubType>
 	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\HomeworkPages\View_one_hw.xaml.cs">
+	    <DependentUpon>View_one_hw.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Teacher\Create_feedback.xaml.cs">
+	    <DependentUpon>Create_feedback.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Teacher\Edit_feedback.xaml.cs">
+	    <DependentUpon>Edit_feedback.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Teacher\Feedback.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
@@ -139,7 +169,40 @@
 	  <MauiXaml Update="Views\GroupPages\Edit_group.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\GroupPages\Users_list.xaml">
+	  <MauiXaml Update="Views\GroupPages\Users_in_group_student.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\GroupPages\Users_in_group.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\GroupPages\Users_outside_group.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\HomeworkPages\Add_hw.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\HomeworkPages\List_all_groups.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\HomeworkPages\List_all_groups_without_hw.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\HomeworkPages\List_all_groups_with_hw.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\HomeworkPages\List_all_hw_one_group.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\HomeworkPages\List_all_hw_user.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\HomeworkPages\View_one_hw.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Teacher\Create_feedback.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Teacher\Edit_feedback.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Teacher\Feedback.xaml">

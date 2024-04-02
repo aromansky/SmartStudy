@@ -62,6 +62,21 @@ namespace WebAPI.Controllers
             return await group_settings.ToListAsync();
         }
 
+        // Принимает id группы и возвращает дз, которое ей доступно
+        // GET: api/group_settings/homework-5
+        [HttpGet("homework-{id}")]
+        public async Task<ActionResult<IEnumerable<homework>>> GetHomeworkForGroup(long id)
+        {
+            var resHomework = from group_settings in _context.group_settings
+                           join group_homework in _context.group_homework on group_settings.group_settings_id equals group_homework.group_settings_id
+                           join homework in _context.homework on group_homework.homework_id equals homework.homework_id
+                           where group_settings.group_settings_id == id
+                           select homework;
+            if (resHomework == null)
+                return NotFound();
+            return await resHomework.ToListAsync();
+        }
+
         // GET: api/group_settings/event-5
         [HttpGet("tutor-{id}")]
         public async Task<ActionResult<IEnumerable<group_settings>>> GetGroup_settingsWithTutor(long id)

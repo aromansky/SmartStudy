@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartStudy.Views.GroupPages.Create_group"
              Title="Создание группы">
-    <Grid RowDefinitions="*,0.5*,4*,*">
+    <Grid RowDefinitions="*,4*,*">
         <Grid Grid.Row="0" Margin="5">
             <Entry x:Name="Title"
                    Placeholder="Название группы"
@@ -14,20 +14,12 @@
                    VerticalOptions="Start"/>
         </Grid>
 
-        <Grid Grid.Row="1" Margin="5">
-            <Button x:Name="AddUsers" 
-                    Text="Добавить участников" 
-                    WidthRequest="200" 
-                    HorizontalOptions="Start"
-                    Clicked="AddUsersToGroup"/>
-        </Grid>
-
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="1">
             <Editor x:Name="Description"
                 Placeholder="Описание"
                 MaxLength="500"/>
         </Grid>
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="2">
 
             <Button x:Name="SaveButton"
                     Text="Сохранить"

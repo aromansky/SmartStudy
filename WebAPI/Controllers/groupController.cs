@@ -26,6 +26,29 @@ namespace WebAPI.Controllers
             return await _context.group.ToListAsync();
         }
 
+        // Принимает homework_id, возвращает группы (group_settings), которым оно доступно
+        // GET: api/group_homework
+        [HttpGet("groups_with_homework-{id}")]
+        public async Task<ActionResult<IEnumerable<group_settings>>> GetGroupWithHomework(long id)
+        {
+            var groups = from homework in _context.homework
+                         join group_homework in _context.group_homework on homework.homework_id equals group_homework.homework_id
+                         join group_settings in _context.group_settings on group_homework.group_settings_id equals group_settings.group_settings_id
+                         where homework.homework_id == id
+                         select new group_settings
+                         {
+                             group_settings_id = group_settings.group_settings_id,
+                             Tutor_id = group_settings.Tutor_id,
+                             Title = group_settings.Title,
+                             Description = group_settings.Description
+
+                         };
+            if (groups is null)
+                return NotFound();
+            return await groups.ToListAsync();
+
+        }
+
         // GET: api/group/5
         [HttpGet("{id}")]
         public async Task<ActionResult<group>> Getgroup(long id)
@@ -91,20 +114,22 @@ namespace WebAPI.Controllers
         }
 
         // DELETE: api/group/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Deletegroup(long id)
+        [HttpDelete("{group_settings_id}_{user_id}")]
+        public async Task<IActionResult> Deletegroup(long group_settings_id, long user_id)
         {
             if (_context.group == null)
             {
                 return NotFound();
             }
-            var @group = await _context.group.FindAsync(id);
+            var @group = from _group in _context.@group
+                         where _group.group_settings_id == group_settings_id && _group.user_id == user_id
+                         select _group;
             if (@group == null)
             {
                 return NotFound();
             }
 
-            _context.group.Remove(@group);
+            _context.group.Remove(@group.First());
             await _context.SaveChangesAsync();
 
             return NoContent();
