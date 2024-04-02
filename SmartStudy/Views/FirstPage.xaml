@@ -22,7 +22,8 @@
             WidthRequest="300"
             HeightRequest="50"
             HorizontalOptions="Center"
-            Keyboard="Email"/>
+            Keyboard="Email"
+            BackgroundColor="AliceBlue"/>
 
         <Grid
             Grid.Row="1"
@@ -41,7 +42,8 @@
                    x:Name="Password"
                    Placeholder="Пароль"
                    IsPassword="True"
-                   MaxLength="20"/>
+                   MaxLength="20"
+                   BackgroundColor="AliceBlue"/>
 
             <ImageButton Source="opened.png"  Grid.Row="0" Grid.Column="1"
                          Clicked="ClickPasswordVisibility"></ImageButton>
