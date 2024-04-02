@@ -28,7 +28,8 @@
         <Grid
             Grid.Row="1"
             Grid.Column="2"
-            HorizontalOptions="Center">
+            HorizontalOptions="Center"
+            BackgroundColor="AliceBlue">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
@@ -42,8 +43,7 @@
                    x:Name="Password"
                    Placeholder="Пароль"
                    IsPassword="True"
-                   MaxLength="20"
-                   BackgroundColor="AliceBlue"/>
+                   MaxLength="20"/>
 
             <ImageButton Source="opened.png"  Grid.Row="0" Grid.Column="1"
                          Clicked="ClickPasswordVisibility"></ImageButton>

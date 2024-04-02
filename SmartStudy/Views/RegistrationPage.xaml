@@ -46,7 +46,8 @@
         <Grid
             Grid.Row="1"
             Grid.Column="2"
-            HorizontalOptions="Center">
+            HorizontalOptions="Center"
+            BackgroundColor="AliceBlue">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
@@ -62,8 +63,7 @@
                    HorizontalOptions="Center"
                    WidthRequest="250"
                    MaxLength="20"
-                   IsPassword="True"
-                   BackgroundColor="AliceBlue"/>
+                   IsPassword="True"/>
 
             
             <ImageButton Source="opened.png"  Grid.Row="0" Grid.Column="1"
