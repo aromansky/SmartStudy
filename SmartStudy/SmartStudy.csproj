@@ -98,6 +98,9 @@
 	  <Compile Update="Views\GroupPages\Edit_group.xaml.cs">
 	    <DependentUpon>Edit_group.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\GroupPages\Users_in_group_student.xaml.cs">
+	    <DependentUpon>Users_in_group_student.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\GroupPages\Users_in_group.xaml.cs">
 	    <DependentUpon>Users_in_group.xaml</DependentUpon>
 	  </Compile>
@@ -164,6 +167,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\GroupPages\Edit_group.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\GroupPages\Users_in_group_student.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\GroupPages\Users_in_group.xaml">

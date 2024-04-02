@@ -51,6 +51,9 @@
         ContentTemplate="{DataTemplate views_GroupPages:Edit_group}"
         Route="edit_group"/>
     <ShellContent
+        ContentTemplate="{DataTemplate views_GroupPages:Users_in_group_student}"
+        Route="users_in_droup"/>
+    <ShellContent
         ContentTemplate="{DataTemplate views_HomeworkPages:View_one_hw}"
         Route="view_one_hw"/>
     <ShellContent
