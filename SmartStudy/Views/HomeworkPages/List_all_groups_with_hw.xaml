@@ -16,7 +16,7 @@
                                 <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
                                 <Label Text="{Binding Description}" FontSize="20" TextColor="DarkGray"/>
                             </StackLayout>
-                            <ImageButton Grid.Column="1" Source="group_remove_black.svg" Clicked="remove_group"
+                            <ImageButton Grid.Column="1" Source="{Binding IconRemove}" Clicked="remove_group"
                                          WidthRequest="30" HeightRequest="30" HorizontalOptions="End" Margin="10"/>
                         </Grid>
                     </DataTemplate>

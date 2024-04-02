@@ -13,5 +13,31 @@
             this.Title = title;
             this.Description = description;
         }
+
+
+
+        public string IconAdd
+        {
+            get
+            {
+#if WINDOWS
+                return "group_add_black_1.png";
+#else
+                return "group_add_black.svg";
+#endif
+            }
+        }
+
+        public string IconRemove
+        {
+            get
+            {
+#if WINDOWS
+                return "group_remove_black.png";
+#else
+                return "group_remove_black.svg";
+#endif
+            }
+        }
     }
 }

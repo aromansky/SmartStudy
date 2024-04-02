@@ -11,15 +11,29 @@ namespace SmartStudy.Models
         public ObservableCollection<homework> GroupHomeworks { get; set; } = new ObservableCollection<homework>();
         public ObservableCollection<group_settings> GroupsWithHomework { get; set; } = new ObservableCollection<group_settings>();
         public ObservableCollection<group_settings> GroupsWithoutHomework { get; set; } = new ObservableCollection<group_settings>();
+
+#if WINDOWS
+                private string _icon = "delete.png";
+#else
+        private string _icon = "group_add_black.svg";
+#endif
+
+        public string Icon
+        {
+            get => _icon;
+            set { _icon = value; }
+        }
+
+
         public Homework_list() => LoadHomework();
 
         public async void LoadHomework()
-        {  
+        {
             List<homework> homeworks;
 
             User thisUser = Serializer.DeserializeUser();
 
-            if(thisUser.IsTutor())
+            if (thisUser.IsTutor())
                 homeworks = await Client.GetHomeworkForAuthor(thisUser.user_id);
             else
                 homeworks = await Client.GetUserHomework(thisUser.user_id);

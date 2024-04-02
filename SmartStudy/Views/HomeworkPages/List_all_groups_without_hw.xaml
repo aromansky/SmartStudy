@@ -16,7 +16,7 @@
                                 <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
                                 <Label Text="{Binding Description}" FontSize="20" TextColor="DarkGray"/>
                             </StackLayout>
-                            <ImageButton Grid.Column="1" Source="group_add_black.svg" Clicked="group_add"
+                            <ImageButton x:Name="add_button" Grid.Column="1" Source="{Binding IconAdd}" Clicked="group_add"
                                          WidthRequest="30" HeightRequest="30" HorizontalOptions="End" Margin="10"/>
                         </Grid>
                     </DataTemplate>

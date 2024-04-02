@@ -19,9 +19,22 @@ public partial class View_one_hw : ContentPage
         BindingContext = new Homework_list();
 
 #if WINDOWS
+if(user.IsTutor())
+        {
+            ToolbarItem add_group = new ToolbarItem { IconImageSource = ImageSource.FromFile("group_add_white.png") };
+            ToolbarItem groups = new ToolbarItem { IconImageSource = ImageSource.FromFile("groups_white.png") };
 
+            add_group.Clicked += Add_group_Clicked;
+            groups.Clicked += Groups_with_hw_Clicked;
+
+            if (this.ToolbarItems.Count == 0)
+            {
+                this.ToolbarItems.Add(add_group);
+                this.ToolbarItems.Add(groups);
+            }
+        } 
 #else
-        if(user.IsTutor())
+        if (user.IsTutor())
         {
             ToolbarItem add_group = new ToolbarItem { IconImageSource = ImageSource.FromFile("group_add_white.svg") };
             ToolbarItem groups = new ToolbarItem { IconImageSource = ImageSource.FromFile("groups1.svg") };
