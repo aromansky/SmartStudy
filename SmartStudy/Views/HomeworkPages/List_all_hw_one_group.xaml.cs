@@ -27,7 +27,7 @@ public partial class List_all_hw_one_group : ContentPage
 
     protected override void OnAppearing()
     {
-        (BindingContext as Homework_list).LoadGroupHomework(group_id);
+        UpdateHomework(group_id);
     }
 
     private async void remove_homework(object sender, EventArgs e)

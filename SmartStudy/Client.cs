@@ -423,6 +423,24 @@ namespace SmartStudy
             return users;
         }
 
+        /// <summary>
+        /// Удаляет пользователя из группы
+        /// </summary>
+        /// <param name="group_settings_id">id группы</param>
+        /// <param name="user_id">id пользователя</param>
+        public static async Task<bool> RemoveUserFromGroup(long group_settings_id, long user_id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.DeleteAsync(Constants.GroupUrl + $"/{group_settings_id}_{user_id}");
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
 
         /// <summary>
         ///  Возвращает список объектов group_settings, в которых состоит user
@@ -479,14 +497,14 @@ namespace SmartStudy
         /// </summary>
         /// <param name="g_s">Объект класса group_settings</param>
         /// <param name="users">Массив пользователей</param>
-        public static async void AddUsersToGroup(long group_settings_id, params User[] users)
+        public static async Task<bool> AddUsersToGroup(long group_settings_id, params long[] users_id)
         {
             Uri uri = new Uri(string.Format(Constants.GroupUrl, string.Empty));
-            foreach (User user in users)
+            foreach (long user_id in users_id)
             {
                 try
                 {
-                    string json = JsonSerializer.Serialize<Group>(new Group(group_settings_id, user.user_id),
+                    string json = JsonSerializer.Serialize<Group>(new Group(group_settings_id, user_id),
                         _serializerOptions);
                     StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -499,8 +517,8 @@ namespace SmartStudy
                 {
                     Debug.WriteLine(@"\tERROR {0}", ex.Message);
                 }
-
             }
+            return true;
         }
 
 

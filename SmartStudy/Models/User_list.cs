@@ -9,7 +9,6 @@ namespace SmartStudy.Models
         public ObservableCollection<User> Users { get; set; } = new ObservableCollection<User>();
         public ObservableCollection<User> UsersInGroup { get; set; } = new ObservableCollection<User>();
         public ObservableCollection<User> UsersOutsideGroup { get; set; } = new ObservableCollection<User>();
-        public ObservableCollection<object> SelectedUsers { get; set; } = new ObservableCollection<object>();
 
         public User_list() => Load_All_Users();
 

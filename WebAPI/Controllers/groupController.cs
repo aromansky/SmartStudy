@@ -114,20 +114,22 @@ namespace WebAPI.Controllers
         }
 
         // DELETE: api/group/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Deletegroup(long id)
+        [HttpDelete("{group_settings_id}_{user_id}")]
+        public async Task<IActionResult> Deletegroup(long group_settings_id, long user_id)
         {
             if (_context.group == null)
             {
                 return NotFound();
             }
-            var @group = await _context.group.FindAsync(id);
+            var @group = from _group in _context.@group
+                         where _group.group_settings_id == group_settings_id && _group.user_id == user_id
+                         select _group;
             if (@group == null)
             {
                 return NotFound();
             }
 
-            _context.group.Remove(@group);
+            _context.group.Remove(@group.First());
             await _context.SaveChangesAsync();
 
             return NoContent();

@@ -4,10 +4,8 @@
              x:Class="SmartStudy.Views.GroupPages.Edit_group"
              xmlns:converter="clr-namespace:SmartStudy.Views.GroupPages"
              Title="Группа">
-    <Grid RowDefinitions="*,*,4*,*,2*,*">
+    <Grid RowDefinitions="*,10*,*">
         <Grid Grid.Row="0" Margin="5">
-            <!--Spacing="10"-->
-
             <Entry x:Name="Title"
                    Placeholder="Название группы"
                    IsEnabled="False"
@@ -16,39 +14,14 @@
                    HeightRequest="50"
                    MaxLength="50"/>
         </Grid>
+        
         <Grid Grid.Row="1">
-            <Label Text="&#xA;Список участников: " FontSize="Medium"/>
-        </Grid>
-        <Grid Grid.Row="2" Margin="5">
-            <ScrollView>
-                <CollectionView x:Name="all_users"
-                                ItemsSource="{Binding UsersInGroup}"
-                                Margin="20">
-                    <CollectionView.Resources>
-                        <converter:FullNameConverter x:Key="FullNameConverter" />
-                    </CollectionView.Resources>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <VerticalStackLayout>
-                                <Label Text="{Binding ., Converter={StaticResource FullNameConverter}}" FontSize="28" HorizontalOptions="Start"/>
-                            </VerticalStackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </ScrollView>
-        </Grid>
-
-        <Grid Grid.Row="3" Margin="5">
-            <Button x:Name="AddUsers" Text="Добавить участников" WidthRequest="200" HorizontalOptions="Start" IsEnabled="False" IsVisible="False" Clicked="AddUsersToGroup"/>
-        </Grid>
-
-        <Grid Grid.Row="4">
             <Editor x:Name="Description"
                 Placeholder="Описание"
                 MaxLength="500"
                 IsEnabled="False"/>
         </Grid>
-        <Grid Grid.Row="5" Margin="5">
+        <Grid Grid.Row="2" Margin="5">
             <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
                 <Button x:Name="EditButton"
                             Text="Редактировать"

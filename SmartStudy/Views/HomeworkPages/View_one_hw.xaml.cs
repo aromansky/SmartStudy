@@ -15,9 +15,6 @@ public partial class View_one_hw : ContentPage
     }
     public View_one_hw()
     {
-        InitializeComponent();
-        BindingContext = new Homework_list();
-
 #if WINDOWS
 if(user.IsTutor())
         {
@@ -47,8 +44,11 @@ if(user.IsTutor())
                 this.ToolbarItems.Add(add_group);
                 this.ToolbarItems.Add(groups);
             }
-        }  
+        }
 #endif
+
+        InitializeComponent();
+        BindingContext = new Homework_list();
     }
     public async void Load_Hw(long hw_id)
     {

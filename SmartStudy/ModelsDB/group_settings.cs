@@ -21,7 +21,7 @@
             get
             {
 #if WINDOWS
-                return "group_add_black_1.png";
+                return "group_add_black.png";
 #else
                 return "group_add_black.svg";
 #endif
