@@ -62,4 +62,7 @@
     <ShellContent
         ContentTemplate="{DataTemplate views_HomeworkPages:List_all_hw_one_group}"
         Route="list_all_hw_one_group"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_student:Edit_feedback}"
+        Route="edit_feedback"/>
 </Shell>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SmartStudy.Views.Teacher.Edit_feedback"
-             xmlns:converter="clr-namespace:SmartStudy.Views.Teacher"
+             x:Class="SmartStudy.Views.Student.Edit_feedback"
+             xmlns:converter="clr-namespace:SmartStudy.Views.Student"
              Title="Фидбэк">
     <Grid RowDefinitions="*,*,4*,*,2*,*">
         <Grid Grid.Row="0" Margin="5">
@@ -38,38 +38,11 @@
             </ScrollView>
         </Grid>
 
-        <Grid Grid.Row="3" Margin="5">
-            <Button x:Name="AddUsers" Text="Добавить участников" WidthRequest="200" HorizontalOptions="Start" IsEnabled="False" IsVisible="False" Clicked="AddUsersToGroup"/>
-        </Grid>
-
         <Grid Grid.Row="4">
             <Editor x:Name="Description"
                 Placeholder="Описание"
                 MaxLength="500"
                 IsEnabled="False"/>
-        </Grid>
-        <Grid Grid.Row="5" Margin="5">
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
-                <Button x:Name="EditButton"
-                            Text="Редактировать"
-                            Clicked="EditButton_Clicked"
-                            HeightRequest="50"
-                            Grid.Column="0"/>
-
-                <Button x:Name="SaveButton"
-                            Text="Сохранить"
-                            Clicked="SaveButton_Clicked"
-                            IsEnabled="False"
-                            IsVisible="False"
-                            HeightRequest="50"
-                            Grid.Column="0"/>
-
-                <Button x:Name="DeleteButton"
-                            Text="Удалить"
-                            Clicked="DeleteButton_Clicked"
-                            HeightRequest="50"
-                            Grid.Column="1"/>
-            </Grid>
         </Grid>
     </Grid>
 </ContentPage>
