@@ -51,7 +51,6 @@ public partial class Groups : ContentPage
             CreateGroup.IsEnabled = false;
             CreateGroup.IsVisible = false;
         }
-
     }
 
     private async void group_ckicked(object sender, SelectionChangedEventArgs e)
