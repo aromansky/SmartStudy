@@ -1,16 +1,18 @@
 ﻿using SmartStudy.ModelsDB;
 using System.Collections.ObjectModel;
-using System.Globalization;
 
 namespace SmartStudy.Models
 {
         class User_list
     {
         public ObservableCollection<User> Users { get; set; } = new ObservableCollection<User>();
+        public ObservableCollection<User> UsersForGroup { get; set; } = new ObservableCollection<User>();
         public ObservableCollection<User> UsersInGroup { get; set; } = new ObservableCollection<User>();
         public ObservableCollection<User> UsersOutsideGroup { get; set; } = new ObservableCollection<User>();
         public ObservableCollection<User> UsersWithHomework { get; set; } = new ObservableCollection<User>();
         public ObservableCollection<User> UsersWithoutHomework { get; set; } = new ObservableCollection<User>();
+
+        public ObservableCollection<User> SelectedUsers { get; set; } = new ObservableCollection<User>();
 
         public User_list() => Load_All_Users();
 
@@ -20,6 +22,24 @@ namespace SmartStudy.Models
             Users.Clear();
             foreach (User user in users.OrderBy(x => x.LastName))
                 Users.Add(user);
+        }
+
+        public async void Load_Users_For_Group(List<long> users)
+        {
+            List<User> local_users = await Client.GetUsersList();
+            List<User> all_users = local_users.Where(x => !users.Contains(x.user_id)).ToList();
+            UsersForGroup.Clear();
+            foreach (User user in all_users)
+                UsersForGroup.Add(user);
+        }
+
+        public async void Load_Selected_Users(List<long> users)
+        {
+            List<User> local_users = await Client.GetUsersList();
+            List<User> all_users = local_users.Where(x => users.Contains(x.user_id)).ToList();
+            SelectedUsers.Clear();
+            foreach (User user in all_users)
+                SelectedUsers.Add(user);
         }
 
         public async void Load_Users_In_Group(long group_settings_id)
