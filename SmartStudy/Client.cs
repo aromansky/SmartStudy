@@ -105,7 +105,7 @@ namespace SmartStudy
         /// Создаёт в таблице group_settings запись, соответствующую объекту класса group_settings
         /// </summary>
         /// <param name="settings">Объект класса group_settings</param>
-        public static async void CreateGroupSettings(group_settings settings)
+        public static async Task<bool> CreateGroupSettings(group_settings settings)
         {
             Uri uri = new Uri(string.Format(Constants.GroupSettingsUrl, string.Empty));
 
@@ -118,9 +118,12 @@ namespace SmartStudy
 
                 if (response.IsSuccessStatusCode)
                     Debug.WriteLine("Ok");
+
+                return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
             {
+                return false;
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
         }
@@ -959,6 +962,17 @@ namespace SmartStudy
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
             return feedbacks;
+        }
+
+
+        /// <summary>
+        /// Возвращает id последней созданной группы
+        /// </summary>
+        /// <returns>id группы</returns>
+        public static async Task<long> GetLastCreatedGroupId()
+        {
+            List<group_settings> g_s = await GetGroupsWithTutor(Serializer.DeserializeUser().user_id);
+            return g_s.Last().group_settings_id;
         }
     }
 }
