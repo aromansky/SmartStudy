@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SmartStudy.Views.Student.Edit_feedback"
-             xmlns:converter="clr-namespace:SmartStudy.Views.Student"
+             x:Class="SmartStudy.Views.FeedbackPages.Edit_feedback"
              Title="Фидбэк">
     <Grid RowDefinitions="*,*,10*,*">
         <Grid Grid.Row="0" Margin="5">

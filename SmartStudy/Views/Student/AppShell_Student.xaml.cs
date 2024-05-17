@@ -1,6 +1,7 @@
 using SmartStudy.Views.CalendarPages;
 using SmartStudy.Views.GroupPages;
 using SmartStudy.Views.HomeworkPages;
+using SmartStudy.Views.FeedbackPages;
 namespace SmartStudy.Views.Student;
 
 public partial class AppShell_Student : Shell

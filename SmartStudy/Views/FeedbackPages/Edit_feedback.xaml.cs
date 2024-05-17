@@ -2,7 +2,7 @@ using SmartStudy.ModelsDB;
 using SmartStudy.Models;
 using System.Globalization;
 
-namespace SmartStudy.Views.Student;
+namespace SmartStudy.Views.FeedbackPages;
 
 [QueryProperty(nameof(Feedback_get_Id), "feedback_id")]
 public partial class Edit_feedback : ContentPage
@@ -25,5 +25,16 @@ public partial class Edit_feedback : ContentPage
     public Edit_feedback()
 	{
 		InitializeComponent();
+    }
+    protected override void OnAppearing()
+    {
+        if (!Serializer.DeserializeUser().IsTutor())
+        {
+            EditButton.IsEnabled = false;
+            EditButton.IsVisible = false;
+
+            DeleteButton.IsEnabled = false;
+            DeleteButton.IsVisible = false;
+        }
     }
 }

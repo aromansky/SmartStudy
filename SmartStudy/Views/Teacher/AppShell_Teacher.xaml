@@ -6,6 +6,7 @@
     xmlns:views_teacher="clr-namespace:SmartStudy.Views.Teacher"
     xmlns:views_CalendarPages="clr-namespace:SmartStudy.Views.CalendarPages"
     xmlns:views_GroupPages="clr-namespace:SmartStudy.Views.GroupPages"
+    xmlns:views_FeedbackPages="clr-namespace:SmartStudy.Views.FeedbackPages"
     xmlns:views_HomeworkPages="clr-namespace:SmartStudy.Views.HomeworkPages"
     Shell.FlyoutBehavior="Disabled">
 
@@ -47,10 +48,6 @@
     <ShellContent
         ContentTemplate="{DataTemplate views_CalendarPages:Calendar_note_edit}"
         Route="calendar_note_edit"/>
-    <!-- Возможно, можно удалить
-    <ShellContent
-        ContentTemplate="{DataTemplate views_CalendarPages:Group_list}"
-        Route="add_event_to_group"/>-->
     <ShellContent
         ContentTemplate="{DataTemplate views_GroupPages:Create_group}"
         Route="create_group"/>

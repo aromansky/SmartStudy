@@ -1,7 +1,7 @@
 using SmartStudy.ModelsDB;
 using SmartStudy.Models;
 
-namespace SmartStudy.Views.Teacher;
+namespace SmartStudy.Views.FeedbackPages;
 public partial class Create_feedback : ContentPage
 {
     public Create_feedback()
