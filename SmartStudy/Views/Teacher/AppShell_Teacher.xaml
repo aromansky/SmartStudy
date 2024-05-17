@@ -49,6 +49,9 @@
         ContentTemplate="{DataTemplate views_CalendarPages:Calendar_note_edit}"
         Route="calendar_note_edit"/>
     <ShellContent
+        ContentTemplate="{DataTemplate views_FeedbackPages:Create_feedback}"
+        Route="create_feedback"/>
+    <ShellContent
         ContentTemplate="{DataTemplate views_GroupPages:Create_group}"
         Route="create_group"/>
     <ShellContent
@@ -90,4 +93,7 @@
     <ShellContent
         ContentTemplate="{DataTemplate views_HomeworkPages:Users_without_hw}"
         Route="users_without_hw"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_FeedbackPages:Edit_feedback}"
+        Route="edit_feedback"/>
 </Shell>

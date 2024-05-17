@@ -7,10 +7,7 @@ public partial class Feedback : ContentPage
     public Feedback()
     {
         InitializeComponent();
-        grid.SetColumnSpan(main_view, 2);
-        Label lab = new Label();
-        lab.Text = "װטהבוך";
-        main_view.Add(lab);
+        BindingContext = new Feedback_list();
 #if WINDOWS
 #else
         row_button.Height = 0;
@@ -46,7 +43,7 @@ public partial class Feedback : ContentPage
 
     protected override void OnAppearing()
     {
-        //((Group_note)BindingContext).Load_Groups_With_User();
+        (BindingContext as Feedback_list).LoadUserFeedback();
         if (!Serializer.DeserializeUser().IsTutor())
         {
             CreateFeedback.IsEnabled = false;
@@ -55,11 +52,10 @@ public partial class Feedback : ContentPage
     }
     private async void feedback_clicked(object sender, SelectionChangedEventArgs e)
     {
-        //if (e.CurrentSelection.Count != 0)
-        //{
-        //    await Shell.Current.GoToAsync($"edit_group?group_settings_id={((ModelsDB.group_settings)e.CurrentSelection[0]).group_settings_id}");
-        //    all_groups.SelectedItem = null;
-        //}
-
+        if (e.CurrentSelection.Count != 0)
+        {
+            await Shell.Current.GoToAsync($"edit_feedback?feedback_id={((ModelsDB.feedback)e.CurrentSelection[0]).feedback_id}");
+            all_feedbacks.SelectedItem = null;
+        }
     }
 }

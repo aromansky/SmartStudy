@@ -820,7 +820,7 @@ namespace SmartStudy
         /// Создаёт в таблице feedback запись, соответствующую объекту класса feedback
         /// </summary>
         /// <param name="feedback">Объект класса feedback</param>
-        public static async void CreateFeedback(feedback feedback)
+        public static async Task<bool> CreateFeedback(feedback feedback)
         {
             Uri uri = new Uri(string.Format(Constants.FeedbackUrl, string.Empty));
 
@@ -833,10 +833,13 @@ namespace SmartStudy
 
                 if (response.IsSuccessStatusCode)
                     Debug.WriteLine("Ok");
+
+                return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return false;
             }
         }
 
@@ -974,6 +977,8 @@ namespace SmartStudy
         {
             List<group_settings> g_s = await GetGroupsWithTutor(Serializer.DeserializeUser().user_id);
             return g_s.Last().group_settings_id;
+        }
+
 
         /// <summary>
         /// Возвращает фидбек с данным id

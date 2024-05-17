@@ -23,6 +23,7 @@ public partial class AppShell_Teacher : Shell
         Routing.UnRegisterRoute("list_all_hw_one_group");
         Routing.UnRegisterRoute("list_all_hw_group");
         Routing.UnRegisterRoute("users_in_group");
+        Routing.UnRegisterRoute("edit_feedback");
 
 
         Routing.RegisterRoute("main_page", typeof(MainPage_Teacher));
@@ -36,6 +37,7 @@ public partial class AppShell_Teacher : Shell
         Routing.RegisterRoute("create_group", typeof(Create_group));
         Routing.RegisterRoute("feedback", typeof(Feedback));
         Routing.RegisterRoute("create_feedback", typeof(Create_feedback));
+        Routing.RegisterRoute("edit_feedback", typeof(Edit_feedback));
         Routing.RegisterRoute("add_hw", typeof(Add_hw));
         Routing.RegisterRoute("view_one_hw", typeof(View_one_hw));
         Routing.RegisterRoute("list_all_hw_user", typeof(List_all_hw_user));

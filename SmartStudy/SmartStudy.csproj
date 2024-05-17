@@ -92,6 +92,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\FeedbackPages\Selected_users_for_create_feedback.xaml.cs">
+	    <DependentUpon>Selected_users_for_create_feedback.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\FeedbackPages\Users_for_create_feedback.xaml.cs">
+	    <DependentUpon>Users_for_create_feedback.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\GroupPages\Create_group.xaml.cs">
 	    <DependentUpon>Create_group.xaml</DependentUpon>
 	  </Compile>
@@ -162,6 +168,12 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\CalendarPages\Group_list.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\FeedbackPages\Selected_users_for_create_feedback.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\FeedbackPages\Users_for_create_feedback.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\FirstPage.xaml">

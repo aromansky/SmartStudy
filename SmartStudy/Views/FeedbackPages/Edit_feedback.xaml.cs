@@ -10,7 +10,7 @@ public partial class Edit_feedback : ContentPage
     long feedback_id;
     public long Feedback_get_Id
     {
-        set { Load_feedback__Id(value); }   
+        set { Load_feedback__Id(value); }
     }
     private async void Load_feedback__Id(long text_obj)
     {
@@ -23,8 +23,8 @@ public partial class Edit_feedback : ContentPage
     }
 
     public Edit_feedback()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
     }
     protected override void OnAppearing()
     {
@@ -35,6 +35,31 @@ public partial class Edit_feedback : ContentPage
 
             DeleteButton.IsEnabled = false;
             DeleteButton.IsVisible = false;
+        }
+    }
+
+    private void EditButton_Clicked(object sender, EventArgs e)
+    {
+        Title.IsReadOnly = false;
+        Description.IsReadOnly = false;
+        SaveButton.IsEnabled = true;
+        SaveButton.IsVisible = true;
+    }
+
+    private async void SaveButton_Clicked(object sender, EventArgs e)
+    {
+        Client.EditFeedbackFromId(feedback_id, new feedback(Serializer.DeserializeUser().user_id,
+            Title.Text, Description.Text));
+        await Shell.Current.GoToAsync("///feedback");
+    }
+
+    private async void DeleteButton_Clicked(object sender, EventArgs e)
+    {
+        bool result = await DisplayAlert("Подтвердить действие", $"Вы хотите удалить данный фидбек?", "Да", "Нет");
+        if (result)
+        {
+            await Client.DeleteFeedback(feedback_id);
+            await Shell.Current.GoToAsync("///feedback");
         }
     }
 }

@@ -6,6 +6,13 @@
         public long author_id { get; set; }
         public string Title { get; set; }
         public string? Description { get; set; }
+
+        public feedback(long author_id, string title, string description)
+        {
+            this.author_id = author_id;
+            Title = title;
+            Description = description;
+        }
     }
 
 
@@ -13,12 +20,10 @@
     {
         public string author { get; set; }
 
-        public ModFeedback(feedback fb, string author_firstname, string author_lastname)
+        public ModFeedback(feedback fb, string author_firstname, string author_lastname): base(fb.author_id,
+                                                                                               fb.Title, fb.Description)
         {
             this.feedback_id = fb.feedback_id;
-            this.author_id = fb.author_id;
-            this.Title = fb.Title;
-            this.Description = fb.Description;
             this.author = $"{author_lastname} {author_firstname}";
         }
     }

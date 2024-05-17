@@ -28,13 +28,13 @@
             <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
                 <Button x:Name="EditButton"
                          Text="Редактировать"
-                         
+                         Clicked="EditButton_Clicked"
                          HeightRequest="50"
                          Grid.Column="0"/>
 
                 <Button x:Name="SaveButton"
                          Text="Сохранить"
-                         
+                         Clicked="SaveButton_Clicked"
                          IsEnabled="False"
                          IsVisible="False"
                          HeightRequest="50"
@@ -42,7 +42,7 @@
 
                 <Button x:Name="DeleteButton"
                          Text="Удалить"
-                         
+                         Clicked="DeleteButton_Clicked"
                          HeightRequest="50"
                          Grid.Column="1"/>
             </Grid>

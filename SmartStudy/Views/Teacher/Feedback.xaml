@@ -25,8 +25,8 @@
         </Grid>
         <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5">
             <ScrollView>
-                <CollectionView x:Name="all_groups"
-                    ItemsSource="{Binding GroupsWithUser}" 
+                <CollectionView x:Name="all_feedbacks"
+                    ItemsSource="{Binding UserFeedback}" 
                     Margin="20"
                     SelectionMode="Single"
                     SelectionChanged="feedback_clicked">
@@ -38,7 +38,7 @@
                         <DataTemplate>
                             <StackLayout>
                                 <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
-                                <Label Text="{Binding Description}" FontSize="20" TextColor="DarkGray"/>
+                                <Label Text="{Binding author}" FontSize="20" TextColor="DarkGray"/>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
