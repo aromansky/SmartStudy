@@ -26,7 +26,7 @@ public partial class AppShell_Student : Shell
         Routing.RegisterRoute("calendar", typeof(Calendar));
         Routing.RegisterRoute("calendar_note_edit", typeof(Calendar_note_edit));
         Routing.RegisterRoute("feedback", typeof(Feedback));
-        Routing.RegisterRoute("edit_feedback", typeof(Feedback));
+        Routing.RegisterRoute("edit_feedback", typeof(Edit_feedback));
         Routing.RegisterRoute("homework", typeof(Homework));
         Routing.RegisterRoute("edit_group", typeof(Edit_group));
         Routing.RegisterRoute("users_in_group", typeof(Users_in_group_student));

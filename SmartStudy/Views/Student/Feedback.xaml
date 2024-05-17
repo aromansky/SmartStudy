@@ -20,10 +20,11 @@
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5">
             <ScrollView>
-                <CollectionView x:Name="all_tasks"
+                <CollectionView x:Name="all_feedbacks"
                     ItemsSource="{Binding UserFeedback}"
                     Margin="20"
-                    SelectionMode="Single">
+                    SelectionMode="Single"
+                    SelectionChanged="feedback_clicked">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                     </CollectionView.ItemsLayout>
@@ -32,7 +33,7 @@
                         <DataTemplate>
                             <StackLayout>
                                 <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
-                                <Label Text="{Binding Description}" FontSize="20" TextColor="DarkGray"/>
+                                <Label Text="{Binding author}" FontSize="20" TextColor="DarkGray"/>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

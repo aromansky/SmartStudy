@@ -960,5 +960,49 @@ namespace SmartStudy
             }
             return feedbacks;
         }
+
+        /// <summary>
+        /// Возвращает фидбек с данным id
+        /// </summary>
+        /// <param name="feedback_id">id фидбека</param>
+        /// <returns></returns>
+        public static async Task<feedback> GetFeedbackForID(long feedback_id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.FeedbackUrl + $"/{feedback_id}");
+                if (response.IsSuccessStatusCode)
+                    return await response.Content.ReadFromJsonAsync<feedback>();
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает пользователя с данным id
+        /// </summary>
+        /// <param name="user_id">id пользователя</param>
+        /// <returns></returns>
+        public static async Task<User> GetUserForID(long user_id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.UserUrl + $"/{user_id}");
+                if (response.IsSuccessStatusCode)
+                    return await response.Content.ReadFromJsonAsync<User>();
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return null;
+            }
+        }
     }
 }

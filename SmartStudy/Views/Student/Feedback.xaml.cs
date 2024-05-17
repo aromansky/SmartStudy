@@ -45,11 +45,10 @@ public partial class Feedback : ContentPage
 
     private async void feedback_clicked(object sender, SelectionChangedEventArgs e)
     {
-        //if (e.CurrentSelection.Count != 0)
-        //{
-        //    await Shell.Current.GoToAsync($"edit_group?group_settings_id={((ModelsDB.group_settings)e.CurrentSelection[0]).group_settings_id}");
-        //    all_groups.SelectedItem = null;
-        //}
-
+        if (e.CurrentSelection.Count != 0)
+        {
+            await Shell.Current.GoToAsync($"edit_feedback?feedback_id={((ModelsDB.feedback)e.CurrentSelection[0]).feedback_id}");
+            all_feedbacks.SelectedItem = null;
+        }
     }
 }
