@@ -158,7 +158,7 @@
 	  <Compile Update="Views\FeedbackPages\Create_feedback.xaml.cs">
 	    <DependentUpon>Create_feedback.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Teacher\Feedback.xaml.cs">
+	  <Compile Update="Views\FeedbackPages\Feedback.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Teacher\Homework.xaml.cs">
@@ -241,7 +241,7 @@
 	  <MauiXaml Update="Views\FeedbackPages\Create_feedback.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Teacher\Feedback.xaml">
+	  <MauiXaml Update="Views\FeedbackPages\Feedback.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Teacher\Homework.xaml">
