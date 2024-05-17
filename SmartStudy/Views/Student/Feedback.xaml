@@ -18,8 +18,26 @@
             <RowDefinition Height="15*"/>
             <RowDefinition Height="*" x:Name="row_button"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0">
-            <VerticalStackLayout x:Name="main_view"></VerticalStackLayout>
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5">
+            <ScrollView>
+                <CollectionView x:Name="all_tasks"
+                    ItemsSource="{Binding UserFeedback}"
+                    Margin="20"
+                    SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Text="{Binding Title}" FontSize="28" HorizontalOptions="Start"/>
+                                <Label Text="{Binding Description}" FontSize="20" TextColor="DarkGray"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1">
             <Button Text="Главная" Clicked="clicked_to_main_page"/>

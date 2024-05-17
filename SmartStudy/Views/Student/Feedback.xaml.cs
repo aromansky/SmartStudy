@@ -7,15 +7,11 @@ public partial class Feedback : ContentPage
 	public Feedback()
 	{
 		InitializeComponent();
-        grid.SetColumnSpan(main_view, 2);
-        Label lab = new Label();
-        lab.Text = "װטהבוך";
-        main_view.Add(lab);
+        BindingContext = new Feedback_list();
 #if WINDOWS
 #else
         row_button.Height = 0;
 #endif
-        BindingContext = new Group_note();
     }
     public async void update_page(object sender, EventArgs e)
     {
@@ -43,7 +39,7 @@ public partial class Feedback : ContentPage
 
     protected override void OnAppearing()
     {
-        //((Group_note)BindingContext).Load_Groups_With_User();
+        (BindingContext as Feedback_list).LoadUserFeedback();
     }
 
 
