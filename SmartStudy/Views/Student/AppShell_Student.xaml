@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views_student="clr-namespace:SmartStudy.Views.Student"
     xmlns:views_CalendarPages="clr-namespace:SmartStudy.Views.CalendarPages"
+    xmlns:views_FeedbackPages="clr-namespace:SmartStudy.Views.FeedbackPages"
     xmlns:views_GroupPages="clr-namespace:SmartStudy.Views.GroupPages"
     xmlns:views_HomeworkPages="clr-namespace:SmartStudy.Views.HomeworkPages"
     Shell.FlyoutBehavior="Disabled">
@@ -62,4 +63,7 @@
     <ShellContent
         ContentTemplate="{DataTemplate views_HomeworkPages:List_all_hw_one_group}"
         Route="list_all_hw_one_group"/>
+    <ShellContent
+        ContentTemplate="{DataTemplate views_FeedbackPages:Edit_feedback}"
+        Route="edit_feedback"/>
 </Shell>

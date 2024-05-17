@@ -1,3 +1,5 @@
+using SmartStudy.Models;
+
 namespace SmartStudy.Views.Teacher;
 
 public partial class Feedback : ContentPage
@@ -39,6 +41,17 @@ public partial class Feedback : ContentPage
     public async void clicked_to_create_feedback(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("create_feedback");
+    }
+
+
+    protected override void OnAppearing()
+    {
+        //((Group_note)BindingContext).Load_Groups_With_User();
+        if (!Serializer.DeserializeUser().IsTutor())
+        {
+            CreateFeedback.IsEnabled = false;
+            CreateFeedback.IsVisible = false;
+        }
     }
     private async void feedback_clicked(object sender, SelectionChangedEventArgs e)
     {

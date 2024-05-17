@@ -1,3 +1,5 @@
+using SmartStudy.Models;
+
 namespace SmartStudy.Views.Student;
 
 public partial class Feedback : ContentPage
@@ -5,10 +7,7 @@ public partial class Feedback : ContentPage
 	public Feedback()
 	{
 		InitializeComponent();
-        grid.SetColumnSpan(main_view, 2);
-        Label lab = new Label();
-        lab.Text = "װטהבוך";
-        main_view.Add(lab);
+        BindingContext = new Feedback_list();
 #if WINDOWS
 #else
         row_button.Height = 0;
@@ -34,5 +33,22 @@ public partial class Feedback : ContentPage
     public async void clicked_to_groups(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("///groups");
+    }
+
+
+
+    protected override void OnAppearing()
+    {
+        (BindingContext as Feedback_list).LoadUserFeedback();
+    }
+
+
+    private async void feedback_clicked(object sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection.Count != 0)
+        {
+            await Shell.Current.GoToAsync($"edit_feedback?feedback_id={((ModelsDB.feedback)e.CurrentSelection[0]).feedback_id}");
+            all_feedbacks.SelectedItem = null;
+        }
     }
 }

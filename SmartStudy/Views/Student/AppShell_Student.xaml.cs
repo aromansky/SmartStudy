@@ -1,6 +1,7 @@
 using SmartStudy.Views.CalendarPages;
 using SmartStudy.Views.GroupPages;
 using SmartStudy.Views.HomeworkPages;
+using SmartStudy.Views.FeedbackPages;
 namespace SmartStudy.Views.Student;
 
 public partial class AppShell_Student : Shell
@@ -20,11 +21,13 @@ public partial class AppShell_Student : Shell
         Routing.UnRegisterRoute("list_all_hw_one_group");
         Routing.UnRegisterRoute("list_all_hw_group");
         Routing.UnRegisterRoute("users_in_group");
+        Routing.UnRegisterRoute("edit_feedback");
 
         Routing.RegisterRoute("main_page", typeof(MainPage_Student));
         Routing.RegisterRoute("calendar", typeof(Calendar));
         Routing.RegisterRoute("calendar_note_edit", typeof(Calendar_note_edit));
         Routing.RegisterRoute("feedback", typeof(Feedback));
+        Routing.RegisterRoute("edit_feedback", typeof(Edit_feedback));
         Routing.RegisterRoute("homework", typeof(Homework));
         Routing.RegisterRoute("edit_group", typeof(Edit_group));
         Routing.RegisterRoute("users_in_group", typeof(Users_in_group_student));

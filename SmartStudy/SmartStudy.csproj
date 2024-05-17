@@ -146,11 +146,11 @@
 	  <Compile Update="Views\HomeworkPages\View_one_hw.xaml.cs">
 	    <DependentUpon>View_one_hw.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Teacher\Create_feedback.xaml.cs">
-	    <DependentUpon>Create_feedback.xaml</DependentUpon>
+	  <Compile Update="Views\FeedbackPages\Edit_feedback.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Teacher\Edit_feedback.xaml.cs">
-	    <DependentUpon>Edit_feedback.xaml</DependentUpon>
+	  <Compile Update="Views\FeedbackPages\Create_feedback.xaml.cs">
+	    <DependentUpon>Create_feedback.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Teacher\Feedback.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
@@ -223,10 +223,10 @@
 	  <MauiXaml Update="Views\HomeworkPages\View_one_hw.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Teacher\Create_feedback.xaml">
+	  <MauiXaml Update="Views\FeedbackPages\Edit_feedback.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Teacher\Edit_feedback.xaml">
+	  <MauiXaml Update="Views\FeedbackPages\Create_feedback.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Teacher\Feedback.xaml">
