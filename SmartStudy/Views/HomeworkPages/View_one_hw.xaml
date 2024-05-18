@@ -41,7 +41,7 @@
                     IsReadOnly="True"
                     HeightRequest="500" 
                     VerticalOptions="StartAndExpand"
-                    BackgroundColor="AliceBlue"/>
+                    />
         </Grid>
         <Grid Grid.Row="3">
             <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
