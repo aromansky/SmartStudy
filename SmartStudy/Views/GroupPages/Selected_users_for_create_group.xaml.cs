@@ -28,7 +28,6 @@ public partial class Selected_users_for_create_group : ContentPage
     private async void delete_user(object sender, EventArgs e)
     {
         User user = (sender as ImageButton).BindingContext as User;
-        //await Client.AddUsersToGroup(group_id, user.user_id);
         users.Remove(user.user_id);
         UpdateUsers(user);
     }

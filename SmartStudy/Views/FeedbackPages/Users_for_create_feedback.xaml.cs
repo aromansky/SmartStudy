@@ -2,12 +2,12 @@ using SmartStudy.Models;
 using SmartStudy.ModelsDB;
 using System.Globalization;
 
-namespace SmartStudy.Views.GroupPages;
+namespace SmartStudy.Views.FeedbackPages;
 
-public partial class Users_for_create_group : ContentPage
+public partial class Users_for_create_feedback : ContentPage
 {
     List<long> users;
-    public Users_for_create_group(ref List<long> users)
+    public Users_for_create_feedback(ref List<long> users)
 	{
 		InitializeComponent();
         BindingContext = new User_list();

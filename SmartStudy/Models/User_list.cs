@@ -7,6 +7,7 @@ namespace SmartStudy.Models
     {
         public ObservableCollection<User> Users { get; set; } = new ObservableCollection<User>();
         public ObservableCollection<User> UsersForGroup { get; set; } = new ObservableCollection<User>();
+        public ObservableCollection<User> UsersWithFeedback { get; set; } = new ObservableCollection<User>();
         public ObservableCollection<User> UsersInGroup { get; set; } = new ObservableCollection<User>();
         public ObservableCollection<User> UsersOutsideGroup { get; set; } = new ObservableCollection<User>();
         public ObservableCollection<User> UsersWithHomework { get; set; } = new ObservableCollection<User>();
@@ -31,6 +32,14 @@ namespace SmartStudy.Models
             UsersForGroup.Clear();
             foreach (User user in all_users)
                 UsersForGroup.Add(user);
+        }
+
+        public async void Load_Users_With_Feedback(long feedback_id)
+        {
+            List<User> local_users = await Client.GetUsersWithFeeedback(feedback_id);
+            UsersWithFeedback.Clear();
+            foreach (User user in local_users)
+                UsersWithFeedback.Add(user);
         }
 
         public async void Load_Selected_Users(List<long> users)

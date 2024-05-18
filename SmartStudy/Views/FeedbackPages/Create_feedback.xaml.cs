@@ -4,39 +4,71 @@ using SmartStudy.Models;
 namespace SmartStudy.Views.FeedbackPages;
 public partial class Create_feedback : ContentPage
 {
+    List<long> users;
+    List<long> groups;
     public Create_feedback()
 	{
-		InitializeComponent();
+#if WINDOWS
+        ToolbarItem add_users = new ToolbarItem { IconImageSource = ImageSource.FromFile("user_add_white.png") };
+        ToolbarItem add_groups = new ToolbarItem { IconImageSource = ImageSource.FromFile("group_add_white.png") };
+        ToolbarItem users_bar = new ToolbarItem { IconImageSource = ImageSource.FromFile("users_white.png") };
+#else
+        ToolbarItem add_users = new ToolbarItem { IconImageSource = ImageSource.FromFile("user_add_white.svg") };
+        ToolbarItem add_groups = new ToolbarItem { IconImageSource = ImageSource.FromFile("group_add_white.png") };
+        ToolbarItem users_bar = new ToolbarItem { IconImageSource = ImageSource.FromFile("users.svg") };
+#endif
+        add_users.Clicked += AddUsers;
+        add_groups.Clicked += AddGroup;
+        users_bar.Clicked += UsersWithFeedback;
+
+        this.ToolbarItems.Add(users_bar);
+        this.ToolbarItems.Add(add_groups);
+        this.ToolbarItems.Add(add_users);
+
+        users = new List<long>();
+        groups = new List<long>();
+
+        InitializeComponent();
     }
 
     private async void Savebutton_Clicked(object sender, EventArgs e)
     {
         if (string.IsNullOrEmpty(Title.Text))
-            await DisplayAlert("Ошибка", "Введите название фидбэка", "Ок");
+            await DisplayAlert("Ошибка", "Введите заголовок", "Ок");
         else
         {
-            group_settings g_s = new group_settings(Serializer.DeserializeUser().user_id, Title.Text, Description.Text);
-            Client.CreateGroupSettings(g_s); // вот тут заменить на feedbackSettings?
+            AddUsersFromGroups();
+            await Client.CreateFeedback(new feedback(Serializer.DeserializeUser().user_id, Title.Text, Description.Text));
+            long id = await Client.GetLastCreatedFeedbackId();
+            await Client.SendFeedbackToUsers(id, users.ToArray());
             await Shell.Current.GoToAsync("///feedback");
         }
     }
-
-    private void AddUsersToFeedback(object sender, EventArgs e)
+    private async void AddUsers(object sender, EventArgs e)
     {
-        DisplayAlert("Заглушка", "На данный момент эта кнопка не работает", "Ок");
-        //bool res = await DisplayAlert("Создание группы", "Сохранить указанные настройки и перейти к добавлению пользователей?", "Да", "Нет");
-        //if(res)
-        //{
-        //    if (string.IsNullOrEmpty(Title.Text))
-        //        await DisplayAlert("Ошибка", "Введите название группы", "Ок");
-        //    else
-        //    {
-        //        long user_id = Serializer.DeserializeUser().user_id;
-        //        group_settings g_s = new group_settings(user_id, Title.Text, Description.Text);
-        //        Client.CreateGroupSettings(g_s);
-        //        // надо будет подумать над переходом к странице добавления пользователей
-               
-        //    }
-        //}
+        await AddUsersFromGroups();
+        await Navigation.PushAsync(new Users_for_create_feedback(ref users));
+    }
+
+    private async void UsersWithFeedback(object sender, EventArgs e)
+    {
+        await AddUsersFromGroups();
+        await Navigation.PushAsync(new Selected_users_for_create_feedback(ref users));
+    }
+
+    private async void AddGroup(object sender, EventArgs e)
+    {
+        groups = groups.Distinct().ToList();
+        await Navigation.PushAsync(new Groups_for_create_feedback(ref groups));
+    }
+
+    private async Task<bool> AddUsersFromGroups()
+    {
+        foreach (long g_s_id in groups)
+        {
+            List<User> u = await Client.GetUsersFromGroup(g_s_id);
+            users = users.Concat(u.Select(x => x.user_id)).Distinct().ToList();
+        }
+        return true;
     }
 }

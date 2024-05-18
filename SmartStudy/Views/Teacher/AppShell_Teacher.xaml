@@ -4,9 +4,9 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views_teacher="clr-namespace:SmartStudy.Views.Teacher"
+    xmlns:views_Feedback="clr-namespace:SmartStudy.Views.FeedbackPages"
     xmlns:views_CalendarPages="clr-namespace:SmartStudy.Views.CalendarPages"
     xmlns:views_GroupPages="clr-namespace:SmartStudy.Views.GroupPages"
-    xmlns:views_FeedbackPages="clr-namespace:SmartStudy.Views.FeedbackPages"
     xmlns:views_HomeworkPages="clr-namespace:SmartStudy.Views.HomeworkPages"
     Shell.FlyoutBehavior="Disabled">
 
@@ -26,7 +26,7 @@
         <Tab Icon="message.svg"
             Title="Фидбэк">
             <ShellContent 
-                ContentTemplate="{DataTemplate views_teacher:Feedback}"
+                ContentTemplate="{DataTemplate views_Feedback:Feedback}"
                 Route="feedback"/>
         </Tab>
         <Tab Icon="homework.svg"

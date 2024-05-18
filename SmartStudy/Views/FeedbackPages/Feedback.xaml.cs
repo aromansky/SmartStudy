@@ -1,12 +1,12 @@
 using SmartStudy.Models;
 
-namespace SmartStudy.Views.Student;
+namespace SmartStudy.Views.FeedbackPages;
 
 public partial class Feedback : ContentPage
 {
-	public Feedback()
-	{
-		InitializeComponent();
+    public Feedback()
+    {
+        InitializeComponent();
         BindingContext = new Feedback_list();
 #if WINDOWS
 #else
@@ -35,14 +35,21 @@ public partial class Feedback : ContentPage
         await Shell.Current.GoToAsync("///groups");
     }
 
+    public async void clicked_to_create_feedback(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("create_feedback");
+    }
 
 
     protected override void OnAppearing()
     {
         (BindingContext as Feedback_list).LoadUserFeedback();
+        if (!Serializer.DeserializeUser().IsTutor())
+        {
+            CreateFeedback.IsEnabled = false;
+            CreateFeedback.IsVisible = false;
+        }
     }
-
-
     private async void feedback_clicked(object sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.Count != 0)

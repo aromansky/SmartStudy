@@ -2,12 +2,12 @@ using SmartStudy.Models;
 using SmartStudy.ModelsDB;
 using System.Globalization;
 
-namespace SmartStudy.Views.GroupPages;
+namespace SmartStudy.Views.FeedbackPages;
 
-public partial class Users_for_create_group : ContentPage
+public partial class Selected_users_for_create_feedback : ContentPage
 {
     List<long> users;
-    public Users_for_create_group(ref List<long> users)
+    public Selected_users_for_create_feedback(ref List<long> users)
 	{
 		InitializeComponent();
         BindingContext = new User_list();
@@ -16,19 +16,19 @@ public partial class Users_for_create_group : ContentPage
 
     protected override async void OnAppearing()
     {
-        (BindingContext as User_list).Load_Users_For_Group(users);
+        (BindingContext as User_list).Load_Selected_Users(users);
     }
 
 
     private void UpdateUsers(User user)
     {
-        (BindingContext as User_list).UsersForGroup.Remove(user);
+        (BindingContext as User_list).SelectedUsers.Remove(user);
     }
 
-    private async void add_user(object sender, EventArgs e)
+    private async void delete_user(object sender, EventArgs e)
     {
         User user = (sender as ImageButton).BindingContext as User;
-        users.Add(user.user_id);
+        users.Remove(user.user_id);
         UpdateUsers(user);
     }
 }
