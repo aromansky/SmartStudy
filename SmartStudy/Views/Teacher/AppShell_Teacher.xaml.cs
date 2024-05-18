@@ -9,7 +9,6 @@ public partial class AppShell_Teacher : Shell
     public AppShell_Teacher()
     {
         InitializeComponent();
-        Routing.UnRegisterRoute("main_page");
         Routing.UnRegisterRoute("calendar");
         Routing.UnRegisterRoute("feedback");
         Routing.UnRegisterRoute("calendar");
@@ -26,8 +25,6 @@ public partial class AppShell_Teacher : Shell
         Routing.UnRegisterRoute("edit_feedback");
         Routing.UnRegisterRoute("create_feedback");
 
-
-        Routing.RegisterRoute("main_page", typeof(MainPage_Teacher));
         Routing.RegisterRoute("calendar", typeof(Calendar));
         Routing.RegisterRoute("calendar_note_add", typeof(Calendar_note_add));
         Routing.RegisterRoute("calendar_note_edit", typeof(Calendar_note_edit));

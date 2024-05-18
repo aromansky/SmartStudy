@@ -17,7 +17,7 @@ public partial class List_all_hw_group : ContentPage
     }
     public async void update_page(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("///main_page");
+        await Shell.Current.GoToAsync("///groups");
         await Shell.Current.GoToAsync("list_all_hw_group");
     }
 

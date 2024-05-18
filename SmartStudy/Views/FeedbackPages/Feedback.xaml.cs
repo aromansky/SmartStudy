@@ -15,12 +15,8 @@ public partial class Feedback : ContentPage
     }
     public async void update_page(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("///main_page");
+        await Shell.Current.GoToAsync("///groups");
         await Shell.Current.GoToAsync("///feedback");
-    }
-    public async void clicked_to_main_page(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("///main_page");
     }
     public async void clicked_to_calendar(object sender, EventArgs e)
     {

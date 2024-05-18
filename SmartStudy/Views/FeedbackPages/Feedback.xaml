@@ -12,7 +12,6 @@
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
-            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -23,7 +22,7 @@
         <Grid Grid.Column="0" Grid.Row="0">
             <VerticalStackLayout x:Name="main_view"></VerticalStackLayout>
         </Grid>
-        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5">
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4">
             <ScrollView>
                 <CollectionView x:Name="all_feedbacks"
                     ItemsSource="{Binding UserFeedback}" 
@@ -45,7 +44,7 @@
                 </CollectionView>
             </ScrollView>
         </Grid>
-        <Grid Grid.Column="4" Grid.Row="1">
+        <Grid Grid.Column="3" Grid.Row="1">
             <ImageButton Source="plus_circle.png" 
                          x:Name="CreateFeedback"
                          WidthRequest="70" 
@@ -57,18 +56,15 @@
                          Clicked="clicked_to_create_feedback"/>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="2">
-            <Button Text="Главная" Clicked="clicked_to_main_page"/>
-        </Grid>
-        <Grid Grid.Column="1" Grid.Row="2">
             <Button Text="Календарь" Clicked="clicked_to_calendar"/>
         </Grid>
-        <Grid Grid.Column="2" Grid.Row="2">
+        <Grid Grid.Column="1" Grid.Row="2">
             <Button Text="Фидбэк" IsEnabled="False"/>
         </Grid>
-        <Grid Grid.Column="3" Grid.Row="2">
+        <Grid Grid.Column="2" Grid.Row="2">
             <Button Text="Домашнее задание" Clicked="clicked_to_homework"/>
         </Grid>
-        <Grid Grid.Column="4" Grid.Row="2">
+        <Grid Grid.Column="3" Grid.Row="2">
             <Button Text="Группы" Clicked="clicked_to_groups"/>
         </Grid>
     </Grid>

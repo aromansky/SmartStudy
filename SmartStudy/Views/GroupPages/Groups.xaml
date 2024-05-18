@@ -12,14 +12,13 @@
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
-            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="14*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*" x:Name="row_button"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5">
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4">
             <ScrollView>
                 <CollectionView x:Name="all_groups"
                     ItemsSource="{Binding GroupsWithUser}"
@@ -42,7 +41,7 @@
             </ScrollView>
         </Grid>
 
-        <Grid Grid.Column="4" Grid.Row="1">
+        <Grid Grid.Column="3" Grid.Row="1">
             <ImageButton Source="plus_circle.png" 
                             x:Name="CreateGroup"
                             WidthRequest="70" 
@@ -54,18 +53,15 @@
                             Clicked="clicked_to_create_group"/>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="2">
-            <Button Text="Главная" Clicked="clicked_to_main_page"/>
-        </Grid>
-        <Grid Grid.Column="1" Grid.Row="2">
             <Button Text="Календарь" Clicked="clicked_to_calendar"/>
         </Grid>
-        <Grid Grid.Column="2" Grid.Row="2">
+        <Grid Grid.Column="1" Grid.Row="2">
             <Button Text="Фидбэк" Clicked="clicked_to_feedback"/>
         </Grid>
-        <Grid Grid.Column="3" Grid.Row="2">
+        <Grid Grid.Column="2" Grid.Row="2">
             <Button Text="Домашнее задание" Clicked="clicked_to_homework"/>
         </Grid>
-        <Grid Grid.Column="4" Grid.Row="2">
+        <Grid Grid.Column="3" Grid.Row="2">
             <Button Text="Группы" IsEnabled="False"/>
         </Grid>
     </Grid>

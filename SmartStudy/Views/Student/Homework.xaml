@@ -12,13 +12,12 @@
             <ColumnDefinition />
             <ColumnDefinition />
             <ColumnDefinition />
-            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>
             <RowDefinition Height="*" x:Name="row_button"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5">
+        <Grid Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4">
             <ScrollView>
                 <CollectionView x:Name="all_tasks"
                     ItemsSource="{Binding Homeworks}"
@@ -44,18 +43,15 @@
             <VerticalStackLayout x:Name="main_view"></VerticalStackLayout>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="1">
-            <Button Text="Главная" Clicked="clicked_to_main_page"/>
-        </Grid>
-        <Grid Grid.Column="1" Grid.Row="1">
             <Button Text="Календарь" Clicked="clicked_to_calendar"/>
         </Grid>
-        <Grid Grid.Column="2" Grid.Row="1">
+        <Grid Grid.Column="1" Grid.Row="1">
             <Button Text="Фидбэк" Clicked="clicked_to_feedback"/>
         </Grid>
-        <Grid Grid.Column="3" Grid.Row="1">
+        <Grid Grid.Column="2" Grid.Row="1">
             <Button Text="Домашнее задание" IsEnabled="False"/>
         </Grid>
-        <Grid Grid.Column="4" Grid.Row="1">
+        <Grid Grid.Column="3" Grid.Row="1">
             <Button Text="Группы" Clicked="clicked_to_groups"/>
         </Grid>
     </Grid>
