@@ -12,14 +12,16 @@
                    HorizontalTextAlignment="Center"
                    HeightRequest="50"
                    MaxLength="50"
-                   IsReadOnly="True"/>
+                   IsReadOnly="True"
+                   BackgroundColor="AliceBlue"/>
         </Grid>
         
         <Grid Grid.Row="1">
             <Editor x:Name="Description"
                     Placeholder="Описание"
                     MaxLength="500"
-                    IsReadOnly="True"/>
+                    IsReadOnly="True"
+                    BackgroundColor="AliceBlue"/>
         </Grid>
         <Grid Grid.Row="2" Margin="5">
             <Grid ColumnDefinitions="*,*" ColumnSpacing="4">

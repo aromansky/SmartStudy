@@ -11,13 +11,15 @@
                    HorizontalTextAlignment="Center"
                    HeightRequest="50"
                    MaxLength="50"
-                   VerticalOptions="Start"/>
+                   VerticalOptions="Start"
+                   BackgroundColor="AliceBlue"/>
         </Grid>
 
         <Grid Grid.Row="1">
             <Editor x:Name="Description"
                 Placeholder="Описание"
-                MaxLength="500"/>
+                MaxLength="500"
+                BackgroundColor="AliceBlue"/>
         </Grid>
         <Grid Grid.Row="2">
 
