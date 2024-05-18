@@ -28,7 +28,6 @@ public partial class Users_for_create_feedback : ContentPage
     private async void add_user(object sender, EventArgs e)
     {
         User user = (sender as ImageButton).BindingContext as User;
-        //await Client.AddUsersToGroup(group_id, user.user_id);
         users.Add(user.user_id);
         UpdateUsers(user);
     }

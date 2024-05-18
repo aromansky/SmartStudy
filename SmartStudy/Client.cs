@@ -427,6 +427,28 @@ namespace SmartStudy
             return users;
         }
 
+
+        /// <summary>
+        /// Возвращает список пользователей, которым отослан фидбек
+        /// </summary>
+        /// <param name="feedback_id">id фидбека</param>
+        /// <returns></returns>
+        public static async Task<List<User>> GetUsersWithFeeedback(long feedback_id)
+        {
+            List<User> users = new List<User>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.UserUrl + $"/users_with_feedback-{feedback_id}");
+                if (response.IsSuccessStatusCode)
+                    users = await response.Content.ReadFromJsonAsync<List<User>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return users;
+        }
+
         /// <summary>
         /// Возвращает список с информацией о зарегистрированных пользователях, состоящих в указанной группе
         /// </summary>
@@ -889,7 +911,7 @@ namespace SmartStudy
         /// </summary>
         /// <param name="feedback_id">Id фидбека</param>
         /// <param name="users_id">Id пользователей, котрым отсылается фидбек</param>
-        public static async void SendFeedbackToUsers(long feedback_id, params long[] users_id)
+        public static async Task<bool> SendFeedbackToUsers(long feedback_id, params long[] users_id)
         {
             Uri uri = new Uri(string.Format(Constants.UserFeedbackUrl, string.Empty));
 
@@ -911,6 +933,7 @@ namespace SmartStudy
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
+            return false;
         }
 
         /// <summary>
@@ -977,6 +1000,17 @@ namespace SmartStudy
         {
             List<group_settings> g_s = await GetGroupsWithTutor(Serializer.DeserializeUser().user_id);
             return g_s.Last().group_settings_id;
+        }
+
+
+        /// <summary>
+        /// Возвращает id последнего созданного фидбека
+        /// </summary>
+        /// <returns>id группы</returns>
+        public static async Task<long> GetLastCreatedFeedbackId()
+        {
+            List<feedback> fb = await GetFeedbackForAuthor(Serializer.DeserializeUser().user_id);
+            return fb.Last().feedback_id;
         }
 
 

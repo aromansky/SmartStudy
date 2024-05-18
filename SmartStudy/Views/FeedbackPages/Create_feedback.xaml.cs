@@ -26,6 +26,7 @@ public partial class Create_feedback : ContentPage
         this.ToolbarItems.Add(add_users);
 
         users = new List<long>();
+        groups = new List<long>();
 
         InitializeComponent();
     }
@@ -36,22 +37,38 @@ public partial class Create_feedback : ContentPage
             await DisplayAlert("Ошибка", "Введите заголовок", "Ок");
         else
         {
+            AddUsersFromGroups();
             await Client.CreateFeedback(new feedback(Serializer.DeserializeUser().user_id, Title.Text, Description.Text));
+            long id = await Client.GetLastCreatedFeedbackId();
+            await Client.SendFeedbackToUsers(id, users.ToArray());
             await Shell.Current.GoToAsync("///feedback");
         }
     }
     private async void AddUsers(object sender, EventArgs e)
     {
+        await AddUsersFromGroups();
         await Navigation.PushAsync(new Users_for_create_feedback(ref users));
     }
 
     private async void UsersWithFeedback(object sender, EventArgs e)
     {
+        await AddUsersFromGroups();
         await Navigation.PushAsync(new Selected_users_for_create_feedback(ref users));
     }
 
     private async void AddGroup(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new Users_for_create_feedback(ref users));
+        groups = groups.Distinct().ToList();
+        await Navigation.PushAsync(new Groups_for_create_feedback(ref groups));
+    }
+
+    private async Task<bool> AddUsersFromGroups()
+    {
+        foreach (long g_s_id in groups)
+        {
+            List<User> u = await Client.GetUsersFromGroup(g_s_id);
+            users = users.Concat(u.Select(x => x.user_id)).Distinct().ToList();
+        }
+        return true;
     }
 }
