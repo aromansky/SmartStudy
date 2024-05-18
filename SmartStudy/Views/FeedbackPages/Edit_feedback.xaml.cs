@@ -24,6 +24,17 @@ public partial class Edit_feedback : ContentPage
 
     public Edit_feedback()
     {
+        if (Serializer.DeserializeUser().IsTutor())
+        {
+#if WINDOWS
+        ToolbarItem users_bar = new ToolbarItem { IconImageSource = ImageSource.FromFile("users_white.png") };
+#else
+            ToolbarItem users_bar = new ToolbarItem { IconImageSource = ImageSource.FromFile("users.svg") };
+#endif
+            users_bar.Clicked += UsersWithFeedback;
+            this.ToolbarItems.Add(users_bar);
+        }
+
         InitializeComponent();
     }
     protected override void OnAppearing()
@@ -61,5 +72,10 @@ public partial class Edit_feedback : ContentPage
             await Client.DeleteFeedback(feedback_id);
             await Shell.Current.GoToAsync("///feedback");
         }
+    }
+
+    private async void UsersWithFeedback(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new Users_with_feedback(feedback_id));
     }
 }
