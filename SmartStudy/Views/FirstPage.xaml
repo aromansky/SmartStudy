@@ -91,14 +91,6 @@
             HorizontalOptions="Center"
             Clicked="ClickRegister"/>
 
-        <Button
-            WidthRequest="300"
-            HeightRequest="50"
-            Text="Забыли пароль?"
-            HorizontalOptions="Center"
-            Clicked="ClickForgotPassword"/>
-      
-
     </VerticalStackLayout>
 
 </ContentPage>

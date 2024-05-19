@@ -15,7 +15,7 @@ public partial class Create_feedback : ContentPage
 #else
         ToolbarItem add_users = new ToolbarItem { IconImageSource = ImageSource.FromFile("user_add_white.svg") };
         ToolbarItem add_groups = new ToolbarItem { IconImageSource = ImageSource.FromFile("group_add_white.png") };
-        ToolbarItem users_bar = new ToolbarItem { IconImageSource = ImageSource.FromFile("users.svg") };
+        ToolbarItem users_bar = new ToolbarItem { IconImageSource = ImageSource.FromFile("users_white.svg") };
 #endif
         add_users.Clicked += AddUsers;
         add_groups.Clicked += AddGroup;

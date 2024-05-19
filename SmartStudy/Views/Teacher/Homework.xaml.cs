@@ -6,15 +6,12 @@ public partial class Homework : ContentPage
 	{
 		InitializeComponent();
         grid.SetColumnSpan(main_view, 2);
-        Label lab = new Label();
-        lab.Text = "Задания от учителя";
         Button btn_to_list_all_hw_user = new Button();
         btn_to_list_all_hw_user.Text = "Созданные домашние работы";
         btn_to_list_all_hw_user.Clicked += clicked_to_list_all_hw_user;
         Button btn_to_list_all_hw_group = new Button();
-        btn_to_list_all_hw_group.Text = "Групповые домашние работы";
+        btn_to_list_all_hw_group.Text = "Домашние работы групп";
         btn_to_list_all_hw_group.Clicked += clicked_to_list_all_hw_group;
-        main_view.Add(lab);
         main_view.Add(btn_to_list_all_hw_user);
         main_view.Add(btn_to_list_all_hw_group);
 #if WINDOWS

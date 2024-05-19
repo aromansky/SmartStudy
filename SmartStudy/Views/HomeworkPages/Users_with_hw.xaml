@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartStudy.Views.HomeworkPages.Users_with_hw"
              xmlns:converter="clr-namespace:SmartStudy.Views.HomeworkPages"
-             Title="Пользователи вне групп, которым доступно дз">
+             Title="Пользователи с ДЗ">
     <ScrollView>
         <CollectionView ItemsSource="{Binding UsersWithHomework}"
                             Margin="20">

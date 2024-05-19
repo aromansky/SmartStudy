@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartStudy.Views.GroupPages.Selected_users_for_create_group"
              xmlns:converter="clr-namespace:SmartStudy.Views.GroupPages"
-             Title="Добавить пользователя">
+             Title="Выбранные пользователи">
     <ScrollView>
         <CollectionView ItemsSource="{Binding SelectedUsers}"
                             Margin="20">

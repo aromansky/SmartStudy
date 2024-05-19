@@ -38,11 +38,6 @@ public partial class FirstPage : ContentPage
             DisplayAlert("Ошибка", "Неверный логин или пароль", "ОК");
     }
 
-    private void ClickForgotPassword(object sender, EventArgs e)
-    {
-
-    }
-
     private void ClickPasswordVisibility(object sender, EventArgs e)
     {
         Password.IsPassword = !Password.IsPassword;

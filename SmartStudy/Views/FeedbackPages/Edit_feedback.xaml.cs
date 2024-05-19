@@ -29,7 +29,7 @@ public partial class Edit_feedback : ContentPage
 #if WINDOWS
         ToolbarItem users_bar = new ToolbarItem { IconImageSource = ImageSource.FromFile("users_white.png") };
 #else
-            ToolbarItem users_bar = new ToolbarItem { IconImageSource = ImageSource.FromFile("users.svg") };
+            ToolbarItem users_bar = new ToolbarItem { IconImageSource = ImageSource.FromFile("users_white.svg") };
 #endif
             users_bar.Clicked += UsersWithFeedback;
             this.ToolbarItems.Add(users_bar);
