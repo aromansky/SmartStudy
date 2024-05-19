@@ -105,7 +105,7 @@ namespace SmartStudy
         /// Создаёт в таблице group_settings запись, соответствующую объекту класса group_settings
         /// </summary>
         /// <param name="settings">Объект класса group_settings</param>
-        public static async void CreateGroupSettings(group_settings settings)
+        public static async Task<bool> CreateGroupSettings(group_settings settings)
         {
             Uri uri = new Uri(string.Format(Constants.GroupSettingsUrl, string.Empty));
 
@@ -118,9 +118,12 @@ namespace SmartStudy
 
                 if (response.IsSuccessStatusCode)
                     Debug.WriteLine("Ok");
+
+                return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
             {
+                return false;
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
         }
@@ -414,6 +417,28 @@ namespace SmartStudy
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(Constants.UserUrl + $"/users_with_hw-{homework_id}");
+                if (response.IsSuccessStatusCode)
+                    users = await response.Content.ReadFromJsonAsync<List<User>>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return users;
+        }
+
+
+        /// <summary>
+        /// Возвращает список пользователей, которым отослан фидбек
+        /// </summary>
+        /// <param name="feedback_id">id фидбека</param>
+        /// <returns></returns>
+        public static async Task<List<User>> GetUsersWithFeeedback(long feedback_id)
+        {
+            List<User> users = new List<User>();
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.UserUrl + $"/users_with_feedback-{feedback_id}");
                 if (response.IsSuccessStatusCode)
                     users = await response.Content.ReadFromJsonAsync<List<User>>();
             }
@@ -817,7 +842,7 @@ namespace SmartStudy
         /// Создаёт в таблице feedback запись, соответствующую объекту класса feedback
         /// </summary>
         /// <param name="feedback">Объект класса feedback</param>
-        public static async void CreateFeedback(feedback feedback)
+        public static async Task<bool> CreateFeedback(feedback feedback)
         {
             Uri uri = new Uri(string.Format(Constants.FeedbackUrl, string.Empty));
 
@@ -830,10 +855,13 @@ namespace SmartStudy
 
                 if (response.IsSuccessStatusCode)
                     Debug.WriteLine("Ok");
+
+                return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return false;
             }
         }
 
@@ -883,7 +911,7 @@ namespace SmartStudy
         /// </summary>
         /// <param name="feedback_id">Id фидбека</param>
         /// <param name="users_id">Id пользователей, котрым отсылается фидбек</param>
-        public static async void SendFeedbackToUsers(long feedback_id, params long[] users_id)
+        public static async Task<bool> SendFeedbackToUsers(long feedback_id, params long[] users_id)
         {
             Uri uri = new Uri(string.Format(Constants.UserFeedbackUrl, string.Empty));
 
@@ -905,6 +933,7 @@ namespace SmartStudy
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
+            return false;
         }
 
         /// <summary>
@@ -959,6 +988,74 @@ namespace SmartStudy
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
             return feedbacks;
+        }
+
+
+
+        /// <summary>
+        /// Возвращает id последней созданной группы
+        /// </summary>
+        /// <returns>id группы</returns>
+        public static async Task<long> GetLastCreatedGroupId()
+        {
+            List<group_settings> g_s = await GetGroupsWithTutor(Serializer.DeserializeUser().user_id);
+            return g_s.Last().group_settings_id;
+        }
+
+
+        /// <summary>
+        /// Возвращает id последнего созданного фидбека
+        /// </summary>
+        /// <returns>id группы</returns>
+        public static async Task<long> GetLastCreatedFeedbackId()
+        {
+            List<feedback> fb = await GetFeedbackForAuthor(Serializer.DeserializeUser().user_id);
+            return fb.Last().feedback_id;
+        }
+
+
+        /// <summary>
+        /// Возвращает фидбек с данным id
+        /// </summary>
+        /// <param name="feedback_id">id фидбека</param>
+        /// <returns></returns>
+        public static async Task<feedback> GetFeedbackForID(long feedback_id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.FeedbackUrl + $"/{feedback_id}");
+                if (response.IsSuccessStatusCode)
+                    return await response.Content.ReadFromJsonAsync<feedback>();
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает пользователя с данным id
+        /// </summary>
+        /// <param name="user_id">id пользователя</param>
+        /// <returns></returns>
+        public static async Task<User> GetUserForID(long user_id)
+        {
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(Constants.UserUrl + $"/{user_id}");
+                if (response.IsSuccessStatusCode)
+                    return await response.Content.ReadFromJsonAsync<User>();
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return null;
+            }
         }
     }
 }

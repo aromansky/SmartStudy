@@ -70,14 +70,10 @@ public partial class Calendar : ContentPage
 
     public async void update_page(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("///main_page");
+        await Shell.Current.GoToAsync("///groups");
         await Shell.Current.GoToAsync("///calendar");
     }
 
-    public async void clicked_to_main_page(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("///main_page");
-    }
     public async void clicked_to_groups(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("///groups");
@@ -142,6 +138,14 @@ public partial class Calendar : ContentPage
     public async void event_in_view_clicked(long event_id)
     {
         await Shell.Current.GoToAsync($"calendar_note_edit?note_id={event_id}");
+    }
+
+    public async void logOut(object sender, EventArgs e)
+    {
+        Serializer.DeleteUserData();
+        Application.Current.MainPage = new AppShell();
+        await Navigation.PopToRootAsync();
+        await Shell.Current.GoToAsync("///RegistrationPage");
     }
 
 }

@@ -1,0 +1,34 @@
+using SmartStudy.Models;
+using SmartStudy.ModelsDB;
+using System.Globalization;
+
+namespace SmartStudy.Views.GroupPages;
+
+public partial class Selected_users_for_create_group : ContentPage
+{
+    List<long> users;
+    public Selected_users_for_create_group(ref List<long> users)
+	{
+		InitializeComponent();
+        BindingContext = new User_list();
+        this.users = users;
+    }
+
+    protected override async void OnAppearing()
+    {
+        (BindingContext as User_list).Load_Selected_Users(users);
+    }
+
+
+    private void UpdateUsers(User user)
+    {
+        (BindingContext as User_list).SelectedUsers.Remove(user);
+    }
+
+    private async void delete_user(object sender, EventArgs e)
+    {
+        User user = (sender as ImageButton).BindingContext as User;
+        users.Remove(user.user_id);
+        UpdateUsers(user);
+    }
+}

@@ -97,6 +97,21 @@ namespace WebAPI.Controllers
         }
 
 
+        // Принимает id фидбека, возвращает пользователей, которым оно доступно
+        // GET: api/user/users_with_feedback-5
+        [HttpGet("users_with_feedback-{id}")]
+        public async Task<ActionResult<IEnumerable<user>>> GetUsersWithFeeedback(long id)
+        {
+            var homeworks = (from feedback in _context.feedback
+                             join user_feedback in _context.user_feedback on feedback.feedback_id equals user_feedback.feedback_id
+                             join user in _context.user on user_feedback.user_id equals user.user_id
+                             where feedback.feedback_id == id
+                             select user).Distinct();
+            if (homeworks == null)
+                return NotFound();
+            return await homeworks.ToListAsync();
+        }
+
         // Принимает id пользователя, возвращает фидбек, который он получил
         // GET: api/user/users_with_homework-5
         [HttpGet("feedback_user-{id}")]
@@ -155,6 +170,8 @@ namespace WebAPI.Controllers
                 return NotFound();
             return await homeworks.ToListAsync();
         }
+
+
 
         // PUT: api/users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

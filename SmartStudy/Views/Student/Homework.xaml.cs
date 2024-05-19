@@ -8,7 +8,7 @@ public partial class Homework : ContentPage
 	{
 		InitializeComponent();
         BindingContext = new Homework_list();
-        grid.SetColumnSpan(main_view, 2);
+        //grid.SetColumnSpan(main_view, 2);
         //Button btn_to_view_one_hw = new Button();
         //btn_to_view_one_hw.Text = "посмотреть конкретное задание";
         //btn_to_view_one_hw.Clicked += clicked_to_view_one_hw;
@@ -24,12 +24,8 @@ public partial class Homework : ContentPage
     //}
     public async void update_page(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("///main_page");
+        await Shell.Current.GoToAsync("///groups");
         await Shell.Current.GoToAsync("///homework");
-    }
-    public async void clicked_to_main_page(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("///main_page");
     }
     public async void clicked_to_calendar(object sender, EventArgs e)
     {
@@ -52,7 +48,6 @@ public partial class Homework : ContentPage
     {
         if (e.CurrentSelection.Count != 0)
         {
-            //TODO
             await Shell.Current.GoToAsync($"view_one_hw?hw_id={((ModelsDB.homework)e.CurrentSelection[0]).homework_id}");
             all_tasks.SelectedItem = null;
         }

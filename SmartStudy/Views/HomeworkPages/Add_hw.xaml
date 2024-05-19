@@ -6,11 +6,12 @@
     
     <VerticalStackLayout Spacing="10" Margin="5">
         <Entry x:Name="Title"
-           Placeholder="Название дз"
+           Placeholder="Название домашнего задания"
            FontSize="Medium"
            HorizontalTextAlignment="Center"
            HeightRequest="50"
-           MaxLength="50"/>
+           MaxLength="50"
+           BackgroundColor="AliceBlue"/>
 
         <HorizontalStackLayout Spacing="15">
             <Label Text="Начало: " FontSize="Medium" VerticalTextAlignment="End"/>
@@ -27,9 +28,10 @@
         <TimePicker x:Name="time_change_end" PropertyChanged="time_end_selected"/>
 
         <Editor x:Name="Description"
-            Placeholder="Текст дз"
+            Placeholder="Текст домашнего задания"
             HeightRequest="100"
-            MaxLength="500"/>
+            MaxLength="500"
+            BackgroundColor="AliceBlue"/>
 
         <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
             <Button Text="Сохранить"

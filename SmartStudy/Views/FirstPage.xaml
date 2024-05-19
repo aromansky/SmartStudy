@@ -46,7 +46,9 @@
                    MaxLength="20"/>
 
             <ImageButton Source="opened.png"  Grid.Row="0" Grid.Column="1"
-                         Clicked="ClickPasswordVisibility"></ImageButton>
+                         Clicked="ClickPasswordVisibility" 
+                         Padding="0"
+                         Margin="0"/>
         </Grid>
 
         <Label Padding="5"
@@ -88,14 +90,6 @@
             HeightRequest="50"
             HorizontalOptions="Center"
             Clicked="ClickRegister"/>
-
-        <Button
-            WidthRequest="300"
-            HeightRequest="50"
-            Text="Забыли пароль?"
-            HorizontalOptions="Center"
-            Clicked="ClickForgotPassword"/>
-      
 
     </VerticalStackLayout>
 

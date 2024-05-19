@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartStudy.Views.FeedbackPages.Edit_feedback"
+             Title="Фидбэк">
+    <Grid RowDefinitions="*,*,10*,*">
+        <Grid Grid.Row="0" Margin="5">
+            <Entry x:Name="Title"
+                Placeholder="Название группы"
+                FontSize="Medium"
+                HorizontalTextAlignment="Center"
+                HeightRequest="50"
+                MaxLength="50"
+                IsReadOnly="True"
+                BackgroundColor="AliceBlue"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Label x:Name="Author" 
+                   Margin="10"
+                   FontSize="15"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Editor x:Name="Description"
+                 Placeholder="Описание"
+                 MaxLength="500"
+                 IsReadOnly="True"
+                 />
+        </Grid>
+        <Grid Grid.Row="3" Margin="5">
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="4">
+                <Button x:Name="EditButton"
+                         Text="Редактировать"
+                         Clicked="EditButton_Clicked"
+                         HeightRequest="50"
+                         Grid.Column="0"/>
+
+                <Button x:Name="SaveButton"
+                         Text="Сохранить"
+                         Clicked="SaveButton_Clicked"
+                         IsEnabled="False"
+                         IsVisible="False"
+                         HeightRequest="50"
+                         Grid.Column="0"/>
+
+                <Button x:Name="DeleteButton"
+                         Text="Удалить"
+                         Clicked="DeleteButton_Clicked"
+                         HeightRequest="50"
+                         Grid.Column="1"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

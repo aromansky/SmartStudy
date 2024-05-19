@@ -92,17 +92,35 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\FeedbackPages\Selected_users_for_create_feedback.xaml.cs">
+	    <DependentUpon>Selected_users_for_create_feedback.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\FeedbackPages\Groups_for_create_feedback.xaml.cs">
+	    <DependentUpon>Groups_for_create_feedback.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\FeedbackPages\Users_with_feedback.xaml.cs">
+	    <DependentUpon>Users_with_feedback.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\FeedbackPages\Users_for_create_feedback.xaml.cs">
+	    <DependentUpon>Users_for_create_feedback.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\GroupPages\Create_group.xaml.cs">
 	    <DependentUpon>Create_group.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\GroupPages\Edit_group.xaml.cs">
 	    <DependentUpon>Edit_group.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\GroupPages\Selected_users_for_create_group.xaml.cs">
+	    <DependentUpon>Selected_users_for_create_group.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\GroupPages\Users_in_group_student.xaml.cs">
 	    <DependentUpon>Users_in_group_student.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\GroupPages\Users_in_group.xaml.cs">
 	    <DependentUpon>Users_in_group.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\GroupPages\Users_for_create_group.xaml.cs">
+	    <DependentUpon>Users_for_create_group.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\GroupPages\Users_outside_group.xaml.cs">
 	    <DependentUpon>Users_outside_group.xaml</DependentUpon>
@@ -140,13 +158,13 @@
 	  <Compile Update="Views\HomeworkPages\View_one_hw.xaml.cs">
 	    <DependentUpon>View_one_hw.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Teacher\Create_feedback.xaml.cs">
+	  <Compile Update="Views\FeedbackPages\Edit_feedback.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\FeedbackPages\Create_feedback.xaml.cs">
 	    <DependentUpon>Create_feedback.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Teacher\Edit_feedback.xaml.cs">
-	    <DependentUpon>Edit_feedback.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Teacher\Feedback.xaml.cs">
+	  <Compile Update="Views\FeedbackPages\Feedback.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Teacher\Homework.xaml.cs">
@@ -156,6 +174,18 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\CalendarPages\Group_list.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\FeedbackPages\Selected_users_for_create_feedback.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\FeedbackPages\Groups_for_create_feedback.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\FeedbackPages\Users_with_feedback.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\FeedbackPages\Users_for_create_feedback.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\FirstPage.xaml">
@@ -175,10 +205,16 @@
 	  <MauiXaml Update="Views\GroupPages\Edit_group.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\GroupPages\Selected_users_for_create_group.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\GroupPages\Users_in_group_student.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\GroupPages\Users_in_group.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\GroupPages\Users_for_create_group.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\GroupPages\Users_outside_group.xaml">
@@ -211,13 +247,13 @@
 	  <MauiXaml Update="Views\HomeworkPages\View_one_hw.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Teacher\Create_feedback.xaml">
+	  <MauiXaml Update="Views\FeedbackPages\Edit_feedback.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Teacher\Edit_feedback.xaml">
+	  <MauiXaml Update="Views\FeedbackPages\Create_feedback.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Teacher\Feedback.xaml">
+	  <MauiXaml Update="Views\FeedbackPages\Feedback.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Teacher\Homework.xaml">

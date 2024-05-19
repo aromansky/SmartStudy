@@ -20,7 +20,7 @@ public partial class FirstPage : ContentPage
         if (res)
         {
             Application.Current.MainPage = new Views.Student.AppShell_Student();
-            await Shell.Current.GoToAsync("///main_page");
+            await Shell.Current.GoToAsync("///calendar");
         }
         else
             DisplayAlert("Ошибка", "Неверный логин или пароль", "ОК");
@@ -32,15 +32,10 @@ public partial class FirstPage : ContentPage
         if (res)
         {
             Application.Current.MainPage = new Views.Teacher.AppShell_Teacher();
-            await Shell.Current.GoToAsync("///main_page");
+            await Shell.Current.GoToAsync("///calendar");
         }
         else
             DisplayAlert("Ошибка", "Неверный логин или пароль", "ОК");
-    }
-
-    private void ClickForgotPassword(object sender, EventArgs e)
-    {
-
     }
 
     private void ClickPasswordVisibility(object sender, EventArgs e)

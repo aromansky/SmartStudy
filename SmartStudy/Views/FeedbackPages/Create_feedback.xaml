@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartStudy.Views.FeedbackPages.Create_feedback"
+             Title="Создать фидбэк">
+    <Grid RowDefinitions="*,4*,*">
+        <Grid Grid.Row="0" Margin="5">
+            <Entry x:Name="Title"
+               Placeholder="Заголовок"
+               FontSize="Medium"
+               HorizontalTextAlignment="Center"
+               HeightRequest="50"
+               MaxLength="50"
+               VerticalOptions="Start"
+               BackgroundColor="AliceBlue"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Editor x:Name="Description"
+            Placeholder="Описание"
+            MaxLength="500"
+            BackgroundColor="AliceBlue"/>
+        </Grid>
+        <Grid Grid.Row="2">
+
+            <Button x:Name="SaveButton"
+                Text="Сохранить"
+                IsEnabled="True"
+                IsVisible="True"
+                HeightRequest="50"
+                VerticalOptions="End"
+                Clicked="Savebutton_Clicked"/>
+        </Grid>
+    </Grid>
+</ContentPage>

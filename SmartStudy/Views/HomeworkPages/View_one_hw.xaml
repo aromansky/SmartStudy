@@ -2,16 +2,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartStudy.Views.HomeworkPages.View_one_hw"
-             Title="Домашнее задание">
+             Title="ДЗ">
     <Grid RowDefinitions="*, 2*, 10*, *" Padding="10">
         <Grid Grid.Row="0">
             <Entry x:Name="Title"
-                   Placeholder="Название дз"
+                   Placeholder="Название домашнего задания"
                    FontSize="Medium"
                    HorizontalTextAlignment="Center"
                    IsReadOnly="True"
                    HeightRequest="50"
-                   VerticalTextAlignment="Start"/>
+                   VerticalTextAlignment="Start"
+                   BackgroundColor="AliceBlue"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid ColumnDefinitions= "*,*" Padding="10" >
@@ -36,10 +37,11 @@
         </Grid>
         <Grid Grid.Row="2">
             <Editor x:Name="Description"
-                    Placeholder="Описание дз"
+                    Placeholder="Описание домашнего задания"
                     IsReadOnly="True"
                     HeightRequest="500" 
-                    VerticalOptions="StartAndExpand"/>
+                    VerticalOptions="StartAndExpand"
+                    />
         </Grid>
         <Grid Grid.Row="3">
             <Grid ColumnDefinitions="*,*" ColumnSpacing="4">

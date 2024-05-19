@@ -4,18 +4,13 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views_teacher="clr-namespace:SmartStudy.Views.Teacher"
+    xmlns:views_Feedback="clr-namespace:SmartStudy.Views.FeedbackPages"
     xmlns:views_CalendarPages="clr-namespace:SmartStudy.Views.CalendarPages"
     xmlns:views_GroupPages="clr-namespace:SmartStudy.Views.GroupPages"
     xmlns:views_HomeworkPages="clr-namespace:SmartStudy.Views.HomeworkPages"
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar x:Name="TabBar_t">
-        <Tab Icon="main_page.svg"
-            Title="Главная">
-            <ShellContent
-                ContentTemplate="{DataTemplate views_teacher:MainPage_Teacher}"
-                Route="main_page"/>
-        </Tab>
         <Tab Icon="calendar.svg"
             Title="Календарь">
             <ShellContent
@@ -25,7 +20,7 @@
         <Tab Icon="message.svg"
             Title="Фидбэк">
             <ShellContent 
-                ContentTemplate="{DataTemplate views_teacher:Feedback}"
+                ContentTemplate="{DataTemplate views_Feedback:Feedback}"
                 Route="feedback"/>
         </Tab>
         <Tab Icon="homework.svg"
@@ -47,10 +42,6 @@
     <ShellContent
         ContentTemplate="{DataTemplate views_CalendarPages:Calendar_note_edit}"
         Route="calendar_note_edit"/>
-    <!-- Возможно, можно удалить
-    <ShellContent
-        ContentTemplate="{DataTemplate views_CalendarPages:Group_list}"
-        Route="add_event_to_group"/>-->
     <ShellContent
         ContentTemplate="{DataTemplate views_GroupPages:Create_group}"
         Route="create_group"/>
